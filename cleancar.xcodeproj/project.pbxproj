@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		54BCEEB37102C09D6FE88918 /* Pods_cleancarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48303207C9BACF141C57D8CC /* Pods_cleancarUITests.framework */; };
+		62E3D6D6AF6026B8B831C243 /* Pods_cleancar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC7078257E4E069BA7EF11A /* Pods_cleancar.framework */; };
 		B4EEA3261D6429EB0039D998 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA3251D6429EB0039D998 /* AppDelegate.swift */; };
 		B4EEA3281D6429EB0039D998 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA3271D6429EB0039D998 /* ViewController.swift */; };
 		B4EEA32B1D6429EB0039D998 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4EEA3291D6429EB0039D998 /* Main.storyboard */; };
@@ -28,6 +30,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09557AF8E2E4DB998B24E254 /* Pods-cleancarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancarUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		408F4B8A8AAB864F46AF8072 /* Pods-cleancar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.release.xcconfig"; sourceTree = "<group>"; };
+		48303207C9BACF141C57D8CC /* Pods_cleancarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cleancarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		82965A14B655F9FE32120647 /* Pods-cleancarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancarUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests.release.xcconfig"; sourceTree = "<group>"; };
+		84384B51F1EAA21FEFEA9766 /* Pods-cleancar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.debug.xcconfig"; sourceTree = "<group>"; };
 		B4EEA3221D6429EA0039D998 /* cleancar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cleancar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4EEA3251D6429EB0039D998 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4EEA3271D6429EB0039D998 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,6 +47,7 @@
 		B4EEA33C1D6429EB0039D998 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4EEA3451D6437BC0039D998 /* CodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeViewController.swift; sourceTree = "<group>"; };
 		B4EEA3471D644B1F0039D998 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		EEC7078257E4E069BA7EF11A /* Pods_cleancar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cleancar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62E3D6D6AF6026B8B831C243 /* Pods_cleancar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,18 +63,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54BCEEB37102C09D6FE88918 /* Pods_cleancarUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A60FEBE2B3F7D3A5A8DE74E6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				84384B51F1EAA21FEFEA9766 /* Pods-cleancar.debug.xcconfig */,
+				408F4B8A8AAB864F46AF8072 /* Pods-cleancar.release.xcconfig */,
+				09557AF8E2E4DB998B24E254 /* Pods-cleancarUITests.debug.xcconfig */,
+				82965A14B655F9FE32120647 /* Pods-cleancarUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B4EEA3191D6429EA0039D998 = {
 			isa = PBXGroup;
 			children = (
 				B4EEA3241D6429EB0039D998 /* cleancar */,
 				B4EEA3391D6429EB0039D998 /* cleancarUITests */,
 				B4EEA3231D6429EA0039D998 /* Products */,
+				A60FEBE2B3F7D3A5A8DE74E6 /* Pods */,
+				E839B45BC8CB19266AD0869D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,6 +125,15 @@
 			path = cleancarUITests;
 			sourceTree = "<group>";
 		};
+		E839B45BC8CB19266AD0869D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EEC7078257E4E069BA7EF11A /* Pods_cleancar.framework */,
+				48303207C9BACF141C57D8CC /* Pods_cleancarUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -109,9 +141,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B4EEA33F1D6429EB0039D998 /* Build configuration list for PBXNativeTarget "cleancar" */;
 			buildPhases = (
+				6CE1F23108BB993223B7300A /* [CP] Check Pods Manifest.lock */,
 				B4EEA31E1D6429EA0039D998 /* Sources */,
 				B4EEA31F1D6429EA0039D998 /* Frameworks */,
 				B4EEA3201D6429EA0039D998 /* Resources */,
+				11435FF7F653869260FD68D4 /* [CP] Embed Pods Frameworks */,
+				2B78FF9D927FFA0541741E4F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -126,9 +161,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B4EEA3421D6429EB0039D998 /* Build configuration list for PBXNativeTarget "cleancarUITests" */;
 			buildPhases = (
+				957ABC4DB6E38A0CD50B0D62 /* [CP] Check Pods Manifest.lock */,
 				B4EEA3321D6429EB0039D998 /* Sources */,
 				B4EEA3331D6429EB0039D998 /* Frameworks */,
 				B4EEA3341D6429EB0039D998 /* Resources */,
+				2EDD7F92E408F12FC631F9B8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -197,6 +234,84 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		11435FF7F653869260FD68D4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cleancar/Pods-cleancar-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2B78FF9D927FFA0541741E4F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cleancar/Pods-cleancar-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2EDD7F92E408F12FC631F9B8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6CE1F23108BB993223B7300A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		957ABC4DB6E38A0CD50B0D62 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B4EEA31E1D6429EA0039D998 /* Sources */ = {
@@ -333,6 +448,7 @@
 		};
 		B4EEA3401D6429EB0039D998 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 84384B51F1EAA21FEFEA9766 /* Pods-cleancar.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = cleancar/Info.plist;
@@ -345,6 +461,7 @@
 		};
 		B4EEA3411D6429EB0039D998 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 408F4B8A8AAB864F46AF8072 /* Pods-cleancar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = cleancar/Info.plist;
@@ -357,6 +474,7 @@
 		};
 		B4EEA3431D6429EB0039D998 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09557AF8E2E4DB998B24E254 /* Pods-cleancarUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = cleancarUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -368,6 +486,7 @@
 		};
 		B4EEA3441D6429EB0039D998 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82965A14B655F9FE32120647 /* Pods-cleancarUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = cleancarUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -396,6 +515,7 @@
 				B4EEA3411D6429EB0039D998 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B4EEA3421D6429EB0039D998 /* Build configuration list for PBXNativeTarget "cleancarUITests" */ = {
 			isa = XCConfigurationList;
@@ -404,6 +524,7 @@
 				B4EEA3441D6429EB0039D998 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
