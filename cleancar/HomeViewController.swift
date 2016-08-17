@@ -40,7 +40,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //rounded button
-        makeReservationChangeStyleButton.layer.cornerRadius = 20
+        makeReservationChangeStyleButton.layer.cornerRadius = 5
         makeReservationChangeStyleButton.layer.masksToBounds = true
        
         // rounded view
@@ -48,8 +48,15 @@ class HomeViewController: UIViewController {
         roundedBorderView.layer.masksToBounds = true
         roundedBorderView.layer.borderWidth = 1
         roundedBorderView.layer.borderColor = UIColor.grayColor().CGColor
+        
+        navigationController!.navigationBar.barTintColor = UIColor.whiteColor()
+        
+    }
 
-        // Do any additional setup after loading the view.
+    override func viewDidAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.hidden = true
     }
 
     override func didReceiveMemoryWarning() {
