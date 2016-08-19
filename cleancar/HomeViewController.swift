@@ -10,38 +10,40 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
-    
+
+    // IBActions
     @IBAction func goToMapButton(sender: UIButton) {
     }
-    
-    
     @IBAction func callButton(sender: UIButton) {
     }
-    
-    
+    @IBAction func touchUpMakeReservationButton(sender: AnyObject) {
+    }
+
+
+    // IBOutlets
     @IBOutlet weak var roundedBorderView: UIView!
-    
+
     @IBOutlet weak var timeOfOrderLabel: UILabel!
     @IBOutlet weak var nameOfCarLabel: UILabel!
     @IBOutlet weak var numberOfCarLabel: UILabel!
-    
-    @IBAction func cancelButton(sender: UIButton) {
-    }
-    
+
     @IBOutlet weak var chooseTimeCollectionView: UICollectionView!
+    @IBOutlet weak var makeReservationButton: UIButton!
+
     
+    // Identifiers
+    var bookingHourCellID = "bookingHourCell"
     
-    @IBAction func makeReservationButton(sender: UIButton) {
-    }
+    // variables
+    var bookingHours: [AnyObject] = []
     
-    @IBOutlet weak var makeReservationChangeStyleButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //rounded button
-        makeReservationChangeStyleButton.layer.cornerRadius = 5
-        makeReservationChangeStyleButton.layer.masksToBounds = true
+        makeReservationButton.layer.cornerRadius = 5
+        makeReservationButton.layer.masksToBounds = true
        
         // rounded view
         roundedBorderView.layer.cornerRadius = 20
@@ -53,7 +55,7 @@ class HomeViewController: UIViewController {
         
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.hidden = true
@@ -75,4 +77,26 @@ class HomeViewController: UIViewController {
     }
     */
 
+}
+
+
+extension HomeViewController : UICollectionViewDataSource {
+
+    //1
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+
+    //2
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return bookingHours.count
+    }
+
+    //3
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(bookingHourCellID, forIndexPath: indexPath) as! UICollectionViewCell
+        cell.backgroundColor = UIColor.blackColor()
+        // Configure the cell
+        return cell
+    }
 }
