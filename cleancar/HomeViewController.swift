@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+
 
 class HomeViewController: UIViewController {
 
@@ -35,12 +37,16 @@ class HomeViewController: UIViewController {
     var bookingHourCellID = "bookingHourCell"
     
     // variables
-    var bookingHours: [AnyObject] = []
-    
-    
-    
+    var bookingHours: [BookingHour] = []
+
+
+    // UIViewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController!.navigationBar.barTintColor = UIColor.whiteColor()
+        
+        
         //rounded button
         makeReservationButton.layer.cornerRadius = 5
         makeReservationButton.layer.masksToBounds = true
@@ -50,9 +56,18 @@ class HomeViewController: UIViewController {
         roundedBorderView.layer.masksToBounds = true
         roundedBorderView.layer.borderWidth = 1
         roundedBorderView.layer.borderColor = UIColor.grayColor().CGColor
-        
-        navigationController!.navigationBar.barTintColor = UIColor.whiteColor()
-        
+    
+
+        chooseTimeCollectionView.dataSource = self
+
+        BookingHour.subscribeToData({ (snapshot: FIRDataSnapshot) -> Void in
+            let values = snapshot.value as! [AnyObject]
+
+            for (index, value) in values.enumerate() {
+                self.bookingHours.append( BookingHour(index: index, data: value) )
+            }
+            self.chooseTimeCollectionView.reloadData()
+        })
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -94,9 +109,16 @@ extension HomeViewController : UICollectionViewDataSource {
 
     //3
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(bookingHourCellID, forIndexPath: indexPath) as! UICollectionViewCell
-        cell.backgroundColor = UIColor.blackColor()
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(bookingHourCellID, forIndexPath: indexPath) as! BookingHoursCollectionViewCell
+    
         // Configure the cell
+        cell.configure()
+
+        // Set data
+        cell.bookingHour = self.bookingHours[indexPath.row]
+
+        print(indexPath.row, cell.bookingHour?.getHour())
+
         return cell
     }
 }

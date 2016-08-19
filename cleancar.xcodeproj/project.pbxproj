@@ -10,6 +10,7 @@
 		0404B3F268897FB69D358151 /* Pods_cleancarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48303207C9BACF141C57D8CC /* Pods_cleancarUITests.framework */; };
 		3CCDD94ABB73D43BD8346AB0 /* Pods_cleancar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC7078257E4E069BA7EF11A /* Pods_cleancar.framework */; };
 		523F3B521D66EA4300B75421 /* BookingHour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523F3B511D66EA4300B75421 /* BookingHour.swift */; };
+		523F3B551D67678B00B75421 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 523F3B541D67678B00B75421 /* GoogleService-Info.plist */; };
 		525C7C971D66C6D400DAE000 /* PricelistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C961D66C6D400DAE000 /* PricelistController.swift */; };
 		525C7C9A1D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */; };
 		B4EEA3261D6429EB0039D998 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA3251D6429EB0039D998 /* AppDelegate.swift */; };
@@ -37,6 +38,7 @@
 		408F4B8A8AAB864F46AF8072 /* Pods-cleancar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.release.xcconfig"; sourceTree = "<group>"; };
 		48303207C9BACF141C57D8CC /* Pods_cleancarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cleancarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		523F3B511D66EA4300B75421 /* BookingHour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingHour.swift; sourceTree = "<group>"; };
+		523F3B541D67678B00B75421 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		525C7C961D66C6D400DAE000 /* PricelistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PricelistController.swift; sourceTree = "<group>"; };
 		525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingHoursCollectionViewCell.swift; sourceTree = "<group>"; };
 		82965A14B655F9FE32120647 /* Pods-cleancarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancarUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +130,18 @@
 			name = models;
 			sourceTree = "<group>";
 		};
+		523F3B531D6758B400B75421 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B4EEA3251D6429EB0039D998 /* AppDelegate.swift */,
+				B4EEA32C1D6429EB0039D998 /* Assets.xcassets */,
+				B4EEA32E1D6429EB0039D998 /* LaunchScreen.storyboard */,
+				B4EEA3311D6429EB0039D998 /* Info.plist */,
+				523F3B541D67678B00B75421 /* GoogleService-Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		525C7C981D66C6DF00DAE000 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,14 +183,11 @@
 		B4EEA3241D6429EB0039D998 /* cleancar */ = {
 			isa = PBXGroup;
 			children = (
-				525C7C9C1D66CF1F00DAE000 /* views */,
 				525C7C981D66C6DF00DAE000 /* controllers */,
+				525C7C9C1D66CF1F00DAE000 /* views */,
 				523F3B501D66EA1300B75421 /* models */,
-				B4EEA3251D6429EB0039D998 /* AppDelegate.swift */,
 				B4EEA3291D6429EB0039D998 /* Main.storyboard */,
-				B4EEA32C1D6429EB0039D998 /* Assets.xcassets */,
-				B4EEA32E1D6429EB0039D998 /* LaunchScreen.storyboard */,
-				B4EEA3311D6429EB0039D998 /* Info.plist */,
+				523F3B531D6758B400B75421 /* Supporting Files */,
 			);
 			path = cleancar;
 			sourceTree = "<group>";
@@ -286,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4EEA3301D6429EB0039D998 /* LaunchScreen.storyboard in Resources */,
+				523F3B551D67678B00B75421 /* GoogleService-Info.plist in Resources */,
 				B4EEA32D1D6429EB0039D998 /* Assets.xcassets in Resources */,
 				B4EEA32B1D6429EB0039D998 /* Main.storyboard in Resources */,
 			);

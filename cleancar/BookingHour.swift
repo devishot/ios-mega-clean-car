@@ -7,15 +7,28 @@
 //
 
 import Foundation
+import Firebase
 import SwiftyJSON
+
+
+// Global variables and functions
+func getFirebaseRef() -> FIRDatabaseReference {
+    return FIRDatabase.database().reference()
+}
 
 
 class BookingHour {
     var index: Int
     var boxes: [Bool]
     var washers: [String: Bool]
-    
-    init(index: Int, data: JSON) {
+
+
+    static var refHandle: FIRDatabaseHandle?
+
+
+    init(index: Int, data: AnyObject) {
+        let data = JSON(data)
+
         self.index = index
         self.boxes = data["boxes"].arrayValue.map {$0.boolValue}
 
@@ -46,4 +59,18 @@ class BookingHour {
         }
         return "\(f(hour)):\(f(minute))"
     }
+
+    class func subscribeToData(callback: (snapshot: FIRDataSnapshot) -> Void) {
+        BookingHour.refHandle = getFirebaseRef()
+            .child("booking_hours")
+            .observeEventType(FIRDataEventType.Value, withBlock: callback)
+    }
+
+    class func unsubscribe() {
+        if let ref = BookingHour.refHandle {
+            getFirebaseRef().removeObserverWithHandle(ref)
+        }
+    }
 }
+
+
