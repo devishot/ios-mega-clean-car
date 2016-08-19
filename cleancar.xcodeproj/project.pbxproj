@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		54BCEEB37102C09D6FE88918 /* Pods_cleancarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48303207C9BACF141C57D8CC /* Pods_cleancarUITests.framework */; };
-		62E3D6D6AF6026B8B831C243 /* Pods_cleancar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC7078257E4E069BA7EF11A /* Pods_cleancar.framework */; };
+		0404B3F268897FB69D358151 /* Pods_cleancarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48303207C9BACF141C57D8CC /* Pods_cleancarUITests.framework */; };
+		3CCDD94ABB73D43BD8346AB0 /* Pods_cleancar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC7078257E4E069BA7EF11A /* Pods_cleancar.framework */; };
+		525C7C971D66C6D400DAE000 /* PricelistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C961D66C6D400DAE000 /* PricelistController.swift */; };
+		525C7C9A1D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */; };
 		B4EEA3261D6429EB0039D998 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA3251D6429EB0039D998 /* AppDelegate.swift */; };
 		B4EEA3281D6429EB0039D998 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA3271D6429EB0039D998 /* ViewController.swift */; };
 		B4EEA32B1D6429EB0039D998 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4EEA3291D6429EB0039D998 /* Main.storyboard */; };
@@ -33,8 +35,12 @@
 		09557AF8E2E4DB998B24E254 /* Pods-cleancarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancarUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		408F4B8A8AAB864F46AF8072 /* Pods-cleancar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.release.xcconfig"; sourceTree = "<group>"; };
 		48303207C9BACF141C57D8CC /* Pods_cleancarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cleancarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		525C7C961D66C6D400DAE000 /* PricelistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PricelistController.swift; sourceTree = "<group>"; };
+		525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingHoursCollectionViewCell.swift; sourceTree = "<group>"; };
 		82965A14B655F9FE32120647 /* Pods-cleancarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancarUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests.release.xcconfig"; sourceTree = "<group>"; };
 		84384B51F1EAA21FEFEA9766 /* Pods-cleancar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.debug.xcconfig"; sourceTree = "<group>"; };
+		97FAB469328B62ACE747D91A /* Pods-cleancar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.release.xcconfig"; sourceTree = "<group>"; };
+		9EBDDD8594AA17CCC79ADDBF /* Pods-cleancarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancarUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B4EEA3221D6429EA0039D998 /* cleancar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cleancar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4EEA3251D6429EB0039D998 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4EEA3271D6429EB0039D998 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,7 +53,9 @@
 		B4EEA33C1D6429EB0039D998 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4EEA3451D6437BC0039D998 /* CodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeViewController.swift; sourceTree = "<group>"; };
 		B4EEA3471D644B1F0039D998 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		B804464F39BDE39608136BA1 /* Pods-cleancar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.debug.xcconfig"; sourceTree = "<group>"; };
 		EEC7078257E4E069BA7EF11A /* Pods_cleancar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cleancar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6979A98C03896628EE9F5B7 /* Pods-cleancarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancarUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62E3D6D6AF6026B8B831C243 /* Pods_cleancar.framework in Frameworks */,
+				3CCDD94ABB73D43BD8346AB0 /* Pods_cleancar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,14 +71,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54BCEEB37102C09D6FE88918 /* Pods_cleancarUITests.framework in Frameworks */,
+				0404B3F268897FB69D358151 /* Pods_cleancarUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A60FEBE2B3F7D3A5A8DE74E6 /* Pods */ = {
+		0547B4E5F47B77E8C25819A1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B804464F39BDE39608136BA1 /* Pods-cleancar.debug.xcconfig */,
+				97FAB469328B62ACE747D91A /* Pods-cleancar.release.xcconfig */,
+				9EBDDD8594AA17CCC79ADDBF /* Pods-cleancarUITests.debug.xcconfig */,
+				F6979A98C03896628EE9F5B7 /* Pods-cleancarUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		523F3B4D1D66E91B00B75421 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				84384B51F1EAA21FEFEA9766 /* Pods-cleancar.debug.xcconfig */,
@@ -78,7 +97,42 @@
 				09557AF8E2E4DB998B24E254 /* Pods-cleancarUITests.debug.xcconfig */,
 				82965A14B655F9FE32120647 /* Pods-cleancarUITests.release.xcconfig */,
 			);
-			name = Pods;
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		523F3B4E1D66E93F00B75421 /* SignUp/SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				B4EEA3271D6429EB0039D998 /* ViewController.swift */,
+				B4EEA3451D6437BC0039D998 /* CodeViewController.swift */,
+			);
+			name = SignUp/SignIn;
+			sourceTree = "<group>";
+		};
+		523F3B4F1D66E96600B75421 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				B4EEA3471D644B1F0039D998 /* HomeViewController.swift */,
+				525C7C961D66C6D400DAE000 /* PricelistController.swift */,
+			);
+			name = Tabs;
+			sourceTree = "<group>";
+		};
+		525C7C981D66C6DF00DAE000 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				523F3B4E1D66E93F00B75421 /* SignUp/SignIn */,
+				523F3B4F1D66E96600B75421 /* Tabs */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		525C7C9C1D66CF1F00DAE000 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */,
+			);
+			name = views;
 			sourceTree = "<group>";
 		};
 		B4EEA3191D6429EA0039D998 = {
@@ -87,8 +141,9 @@
 				B4EEA3241D6429EB0039D998 /* cleancar */,
 				B4EEA3391D6429EB0039D998 /* cleancarUITests */,
 				B4EEA3231D6429EA0039D998 /* Products */,
-				A60FEBE2B3F7D3A5A8DE74E6 /* Pods */,
 				E839B45BC8CB19266AD0869D /* Frameworks */,
+				523F3B4D1D66E91B00B75421 /* Recovered References */,
+				0547B4E5F47B77E8C25819A1 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};

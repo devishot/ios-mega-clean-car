@@ -19,6 +19,8 @@ target 'cleancar' do
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
 
+  pod 'SwiftyJSON'
+
 
   target 'cleancarUITests' do
     inherit! :search_paths
