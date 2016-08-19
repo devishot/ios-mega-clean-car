@@ -104,11 +104,10 @@
 		B4EEA3241D6429EB0039D998 /* cleancar */ = {
 			isa = PBXGroup;
 			children = (
+				525C7C9C1D66CF1F00DAE000 /* views */,
+				525C7C981D66C6DF00DAE000 /* controllers */,
 				B4EEA3251D6429EB0039D998 /* AppDelegate.swift */,
-				B4EEA3271D6429EB0039D998 /* ViewController.swift */,
 				B4EEA3291D6429EB0039D998 /* Main.storyboard */,
-				B4EEA3471D644B1F0039D998 /* HomeViewController.swift */,
-				B4EEA3451D6437BC0039D998 /* CodeViewController.swift */,
 				B4EEA32C1D6429EB0039D998 /* Assets.xcassets */,
 				B4EEA32E1D6429EB0039D998 /* LaunchScreen.storyboard */,
 				B4EEA3311D6429EB0039D998 /* Info.plist */,
@@ -318,9 +317,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525C7C9A1D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift in Sources */,
 				B4EEA3461D6437BC0039D998 /* CodeViewController.swift in Sources */,
 				B4EEA3281D6429EB0039D998 /* ViewController.swift in Sources */,
 				B4EEA3261D6429EB0039D998 /* AppDelegate.swift in Sources */,
+				525C7C971D66C6D400DAE000 /* PricelistController.swift in Sources */,
 				B4EEA3481D644B1F0039D998 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,7 +455,7 @@
 				INFOPLIST_FILE = cleancar/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = a.cleancar;
+				PRODUCT_BUNDLE_IDENTIFIER = hackteam.MegaCleanCar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -467,7 +468,7 @@
 				INFOPLIST_FILE = cleancar/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = a.cleancar;
+				PRODUCT_BUNDLE_IDENTIFIER = hackteam.MegaCleanCar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
