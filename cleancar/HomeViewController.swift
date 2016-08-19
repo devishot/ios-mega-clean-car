@@ -38,28 +38,38 @@ class HomeViewController: UIViewController {
     
     // variables
     var bookingHours: [BookingHour] = []
+    var bookingHoursSelectedIndex: NSIndexPath? {
+        didSet {
+            self.chooseTimeCollectionView.reloadData()
+        }
+    }
 
 
     // UIViewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 1. Init styles
         navigationController!.navigationBar.barTintColor = UIColor.whiteColor()
         
         
-        //rounded button
+            //rounded button
         makeReservationButton.layer.cornerRadius = 5
         makeReservationButton.layer.masksToBounds = true
        
-        // rounded view
+            // rounded view
         roundedBorderView.layer.cornerRadius = 20
         roundedBorderView.layer.masksToBounds = true
         roundedBorderView.layer.borderWidth = 1
         roundedBorderView.layer.borderColor = UIColor.grayColor().CGColor
-    
 
+
+        // 2. Delegate views
         chooseTimeCollectionView.dataSource = self
+        chooseTimeCollectionView.delegate = self
 
+
+        // 3. Fetch data
         BookingHour.subscribeToData({ (snapshot: FIRDataSnapshot) -> Void in
             let values = snapshot.value as! [AnyObject]
 
@@ -80,17 +90,6 @@ class HomeViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -112,13 +111,25 @@ extension HomeViewController : UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(bookingHourCellID, forIndexPath: indexPath) as! BookingHoursCollectionViewCell
     
         // Configure the cell
-        cell.configure()
+        let isSelected = self.bookingHoursSelectedIndex == indexPath
+        cell.configure(isSelected)
 
         // Set data
         cell.bookingHour = self.bookingHours[indexPath.row]
 
-        print(indexPath.row, cell.bookingHour?.getHour())
-
         return cell
     }
+
+}
+
+extension HomeViewController : UICollectionViewDelegate {
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if let selected = self.bookingHoursSelectedIndex where selected == indexPath {
+            self.bookingHoursSelectedIndex = nil
+        } else {
+            self.bookingHoursSelectedIndex = indexPath
+        }
+    }
+
 }

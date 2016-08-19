@@ -22,8 +22,14 @@ class BookingHoursCollectionViewCell: UICollectionViewCell {
     }
 
     // methods
-    func configure() -> Void {
+    func configure(isSelected: Bool) -> Void {
         self.backgroundColor = UIColor.blackColor()
         self.hourLabel.textColor = UIColor.yellowColor()
+
+        if isSelected {
+            self.backgroundColor = UIColor.redColor()
+        } else {
+            self.backgroundColor = UIColor.blackColor()
+        }
     }
 }
