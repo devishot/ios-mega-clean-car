@@ -373,15 +373,15 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="2VM-o6-bZt" kind="relationship" relationship="viewControllers" id="ibn-vT-bU1"/>
-                        <segue destination="EEF-4p-Oq9" kind="relationship" relationship="viewControllers" id="4Tq-6k-Qt8"/>
+                        <segue destination="2VM-o6-bZt" kind="relationship" relationship="viewControllers" id="KsR-u0-bDD"/>
+                        <segue destination="EEF-4p-Oq9" kind="relationship" relationship="viewControllers" id="sVE-QT-RQr"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggi-SR-1sc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3642" y="1042"/>
+            <point key="canvasLocation" x="3363" y="1012"/>
         </scene>
-        <!--Главная-->
+        <!--Item-->
         <scene sceneID="ULj-vN-jC5">
             <objects>
                 <viewController id="2VM-o6-bZt" customClass="HomeViewController" customModule="cleancar" customModuleProvider="target" sceneMemberID="viewController">
@@ -416,7 +416,8 @@
                                         <exclude reference="tkQ-0e-mph"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="49" width="203" height="43"/>
                                     <mask key="constraints">
                                         <include reference="157-7K-2W7"/>
                                         <include reference="Ovc-ir-5u9"/>
@@ -443,7 +444,8 @@
                                         <exclude reference="9X4-LL-uzU"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="99" width="192" height="21"/>
                                     <mask key="constraints">
                                         <include reference="7D6-17-8Jk"/>
                                         <include reference="9X4-LL-uzU"/>
@@ -469,7 +471,8 @@
                                         <exclude reference="lr6-yS-UKX"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="200" y="69" width="200" height="21"/>
                                     <mask key="constraints">
                                         <include reference="OuH-C5-K2c"/>
                                         <include reference="lr6-yS-UKX"/>
@@ -496,7 +499,8 @@
                                         <exclude reference="uCs-or-2mD"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="154" width="192" height="30"/>
                                     <mask key="constraints">
                                         <include reference="inh-3m-ZUf"/>
                                         <include reference="uCs-or-2mD"/>
@@ -521,7 +525,8 @@
                                         <exclude reference="xhO-yN-1uq"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="195" y="154" width="185" height="30"/>
                                     <mask key="constraints">
                                         <include reference="oVJ-p7-D1o"/>
                                         <include reference="xhO-yN-1uq"/>
@@ -796,7 +801,8 @@
                                         <exclude reference="UwT-ER-XEF"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="207" width="400" height="141"/>
                                     <mask key="subviews">
                                         <include reference="PYa-UD-fAD"/>
                                         <include reference="rcG-X8-qSl"/>
@@ -966,7 +972,8 @@
                                         <exclude reference="w8V-IC-1kS"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="356" width="400" height="159"/>
                                     <mask key="subviews">
                                         <include reference="4hk-Iw-zbk"/>
                                         <include reference="gUS-7x-N8Z"/>
@@ -1001,14 +1008,15 @@
                                         <exclude reference="xMR-D3-JzB"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="540" width="360" height="40"/>
                                     <mask key="constraints">
                                         <include reference="l2J-xV-3dB"/>
                                         <include reference="xMR-D3-JzB"/>
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="touchUpMakeReservationButton:" destination="2VM-o6-bZt" eventType="touchUpInside" id="KTm-B0-ZeL"/>
+                                    <segue destination="FIN-L0-fJv" kind="show" identifier="bookingSegue" action="showDetailViewController:sender:" id="kCQ-Ej-f6o"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+7 777 123 45 67 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B2s-aw-gLe">
@@ -1030,7 +1038,8 @@
                                         <exclude reference="dKT-eu-6IC"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="200" y="99" width="180" height="21"/>
                                     <mask key="constraints">
                                         <include reference="2KI-4o-iFR"/>
                                         <include reference="dKT-eu-6IC"/>
@@ -1197,9 +1206,8 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Главная" id="KCD-kI-qnV"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="imN-NW-aRJ"/>
                     <navigationItem key="navigationItem" id="1xR-4M-FmZ"/>
-                    <nil key="simulatedTopBarMetrics"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="chooseTimeCollectionView" destination="gUS-7x-N8Z" id="ZLH-Ta-xVj"/>
@@ -1212,11 +1220,31 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nKz-ZG-xlr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4531.5" y="695"/>
+            <point key="canvasLocation" x="5449.5" y="695"/>
+        </scene>
+        <!--Booking Controller-->
+        <scene sceneID="LnN-4t-EPc">
+            <objects>
+                <viewController id="FIN-L0-fJv" customClass="BookingController" customModule="cleancar" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="79u-tQ-VMF"/>
+                        <viewControllerLayoutGuide type="bottom" id="CRo-ps-I4k"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Rac-ga-Jcd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fqA-sk-Ogh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6202.5" y="695"/>
         </scene>
         <!--Услуги-->
         <scene sceneID="jej-qA-yWx">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w3U-8c-iWW" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="EEF-4p-Oq9" customClass="PricelistController" customModule="cleancar" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RAe-Ot-zqC"/>
@@ -1230,7 +1258,6 @@
                     <tabBarItem key="tabBarItem" title="Услуги" id="o0k-aJ-kyM"/>
                     <nil key="simulatedTopBarMetrics"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="w3U-8c-iWW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4519.5" y="1400"/>
         </scene>

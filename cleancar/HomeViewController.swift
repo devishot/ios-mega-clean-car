@@ -18,8 +18,6 @@ class HomeViewController: UIViewController {
     }
     @IBAction func callButton(sender: UIButton) {
     }
-    @IBAction func touchUpMakeReservationButton(sender: AnyObject) {
-    }
 
 
     // IBOutlets
@@ -35,12 +33,20 @@ class HomeViewController: UIViewController {
     
     // Identifiers
     var bookingHourCellID = "bookingHourCell"
-    
+    var bookingSegueID = "bookingSegue"
+
+
     // variables
     var bookingHours: [BookingHour] = []
     var bookingHoursSelectedIndex: NSIndexPath? {
         didSet {
             self.chooseTimeCollectionView.reloadData()
+
+            if self.bookingHoursSelectedIndex != nil {
+                self.makeReservationButton.enabled = true
+            } else {
+                self.makeReservationButton.enabled = false
+            }
         }
     }
 
@@ -50,9 +56,9 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         // 1. Init styles
-        navigationController!.navigationBar.barTintColor = UIColor.whiteColor()
-        
-        
+        self.navigationController?.navigationBar.hidden = true
+        print("@@@@@", self.navigationController?.navigationBar.hidden)
+
             //rounded button
         makeReservationButton.layer.cornerRadius = 5
         makeReservationButton.layer.masksToBounds = true
@@ -64,9 +70,11 @@ class HomeViewController: UIViewController {
         roundedBorderView.layer.borderColor = UIColor.grayColor().CGColor
 
 
-        // 2. Delegate views
+        // 2. Init behaviour
         chooseTimeCollectionView.dataSource = self
         chooseTimeCollectionView.delegate = self
+
+        self.makeReservationButton.enabled = true
 
 
         // 3. Fetch data
@@ -80,17 +88,13 @@ class HomeViewController: UIViewController {
         })
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationController?.navigationBar.hidden = true
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue == self.bookingSegueID {
+            let destinationController = segue.destinationViewController as! BookingController
+            destinationController.bookingHour = self.bookingHours[self.bookingHoursSelectedIndex!.row]
+        }
     }
-
 }
 
 
