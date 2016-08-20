@@ -21,6 +21,8 @@ target 'cleancar' do
 
   pod 'SwiftyJSON'
 
+  pod 'Cosmos', '~> 1.2'
+
 
   target 'cleancarUITests' do
     inherit! :search_paths

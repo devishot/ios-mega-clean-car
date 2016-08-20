@@ -11,12 +11,21 @@ import Firebase
 
 
 class BookingController: UIViewController {
-
-    // IBActions
-    
     
     // IBOutlets
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var carTypeLabel: UILabel!
+    @IBOutlet weak var carNumberLabel: UILabel!
+    @IBOutlet weak var tableInsideContainerView: UIView!
     
+    @IBOutlet weak var totalPriceLabel: UILabel!
+
+    // IBActions
+    @IBAction func changeCarButton(sender: UIButton) {
+    }
+    
+    @IBAction func sendButton(sender: UIButton) {
+    }
     
     // variables
     var bookingHour: BookingHour?
