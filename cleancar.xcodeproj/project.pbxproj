@@ -14,6 +14,10 @@
 		523F3B571D67A50B00B75421 /* BookingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523F3B561D67A50B00B75421 /* BookingController.swift */; };
 		525C7C971D66C6D400DAE000 /* PricelistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C961D66C6D400DAE000 /* PricelistController.swift */; };
 		525C7C9A1D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */; };
+		B43C90031D6859F800667B09 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43C90021D6859F800667B09 /* FeedbackViewController.swift */; };
+		B4856D961D6889FC000EC687 /* UIView+borderColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4856D951D6889FC000EC687 /* UIView+borderColor.swift */; };
+		B4856D981D6896E0000EC687 /* OrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4856D971D6896E0000EC687 /* OrdersTableViewCell.swift */; };
+		B4856D9A1D68979F000EC687 /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4856D991D68979F000EC687 /* OrdersViewController.swift */; };
 		B4EEA3261D6429EB0039D998 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA3251D6429EB0039D998 /* AppDelegate.swift */; };
 		B4EEA3281D6429EB0039D998 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA3271D6429EB0039D998 /* ViewController.swift */; };
 		B4EEA32B1D6429EB0039D998 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4EEA3291D6429EB0039D998 /* Main.storyboard */; };
@@ -47,6 +51,10 @@
 		84384B51F1EAA21FEFEA9766 /* Pods-cleancar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.debug.xcconfig"; sourceTree = "<group>"; };
 		97FAB469328B62ACE747D91A /* Pods-cleancar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.release.xcconfig"; sourceTree = "<group>"; };
 		9EBDDD8594AA17CCC79ADDBF /* Pods-cleancarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancarUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		B43C90021D6859F800667B09 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		B4856D951D6889FC000EC687 /* UIView+borderColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+borderColor.swift"; sourceTree = "<group>"; };
+		B4856D971D6896E0000EC687 /* OrdersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersTableViewCell.swift; sourceTree = "<group>"; };
+		B4856D991D68979F000EC687 /* OrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
 		B4EEA3221D6429EA0039D998 /* cleancar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cleancar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4EEA3251D6429EB0039D998 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4EEA3271D6429EB0039D998 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +128,8 @@
 			children = (
 				B4EEA3471D644B1F0039D998 /* HomeViewController.swift */,
 				525C7C961D66C6D400DAE000 /* PricelistController.swift */,
+				B43C90021D6859F800667B09 /* FeedbackViewController.swift */,
+				B4856D991D68979F000EC687 /* OrdersViewController.swift */,
 			);
 			name = Tabs;
 			sourceTree = "<group>";
@@ -158,14 +168,25 @@
 			isa = PBXGroup;
 			children = (
 				525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */,
+				B4856D971D6896E0000EC687 /* OrdersTableViewCell.swift */,
 			);
 			name = views;
+			sourceTree = "<group>";
+		};
+		B4856D941D6889DE000EC687 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B4856D951D6889FC000EC687 /* UIView+borderColor.swift */,
+			);
+			name = extensions;
+			path = cleancar;
 			sourceTree = "<group>";
 		};
 		B4EEA3191D6429EA0039D998 = {
 			isa = PBXGroup;
 			children = (
 				B4EEA3241D6429EB0039D998 /* cleancar */,
+				B4856D941D6889DE000EC687 /* extensions */,
 				B4EEA3231D6429EA0039D998 /* Products */,
 				B4EEA3391D6429EB0039D998 /* cleancarUITests */,
 				E839B45BC8CB19266AD0869D /* Frameworks */,
@@ -402,9 +423,13 @@
 				B4EEA3461D6437BC0039D998 /* CodeViewController.swift in Sources */,
 				523F3B521D66EA4300B75421 /* BookingHour.swift in Sources */,
 				B4EEA3281D6429EB0039D998 /* ViewController.swift in Sources */,
+				B4856D961D6889FC000EC687 /* UIView+borderColor.swift in Sources */,
 				B4EEA3261D6429EB0039D998 /* AppDelegate.swift in Sources */,
 				525C7C971D66C6D400DAE000 /* PricelistController.swift in Sources */,
+				B4856D9A1D68979F000EC687 /* OrdersViewController.swift in Sources */,
+				B4856D981D6896E0000EC687 /* OrdersTableViewCell.swift in Sources */,
 				B4EEA3481D644B1F0039D998 /* HomeViewController.swift in Sources */,
+				B43C90031D6859F800667B09 /* FeedbackViewController.swift in Sources */,
 				523F3B571D67A50B00B75421 /* BookingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
