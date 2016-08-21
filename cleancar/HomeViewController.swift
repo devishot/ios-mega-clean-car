@@ -56,8 +56,6 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         // 1. Init styles
-        self.navigationController?.navigationBar.hidden = true
-        print("@@@@@", self.navigationController?.navigationBar.hidden)
 
             //rounded button
         makeReservationButton.layer.cornerRadius = 5
@@ -86,6 +84,13 @@ class HomeViewController: UIViewController {
             }
             self.chooseTimeCollectionView.reloadData()
         })
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.tabBarController?.tabBar.hidden = false
     }
 
 

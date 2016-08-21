@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ycG-gP-qHL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qex-dj-Kcb">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -373,7 +373,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="2VM-o6-bZt" kind="relationship" relationship="viewControllers" id="KsR-u0-bDD"/>
+                        <segue destination="i7r-FA-csY" kind="relationship" relationship="viewControllers" id="KsR-u0-bDD"/>
                         <segue destination="EEF-4p-Oq9" kind="relationship" relationship="viewControllers" id="sVE-QT-RQr"/>
                     </connections>
                 </tabBarController>
@@ -381,7 +381,7 @@
             </objects>
             <point key="canvasLocation" x="3363" y="1012"/>
         </scene>
-        <!--Item-->
+        <!--Home View Controller-->
         <scene sceneID="ULj-vN-jC5">
             <objects>
                 <viewController id="2VM-o6-bZt" customClass="HomeViewController" customModule="cleancar" customModuleProvider="target" sceneMemberID="viewController">
@@ -393,38 +393,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   MEGA Silk Way" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2e-SQ-cRF">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="140" id="157-7K-2W7">
-                                        <variation key="widthClass=compact" constant="203"/>
-                                    </constraint>
-                                    <constraint firstAttribute="height" constant="54" id="Ovc-ir-5u9">
-                                        <variation key="widthClass=compact" constant="43"/>
-                                    </constraint>
-                                    <constraint firstAttribute="width" secondItem="p2e-SQ-cRF" secondAttribute="height" multiplier="20:3" id="tkQ-0e-mph">
-                                        <variation key="widthClass=compact" constant="-83.666666666666686"/>
-                                    </constraint>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="157-7K-2W7"/>
-                                        <exclude reference="Ovc-ir-5u9"/>
-                                        <exclude reference="tkQ-0e-mph"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="49" width="203" height="43"/>
-                                    <mask key="constraints">
-                                        <include reference="157-7K-2W7"/>
-                                        <include reference="Ovc-ir-5u9"/>
-                                        <include reference="tkQ-0e-mph"/>
-                                    </mask>
-                                </variation>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="       Тлендиева, 34/2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2D-zM-WbL">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <constraints>
@@ -444,8 +412,7 @@
                                         <exclude reference="9X4-LL-uzU"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="99" width="192" height="21"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="7D6-17-8Jk"/>
                                         <include reference="9X4-LL-uzU"/>
@@ -471,8 +438,7 @@
                                         <exclude reference="lr6-yS-UKX"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="200" y="69" width="200" height="21"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="OuH-C5-K2c"/>
                                         <include reference="lr6-yS-UKX"/>
@@ -499,8 +465,7 @@
                                         <exclude reference="uCs-or-2mD"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="154" width="192" height="30"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="inh-3m-ZUf"/>
                                         <include reference="uCs-or-2mD"/>
@@ -525,8 +490,7 @@
                                         <exclude reference="xhO-yN-1uq"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="195" y="154" width="185" height="30"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="oVJ-p7-D1o"/>
                                         <include reference="xhO-yN-1uq"/>
@@ -801,8 +765,7 @@
                                         <exclude reference="UwT-ER-XEF"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="207" width="400" height="141"/>
+                                <variation key="widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="PYa-UD-fAD"/>
                                         <include reference="rcG-X8-qSl"/>
@@ -972,8 +935,7 @@
                                         <exclude reference="w8V-IC-1kS"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="356" width="400" height="159"/>
+                                <variation key="widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="4hk-Iw-zbk"/>
                                         <include reference="gUS-7x-N8Z"/>
@@ -1008,15 +970,14 @@
                                         <exclude reference="xMR-D3-JzB"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="540" width="360" height="40"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="l2J-xV-3dB"/>
                                         <include reference="xMR-D3-JzB"/>
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="FIN-L0-fJv" kind="show" identifier="bookingSegue" action="showDetailViewController:sender:" id="kCQ-Ej-f6o"/>
+                                    <segue destination="FIN-L0-fJv" kind="show" identifier="bookingSegue" id="xnh-l4-5IF"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+7 777 123 45 67 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B2s-aw-gLe">
@@ -1038,11 +999,41 @@
                                         <exclude reference="dKT-eu-6IC"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="200" y="99" width="180" height="21"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="2KI-4o-iFR"/>
                                         <include reference="dKT-eu-6IC"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   MEGA Silk Way" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2e-SQ-cRF">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="157-7K-2W7">
+                                        <variation key="widthClass=compact" constant="203"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="54" id="Ovc-ir-5u9">
+                                        <variation key="widthClass=compact" constant="43"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" secondItem="p2e-SQ-cRF" secondAttribute="height" multiplier="20:3" id="tkQ-0e-mph">
+                                        <variation key="widthClass=compact" constant="-83.666666666666686"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="157-7K-2W7"/>
+                                        <exclude reference="Ovc-ir-5u9"/>
+                                        <exclude reference="tkQ-0e-mph"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="157-7K-2W7"/>
+                                        <include reference="Ovc-ir-5u9"/>
+                                        <include reference="tkQ-0e-mph"/>
                                     </mask>
                                 </variation>
                             </label>
@@ -1115,7 +1106,6 @@
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="p2e-SQ-cRF"/>
                                 <exclude reference="F2D-zM-WbL"/>
                                 <exclude reference="QUu-x5-efP"/>
                                 <exclude reference="rPb-9f-R7D"/>
@@ -1124,6 +1114,7 @@
                                 <exclude reference="l6C-ZE-Ysf"/>
                                 <exclude reference="1CW-MQ-2dq"/>
                                 <exclude reference="B2s-aw-gLe"/>
+                                <exclude reference="p2e-SQ-cRF"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="EQu-9e-A3y"/>
@@ -1161,7 +1152,6 @@
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="p2e-SQ-cRF"/>
                                 <include reference="F2D-zM-WbL"/>
                                 <include reference="QUu-x5-efP"/>
                                 <include reference="rPb-9f-R7D"/>
@@ -1170,6 +1160,7 @@
                                 <include reference="l6C-ZE-Ysf"/>
                                 <include reference="1CW-MQ-2dq"/>
                                 <include reference="B2s-aw-gLe"/>
+                                <include reference="p2e-SQ-cRF"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="EQu-9e-A3y"/>
@@ -1206,7 +1197,6 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="imN-NW-aRJ"/>
                     <navigationItem key="navigationItem" id="1xR-4M-FmZ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -1220,7 +1210,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nKz-ZG-xlr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5449.5" y="695"/>
+            <point key="canvasLocation" x="5389.5" y="705"/>
         </scene>
         <!--Booking Controller-->
         <scene sceneID="LnN-4t-EPc">
@@ -1235,11 +1225,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <nil key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fqA-sk-Ogh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6202.5" y="695"/>
+            <point key="canvasLocation" x="6214.5" y="705"/>
         </scene>
         <!--Услуги-->
         <scene sceneID="jej-qA-yWx">
@@ -1278,6 +1267,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8kj-xO-SfW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="322.5" y="1012"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="sNB-JD-tJD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="i7r-FA-csY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="imN-NW-aRJ"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jtN-4h-4qz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2VM-o6-bZt" kind="relationship" relationship="rootViewController" id="DsL-lB-kS2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H3Q-JQ-rsm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4501.5" y="705"/>
         </scene>
     </scenes>
     <resources>

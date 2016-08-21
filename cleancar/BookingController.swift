@@ -24,18 +24,15 @@ class BookingController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if self.navigationController != nil {
-            print("here", self.navigationController?.viewControllers)
-        }
-        self.navigationController?.navigationBar.hidden = false
         
-        print("heh =(")
+        
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.tabBarController?.tabBar.hidden = true
     }
 
 }
