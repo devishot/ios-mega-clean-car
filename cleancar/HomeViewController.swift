@@ -95,7 +95,7 @@ class HomeViewController: UIViewController {
 
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue == self.bookingSegueID {
+        if segue.identifier == self.bookingSegueID {
             let destinationController = segue.destinationViewController as! BookingController
             destinationController.bookingHour = self.bookingHours[self.bookingHoursSelectedIndex!.row]
         }

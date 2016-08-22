@@ -33,9 +33,10 @@ class BookingController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+
+        timeLabel.text = self.bookingHour!.getHour()
     }
+
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
