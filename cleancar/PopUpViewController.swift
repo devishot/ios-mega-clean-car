@@ -13,15 +13,30 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var popUpView: UIView!
     @IBOutlet weak var chooseCarCarcasTextField: UITextField!
     
+    @IBOutlet weak var carNumberTextField: UITextField!
+    @IBOutlet weak var carModelTextField: UITextField!
+    @IBOutlet weak var carCarcasTextField: UITextField!
+    
+    
+    @IBOutlet weak var lineOfNumberLabelView: UIView!
+    @IBOutlet weak var lineOfModelLabelView: UIView!
+    @IBOutlet weak var lineOfCarcasLabelView: UIView!
+    
     var carcasTypes = ["Седан","Кроссовер","Внедорожник","Микроавтобус"]
     var picker = UIPickerView()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //textfield customization
+        lineOfNumberLabelView.addTopBorderWithColor(UIColor.lightGrayColor(), width: 1)
+        lineOfModelLabelView.addTopBorderWithColor(UIColor.lightGrayColor(), width: 1)
+        lineOfCarcasLabelView.addTopBorderWithColor(UIColor.lightGrayColor(), width: 1)
+        
         //view customization
         popUpView.layer.cornerRadius = 15
         popUpView.layer.masksToBounds = true
+        popUpView.layer.backgroundColor = UIColor.whiteColor().CGColor
         //piker view 
         picker.delegate = self
         picker.dataSource = self
@@ -71,7 +86,7 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         });
     }
     
-    
+    //picker view functions
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }

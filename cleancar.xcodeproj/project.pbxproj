@@ -16,9 +16,9 @@
 		525C7C9A1D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */; };
 		B43C90031D6859F800667B09 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43C90021D6859F800667B09 /* FeedbackViewController.swift */; };
 		B45905C41D6AC92600CFEFEF /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45905C31D6AC92600CFEFEF /* PopUpViewController.swift */; };
+		B45905C61D6C171B00CFEFEF /* OrdersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45905C51D6C171B00CFEFEF /* OrdersTableViewController.swift */; };
 		B4856D961D6889FC000EC687 /* UIView+borderColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4856D951D6889FC000EC687 /* UIView+borderColor.swift */; };
 		B4856D981D6896E0000EC687 /* OrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4856D971D6896E0000EC687 /* OrdersTableViewCell.swift */; };
-		B4856D9A1D68979F000EC687 /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4856D991D68979F000EC687 /* OrdersViewController.swift */; };
 		B4EEA3261D6429EB0039D998 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA3251D6429EB0039D998 /* AppDelegate.swift */; };
 		B4EEA3281D6429EB0039D998 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA3271D6429EB0039D998 /* ViewController.swift */; };
 		B4EEA32B1D6429EB0039D998 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4EEA3291D6429EB0039D998 /* Main.storyboard */; };
@@ -54,9 +54,9 @@
 		9EBDDD8594AA17CCC79ADDBF /* Pods-cleancarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancarUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B43C90021D6859F800667B09 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		B45905C31D6AC92600CFEFEF /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
+		B45905C51D6C171B00CFEFEF /* OrdersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersTableViewController.swift; sourceTree = "<group>"; };
 		B4856D951D6889FC000EC687 /* UIView+borderColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+borderColor.swift"; sourceTree = "<group>"; };
 		B4856D971D6896E0000EC687 /* OrdersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersTableViewCell.swift; sourceTree = "<group>"; };
-		B4856D991D68979F000EC687 /* OrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
 		B4EEA3221D6429EA0039D998 /* cleancar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cleancar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4EEA3251D6429EB0039D998 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4EEA3271D6429EB0039D998 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -131,8 +131,8 @@
 				B4EEA3471D644B1F0039D998 /* HomeViewController.swift */,
 				525C7C961D66C6D400DAE000 /* PricelistController.swift */,
 				B43C90021D6859F800667B09 /* FeedbackViewController.swift */,
-				B4856D991D68979F000EC687 /* OrdersViewController.swift */,
 				B45905C31D6AC92600CFEFEF /* PopUpViewController.swift */,
+				B45905C51D6C171B00CFEFEF /* OrdersTableViewController.swift */,
 			);
 			name = Tabs;
 			sourceTree = "<group>";
@@ -429,8 +429,8 @@
 				B4856D961D6889FC000EC687 /* UIView+borderColor.swift in Sources */,
 				B4EEA3261D6429EB0039D998 /* AppDelegate.swift in Sources */,
 				525C7C971D66C6D400DAE000 /* PricelistController.swift in Sources */,
+				B45905C61D6C171B00CFEFEF /* OrdersTableViewController.swift in Sources */,
 				B45905C41D6AC92600CFEFEF /* PopUpViewController.swift in Sources */,
-				B4856D9A1D68979F000EC687 /* OrdersViewController.swift in Sources */,
 				B4856D981D6896E0000EC687 /* OrdersTableViewCell.swift in Sources */,
 				B4EEA3481D644B1F0039D998 /* HomeViewController.swift in Sources */,
 				B43C90031D6859F800667B09 /* FeedbackViewController.swift in Sources */,

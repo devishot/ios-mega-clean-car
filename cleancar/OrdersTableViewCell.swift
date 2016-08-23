@@ -10,19 +10,20 @@ import UIKit
 
 class OrdersTableViewCell: UITableViewCell {
     //outlets
-    @IBOutlet weak var boxNumberLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var boxLabel: UILabel!
+    @IBOutlet weak var numberOfBoxLabel: UILabel!
+    
+    @IBOutlet weak var cleanserLabel: UILabel!
     @IBOutlet weak var cleanserNameLabel: UILabel!
     
-    @IBOutlet weak var carBrandLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    @IBOutlet weak var carModelName: UILabel!
     @IBOutlet weak var carNumberLabel: UILabel!
     
     @IBOutlet weak var overallPriceLabel: UILabel!
     
-    
-    @IBOutlet weak var allSelectedServicesTextView: UITextView!
-    
-    
+    @IBOutlet weak var servicesDescriptionLabel: UITextView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
