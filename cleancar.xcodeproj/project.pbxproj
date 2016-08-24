@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0404B3F268897FB69D358151 /* Pods_cleancarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48303207C9BACF141C57D8CC /* Pods_cleancarUITests.framework */; };
 		3CCDD94ABB73D43BD8346AB0 /* Pods_cleancar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC7078257E4E069BA7EF11A /* Pods_cleancar.framework */; };
+		5209DE3F1D6C1EEA006E040E /* ServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5209DE3E1D6C1EEA006E040E /* ServicesTableViewController.swift */; };
+		5225B05A1D6B5CEB00BFBAE7 /* CarInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225B0591D6B5CEB00BFBAE7 /* CarInfo.swift */; };
+		5225B05C1D6B640E00BFBAE7 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225B05B1D6B640E00BFBAE7 /* Services.swift */; };
 		523F3B521D66EA4300B75421 /* BookingHour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523F3B511D66EA4300B75421 /* BookingHour.swift */; };
 		523F3B551D67678B00B75421 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 523F3B541D67678B00B75421 /* GoogleService-Info.plist */; };
 		523F3B571D67A50B00B75421 /* BookingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523F3B561D67A50B00B75421 /* BookingController.swift */; };
@@ -42,6 +45,9 @@
 		09557AF8E2E4DB998B24E254 /* Pods-cleancarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancarUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		408F4B8A8AAB864F46AF8072 /* Pods-cleancar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.release.xcconfig"; sourceTree = "<group>"; };
 		48303207C9BACF141C57D8CC /* Pods_cleancarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cleancarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5209DE3E1D6C1EEA006E040E /* ServicesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesTableViewController.swift; sourceTree = "<group>"; };
+		5225B0591D6B5CEB00BFBAE7 /* CarInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarInfo.swift; sourceTree = "<group>"; };
+		5225B05B1D6B640E00BFBAE7 /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		523F3B511D66EA4300B75421 /* BookingHour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingHour.swift; sourceTree = "<group>"; };
 		523F3B541D67678B00B75421 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		523F3B561D67A50B00B75421 /* BookingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingController.swift; sourceTree = "<group>"; };
@@ -138,6 +144,8 @@
 			isa = PBXGroup;
 			children = (
 				523F3B511D66EA4300B75421 /* BookingHour.swift */,
+				5225B0591D6B5CEB00BFBAE7 /* CarInfo.swift */,
+				5225B05B1D6B640E00BFBAE7 /* Services.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -159,6 +167,7 @@
 			children = (
 				523F3B4E1D66E93F00B75421 /* SignUp/SignIn */,
 				523F3B4F1D66E96600B75421 /* Tabs */,
+				5209DE3E1D6C1EEA006E040E /* ServicesTableViewController.swift */,
 				523F3B561D67A50B00B75421 /* BookingController.swift */,
 			);
 			name = controllers;
@@ -422,6 +431,9 @@
 				525C7C9A1D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift in Sources */,
 				B4EEA3461D6437BC0039D998 /* CodeViewController.swift in Sources */,
 				523F3B521D66EA4300B75421 /* BookingHour.swift in Sources */,
+				5225B05C1D6B640E00BFBAE7 /* Services.swift in Sources */,
+				5209DE3F1D6C1EEA006E040E /* ServicesTableViewController.swift in Sources */,
+				5225B05A1D6B5CEB00BFBAE7 /* CarInfo.swift in Sources */,
 				B4EEA3281D6429EB0039D998 /* ViewController.swift in Sources */,
 				B4856D961D6889FC000EC687 /* UIView+borderColor.swift in Sources */,
 				B4EEA3261D6429EB0039D998 /* AppDelegate.swift in Sources */,
