@@ -20,7 +20,10 @@ class CarInfo {
     var type: CarTypeEnum
     var model: String?
     var identifierNumber: String?
+
     
+    static let carTypeNames = ["Седан","Кроссовер","Внедорожник","Микроавтобус"]
+
     init() {
         self.type = .Normal
     }

@@ -22,10 +22,10 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var lineOfModelLabelView: UIView!
     @IBOutlet weak var lineOfCarcasLabelView: UIView!
     
-    var carcasTypes = ["Седан","Кроссовер","Внедорожник","Микроавтобус"]
+    let carcasTypes = CarInfo.carTypeNames
     var picker = UIPickerView()
-    
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         //textfield customization
@@ -41,13 +41,9 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         picker.delegate = self
         picker.dataSource = self
         chooseCarCarcasTextField.inputView = picker
-        
-        //popup menu features
-        self.view.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.8)
-        
-        self.showAnimate()
 
-        // Do any additional setup after loading the view.
+        //popup menu features
+        self.view.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.2)
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,42 +51,11 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         // Dispose of any resources that can be recreated.
     }
     
-
-    @IBAction func closePopUpButton(sender: UIButton) {
-    
-     self.removeAnimate()
-    
-    }
-    
-    //animates popup menu
-    func showAnimate()
-    {
-        self.view.transform = CGAffineTransformMakeScale(1.3, 1.3)
-        self.view.alpha = 0.0;
-        UIView.animateWithDuration(0.25, animations: {
-            self.view.alpha = 1.0
-            self.view.transform = CGAffineTransformMakeScale(1.0, 1.0)
-        });
-    }
-    
-    func removeAnimate()
-    {
-        UIView.animateWithDuration(0.25, animations: {
-            self.view.transform = CGAffineTransformMakeScale(1.3, 1.3)
-            self.view.alpha = 0.0;
-            }, completion:{(finished : Bool)  in
-                if (finished)
-                {
-                    self.view.removeFromSuperview()
-                }
-        });
-    }
-    
     //picker view functions
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
-    
+
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return carcasTypes.count
     }
@@ -102,15 +67,5 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return carcasTypes[row]
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
