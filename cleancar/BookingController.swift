@@ -22,6 +22,12 @@ class BookingController: UIViewController {
 
     // IBActions
     @IBAction func changeCarButton(sender: UIButton) {
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("sbPopUpID") as! PopUpViewController
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = self.view.frame
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMoveToParentViewController(self)
+        
     }
     
     @IBAction func sendButton(sender: UIButton) {

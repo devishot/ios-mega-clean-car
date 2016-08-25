@@ -20,6 +20,8 @@ class FeedbackViewController: UIViewController {
     @IBOutlet weak var sendFeedbackButton: UIButton!
     
     
+    @IBOutlet weak var lineView1: UIView!
+    @IBOutlet weak var lineView2: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +35,8 @@ class FeedbackViewController: UIViewController {
         lineToDrawView.layer.masksToBounds = true
         lineToDrawView.addTopBorderWithColor(UIColor.lightGrayColor(), width: 1)
         lineToDrawView.addBottomBorderWithColor(UIColor.lightGrayColor(), width: 1)
+        lineView1.addTopBorderWithColor(UIColor.lightGrayColor(), width: 1)
+        lineView2.addTopBorderWithColor(UIColor.lightGrayColor(), width: 1)
         
     
 
