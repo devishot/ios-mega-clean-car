@@ -24,21 +24,16 @@ class BookingController: UIViewController, Dimmable {
     @IBOutlet weak var totalPriceLabel: UILabel!
 
     // IBActions
-    /*
-    @IBAction func clickedChangeCarButton(sender: UIButton) {
-        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("sbPopUpID") as! PopUpViewController
-        self.addChildViewController(popOverVC)
-        popOverVC.view.frame = self.view.frame
-        self.view.addSubview(popOverVC.view)
-        popOverVC.didMoveToParentViewController(self)
-    }
-    */
     @IBAction func sendButton(sender: UIButton) {
     }
-
     @IBAction func unwindFromPopupChangeCarInfo(segue: UIStoryboardSegue) {
+        let popUpViewController = segue.sourceViewController as! PopUpViewController
+        // get carInfo
+        self.carInfo = popUpViewController.carInfo
+        // animate
         dim(.Out, speed: dimSpeed)
     }
+
 
     // constants
     let embeddedTableViewControllerSegueID = "embeddedTableViewController"
@@ -96,6 +91,10 @@ class BookingController: UIViewController, Dimmable {
             }
         }
         if segue.identifier == self.popupChangeCarInfoSegueID {
+            let popUpViewController = segue.destinationViewController as! PopUpViewController
+            // set carInfo
+            popUpViewController.carInfo = self.carInfo
+            // animate
             dim(.In, alpha: dimLevel, speed: dimSpeed)
         }
     }
