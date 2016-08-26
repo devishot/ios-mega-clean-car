@@ -8,10 +8,10 @@
 
 import UIKit
 
-class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class PopUpViewController: UIViewController {
 
     @IBOutlet weak var popUpView: UIView!
-    @IBOutlet weak var chooseCarCarcasTextField: UITextField!
+
     
     @IBOutlet weak var carNumberTextField: UITextField!
     @IBOutlet weak var carModelTextField: UITextField!
@@ -33,7 +33,7 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         //textfield customization
         lineOfNumberLabelView.addTopBorderWithColor(UIColor.lightGrayColor(), width: 1)
         lineOfModelLabelView.addTopBorderWithColor(UIColor.lightGrayColor(), width: 1)
-        lineOfCarcasLabelView.addTopBorderWithColor(UIColor.lightGrayColor(), width: 1)
+
         
         //view customization
         popUpView.layer.cornerRadius = 15
@@ -51,17 +51,11 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         carNumberTextField.text = self.carInfo!.identifierNumber
         carModelTextField.text = self.carInfo!.model
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-    //picker view functions
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
-
+    
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return carcasTypes.count
     }
