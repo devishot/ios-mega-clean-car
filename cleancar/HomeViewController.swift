@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 
 class HomeViewController: UIViewController {
@@ -17,6 +19,25 @@ class HomeViewController: UIViewController {
     @IBAction func goToMapButton(sender: UIButton) {
     }
     @IBAction func callButton(sender: UIButton) {
+    }
+    @IBAction func clickedMenuButton(sender: UIButton) {
+        let actionSheet = UIAlertController(title: nil,
+                                            message: "Выберите действие",
+                                            preferredStyle: .ActionSheet)
+
+        let logOut = UIAlertAction(title: "Выйти", style: .Destructive, handler: { (alert: UIAlertAction!) -> Void in
+            self.logOut()
+        })
+
+        let cancel = UIAlertAction(title: "Отмена", style: .Cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+        })
+
+        actionSheet.addAction(logOut)
+        actionSheet.addAction(cancel)
+
+        self.presentViewController(actionSheet, animated: true, completion: nil)
     }
 
 
@@ -60,7 +81,7 @@ class HomeViewController: UIViewController {
             //rounded button
         makeReservationButton.layer.cornerRadius = 5
         makeReservationButton.layer.masksToBounds = true
-       
+
             // rounded view
         roundedBorderView.layer.cornerRadius = 20
         roundedBorderView.layer.masksToBounds = true
@@ -98,6 +119,25 @@ class HomeViewController: UIViewController {
         if segue.identifier == self.bookingSegueID {
             let destinationController = segue.destinationViewController as! BookingController
             destinationController.bookingHour = self.bookingHours[self.bookingHoursSelectedIndex!.row]
+        }
+    }
+    
+
+    func logOut() -> Void {
+        do {
+            // logout from Firebase
+            try FIRAuth.auth()?.signOut()
+            // logout from Facebook
+            let facebookLogin = FBSDKLoginManager();
+            facebookLogin.logOut()
+            // redirect to LoginViewController
+            let firstNavigationController = self.storyboard?.instantiateViewControllerWithIdentifier("loginNavController") as! UINavigationController
+            dispatch_async(dispatch_get_main_queue(), {
+                self.presentViewController(firstNavigationController, animated: true, completion: nil)
+                return
+            })
+        } catch {
+            print(error)
         }
     }
 }

@@ -14,7 +14,6 @@ class BookingController: UIViewController, Dimmable {
     
     // IBOutlets
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var carViewsContainer: UIView!
     @IBOutlet weak var carDetailsView: UIView!
     @IBOutlet weak var carTypeLabel: UILabel!
     @IBOutlet weak var carNumberLabel: UILabel!
@@ -22,6 +21,7 @@ class BookingController: UIViewController, Dimmable {
     @IBOutlet weak var changeCarButton: UIButton!
     @IBOutlet weak var tableInsideContainerView: UIView!
     @IBOutlet weak var totalPriceLabel: UILabel!
+
 
     // IBActions
     @IBAction func sendButton(sender: UIButton) {
@@ -103,7 +103,11 @@ class BookingController: UIViewController, Dimmable {
 
 
     func showCarDetailView() -> Void {
-        carViewsContainer.bringSubviewToFront(carDetailsView)
+        UIView.transitionFromView(noCarView,
+                                  toView: carDetailsView,
+                                  duration: 0.2,
+                                  options: UIViewAnimationOptions.ShowHideTransitionViews,
+                                  completion: nil)
 
         // set values
         carTypeLabel.text = self.carInfo!.model
@@ -113,6 +117,12 @@ class BookingController: UIViewController, Dimmable {
     }
 
     func hideCarDetailView() -> Void {
+        UIView.transitionFromView(carDetailsView,
+                                  toView: noCarView,
+                                  duration: 0.2,
+                                  options: UIViewAnimationOptions.ShowHideTransitionViews,
+                                  completion: nil)
+
         // update button
         changeCarButton.titleLabel?.text = addLabelText
     }
