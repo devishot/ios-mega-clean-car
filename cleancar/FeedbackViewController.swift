@@ -15,28 +15,25 @@ class FeedbackViewController: UIViewController {
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var feedbackTextView: UITextView!
     
-    @IBOutlet weak var lineToDrawView: UIView!
+
     //actions
     @IBOutlet weak var sendFeedbackButton: UIButton!
     
     
     @IBOutlet weak var lineView1: UIView!
-    @IBOutlet weak var lineView2: UIView!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         backgroundView.layer.masksToBounds = true
-        backgroundView.layer.cornerRadius = 15
+        backgroundView.layer.cornerRadius = 5
         
-        sendFeedbackButton.layer.cornerRadius = 15
+        sendFeedbackButton.layer.cornerRadius = 5
         sendFeedbackButton.layer.masksToBounds = true
-        lineToDrawView.layer.masksToBounds = true
-        lineToDrawView.addTopBorderWithColor(UIColor.lightGrayColor(), width: 1)
-        lineToDrawView.addBottomBorderWithColor(UIColor.lightGrayColor(), width: 1)
-        lineView1.addTopBorderWithColor(UIColor.lightGrayColor(), width: 1)
-        lineView2.addTopBorderWithColor(UIColor.lightGrayColor(), width: 1)
+        
+      
         
     
 

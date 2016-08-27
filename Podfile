@@ -23,9 +23,6 @@ target 'cleancar' do
 
   pod 'Cosmos', '~> 1.2'
 
-  pod 'XLPagerTabStrip', '~> 5.0'
-
-
 
   target 'cleancarUITests' do
     inherit! :search_paths
