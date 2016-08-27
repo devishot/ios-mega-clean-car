@@ -14,13 +14,13 @@ class BookingController: UIViewController, Dimmable {
     
     // IBOutlets
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var carViewsContainer: UIView!
     @IBOutlet weak var carDetailsView: UIView!
     @IBOutlet weak var carTypeLabel: UILabel!
     @IBOutlet weak var carNumberLabel: UILabel!
     @IBOutlet weak var noCarView: UIView!
     @IBOutlet weak var changeCarButton: UIButton!
     @IBOutlet weak var tableInsideContainerView: UIView!
-
     @IBOutlet weak var totalPriceLabel: UILabel!
 
     // IBActions
@@ -39,6 +39,7 @@ class BookingController: UIViewController, Dimmable {
     let embeddedTableViewControllerSegueID = "embeddedTableViewController"
     let popupChangeCarInfoSegueID = "popupChangeCarInfo"
     let addLabelText = "Добавить"
+    let updateLabelText = "Изменить"
     let dimLevel: CGFloat = 0.5
     let dimSpeed: Double = 0.5
 
@@ -51,7 +52,13 @@ class BookingController: UIViewController, Dimmable {
             let updated = selectedServices.update(carInfo!.type)
             self.servicesTableViewController!.selectedServices = updated
 
-            showCarDetailView()
+            dispatch_async(dispatch_get_main_queue()) {
+                if self.carInfo!.model != nil {
+                    self.showCarDetailView()
+                } else {
+                    self.hideCarDetailView()
+                }
+            }
         }
     }
     var bookingHour: BookingHour?
@@ -74,11 +81,6 @@ class BookingController: UIViewController, Dimmable {
 
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.tabBarController?.tabBar.hidden = true
-
-        if self.carInfo != nil {
-            self.carTypeLabel.text = self.carInfo?.getType()
-            self.carNumberLabel.text = self.carInfo?.identifierNumber
-        }
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -99,12 +101,20 @@ class BookingController: UIViewController, Dimmable {
         }
     }
 
-    
+
     func showCarDetailView() -> Void {
-        noCarView.hidden = true
-        carDetailsView.hidden = false
-        changeCarButton.titleLabel?.text = addLabelText
+        carViewsContainer.bringSubviewToFront(carDetailsView)
+
+        // set values
+        carTypeLabel.text = self.carInfo!.model
+        carNumberLabel.text = self.carInfo!.identifierNumber
+        // update button
+        changeCarButton.titleLabel?.text = updateLabelText
     }
 
+    func hideCarDetailView() -> Void {
+        // update button
+        changeCarButton.titleLabel?.text = addLabelText
+    }
 }
 
