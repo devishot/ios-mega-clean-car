@@ -28,16 +28,16 @@ class BookingHoursCollectionViewCell: UICollectionViewCell {
 
         if isSelected {
             self.backgroundColor = UIColor.whiteColor()
-            self.addTopBorderWithColor(UIColor.yellowColor(), width: 5)
-            self.addBottomBorderWithColor(UIColor.yellowColor(), width: 5)
-            self.addLeftBorderWithColor(UIColor.yellowColor(), width: 5)
-            self.addRightBorderWithColor(UIColor.yellowColor(), width: 5)
+            self.addTopBorderWithColor(UIColor.yellowColor(), width: 2)
+            self.addBottomBorderWithColor(UIColor.yellowColor(), width: 2)
+            self.addLeftBorderWithColor(UIColor.yellowColor(), width: 2)
+            self.addRightBorderWithColor(UIColor.yellowColor(), width: 2)
         } else {
             self.backgroundColor = UIColor.whiteColor()
-            self.addTopBorderWithColor(UIColor.whiteColor(), width: 5)
-            self.addBottomBorderWithColor(UIColor.whiteColor(), width: 5)
-            self.addLeftBorderWithColor(UIColor.whiteColor(), width: 5)
-            self.addRightBorderWithColor(UIColor.whiteColor(), width: 5)
+            self.addTopBorderWithColor(UIColor.whiteColor(), width: 2)
+            self.addBottomBorderWithColor(UIColor.whiteColor(), width: 2)
+            self.addLeftBorderWithColor(UIColor.whiteColor(), width: 2)
+            self.addRightBorderWithColor(UIColor.whiteColor(), width: 2)
         }
     }
 }

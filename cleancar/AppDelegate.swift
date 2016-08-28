@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Facebook
         FBSDKApplicationDelegate.sharedInstance().application(application,didFinishLaunchingWithOptions:launchOptions)
+        
+        //tab bar item color
+        UITabBar.appearance().tintColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 56/255.0, alpha: 1.0)
 
         return true
     }

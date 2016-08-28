@@ -83,10 +83,10 @@ class HomeViewController: UIViewController {
         makeReservationButton.layer.masksToBounds = true
 
             // rounded view
-        roundedBorderView.layer.cornerRadius = 20
+        roundedBorderView.layer.cornerRadius = 10
         roundedBorderView.layer.masksToBounds = true
         roundedBorderView.layer.borderWidth = 1
-        roundedBorderView.layer.borderColor = UIColor.grayColor().CGColor
+        roundedBorderView.layer.borderColor = UIColor.orangeColor().CGColor
 
 
         // 2. Init behaviour
@@ -104,6 +104,8 @@ class HomeViewController: UIViewController {
                 self.bookingHours.append( BookingHour(index: index, data: value) )
             }
             self.chooseTimeCollectionView.reloadData()
+            
+            print("BookingHours fetched, YEAH!", self.bookingHours)
         })
     }
 
@@ -158,6 +160,9 @@ extension HomeViewController : UICollectionViewDataSource {
     //3
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(bookingHourCellID, forIndexPath: indexPath) as! BookingHoursCollectionViewCell
+        
+        cell.layer.cornerRadius = 10
+        cell.layer.masksToBounds = true
     
         // Configure the cell
         let isSelected = self.bookingHoursSelectedIndex == indexPath

@@ -56,7 +56,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         // style
-        navigationController!.navigationBar.barTintColor = UIColor(red: 216.0/255.0, green: 55.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+     //   navigationController!.navigationBar.barTintColor = UIColor(red: 216.0/255.0, green: 55.0/255.0, blue: 55.0/255.0, alpha: 1.0)
 
         // behaviour
         self.facebookAlreadyLoggedIn()
