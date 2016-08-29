@@ -20,6 +20,12 @@ class LoginCheckViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //keyboard type
+        codeTextField.keyboardType = UIKeyboardType.NumberPad
+        
+        // placeholder color
+        codeTextField.attributedPlaceholder =  NSAttributedString(string:"placeholder text",attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
 
         navigationController!.navigationBar.barTintColor = UIColor(red: 216.0/255.0, green: 55.0/255.0, blue: 55.0/255.0, alpha: 1.0)
     }

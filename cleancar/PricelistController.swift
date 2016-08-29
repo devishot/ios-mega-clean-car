@@ -17,6 +17,8 @@ class PricelistController: UIViewController {
 
     override func viewDidLoad() {
         
+        
+        UISegmentedControl.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.orangeColor()], forState: UIControlState.Normal)
         typesOfCarsSC.setFontSize(10)
         self.currentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("a")
         self.currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false

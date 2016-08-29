@@ -28,9 +28,9 @@ class FeedbackViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         backgroundView.layer.masksToBounds = true
-        backgroundView.layer.cornerRadius = 5
+        backgroundView.layer.cornerRadius = 8
         
-        sendFeedbackButton.layer.cornerRadius = 5
+        sendFeedbackButton.layer.cornerRadius = 8
         sendFeedbackButton.layer.masksToBounds = true
         
       

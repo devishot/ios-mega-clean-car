@@ -22,10 +22,13 @@ class BookingController: UIViewController, Dimmable {
     @IBOutlet weak var tableInsideContainerView: UIView!
     @IBOutlet weak var totalPriceLabel: UILabel!
 
+    @IBOutlet weak var roundedSendButton: UIButton!
 
     // IBActions
     @IBAction func sendButton(sender: UIButton) {
+
     }
+    
     @IBAction func unwindFromPopupChangeCarInfo(segue: UIStoryboardSegue) {
         let popUpViewController = segue.sourceViewController as! PopUpViewController
         // get carInfo
@@ -67,12 +70,24 @@ class BookingController: UIViewController, Dimmable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        roundedSendButton.layer.cornerRadius = 5
+        roundedSendButton.layer.masksToBounds = true
 
         // set values
         timeLabel.text = self.bookingHour!.getHour()
         
         // set carInfo
         self.carInfo = CarInfo()
+        
+        // navigationbar item color
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSForegroundColorAttributeName: UIColor.orangeColor(),
+            NSFontAttributeName: UIFont(name: "Helvetica", size: 18)!
+            
+        ]
+        self.navigationController!.navigationBar.tintColor = UIColor.orangeColor();
+        self.navigationController!.navigationBar.backgroundColor = UIColor.whiteColor();
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orangeColor()]
 
     }
 
