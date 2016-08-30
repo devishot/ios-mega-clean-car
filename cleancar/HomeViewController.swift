@@ -25,8 +25,17 @@ class HomeViewController: UIViewController {
                                             message: "Выберите действие",
                                             preferredStyle: .ActionSheet)
 
-        let logOut = UIAlertAction(title: "Выйти", style: .Destructive, handler: { (alert: UIAlertAction!) -> Void in
-            self.logOut()
+        let logOut = UIAlertAction(title: "Выйти", style: .Destructive,
+                                   handler: { (alert: UIAlertAction!) -> Void in
+            // logout from firebase and facebook
+            User.logOut() {
+                // redirect to LoginViewController
+                let firstNavigationController = self.storyboard?.instantiateViewControllerWithIdentifier("loginNavController") as! UINavigationController
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.presentViewController(firstNavigationController, animated: true, completion: nil)
+                    return
+                })
+            }
         })
 
         let cancel = UIAlertAction(title: "Отмена", style: .Cancel, handler: {
@@ -97,14 +106,11 @@ class HomeViewController: UIViewController {
 
 
         // 3. Fetch data
-        BookingHour.subscribeToData({ (snapshot: FIRDataSnapshot) -> Void in
-            let values = snapshot.value as! [AnyObject]
-
-            for (index, value) in values.enumerate() {
-                self.bookingHours.append( BookingHour(index: index, data: value) )
-            }
+        BookingHour.subscribeAndFetchData({ () -> (Void) in
+            self.bookingHours = BookingHour.today
             self.chooseTimeCollectionView.reloadData()
         })
+        Washer.fetchData(){}
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -121,25 +127,7 @@ class HomeViewController: UIViewController {
             destinationController.bookingHour = self.bookingHours[self.bookingHoursSelectedIndex!.row]
         }
     }
-    
 
-    func logOut() -> Void {
-        do {
-            // logout from Firebase
-            try FIRAuth.auth()?.signOut()
-            // logout from Facebook
-            let facebookLogin = FBSDKLoginManager();
-            facebookLogin.logOut()
-            // redirect to LoginViewController
-            let firstNavigationController = self.storyboard?.instantiateViewControllerWithIdentifier("loginNavController") as! UINavigationController
-            dispatch_async(dispatch_get_main_queue(), {
-                self.presentViewController(firstNavigationController, animated: true, completion: nil)
-                return
-            })
-        } catch {
-            print(error)
-        }
-    }
 }
 
 

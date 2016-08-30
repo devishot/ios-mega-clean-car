@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
     // IBActions
     @IBAction func clickedFacebookLoginButton(sender: UIButton) {
         self.facebookLogin() {
-            self.firebaseLogin(self.redirectToHome)
+            User.logInByFacebook(self.redirectToHome)
         }
     }
     @IBAction func clickedSignUpButton(sender: UIButton) {
@@ -58,9 +58,9 @@ class LoginViewController: UIViewController {
         // style
         navigationController!.navigationBar.barTintColor = UIColor(red: 216.0/255.0, green: 55.0/255.0, blue: 55.0/255.0, alpha: 1.0)
 
-        // behaviour
-        self.facebookAlreadyLoggedIn()
-        // TODO: also add check for Already Firebase Auth
+        // if logged by FB then redirect to home
+        User.isAlreadyLoggedInByFacebook(self.redirectToHome)
+        //TODO: User.isAlreadyLoggedIn()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -116,44 +116,16 @@ class LoginViewController: UIViewController {
     }
 
 
-    func facebookAlreadyLoggedIn() -> Bool {
-        if FBSDKAccessToken.currentAccessToken() != nil {
-            if let user = FIRAuth.auth()?.currentUser {
-                print("Already logged in, user: \(user.displayName)");
-                self.redirectToHome()
-            } else {
-                print("Warning: not logged in Firebase")
-                // sign into Firebase and redirect to Home
-                self.firebaseLogin(redirectToHome)
-            }
-            return true
-        }
-        return false
-    }
-
     func facebookLogin(completion: () -> (Void)) -> Void {
-        let facebookLogin = FBSDKLoginManager();
-        
-        facebookLogin.logInWithReadPermissions(["email", "user_friends"], fromViewController: self) { (result, error) in
+        let loginManager = FBSDKLoginManager();
+
+        loginManager.logInWithReadPermissions(["email", "user_friends"], fromViewController: self) { (result, error) in
             if FBSDKAccessToken.currentAccessToken() != nil {
                 completion()
             } else {
                 print("Error: while login via Facebook", error.debugDescription)
             }
             
-        }
-    }
-
-    func firebaseLogin(completion: () -> (Void) ) -> Void {
-        let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString);
-
-        FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
-            if error == nil {
-                print("Firebase login: \(user?.displayName)");
-                completion()
-            } else {
-                print("Error: while login into Firebase:", error.debugDescription);
-            }
         }
     }
 

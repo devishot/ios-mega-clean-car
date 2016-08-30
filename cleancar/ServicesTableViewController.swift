@@ -56,27 +56,37 @@ class ServicesTableViewController: UITableViewController {
 
 
     // variables
+    var updateTotal: ((Int) -> Void)? // as completion for BookingController
+
     var selectedServices: Services = Services() {
         didSet {
             // update cost labels
-            engineCleaningCostLabel.text = selectedServices.getCostFor(.EngineCleaning)
-            trunkCleaningCostLabel.text = selectedServices.getCostFor(.TrunkCleaning)
-            interierPolishingCostLabel.text = selectedServices.getCostFor(.InterierPolishing)
-            bodyWeaningCostLabel.text = selectedServices.getCostFor(.BodyWeaning)
-
-            bodyWashingCostLabel.text = selectedServices.getCostFor(.Body)
-            salonWashingCostLabel.text = selectedServices.getCostFor(.Salon)
-            bodyAndSalonWashingCostLabel.text = selectedServices.getCostFor(.BodyAndSalon)
+            let labels: [UILabel: Int] = [
+                engineCleaningCostLabel:
+                    selectedServices.getCostFor(.EngineCleaning),
+                trunkCleaningCostLabel:
+                    selectedServices.getCostFor(.TrunkCleaning),
+                interierPolishingCostLabel:
+                    selectedServices.getCostFor(.InterierPolishing),
+                bodyWeaningCostLabel:
+                    selectedServices.getCostFor(.BodyWeaning),
+                bodyWashingCostLabel:
+                    selectedServices.getCostFor(.Body),
+                salonWashingCostLabel:
+                    selectedServices.getCostFor(.Salon),
+                bodyAndSalonWashingCostLabel:
+                    selectedServices.getCostFor(.BodyAndSalon),
+                matsCountCostLabel:
+                    selectedServices.getCostForCleanMats()
+            ]
+            labels.forEach({ (label, cost) in label.text = formatMoney(cost) })
 
             // update stepper labels
-            matsCountCostLabel.text = selectedServices.getCostForCleanMats()
             matsCountLabel.text = selectedServices.getCountForCleanMats()
 
             // call callback
             updateTotal!(selectedServices.getCostForTotal())
         }
     }
-
-    var updateTotal: ((String) -> ())?
 
 }

@@ -345,18 +345,18 @@
                                 <exclude reference="C3F-Fc-CEg"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="6rb-R5-3ev"/>
-                                <exclude reference="gZe-g6-9UV"/>
-                                <exclude reference="zat-m3-a9r"/>
-                                <exclude reference="6i9-CJ-q5H"/>
-                                <exclude reference="qXA-kH-ryS"/>
-                                <exclude reference="xFE-Yy-ms6"/>
-                                <exclude reference="eEo-f3-GL3"/>
-                                <exclude reference="gIL-NG-blE"/>
+                                <exclude reference="bCe-9S-AB0"/>
                                 <exclude reference="7vJ-S2-huY"/>
                                 <exclude reference="COA-7H-tcQ"/>
                                 <exclude reference="khg-6a-5bv"/>
-                                <exclude reference="bCe-9S-AB0"/>
+                                <exclude reference="eEo-f3-GL3"/>
+                                <exclude reference="gIL-NG-blE"/>
+                                <exclude reference="6i9-CJ-q5H"/>
+                                <exclude reference="qXA-kH-ryS"/>
+                                <exclude reference="xFE-Yy-ms6"/>
+                                <exclude reference="6rb-R5-3ev"/>
+                                <exclude reference="gZe-g6-9UV"/>
+                                <exclude reference="zat-m3-a9r"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -367,18 +367,18 @@
                                 <include reference="C3F-Fc-CEg"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="6rb-R5-3ev"/>
-                                <include reference="gZe-g6-9UV"/>
-                                <include reference="zat-m3-a9r"/>
-                                <include reference="6i9-CJ-q5H"/>
-                                <include reference="qXA-kH-ryS"/>
-                                <include reference="xFE-Yy-ms6"/>
-                                <include reference="eEo-f3-GL3"/>
-                                <include reference="gIL-NG-blE"/>
+                                <include reference="bCe-9S-AB0"/>
                                 <include reference="7vJ-S2-huY"/>
                                 <include reference="COA-7H-tcQ"/>
                                 <include reference="khg-6a-5bv"/>
-                                <include reference="bCe-9S-AB0"/>
+                                <include reference="eEo-f3-GL3"/>
+                                <include reference="gIL-NG-blE"/>
+                                <include reference="6i9-CJ-q5H"/>
+                                <include reference="qXA-kH-ryS"/>
+                                <include reference="xFE-Yy-ms6"/>
+                                <include reference="6rb-R5-3ev"/>
+                                <include reference="gZe-g6-9UV"/>
+                                <include reference="zat-m3-a9r"/>
                             </mask>
                         </variation>
                     </view>
@@ -607,10 +607,10 @@
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="rPk-L4-KLQ"/>
-                                        <exclude reference="cmn-On-em4"/>
-                                        <exclude reference="ypM-jG-pO5"/>
                                         <exclude reference="62R-KL-kkf"/>
                                         <exclude reference="zRs-M7-zQA"/>
+                                        <exclude reference="cmn-On-em4"/>
+                                        <exclude reference="ypM-jG-pO5"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -620,10 +620,10 @@
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="rPk-L4-KLQ"/>
-                                        <include reference="cmn-On-em4"/>
-                                        <include reference="ypM-jG-pO5"/>
                                         <include reference="62R-KL-kkf"/>
                                         <include reference="zRs-M7-zQA"/>
+                                        <include reference="cmn-On-em4"/>
+                                        <include reference="ypM-jG-pO5"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -1598,7 +1598,7 @@
                                                         <rect key="frame" x="40" y="508" width="360" height="40"/>
                                                         <color key="backgroundColor" white="0.68999999999999995" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" secondItem="j2q-OE-6bs" secondAttribute="height" multiplier="86:11" id="0qb-K7-UFD"/>
+                                                            <constraint firstAttribute="height" constant="50" id="4Hf-Ta-FC8"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="23"/>
                                                         <state key="normal" title="Отправить">
@@ -1606,12 +1606,12 @@
                                                         </state>
                                                         <variation key="default">
                                                             <mask key="constraints">
-                                                                <exclude reference="0qb-K7-UFD"/>
+                                                                <exclude reference="4Hf-Ta-FC8"/>
                                                             </mask>
                                                         </variation>
                                                         <variation key="widthClass=compact">
                                                             <mask key="constraints">
-                                                                <include reference="0qb-K7-UFD"/>
+                                                                <include reference="4Hf-Ta-FC8"/>
                                                             </mask>
                                                         </variation>
                                                         <connections>
@@ -1621,13 +1621,13 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstItem="j2q-OE-6bs" firstAttribute="top" secondItem="32Q-w0-pUZ" secondAttribute="bottom" constant="5" id="Gjg-D0-PJH"/>
                                                     <constraint firstItem="j2q-OE-6bs" firstAttribute="leading" secondItem="Vjw-fF-1Ec" secondAttribute="leadingMargin" constant="20" id="KGE-JW-ySl"/>
                                                     <constraint firstItem="j2q-OE-6bs" firstAttribute="centerX" secondItem="Vjw-fF-1Ec" secondAttribute="centerX" id="MXg-qR-3jg"/>
                                                     <constraint firstAttribute="height" constant="100" id="Q1S-eB-Xsv"/>
                                                     <constraint firstAttribute="trailingMargin" secondItem="32Q-w0-pUZ" secondAttribute="trailing" constant="8" id="U0g-zQ-Mbc"/>
                                                     <constraint firstItem="32Q-w0-pUZ" firstAttribute="top" secondItem="Vjw-fF-1Ec" secondAttribute="topMargin" id="brz-Dg-4OM"/>
                                                     <constraint firstAttribute="trailingMargin" secondItem="j2q-OE-6bs" secondAttribute="trailing" constant="20" id="hbA-GQ-ehF"/>
+                                                    <constraint firstItem="j2q-OE-6bs" firstAttribute="top" secondItem="32Q-w0-pUZ" secondAttribute="bottom" constant="5" id="p1y-hI-rfU"/>
                                                 </constraints>
                                                 <variation key="default">
                                                     <mask key="subviews">
@@ -1636,10 +1636,10 @@
                                                     </mask>
                                                     <mask key="constraints">
                                                         <exclude reference="Q1S-eB-Xsv"/>
-                                                        <exclude reference="Gjg-D0-PJH"/>
                                                         <exclude reference="KGE-JW-ySl"/>
                                                         <exclude reference="MXg-qR-3jg"/>
                                                         <exclude reference="hbA-GQ-ehF"/>
+                                                        <exclude reference="p1y-hI-rfU"/>
                                                         <exclude reference="U0g-zQ-Mbc"/>
                                                         <exclude reference="brz-Dg-4OM"/>
                                                     </mask>
@@ -1651,10 +1651,10 @@
                                                     </mask>
                                                     <mask key="constraints">
                                                         <include reference="Q1S-eB-Xsv"/>
-                                                        <include reference="Gjg-D0-PJH"/>
                                                         <include reference="KGE-JW-ySl"/>
                                                         <include reference="MXg-qR-3jg"/>
                                                         <include reference="hbA-GQ-ehF"/>
+                                                        <include reference="p1y-hI-rfU"/>
                                                         <include reference="U0g-zQ-Mbc"/>
                                                         <include reference="brz-Dg-4OM"/>
                                                     </mask>
@@ -1742,97 +1742,133 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vhC-hx-dkZ">
                                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                         <subviews>
-                                                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5pd-5z-TJN" userLabel="Car Details View">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9xf-nH-cH1" userLabel="Transition View">
                                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAR MODEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T7L-tT-Buz">
-                                                                        <rect key="frame" x="40" y="152" width="360" height="22"/>
-                                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
-                                                                        <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAR ID NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zL-bm-rr4">
-                                                                        <rect key="frame" x="40" y="177" width="180" height="22"/>
-                                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
-                                                                        <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
+                                                                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5pd-5z-TJN" userLabel="Car Details View">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAR MODEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T7L-tT-Buz">
+                                                                                <rect key="frame" x="40" y="152" width="360" height="22"/>
+                                                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
+                                                                                <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAR ID NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zL-bm-rr4">
+                                                                                <rect key="frame" x="40" y="177" width="180" height="22"/>
+                                                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
+                                                                                <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <constraints>
+                                                                            <constraint firstItem="8zL-bm-rr4" firstAttribute="leading" secondItem="5pd-5z-TJN" secondAttribute="leading" constant="16" id="IqI-en-3rj"/>
+                                                                            <constraint firstItem="T7L-tT-Buz" firstAttribute="top" secondItem="5pd-5z-TJN" secondAttribute="top" constant="8" id="UFY-Si-2Ru"/>
+                                                                            <constraint firstItem="T7L-tT-Buz" firstAttribute="leading" secondItem="5pd-5z-TJN" secondAttribute="leading" constant="16" id="lMy-TV-iXS"/>
+                                                                            <constraint firstItem="8zL-bm-rr4" firstAttribute="top" secondItem="T7L-tT-Buz" secondAttribute="bottom" constant="5" id="mqt-Ll-pOm"/>
+                                                                        </constraints>
+                                                                        <variation key="default">
+                                                                            <mask key="subviews">
+                                                                                <exclude reference="T7L-tT-Buz"/>
+                                                                                <exclude reference="8zL-bm-rr4"/>
+                                                                            </mask>
+                                                                            <mask key="constraints">
+                                                                                <exclude reference="UFY-Si-2Ru"/>
+                                                                                <exclude reference="lMy-TV-iXS"/>
+                                                                                <exclude reference="IqI-en-3rj"/>
+                                                                                <exclude reference="mqt-Ll-pOm"/>
+                                                                            </mask>
+                                                                        </variation>
+                                                                        <variation key="widthClass=compact">
+                                                                            <mask key="subviews">
+                                                                                <include reference="T7L-tT-Buz"/>
+                                                                                <include reference="8zL-bm-rr4"/>
+                                                                            </mask>
+                                                                            <mask key="constraints">
+                                                                                <include reference="UFY-Si-2Ru"/>
+                                                                                <include reference="lMy-TV-iXS"/>
+                                                                                <include reference="IqI-en-3rj"/>
+                                                                                <include reference="mqt-Ll-pOm"/>
+                                                                            </mask>
+                                                                        </variation>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4RL-ZV-upD" userLabel="No Car View">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Укажите автомобиль" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pb0-To-acr">
+                                                                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <constraints>
+                                                                            <constraint firstItem="Pb0-To-acr" firstAttribute="centerY" secondItem="4RL-ZV-upD" secondAttribute="centerY" id="PkN-Wi-5WP"/>
+                                                                            <constraint firstItem="Pb0-To-acr" firstAttribute="leading" secondItem="4RL-ZV-upD" secondAttribute="leading" constant="16" id="XMb-uH-YmU"/>
+                                                                        </constraints>
+                                                                        <variation key="default">
+                                                                            <mask key="subviews">
+                                                                                <exclude reference="Pb0-To-acr"/>
+                                                                            </mask>
+                                                                            <mask key="constraints">
+                                                                                <exclude reference="PkN-Wi-5WP"/>
+                                                                                <exclude reference="XMb-uH-YmU"/>
+                                                                            </mask>
+                                                                        </variation>
+                                                                        <variation key="widthClass=compact">
+                                                                            <mask key="subviews">
+                                                                                <include reference="Pb0-To-acr"/>
+                                                                            </mask>
+                                                                            <mask key="constraints">
+                                                                                <include reference="PkN-Wi-5WP"/>
+                                                                                <include reference="XMb-uH-YmU"/>
+                                                                            </mask>
+                                                                        </variation>
+                                                                    </view>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
-                                                                    <constraint firstItem="8zL-bm-rr4" firstAttribute="leading" secondItem="5pd-5z-TJN" secondAttribute="leadingMargin" constant="8" id="3N7-oY-dFl"/>
-                                                                    <constraint firstItem="8zL-bm-rr4" firstAttribute="leading" secondItem="5pd-5z-TJN" secondAttribute="leadingMargin" constant="8" id="6fH-V1-nNC"/>
-                                                                    <constraint firstAttribute="width" constant="190" id="Su0-ut-hec"/>
-                                                                    <constraint firstItem="T7L-tT-Buz" firstAttribute="top" secondItem="5pd-5z-TJN" secondAttribute="topMargin" constant="8" id="dHy-7d-wCl"/>
-                                                                    <constraint firstItem="8zL-bm-rr4" firstAttribute="top" secondItem="T7L-tT-Buz" secondAttribute="bottom" constant="5" id="mqt-Ll-pOm"/>
-                                                                    <constraint firstItem="T7L-tT-Buz" firstAttribute="leading" secondItem="5pd-5z-TJN" secondAttribute="leadingMargin" constant="8" id="wH5-KS-NcB"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="4RL-ZV-upD" secondAttribute="trailing" id="0jf-mJ-kwl"/>
+                                                                    <constraint firstItem="5pd-5z-TJN" firstAttribute="top" secondItem="9xf-nH-cH1" secondAttribute="top" id="51Q-vr-Dmh"/>
+                                                                    <constraint firstItem="5pd-5z-TJN" firstAttribute="leading" secondItem="9xf-nH-cH1" secondAttribute="leading" id="83v-rx-yGI"/>
+                                                                    <constraint firstItem="4RL-ZV-upD" firstAttribute="top" secondItem="9xf-nH-cH1" secondAttribute="top" id="BzB-wb-dmZ"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="4RL-ZV-upD" secondAttribute="bottom" id="QtN-6I-lih"/>
+                                                                    <constraint firstItem="4RL-ZV-upD" firstAttribute="leading" secondItem="9xf-nH-cH1" secondAttribute="leading" id="eOr-1n-djj"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="5pd-5z-TJN" secondAttribute="trailing" id="kQI-g0-iJV"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="5pd-5z-TJN" secondAttribute="bottom" id="nzx-3h-reM"/>
                                                                 </constraints>
                                                                 <variation key="default">
                                                                     <mask key="subviews">
-                                                                        <exclude reference="T7L-tT-Buz"/>
-                                                                        <exclude reference="8zL-bm-rr4"/>
+                                                                        <exclude reference="5pd-5z-TJN"/>
+                                                                        <exclude reference="4RL-ZV-upD"/>
                                                                     </mask>
                                                                     <mask key="constraints">
-                                                                        <exclude reference="Su0-ut-hec"/>
-                                                                        <exclude reference="dHy-7d-wCl"/>
-                                                                        <exclude reference="wH5-KS-NcB"/>
-                                                                        <exclude reference="3N7-oY-dFl"/>
-                                                                        <exclude reference="6fH-V1-nNC"/>
-                                                                        <exclude reference="mqt-Ll-pOm"/>
+                                                                        <exclude reference="0jf-mJ-kwl"/>
+                                                                        <exclude reference="BzB-wb-dmZ"/>
+                                                                        <exclude reference="QtN-6I-lih"/>
+                                                                        <exclude reference="eOr-1n-djj"/>
+                                                                        <exclude reference="51Q-vr-Dmh"/>
+                                                                        <exclude reference="83v-rx-yGI"/>
+                                                                        <exclude reference="kQI-g0-iJV"/>
+                                                                        <exclude reference="nzx-3h-reM"/>
                                                                     </mask>
                                                                 </variation>
                                                                 <variation key="widthClass=compact">
                                                                     <mask key="subviews">
-                                                                        <include reference="T7L-tT-Buz"/>
-                                                                        <include reference="8zL-bm-rr4"/>
+                                                                        <include reference="5pd-5z-TJN"/>
+                                                                        <include reference="4RL-ZV-upD"/>
                                                                     </mask>
                                                                     <mask key="constraints">
-                                                                        <include reference="Su0-ut-hec"/>
-                                                                        <include reference="dHy-7d-wCl"/>
-                                                                        <include reference="wH5-KS-NcB"/>
-                                                                        <include reference="3N7-oY-dFl"/>
-                                                                        <include reference="6fH-V1-nNC"/>
-                                                                        <include reference="mqt-Ll-pOm"/>
-                                                                    </mask>
-                                                                </variation>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4RL-ZV-upD" userLabel="No Car View">
-                                                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                                <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Укажите автомобиль" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pb0-To-acr">
-                                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                        <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                </subviews>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="190" id="06m-eD-bpw"/>
-                                                                    <constraint firstItem="Pb0-To-acr" firstAttribute="centerX" secondItem="4RL-ZV-upD" secondAttribute="centerX" id="8PI-mh-kyi"/>
-                                                                    <constraint firstItem="Pb0-To-acr" firstAttribute="leading" secondItem="4RL-ZV-upD" secondAttribute="leadingMargin" constant="8" id="pGT-nC-Lb6"/>
-                                                                    <constraint firstItem="Pb0-To-acr" firstAttribute="centerY" secondItem="4RL-ZV-upD" secondAttribute="centerY" id="tzt-Xh-X1v"/>
-                                                                </constraints>
-                                                                <variation key="default">
-                                                                    <mask key="subviews">
-                                                                        <exclude reference="Pb0-To-acr"/>
-                                                                    </mask>
-                                                                    <mask key="constraints">
-                                                                        <exclude reference="06m-eD-bpw"/>
-                                                                        <exclude reference="8PI-mh-kyi"/>
-                                                                        <exclude reference="pGT-nC-Lb6"/>
-                                                                        <exclude reference="tzt-Xh-X1v"/>
-                                                                    </mask>
-                                                                </variation>
-                                                                <variation key="widthClass=compact">
-                                                                    <mask key="subviews">
-                                                                        <include reference="Pb0-To-acr"/>
-                                                                    </mask>
-                                                                    <mask key="constraints">
-                                                                        <include reference="06m-eD-bpw"/>
-                                                                        <exclude reference="8PI-mh-kyi"/>
-                                                                        <include reference="pGT-nC-Lb6"/>
-                                                                        <include reference="tzt-Xh-X1v"/>
+                                                                        <include reference="0jf-mJ-kwl"/>
+                                                                        <include reference="BzB-wb-dmZ"/>
+                                                                        <include reference="QtN-6I-lih"/>
+                                                                        <include reference="eOr-1n-djj"/>
+                                                                        <include reference="51Q-vr-Dmh"/>
+                                                                        <include reference="83v-rx-yGI"/>
+                                                                        <include reference="kQI-g0-iJV"/>
+                                                                        <include reference="nzx-3h-reM"/>
                                                                     </mask>
                                                                 </variation>
                                                             </view>
@@ -1849,52 +1885,41 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstItem="5pd-5z-TJN" firstAttribute="leading" secondItem="vhC-hx-dkZ" secondAttribute="leadingMargin" id="2fv-ss-P4v"/>
+                                                            <constraint firstItem="9xf-nH-cH1" firstAttribute="leading" secondItem="vhC-hx-dkZ" secondAttribute="leading" id="3Ec-L1-7SI"/>
+                                                            <constraint firstItem="9xf-nH-cH1" firstAttribute="height" secondItem="vhC-hx-dkZ" secondAttribute="height" id="BVl-2s-0xh"/>
                                                             <constraint firstAttribute="height" constant="50" id="F1G-Jp-Q1h"/>
-                                                            <constraint firstItem="4RL-ZV-upD" firstAttribute="centerY" secondItem="vhC-hx-dkZ" secondAttribute="centerY" id="NDL-0G-1Dn"/>
-                                                            <constraint firstItem="5pd-5z-TJN" firstAttribute="height" secondItem="vhC-hx-dkZ" secondAttribute="height" id="P6Z-fp-7ln"/>
-                                                            <constraint firstItem="4RL-ZV-upD" firstAttribute="height" secondItem="vhC-hx-dkZ" secondAttribute="height" id="S4c-eM-P1z"/>
-                                                            <constraint firstItem="5pd-5z-TJN" firstAttribute="centerY" secondItem="vhC-hx-dkZ" secondAttribute="centerY" id="Ur1-Uh-Ldh"/>
+                                                            <constraint firstItem="9xf-nH-cH1" firstAttribute="top" secondItem="vhC-hx-dkZ" secondAttribute="top" id="Gtn-ix-imy"/>
+                                                            <constraint firstItem="4rq-AU-QgP" firstAttribute="leading" secondItem="9xf-nH-cH1" secondAttribute="trailing" id="KtK-9S-aJr"/>
                                                             <constraint firstAttribute="trailingMargin" secondItem="4rq-AU-QgP" secondAttribute="trailing" constant="8" id="bwl-1L-42Y"/>
-                                                            <constraint firstItem="4RL-ZV-upD" firstAttribute="leading" secondItem="vhC-hx-dkZ" secondAttribute="leading" id="eE2-PO-tGy"/>
-                                                            <constraint firstItem="4rq-AU-QgP" firstAttribute="top" secondItem="vhC-hx-dkZ" secondAttribute="topMargin" constant="8" id="mEB-cW-vVE"/>
                                                             <constraint firstItem="4rq-AU-QgP" firstAttribute="centerY" secondItem="vhC-hx-dkZ" secondAttribute="centerY" id="vg8-Iq-zIK"/>
                                                         </constraints>
                                                         <variation key="default">
                                                             <mask key="subviews">
-                                                                <exclude reference="5pd-5z-TJN"/>
-                                                                <exclude reference="4RL-ZV-upD"/>
+                                                                <exclude reference="9xf-nH-cH1"/>
                                                                 <exclude reference="4rq-AU-QgP"/>
                                                             </mask>
                                                             <mask key="constraints">
                                                                 <exclude reference="F1G-Jp-Q1h"/>
-                                                                <exclude reference="NDL-0G-1Dn"/>
-                                                                <exclude reference="S4c-eM-P1z"/>
-                                                                <exclude reference="eE2-PO-tGy"/>
-                                                                <exclude reference="2fv-ss-P4v"/>
-                                                                <exclude reference="P6Z-fp-7ln"/>
-                                                                <exclude reference="Ur1-Uh-Ldh"/>
+                                                                <exclude reference="3Ec-L1-7SI"/>
+                                                                <exclude reference="BVl-2s-0xh"/>
+                                                                <exclude reference="Gtn-ix-imy"/>
+                                                                <exclude reference="KtK-9S-aJr"/>
                                                                 <exclude reference="bwl-1L-42Y"/>
-                                                                <exclude reference="mEB-cW-vVE"/>
                                                                 <exclude reference="vg8-Iq-zIK"/>
                                                             </mask>
                                                         </variation>
                                                         <variation key="widthClass=compact">
                                                             <mask key="subviews">
-                                                                <include reference="5pd-5z-TJN"/>
-                                                                <include reference="4RL-ZV-upD"/>
+                                                                <include reference="9xf-nH-cH1"/>
                                                                 <include reference="4rq-AU-QgP"/>
                                                             </mask>
                                                             <mask key="constraints">
                                                                 <include reference="F1G-Jp-Q1h"/>
-                                                                <include reference="NDL-0G-1Dn"/>
-                                                                <include reference="S4c-eM-P1z"/>
-                                                                <include reference="eE2-PO-tGy"/>
-                                                                <include reference="2fv-ss-P4v"/>
-                                                                <include reference="P6Z-fp-7ln"/>
-                                                                <include reference="Ur1-Uh-Ldh"/>
+                                                                <include reference="3Ec-L1-7SI"/>
+                                                                <include reference="BVl-2s-0xh"/>
+                                                                <include reference="Gtn-ix-imy"/>
+                                                                <include reference="KtK-9S-aJr"/>
                                                                 <include reference="bwl-1L-42Y"/>
-                                                                <exclude reference="mEB-cW-vVE"/>
                                                                 <include reference="vg8-Iq-zIK"/>
                                                             </mask>
                                                         </variation>
@@ -2046,14 +2071,14 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="400" height="750"/>
                     <connections>
-                        <outlet property="carDetailsView" destination="5pd-5z-TJN" id="SdB-M2-L5V"/>
                         <outlet property="carNumberLabel" destination="8zL-bm-rr4" id="2Du-H7-gRi"/>
                         <outlet property="carTypeLabel" destination="T7L-tT-Buz" id="SVA-os-H0L"/>
                         <outlet property="changeCarButton" destination="4rq-AU-QgP" id="kta-nB-hHN"/>
-                        <outlet property="noCarView" destination="5pd-5z-TJN" id="mdc-yQ-MW5"/>
                         <outlet property="tableInsideContainerView" destination="9wJ-BT-zeq" id="BOn-m1-qaT"/>
                         <outlet property="timeLabel" destination="2zQ-ki-7xg" id="cjM-4j-RzJ"/>
                         <outlet property="totalPriceLabel" destination="32Q-w0-pUZ" id="O4C-oz-aaR"/>
+                        <outlet property="transitionViewNoCar" destination="4RL-ZV-upD" id="LBe-sv-YVQ"/>
+                        <outlet property="transitionViewWithCar" destination="5pd-5z-TJN" id="ATT-t5-EdM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fqA-sk-Ogh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3742,7 +3767,7 @@
                                                     <rect key="frame" x="15" y="20" width="96" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="2800KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hem-VM-oIp">
@@ -3770,7 +3795,7 @@
                                                     <rect key="frame" x="15" y="20" width="45" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="1800KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WZe-UJ-5t0">
@@ -3797,7 +3822,7 @@
                                                     <rect key="frame" x="15" y="20" width="48" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="1000KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ih3-b9-wvD">
@@ -3824,7 +3849,7 @@
                                                     <rect key="frame" x="15" y="20" width="130" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="4000KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1qq-82-stS">
@@ -3851,7 +3876,7 @@
                                                     <rect key="frame" x="15" y="20" width="138" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="500KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sdv-mM-SmR">
@@ -3878,7 +3903,7 @@
                                                     <rect key="frame" x="15" y="19" width="149" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -3908,7 +3933,7 @@
                                                     <rect key="frame" x="15" y="19" width="165" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -3938,7 +3963,7 @@
                                                     <rect key="frame" x="15" y="19" width="126" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -3992,7 +4017,7 @@
                                                     <rect key="frame" x="15" y="20" width="96" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="4000KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UYL-tv-h8k">
@@ -4020,7 +4045,7 @@
                                                     <rect key="frame" x="15" y="20" width="45" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="2400KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oIr-p3-2pO">
@@ -4047,7 +4072,7 @@
                                                     <rect key="frame" x="15" y="20" width="48" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="1600KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Fl-Wc-KCc">
@@ -4074,7 +4099,7 @@
                                                     <rect key="frame" x="15" y="20" width="130" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="4000KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lfc-dL-rLQ">
@@ -4101,7 +4126,7 @@
                                                     <rect key="frame" x="15" y="20" width="138" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="600KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dzs-R5-Sxt">
@@ -4128,7 +4153,7 @@
                                                     <rect key="frame" x="15" y="19" width="149" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -4158,7 +4183,7 @@
                                                     <rect key="frame" x="15" y="19" width="165" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -4188,7 +4213,7 @@
                                                     <rect key="frame" x="15" y="19" width="126" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -4242,7 +4267,7 @@
                                                     <rect key="frame" x="15" y="20" width="96" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="3800KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Smt-Jb-tj5">
@@ -4270,7 +4295,7 @@
                                                     <rect key="frame" x="15" y="20" width="45" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="2300KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v8Y-qr-qWZ">
@@ -4297,7 +4322,7 @@
                                                     <rect key="frame" x="15" y="20" width="48" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="1500KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5AK-9F-OGi">
@@ -4324,7 +4349,7 @@
                                                     <rect key="frame" x="15" y="20" width="130" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="4000KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9TN-Fz-Ecz">
@@ -4351,7 +4376,7 @@
                                                     <rect key="frame" x="15" y="20" width="138" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="600KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QUU-BE-ezK">
@@ -4378,7 +4403,7 @@
                                                     <rect key="frame" x="15" y="19" width="149" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -4408,7 +4433,7 @@
                                                     <rect key="frame" x="15" y="19" width="165" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -4438,7 +4463,7 @@
                                                     <rect key="frame" x="15" y="19" width="126" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -4492,7 +4517,7 @@
                                                     <rect key="frame" x="15" y="20" width="96" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="3500KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vx9-lu-JT9">
@@ -4520,7 +4545,7 @@
                                                     <rect key="frame" x="15" y="20" width="45" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="2100KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ng3-go-VtK">
@@ -4547,7 +4572,7 @@
                                                     <rect key="frame" x="15" y="20" width="48" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="1400KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RSa-cg-nXC">
@@ -4574,7 +4599,7 @@
                                                     <rect key="frame" x="15" y="20" width="130" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="4000KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fPU-em-hqa">
@@ -4601,7 +4626,7 @@
                                                     <rect key="frame" x="15" y="20" width="138" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="500KZT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mkl-Bg-olN">
@@ -4628,7 +4653,7 @@
                                                     <rect key="frame" x="15" y="19" width="149" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -4658,7 +4683,7 @@
                                                     <rect key="frame" x="15" y="19" width="165" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -4688,7 +4713,7 @@
                                                     <rect key="frame" x="15" y="19" width="126" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>

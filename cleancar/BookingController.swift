@@ -7,17 +7,17 @@
 //
 
 import UIKit
-import Firebase
 
 
 class BookingController: UIViewController, Dimmable {
     
     // IBOutlets
+    @IBOutlet weak var transitionViewWithCar: UIView!
+    
+    @IBOutlet weak var transitionViewNoCar: UIView!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var carDetailsView: UIView!
     @IBOutlet weak var carTypeLabel: UILabel!
     @IBOutlet weak var carNumberLabel: UILabel!
-    @IBOutlet weak var noCarView: UIView!
     @IBOutlet weak var changeCarButton: UIButton!
     @IBOutlet weak var tableInsideContainerView: UIView!
     @IBOutlet weak var totalPriceLabel: UILabel!
@@ -25,6 +25,13 @@ class BookingController: UIViewController, Dimmable {
 
     // IBActions
     @IBAction func sendButton(sender: UIButton) {
+        let bookingHour = self.bookingHour!,
+            carInfo = self.carInfo!,
+            services = self.servicesTableViewController!.selectedServices
+        print(".sendButton", bookingHour, carInfo, services)
+        Reservation.create(carInfo, bookingHour: bookingHour, services: services) {
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        }
     }
     @IBAction func unwindFromPopupChangeCarInfo(segue: UIStoryboardSegue) {
         let popUpViewController = segue.sourceViewController as! PopUpViewController
@@ -52,12 +59,10 @@ class BookingController: UIViewController, Dimmable {
             let updated = selectedServices.update(carInfo!.type)
             self.servicesTableViewController!.selectedServices = updated
 
-            dispatch_async(dispatch_get_main_queue()) {
-                if self.carInfo!.model != nil {
-                    self.showCarDetailView()
-                } else {
-                    self.hideCarDetailView()
-                }
+            if self.carInfo!.model != nil {
+                self.showCarDetailView()
+            } else {
+                self.hideCarDetailView()
             }
         }
     }
@@ -89,7 +94,7 @@ class BookingController: UIViewController, Dimmable {
 
             self.servicesTableViewController = tableViewController
             tableViewController.updateTotal = { totalCost in
-                self.totalPriceLabel.text = totalCost
+                self.totalPriceLabel.text = formatMoney(totalCost)
             }
         }
         if segue.identifier == self.popupChangeCarInfoSegueID {
@@ -103,8 +108,8 @@ class BookingController: UIViewController, Dimmable {
 
 
     func showCarDetailView() -> Void {
-        UIView.transitionFromView(noCarView,
-                                  toView: carDetailsView,
+        UIView.transitionFromView(self.transitionViewNoCar,
+                                  toView: self.transitionViewWithCar,
                                   duration: 0.2,
                                   options: UIViewAnimationOptions.ShowHideTransitionViews,
                                   completion: nil)
@@ -117,8 +122,8 @@ class BookingController: UIViewController, Dimmable {
     }
 
     func hideCarDetailView() -> Void {
-        UIView.transitionFromView(carDetailsView,
-                                  toView: noCarView,
+        UIView.transitionFromView(self.transitionViewWithCar,
+                                  toView: self.transitionViewNoCar,
                                   duration: 0.2,
                                   options: UIViewAnimationOptions.ShowHideTransitionViews,
                                   completion: nil)

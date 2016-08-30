@@ -47,5 +47,14 @@ class CarInfo {
         }
     }
 
+    func toDict() -> NSMutableDictionary {
+        let data: NSMutableDictionary = [
+            "type": self.type.rawValue,
+            "model": self.model!,
+            "identifierNumber": self.identifierNumber!
+        ]
+        return data
+    }
+
 }
 

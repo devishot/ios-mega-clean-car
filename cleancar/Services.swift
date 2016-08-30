@@ -21,6 +21,10 @@ enum AdditionalsEnum: String {
     case BodyWeaning
 }
 
+func formatMoney(cost: Int) -> String {
+    return "\(cost) ₸"
+}
+
 
 class Services {
     var carType: CarTypeEnum
@@ -72,6 +76,18 @@ class Services {
     ]
 
 
+    func toDict() -> NSMutableDictionary {
+        let data: NSMutableDictionary = [
+            "car_type": carType.rawValue,
+            "wash_type": washType.rawValue,
+            "additional_select": additionalSelect as NSDictionary,
+            "clean_mats_count": cleanMatsCount,
+            "total": getCostForTotal()
+        ]
+        return data
+    }
+
+
     init() {
         self.carType = .Normal
         self.washType = .Body
@@ -88,8 +104,8 @@ class Services {
         self.additionalSelect = additionalSelect
         self.cleanMatsCount = cleanMatsCount
     }
-
     
+
     func update(newWashType: WashTypeEnum) -> Services {
         return Services(carType: self.carType, washType: newWashType, additionalSelect: self.additionalSelect, cleanMatsCount: self.cleanMatsCount)
     }
@@ -110,29 +126,28 @@ class Services {
     }
 
 
-    func getCostFor(additionType: AdditionalsEnum) -> String {
+    func getCostFor(additionType: AdditionalsEnum) -> Int {
         return getCostFor(additionType.rawValue)
     }
 
-    func getCostFor(washingType: WashTypeEnum) -> String {
+    func getCostFor(washingType: WashTypeEnum) -> Int {
         return getCostFor(String(washingType.rawValue))
     }
 
-    func getCostFor(key: String) -> String {
-        let cost = Services.costs[self.carType.rawValue]![key]
-        return "\(cost!) ₸"
+    func getCostFor(key: String) -> Int {
+        return Services.costs[self.carType.rawValue]![key]!
     }
 
-    func getCostForCleanMats() -> String {
+    func getCostForCleanMats() -> Int {
         let cost = Services.costs[self.carType.rawValue]!["CleanMatsPerCount"]! * self.cleanMatsCount
-        return "\(cost) ₸"
+        return cost
     }
 
     func getCountForCleanMats() -> String {
         return "\(self.cleanMatsCount) ед."
     }
-    
-    func getCostForTotal() -> String {
+
+    func getCostForTotal() -> Int {
         var cost: Int = 0
         
         // washType
@@ -147,7 +162,7 @@ class Services {
         // cleanMats per count
         cost += Services.costs[self.carType.rawValue]!["CleanMatsPerCount"]! * self.cleanMatsCount
 
-        return "\(cost) ₸"
+        return cost
     }
 }
 
