@@ -11,12 +11,6 @@ import Firebase
 import SwiftyJSON
 
 
-// Global variables and functions
-func getFirebaseRef() -> FIRDatabaseReference {
-    return FIRDatabase.database().reference()
-}
-
-
 class BookingHour {
     static let childRefName: String = "booking_hours"
     static var refHandle: FIRDatabaseHandle?
@@ -57,7 +51,7 @@ class BookingHour {
         return data
     }
 
-
+    
     func getHour() -> String {
         let addingMinutes = index * BookingHour.minuteMultiplier
         // 09:00
@@ -77,6 +71,24 @@ class BookingHour {
         }
         return "\(f(hour)):\(f(minute))"
     }
+
+    func getStatus() -> String {
+        let boxes = self.getFreeBoxIndexes()
+        return self.isFree()
+            ? "\(boxes.count) \(transformWord("бокс", amount: boxes.count))"
+            : "Занято"
+    }
+
+
+    func isFree() -> Bool {
+        return self.getFreeBoxIndexes().count > 0
+    }
+
+    func getFreeBoxIndexes() -> [Int] {
+        return self.boxes.enumerate()
+            .reduce([]) { $1.element ? $0 + [$1.index] : $0 }
+    }
+
 
     func reserve(timeToWash: Int = 1) -> [String: AnyObject] {
         let required = _getRequiredBookingHours(timeToWash),

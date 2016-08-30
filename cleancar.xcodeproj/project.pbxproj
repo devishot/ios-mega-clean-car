@@ -16,8 +16,8 @@
 		523F3B551D67678B00B75421 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 523F3B541D67678B00B75421 /* GoogleService-Info.plist */; };
 		523F3B571D67A50B00B75421 /* BookingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523F3B561D67A50B00B75421 /* BookingController.swift */; };
 		5252E8131D731457009A841F /* FirebaseDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5252E8121D731457009A841F /* FirebaseDataProtocol.swift */; };
+		5252E8151D7582E2009A841F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5252E8141D7582E2009A841F /* Utils.swift */; };
 		525C7C971D66C6D400DAE000 /* PricelistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C961D66C6D400DAE000 /* PricelistController.swift */; };
-		525C7C9A1D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */; };
 		528947251D717441004B7090 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528947241D717441004B7090 /* LoginViewController.swift */; };
 		528947271D71760D004B7090 /* LoginCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528947261D71760D004B7090 /* LoginCheckViewController.swift */; };
 		528947291D72C9D7004B7090 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528947281D72C9D7004B7090 /* Reservation.swift */; };
@@ -59,6 +59,7 @@
 		523F3B541D67678B00B75421 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		523F3B561D67A50B00B75421 /* BookingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingController.swift; sourceTree = "<group>"; };
 		5252E8121D731457009A841F /* FirebaseDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDataProtocol.swift; sourceTree = "<group>"; };
+		5252E8141D7582E2009A841F /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		525C7C961D66C6D400DAE000 /* PricelistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PricelistController.swift; sourceTree = "<group>"; };
 		525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingHoursCollectionViewCell.swift; sourceTree = "<group>"; };
 		528947241D717441004B7090 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -205,6 +206,7 @@
 			children = (
 				5292AC061D6EBD4C00E03760 /* Dimmable.swift */,
 				5252E8121D731457009A841F /* FirebaseDataProtocol.swift */,
+				5252E8141D7582E2009A841F /* Utils.swift */,
 			);
 			name = helpers;
 			sourceTree = "<group>";
@@ -457,7 +459,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				525C7C9A1D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift in Sources */,
 				523F3B521D66EA4300B75421 /* BookingHour.swift in Sources */,
 				528947291D72C9D7004B7090 /* Reservation.swift in Sources */,
 				528947271D71760D004B7090 /* LoginCheckViewController.swift in Sources */,
@@ -472,6 +473,7 @@
 				B4EEA3261D6429EB0039D998 /* AppDelegate.swift in Sources */,
 				525C7C971D66C6D400DAE000 /* PricelistController.swift in Sources */,
 				B45905C61D6C171B00CFEFEF /* OrdersTableViewController.swift in Sources */,
+				5252E8151D7582E2009A841F /* Utils.swift in Sources */,
 				B45905C41D6AC92600CFEFEF /* PopUpViewController.swift in Sources */,
 				B4856D981D6896E0000EC687 /* OrdersTableViewCell.swift in Sources */,
 				B45905CB1D7023D000CFEFEF /* UISegmentedControl_fontSize.swift in Sources */,

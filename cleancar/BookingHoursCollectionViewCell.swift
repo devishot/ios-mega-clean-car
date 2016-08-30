@@ -18,6 +18,13 @@ class BookingHoursCollectionViewCell: UICollectionViewCell {
     var bookingHour: BookingHour? {
         didSet {
             hourLabel.text = bookingHour!.getHour()
+            statusLabel.text = bookingHour!.getStatus()
+
+            if bookingHour!.isFree() {
+                statusLabel.textColor = UIColor.greenColor()
+            } else {
+                statusLabel.textColor = UIColor.redColor()
+            }
         }
     }
 

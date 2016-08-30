@@ -21,10 +21,6 @@ enum AdditionalsEnum: String {
     case BodyWeaning
 }
 
-func formatMoney(cost: Int) -> String {
-    return "\(cost) ₸"
-}
-
 
 class Services {
     var carType: CarTypeEnum

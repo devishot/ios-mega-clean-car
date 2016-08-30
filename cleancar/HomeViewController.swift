@@ -156,13 +156,19 @@ extension HomeViewController : UICollectionViewDataSource {
 
         return cell
     }
-    
 
 }
 
+
+
 extension HomeViewController : UICollectionViewDelegate {
-    
+
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+
+        if !self.bookingHours[indexPath.row].isFree() {
+            return
+        }
+
         if let selected = self.bookingHoursSelectedIndex where selected == indexPath {
             self.bookingHoursSelectedIndex = nil
         } else {
