@@ -133,6 +133,9 @@
                                                         <include reference="cGT-k5-Isa"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Ftv-8j-JdZ"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Номер телефона" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C7Y-AS-XSE">
                                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
@@ -153,6 +156,9 @@
                                                         <include reference="QyE-tv-WdV"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="KKk-S7-FGW"/>
+                                                </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddB-eP-w32" userLabel="SignUp Button">
                                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -3530,9 +3536,6 @@
                                     <constraint firstAttribute="width" secondItem="0G7-Cr-Uew" secondAttribute="height" multiplier="324:223" id="S8f-q8-lxV">
                                         <variation key="widthClass=compact" constant="-61.022421524663685"/>
                                     </constraint>
-                                    <constraint firstItem="fEN-WZ-4Ca" firstAttribute="centerY" secondItem="0G7-Cr-Uew" secondAttribute="centerY" id="UNS-IQ-AG1">
-                                        <variation key="widthClass=compact" constant="-104"/>
-                                    </constraint>
                                     <constraint firstItem="TIe-aO-UG8" firstAttribute="leading" secondItem="0G7-Cr-Uew" secondAttribute="leading" constant="-1" id="XrM-ZF-u3K"/>
                                     <constraint firstAttribute="trailing" secondItem="TIe-aO-UG8" secondAttribute="trailing" constant="1" id="eme-l7-MGU"/>
                                     <constraint firstAttribute="trailing" secondItem="fEN-WZ-4Ca" secondAttribute="trailing" constant="1" id="evY-r7-G7b"/>
@@ -3550,7 +3553,6 @@
                                     <mask key="constraints">
                                         <exclude reference="S8f-q8-lxV"/>
                                         <exclude reference="BFl-ka-WVx"/>
-                                        <exclude reference="UNS-IQ-AG1"/>
                                         <exclude reference="evY-r7-G7b"/>
                                         <exclude reference="sDi-Zy-A3B"/>
                                         <exclude reference="zTd-Iq-bnO"/>
@@ -3575,7 +3577,6 @@
                                     <mask key="constraints">
                                         <include reference="S8f-q8-lxV"/>
                                         <include reference="BFl-ka-WVx"/>
-                                        <include reference="UNS-IQ-AG1"/>
                                         <include reference="evY-r7-G7b"/>
                                         <include reference="sDi-Zy-A3B"/>
                                         <include reference="zTd-Iq-bnO"/>
@@ -4971,6 +4972,6 @@
         <image name="сс_logo" width="564" height="564"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qhg-Iy-ujY"/>
+        <segue reference="FvO-fn-Dv2"/>
     </inferredMetricsTieBreakers>
 </document>

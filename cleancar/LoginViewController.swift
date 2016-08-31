@@ -55,12 +55,17 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //keyboard next instead of return
+        self.signUpNameField.nextField = self.signUpNumberField
 
         // style
-     //   navigationController!.navigationBar.barTintColor = UIColor(red: 216.0/255.0, green: 55.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+        //navigationController!.navigationBar.barTintColor = UIColor(red: 216.0/255.0, green: 55.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+        
+        
         // text field placeholder color
         signUpNameField.attributedPlaceholder = NSAttributedString(string:"ФИО",attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
         signUpNumberField.attributedPlaceholder = NSAttributedString(string:"Номер телефона",attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
+        
         // рамки кнопки Регистрация
         signUpButtonBorder.layer.borderColor = UIColor.whiteColor().CGColor
         signUpButtonBorder.layer.borderWidth = 2
@@ -164,7 +169,25 @@ class LoginViewController: UIViewController {
             }
         }
     }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.nextField?.becomeFirstResponder()
+        return true
+    }
 
+}
+
+private var kAssociationKeyNextField: UInt8 = 0
+
+extension UITextField {
+    var nextField: UITextField? {
+        get {
+            return objc_getAssociatedObject(self, &kAssociationKeyNextField) as? UITextField
+        }
+        set(newField) {
+            objc_setAssociatedObject(self, &kAssociationKeyNextField, newField, .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
 }
 
 
