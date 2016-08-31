@@ -28,15 +28,9 @@ class BookingHour {
 
         self.index = index
         self.boxes = data["boxes"].arrayValue.map {$0.boolValue}
-
-        // [String: JSON] -> [String: Bool]
-        let dict: [String: JSON] = data["washers"].dictionaryValue
-        self.washers = [String: Bool]()
-        for (key, value) in dict {
-            self.washers.updateValue(value.boolValue, forKey: key)
-        }
+        self.washers = toStringBool(data["washers"].dictionaryValue)
     }
-    
+
     init(index: Int, boxes: [Bool], washers: [String:Bool]) {
         self.index = index
         self.boxes = boxes

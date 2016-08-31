@@ -28,7 +28,7 @@ class BookingController: UIViewController, Dimmable {
         let bookingHour = self.bookingHour!,
             carInfo = self.carInfo!,
             services = self.servicesTableViewController!.selectedServices
-        print(".sendButton", bookingHour, carInfo, services)
+        //print(".sendButton", bookingHour, carInfo, services)
         Reservation.create(carInfo, bookingHour: bookingHour, services: services) {
             self.navigationController?.popToRootViewControllerAnimated(true)
         }

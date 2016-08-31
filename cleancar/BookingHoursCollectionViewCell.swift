@@ -9,21 +9,21 @@
 import UIKit
 
 class BookingHoursCollectionViewCell: UICollectionViewCell {
-    
-    // IBOutlets
+
+    // IBActions
     @IBOutlet weak var hourLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
 
     // variables
     var bookingHour: BookingHour? {
         didSet {
-            hourLabel.text = bookingHour!.getHour()
-            statusLabel.text = bookingHour!.getStatus()
+            self.hourLabel.text = bookingHour!.getHour()
+            self.statusLabel.text = bookingHour!.getStatus()
 
             if bookingHour!.isFree() {
-                statusLabel.textColor = UIColor.greenColor()
+                self.statusLabel.textColor = UIColor.greenColor()
             } else {
-                statusLabel.textColor = UIColor.redColor()
+                self.statusLabel.textColor = UIColor.redColor()
             }
         }
     }

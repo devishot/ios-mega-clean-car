@@ -21,32 +21,7 @@ class HomeViewController: UIViewController {
     @IBAction func callButton(sender: UIButton) {
     }
     @IBAction func clickedMenuButton(sender: UIButton) {
-        let actionSheet = UIAlertController(title: nil,
-                                            message: "Выберите действие",
-                                            preferredStyle: .ActionSheet)
-
-        let logOut = UIAlertAction(title: "Выйти", style: .Destructive,
-                                   handler: { (alert: UIAlertAction!) -> Void in
-            // logout from firebase and facebook
-            User.logOut() {
-                // redirect to LoginViewController
-                let firstNavigationController = self.storyboard?.instantiateViewControllerWithIdentifier("loginNavController") as! UINavigationController
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.presentViewController(firstNavigationController, animated: true, completion: nil)
-                    return
-                })
-            }
-        })
-
-        let cancel = UIAlertAction(title: "Отмена", style: .Cancel, handler: {
-            (alert: UIAlertAction!) -> Void in
-            
-        })
-
-        actionSheet.addAction(logOut)
-        actionSheet.addAction(cancel)
-
-        self.presentViewController(actionSheet, animated: true, completion: nil)
+        self.displayMenuView()
     }
 
 
@@ -60,7 +35,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var chooseTimeCollectionView: UICollectionView!
     @IBOutlet weak var makeReservationButton: UIButton!
 
-    
+
     // Identifiers
     var bookingHourCellID = "bookingHourCell"
     var bookingSegueID = "bookingSegue"
@@ -77,6 +52,11 @@ class HomeViewController: UIViewController {
             } else {
                 self.makeReservationButton.enabled = false
             }
+        }
+    }
+    var currentUser: User? {
+        didSet {
+            self.updateCurrentReservationView()
         }
     }
 
@@ -118,6 +98,9 @@ class HomeViewController: UIViewController {
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.tabBarController?.tabBar.hidden = false
+
+        // Set data
+        self.currentUser = User.currentUser!
     }
 
 
@@ -128,6 +111,47 @@ class HomeViewController: UIViewController {
         }
     }
 
+
+    func updateCurrentReservationView() {
+        let user = self.currentUser!
+        print("Home.updateCurrentReservationView", user, user.currentReservation?.toDict())
+        if  let reservation: Reservation = user.currentReservation,
+            let carInfo: CarInfo = reservation.user.carInfo {
+
+            self.timeOfOrderLabel.text = reservation.bookingHour.getHour()
+            self.nameOfCarLabel.text = carInfo.model!
+            self.numberOfCarLabel.text = carInfo.identifierNumber!
+        }
+    }
+
+    func displayMenuView() {
+        let actionSheet = UIAlertController(title: nil,
+                                            message: "Выберите действие",
+                                            preferredStyle: .ActionSheet)
+        
+        let logOut = UIAlertAction(title: "Выйти", style: .Destructive,
+                                   handler: { (alert: UIAlertAction!) -> Void in
+                                    // logout from firebase and facebook
+                                    User.logOut() {
+                                        // redirect to LoginViewController
+                                        let firstNavigationController = self.storyboard?.instantiateViewControllerWithIdentifier("loginNavController") as! UINavigationController
+                                        dispatch_async(dispatch_get_main_queue(), {
+                                            self.presentViewController(firstNavigationController, animated: true, completion: nil)
+                                            return
+                                        })
+                                    }
+        })
+        
+        let cancel = UIAlertAction(title: "Отмена", style: .Cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+        })
+        
+        actionSheet.addAction(logOut)
+        actionSheet.addAction(cancel)
+        
+        self.presentViewController(actionSheet, animated: true, completion: nil)
+    }
 }
 
 
@@ -146,7 +170,7 @@ extension HomeViewController : UICollectionViewDataSource {
     //3
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(bookingHourCellID, forIndexPath: indexPath) as! BookingHoursCollectionViewCell
-    
+
         // Configure the cell
         let isSelected = self.bookingHoursSelectedIndex == indexPath
         cell.configure(isSelected)

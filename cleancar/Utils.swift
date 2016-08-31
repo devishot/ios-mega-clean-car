@@ -8,7 +8,7 @@
 
 import Foundation
 import Firebase
-
+import SwiftyJSON
 
 
 func getFirebaseRef() -> FIRDatabaseReference {
@@ -29,3 +29,29 @@ func transformWord(word: String, amount: Int) -> String {
     }
     return "\(word)\(prefix)"
 }
+
+func toStringBool(data: [String:JSON]) -> [String: Bool] {
+    var ret = [String: Bool]()
+    for (key, value) in data {
+        ret.updateValue(value.boolValue, forKey: key)
+    }
+    return ret
+}
+
+func toStringString(data: [String:JSON]) -> [String: String] {
+    var ret = [String: String]()
+    for (key, value) in data {
+        ret.updateValue(value.stringValue, forKey: key)
+    }
+    return ret
+}
+
+func toStringAnyObject(data: [String:JSON]) -> [String: AnyObject] {
+    var ret = [String: AnyObject]()
+    for (key, value) in data {
+        ret.updateValue(value.rawValue, forKey: key)
+    }
+    return ret
+}
+
+

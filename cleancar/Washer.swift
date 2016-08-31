@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import SwiftyJSON
 
 
 class Washer: FirebaseDataProtocol {
@@ -21,6 +22,12 @@ class Washer: FirebaseDataProtocol {
     init(id: String, name: String) {
         self.id = id
         self.name = name
+    }
+    
+    init(data: AnyObject) {
+        let parsed = JSON(data)
+        self.id = parsed["id"].stringValue
+        self.name = parsed["name"].stringValue
     }
 
     func toDict(withId: Bool = false) -> NSMutableDictionary {

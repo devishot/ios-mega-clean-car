@@ -58,9 +58,11 @@ class LoginViewController: UIViewController {
         // style
         navigationController!.navigationBar.barTintColor = UIColor(red: 216.0/255.0, green: 55.0/255.0, blue: 55.0/255.0, alpha: 1.0)
 
-        // if logged by FB then redirect to home
+        // XXX:
+        User.logOut({})
+
         User.isAlreadyLoggedInByFacebook(self.redirectToHome)
-        //TODO: User.isAlreadyLoggedIn()
+        //TODO: User.isAlreadyLoggedInFirebase()
     }
 
     override func viewWillAppear(animated: Bool) {

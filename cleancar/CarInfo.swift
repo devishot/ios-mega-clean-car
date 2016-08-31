@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import SwiftyJSON
+
 
 enum CarTypeEnum: Int {
     case Normal
@@ -34,6 +36,13 @@ class CarInfo {
         self.identifierNumber = identifierNumber
     }
 
+    init(data: AnyObject) {
+        let parsed = JSON(data)
+        self.type  = CarTypeEnum(rawValue: parsed["type"].intValue)!
+        self.model = parsed["model"].string
+        self.identifierNumber = parsed["identifier_number"].string
+    }
+
     func getType() -> String {
         switch self.type {
         case .Normal:
@@ -51,7 +60,7 @@ class CarInfo {
         let data: NSMutableDictionary = [
             "type": self.type.rawValue,
             "model": self.model!,
-            "identifierNumber": self.identifierNumber!
+            "identifier_number": self.identifierNumber!
         ]
         return data
     }

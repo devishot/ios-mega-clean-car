@@ -12,6 +12,7 @@
 		5209DE3F1D6C1EEA006E040E /* ServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5209DE3E1D6C1EEA006E040E /* ServicesTableViewController.swift */; };
 		5225B05A1D6B5CEB00BFBAE7 /* CarInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225B0591D6B5CEB00BFBAE7 /* CarInfo.swift */; };
 		5225B05C1D6B640E00BFBAE7 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225B05B1D6B640E00BFBAE7 /* Services.swift */; };
+		52284A8E1D75F5DD00A41427 /* BookingHoursCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */; };
 		523F3B521D66EA4300B75421 /* BookingHour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523F3B511D66EA4300B75421 /* BookingHour.swift */; };
 		523F3B551D67678B00B75421 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 523F3B541D67678B00B75421 /* GoogleService-Info.plist */; };
 		523F3B571D67A50B00B75421 /* BookingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523F3B561D67A50B00B75421 /* BookingController.swift */; };
@@ -462,6 +463,7 @@
 				523F3B521D66EA4300B75421 /* BookingHour.swift in Sources */,
 				528947291D72C9D7004B7090 /* Reservation.swift in Sources */,
 				528947271D71760D004B7090 /* LoginCheckViewController.swift in Sources */,
+				52284A8E1D75F5DD00A41427 /* BookingHoursCollectionViewCell.swift in Sources */,
 				5225B05C1D6B640E00BFBAE7 /* Services.swift in Sources */,
 				528947251D717441004B7090 /* LoginViewController.swift in Sources */,
 				5209DE3F1D6C1EEA006E040E /* ServicesTableViewController.swift in Sources */,

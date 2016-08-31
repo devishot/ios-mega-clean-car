@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import SwiftyJSON
+
 
 enum WashTypeEnum: Int {
     case Body = 0
@@ -100,7 +102,15 @@ class Services {
         self.additionalSelect = additionalSelect
         self.cleanMatsCount = cleanMatsCount
     }
-    
+
+    init(data: AnyObject) {
+        let parsed = JSON(data)
+        self.carType = CarTypeEnum(rawValue: parsed["car_type"].intValue)!
+        self.washType = WashTypeEnum(rawValue: parsed["wash_type"].intValue)!
+        self.additionalSelect = toStringBool(parsed["additional_select"].dictionaryValue)
+        self.cleanMatsCount = parsed["clean_mats_count"].intValue
+    }
+
 
     func update(newWashType: WashTypeEnum) -> Services {
         return Services(carType: self.carType, washType: newWashType, additionalSelect: self.additionalSelect, cleanMatsCount: self.cleanMatsCount)

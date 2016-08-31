@@ -10,14 +10,16 @@ import Foundation
 import Firebase
 import FBSDKCoreKit
 import FBSDKLoginKit
+import SwiftyJSON
 
 
 class User: FirebaseDataProtocol {
     static let childRefName: String = "users"
+    static var currentUser: User?
 
     let id: String
     let full_name: String
-    var facebookProfile: [String: String]?
+    var facebookProfile: [String: JSON]?
     var carInfo: CarInfo?
     var currentReservation: Reservation?
 
@@ -26,7 +28,7 @@ class User: FirebaseDataProtocol {
         self.full_name = full_name
     }
 
-    init(uid: String, full_name: String, facebookProfile: [String: String]?,
+    init(uid: String, full_name: String, facebookProfile: [String: JSON]?,
          carInfo: CarInfo?, currentReservation: Reservation?) {
         self.id = uid
         self.full_name = full_name
@@ -34,6 +36,51 @@ class User: FirebaseDataProtocol {
         self.carInfo = carInfo
         self.currentReservation = currentReservation
     }
+
+    init(uid: String, data: AnyObject) {
+        let parsed = JSON(data)
+
+        self.id = uid
+        self.full_name = parsed["full_name"].stringValue
+        if let facebookProfile = parsed["facebook_profile"].dictionary {
+            self.facebookProfile = facebookProfile
+        }
+        if parsed["car_info"].isExists() {
+            let data = parsed["car_info"].object
+            self.carInfo = CarInfo(data: data)
+        }
+        if parsed["current_reservation"].isExists() {
+            let data = parsed["current_reservation"].object
+            self.currentReservation = Reservation(data: data)
+        }
+    }
+
+    func toDict(withId: Bool = false) -> NSMutableDictionary {
+        let data: NSMutableDictionary = [
+            "full_name": self.full_name
+        ]
+        if withId {
+            data.setObject(self.id, forKey: "id")
+        }
+        if self.carInfo != nil {
+            data.setObject(self.carInfo!.toDict(), forKey: "car_info")
+        }
+        if self.facebookProfile != nil {
+            data.setObject(toStringAnyObject(self.facebookProfile!),
+                           forKey: "facebook_profile")
+        }
+        return data
+    }
+
+    func toDictFull() -> NSMutableDictionary {
+        let data = self.toDict(false)
+        if self.currentReservation != nil {
+            data.setObject(self.currentReservation!.toDict(true),
+                           forKey: "current_reservation")
+        }
+        return data
+    }
+    
 
 
     func update(newReservation: Reservation) -> User {
@@ -46,27 +93,6 @@ class User: FirebaseDataProtocol {
         let copy = User(uid: id, full_name: full_name, facebookProfile: facebookProfile, carInfo: carInfo, currentReservation: currentReservation)
         copy.carInfo = newCarInfo
         return copy
-    }
-
-
-    func toDict(withId: Bool = false) -> NSMutableDictionary {
-        let data: NSMutableDictionary = [
-            "full_name": self.full_name
-        ]
-        if withId {
-            data.setObject(self.id, forKey: "id")
-        }
-        if self.carInfo != nil {
-            data.setObject(self.carInfo!.toDict(), forKey: "carInfo")
-        }
-        if self.facebookProfile != nil {
-            data.setObject(self.facebookProfile!, forKey: "facebookProfile")
-        }
-        if self.currentReservation != nil {
-            data.setObject(self.currentReservation!.id,
-                           forKey: "currentReservationId")
-        }
-        return data
     }
 
 
@@ -87,13 +113,44 @@ class User: FirebaseDataProtocol {
         return nil
     }
 
+    static func subscribeToUserData(completion: (user: User)->(Void)) -> Void {
+        let uid = self.getUser()!.id
+        getFirebaseRef()
+            .child(User.childRefName)
+            .child(uid)
+            .observeEventType(.Value, withBlock: { (snapshot) in
+                //check is UserProfile exists
+                if snapshot.value is NSNull {
+                    // create UserProfile
+                    User.saveCurrentUser(completion)
+                } else {
+                    let user = User(uid: uid, data: snapshot.value!)
+                    User.currentUser = user
+                    completion(user: user)
+                }
+            })
+    }
+
+    static func saveCurrentUser(completion: (user: User) -> (Void)) -> Void {
+        let user = User.getUser()!
+        getFirebaseRef()
+            .child(User.childRefName)
+            .child(user.id)
+            .setValue(user.toDict(), withCompletionBlock: {_,_ in
+                User.currentUser = user
+                completion(user: user)
+            })
+    }
+
     static func logInByFacebook(completion: () -> (Void) ) -> Void {
         let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString);
-        
+
+        // fetch updated FacebookProfile data
+
         FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
             if error == nil {
-                print("Firebase login: \(user?.displayName)");
-                completion()
+                print("Firebase login: \(user!.displayName!)");
+                afterLogin(completion)
             } else {
                 print("Error: while login into Firebase:", error.debugDescription);
             }
@@ -115,7 +172,14 @@ class User: FirebaseDataProtocol {
         return false
     }
 
-    
+    static func afterLogin(completion: () -> (Void)) -> Void {
+        // fetch or create UserProfile
+        User.subscribeToUserData({ user in
+            completion()
+        })
+        // TODO: fetch FacebookProfile data and update UserProfile
+    }
+
     static func logOut(completion: () -> (Void)) -> Void {
         do {
             // logout from Firebase
@@ -123,7 +187,8 @@ class User: FirebaseDataProtocol {
             // logout from Facebook
             let facebookLogin = FBSDKLoginManager();
             facebookLogin.logOut()
-            
+            User.currentUser = nil
+
             completion()
 
         } catch {
