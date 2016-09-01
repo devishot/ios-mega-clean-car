@@ -23,11 +23,18 @@ class HomeViewController: UIViewController {
     @IBAction func clickedMenuButton(sender: UIButton) {
         self.displayMenuView()
     }
+    @IBAction func clickedCancelReservation(sender: UIButton) {
+        displayPromptView("Хотите отменить бронь?", self: self) { (value: Bool) -> Void in
+            if value {
+                self.currentUser!.currentReservation!.delete()
+            }
+        }
+    }
 
 
     // IBOutlets
     @IBOutlet weak var roundedBorderView: UIView!
-
+    @IBOutlet weak var noReservationView: UIView!
     @IBOutlet weak var timeOfOrderLabel: UILabel!
     @IBOutlet weak var nameOfCarLabel: UILabel!
     @IBOutlet weak var numberOfCarLabel: UILabel!
@@ -47,7 +54,7 @@ class HomeViewController: UIViewController {
         didSet {
             self.chooseTimeCollectionView.reloadData()
 
-            if self.bookingHoursSelectedIndex != nil {
+            if bookingHoursSelectedIndex != nil {
                 self.makeReservationButton.enabled = true
             } else {
                 self.makeReservationButton.enabled = false
@@ -72,10 +79,10 @@ class HomeViewController: UIViewController {
         makeReservationButton.layer.masksToBounds = true
 
             // rounded view
-        roundedBorderView.layer.cornerRadius = 20
+        roundedBorderView.layer.cornerRadius = 10
         roundedBorderView.layer.masksToBounds = true
         roundedBorderView.layer.borderWidth = 1
-        roundedBorderView.layer.borderColor = UIColor.grayColor().CGColor
+        roundedBorderView.layer.borderColor = UIColor.orangeColor().CGColor
 
 
         // 2. Init behaviour
@@ -86,11 +93,14 @@ class HomeViewController: UIViewController {
 
 
         // 3. Fetch data
-        BookingHour.subscribeAndFetchData({ () -> (Void) in
+        Washer.fetchData(){}
+        BookingHour.subscribeToToday({ () -> (Void) in
             self.bookingHours = BookingHour.today
             self.chooseTimeCollectionView.reloadData()
         })
-        Washer.fetchData(){}
+        User.subscribeToCurrent({ () -> (Void) in
+            self.currentUser = User.current
+        })
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -99,29 +109,45 @@ class HomeViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.tabBarController?.tabBar.hidden = false
 
-        // Set data
-        self.currentUser = User.currentUser!
     }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.bookingHoursSelectedIndex = nil
 
+        BookingHour.unsubscribe()
+        User.unsubscribe()
+    }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == self.bookingSegueID {
             let destinationController = segue.destinationViewController as! BookingController
             destinationController.bookingHour = self.bookingHours[self.bookingHoursSelectedIndex!.row]
+            if let carInfo = self.currentUser!.carInfo {
+                destinationController.carInfo = carInfo
+            }
         }
     }
 
 
     func updateCurrentReservationView() {
         let user = self.currentUser!
-        print("Home.updateCurrentReservationView", user, user.currentReservation?.toDict())
+        var fromView = roundedBorderView,
+            toView = noReservationView
+
         if  let reservation: Reservation = user.currentReservation,
             let carInfo: CarInfo = reservation.user.carInfo {
 
             self.timeOfOrderLabel.text = reservation.bookingHour.getHour()
             self.nameOfCarLabel.text = carInfo.model!
             self.numberOfCarLabel.text = carInfo.identifierNumber!
+            
+            fromView = noReservationView
+            toView = roundedBorderView
         }
+
+        UIView.transitionFromView(fromView, toView: toView, duration: 0.2, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
     }
 
     func displayMenuView() {
@@ -129,17 +155,17 @@ class HomeViewController: UIViewController {
                                             message: "Выберите действие",
                                             preferredStyle: .ActionSheet)
         
-        let logOut = UIAlertAction(title: "Выйти", style: .Destructive,
-                                   handler: { (alert: UIAlertAction!) -> Void in
-                                    // logout from firebase and facebook
-                                    User.logOut() {
-                                        // redirect to LoginViewController
-                                        let firstNavigationController = self.storyboard?.instantiateViewControllerWithIdentifier("loginNavController") as! UINavigationController
-                                        dispatch_async(dispatch_get_main_queue(), {
-                                            self.presentViewController(firstNavigationController, animated: true, completion: nil)
-                                            return
-                                        })
-                                    }
+        let logOut = UIAlertAction(title: "Выйти", style: .Destructive, handler: { (alert: UIAlertAction!) -> Void in
+
+            // logout from firebase and facebook
+            User.logOut() {
+                // redirect to LoginViewController
+                let firstNavigationController = self.storyboard?.instantiateViewControllerWithIdentifier("loginNavController") as! UINavigationController
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.presentViewController(firstNavigationController, animated: true, completion: nil)
+                    return
+                })
+            }
         })
         
         let cancel = UIAlertAction(title: "Отмена", style: .Cancel, handler: {
@@ -172,7 +198,7 @@ extension HomeViewController : UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(bookingHourCellID, forIndexPath: indexPath) as! BookingHoursCollectionViewCell
 
         // Configure the cell
-        let isSelected = self.bookingHoursSelectedIndex == indexPath
+        let isSelected: Bool = self.bookingHoursSelectedIndex == indexPath
         cell.configure(isSelected)
 
         // Set data

@@ -32,19 +32,23 @@ class BookingHoursCollectionViewCell: UICollectionViewCell {
     func configure(isSelected: Bool) -> Void {
         self.backgroundColor = UIColor.blackColor()
         self.hourLabel.textColor = UIColor.blackColor()
+        self.layer.cornerRadius = 10
+        self.layer.masksToBounds = true
 
         if isSelected {
+            self.layer.cornerRadius = 10
+            self.layer.masksToBounds = true
             self.backgroundColor = UIColor.whiteColor()
-            self.addTopBorderWithColor(UIColor.yellowColor(), width: 5)
-            self.addBottomBorderWithColor(UIColor.yellowColor(), width: 5)
-            self.addLeftBorderWithColor(UIColor.yellowColor(), width: 5)
-            self.addRightBorderWithColor(UIColor.yellowColor(), width: 5)
+            self.layer.borderColor = UIColor.yellowColor().CGColor
+            self.layer.borderWidth = 2
+            
         } else {
+            self.layer.cornerRadius = 10
+            self.layer.masksToBounds = true
             self.backgroundColor = UIColor.whiteColor()
-            self.addTopBorderWithColor(UIColor.whiteColor(), width: 5)
-            self.addBottomBorderWithColor(UIColor.whiteColor(), width: 5)
-            self.addLeftBorderWithColor(UIColor.whiteColor(), width: 5)
-            self.addRightBorderWithColor(UIColor.whiteColor(), width: 5)
+            self.layer.borderColor = UIColor.whiteColor().CGColor
+            self.layer.borderWidth = 2
+        
         }
     }
 }

@@ -21,26 +21,30 @@ class BookingHour {
     var index: Int
     var boxes: [Bool]
     var washers: [String: Bool]
+    var unassignedReservationIds: [String]
 
 
     init(index: Int, data: AnyObject) {
-        let data = JSON(data)
+        let parsed = JSON(data)
 
         self.index = index
-        self.boxes = data["boxes"].arrayValue.map {$0.boolValue}
-        self.washers = toStringBool(data["washers"].dictionaryValue)
+        self.boxes = parsed["boxes"].arrayValue.map {$0.boolValue}
+        self.washers = toStringBool(parsed["washers"].dictionaryValue)
+        self.unassignedReservationIds = parsed["unassigned"].arrayValue.map({$0.stringValue})
     }
 
     init(index: Int, boxes: [Bool], washers: [String:Bool]) {
         self.index = index
         self.boxes = boxes
         self.washers = washers
+        self.unassignedReservationIds = []
     }
 
     func toDict() -> NSDictionary {
         let data = [
             "boxes": boxes,
-            "washers": washers
+            "washers": washers,
+            "unassigned": unassignedReservationIds
         ]
         return data
     }
@@ -67,15 +71,15 @@ class BookingHour {
     }
 
     func getStatus() -> String {
-        let boxes = self.getFreeBoxIndexes()
+        let freeBoxesCount =
+            self.getFreeBoxIndexes().count - self.unassignedReservationIds.count
         return self.isFree()
-            ? "\(boxes.count) \(transformWord("бокс", amount: boxes.count))"
+            ? "\(freeBoxesCount) \(transformWord("бокс", amount: freeBoxesCount))"
             : "Занято"
     }
 
-
     func isFree() -> Bool {
-        return self.getFreeBoxIndexes().count > 0
+        return self.getFreeBoxIndexes().count - self.unassignedReservationIds.count > 0
     }
 
     func getFreeBoxIndexes() -> [Int] {
@@ -164,24 +168,17 @@ class BookingHour {
 
 
     // firebase
-    class func subscribeAndFetchData(callback: () -> (Void) ) {
-        BookingHour.subscribeToData({ (snapshot: FIRDataSnapshot) -> Void in
-            let values = snapshot.value as! [AnyObject]
-            var data: [BookingHour] = []
-
-            for (index, value) in values.enumerate() {
-                data.append( BookingHour(index: index, data: value) )
-            }
-
-            BookingHour.today = data
-            callback()
-        })
-    }
-
-    class func subscribeToData(callback: (snapshot: FIRDataSnapshot) -> Void) {
+    class func subscribeToToday(callback: () -> (Void) ) {
         BookingHour.refHandle = getFirebaseRef()
             .child(BookingHour.childRefName)
-            .observeEventType(FIRDataEventType.Value, withBlock: callback)
+            .observeEventType(FIRDataEventType.Value) {(snapshot: FIRDataSnapshot) -> Void in
+
+                let values = snapshot.value as! [AnyObject]
+                BookingHour.today = values
+                    .enumerate()
+                    .map({ BookingHour(index: $0.index, data: $0.element) })
+                callback()
+            }
     }
 
     class func unsubscribe() {

@@ -40,6 +40,7 @@ class LoginViewController: UIViewController {
         self.updateLoginPage()
     }
 
+    @IBOutlet weak var signUpButtonBorder: UIButton!
 
     // constants
     let loginCheckSegueID = "loginCheck"
@@ -54,9 +55,21 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //keyboard next instead of return
+        self.signUpNameField.nextField = self.signUpNumberField
 
         // style
-        navigationController!.navigationBar.barTintColor = UIColor(red: 216.0/255.0, green: 55.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+        //navigationController!.navigationBar.barTintColor = UIColor(red: 216.0/255.0, green: 55.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+        
+        
+        // text field placeholder color
+        signUpNameField.attributedPlaceholder = NSAttributedString(string:"ФИО",attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
+        signUpNumberField.attributedPlaceholder = NSAttributedString(string:"Номер телефона",attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
+        
+        // рамки кнопки Регистрация
+        signUpButtonBorder.layer.borderColor = UIColor.whiteColor().CGColor
+        signUpButtonBorder.layer.borderWidth = 2
+        signUpButtonBorder.layer.masksToBounds = true
 
         // XXX:
         User.logOut({})
@@ -132,5 +145,6 @@ class LoginViewController: UIViewController {
     }
 
 }
+
 
 

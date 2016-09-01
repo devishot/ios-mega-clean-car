@@ -16,19 +16,17 @@ class PricelistController: UIViewController {
     weak var currentViewController: UIViewController?
 
     override func viewDidLoad() {
-        
+        UISegmentedControl.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.orangeColor()], forState: UIControlState.Normal)
         typesOfCarsSC.setFontSize(10)
+
         self.currentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("a")
         self.currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false
         self.addChildViewController(self.currentViewController!)
         self.addSubview(self.currentViewController!.view, toView: self.containerView)
-        super.viewDidLoad()
         
-
-
-        // Do any additional setup after loading the view.
+        super.viewDidLoad()
     }
-    
+
     
     @IBAction func showComponent(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {

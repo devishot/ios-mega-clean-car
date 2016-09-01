@@ -19,6 +19,7 @@ class Reservation: FirebaseDataProtocol {
     let user: User
     let bookingHour: BookingHour
     let services: Services
+    let dateCreated: NSDate
 
     var boxIndex: Int?
     var washer: Washer?
@@ -30,6 +31,7 @@ class Reservation: FirebaseDataProtocol {
         self.user = user
         self.bookingHour = bookingHour
         self.services = services
+        self.dateCreated = NSDate()
     }
 
     init(data: AnyObject) {
@@ -39,8 +41,12 @@ class Reservation: FirebaseDataProtocol {
             uid: parsed["user", "id"].stringValue,
             data: parsed["user"].object
         )
+
+        print("here", BookingHour.today)
+        
         self.bookingHour = BookingHour.today[parsed["booking_hour_index"].intValue]
         self.services = Services(data: parsed["services"].object)
+        self.dateCreated = parseTime(parsed["date_created"].stringValue)
 
         // optional
         self.boxIndex = parsed["box_index"].int
@@ -54,7 +60,8 @@ class Reservation: FirebaseDataProtocol {
         let data: NSMutableDictionary = [
             "user": user.toDict(true),
             "booking_hour_index": bookingHour.index,
-            "services": services.toDict()
+            "services": services.toDict(),
+            "date_created": formatTime(dateCreated)
         ]
         if withId {
             data.setObject(self.id, forKey: "id")
@@ -85,17 +92,15 @@ class Reservation: FirebaseDataProtocol {
             reservedBookingHours = bookingData["bookingHours"]! as! [BookingHour]
         */
 
-        // create Reservation
-        let reservation = Reservation(id: id, user: user, bookingHour: bookingHour, services: services)
-
-        // update User data
         var updUser = user.update(carInfo)
+        let reservation = Reservation(id: id, user: updUser, bookingHour: bookingHour, services: services)
         updUser = updUser.update(reservation)
 
         // collect requests
         let childUpdates: NSMutableDictionary = [
             "/\(Reservation.childRefName)/\(id)": reservation.toDict(),
             "/\(User.childRefName)/\(updUser.id)": updUser.toDictFull(),
+            "/\(BookingHour.childRefName)/\(bookingHour.index)/unassigned/\(id)": true
         ]
 
         /* //auto reserve - Part II
@@ -108,11 +113,32 @@ class Reservation: FirebaseDataProtocol {
         */
 
         // push requests
-        ref.updateChildValues(childUpdates as [NSObject: AnyObject],
-                              withCompletionBlock: {(error, ref) in
-            completion()
-        })
+        ref.updateChildValues(
+            childUpdates as [NSObject: AnyObject],
+            withCompletionBlock: {(error, ref) in
+                completion()
+            }
+        )
         return reservation
+    }
+
+    func delete() {
+        let updateChildValues: NSMutableDictionary = [
+            "\(Reservation.childRefName)/\(self.id)": NSNull(),
+            "\(User.childRefName)/\(self.user.id)/current_reservation": NSNull(),
+            "\(BookingHour.childRefName)/\(self.bookingHour.index)/unassigned/\(self.id)": NSNull()
+        ]
+
+        if self.boxIndex != nil {
+            let prefix = "\(BookingHour.childRefName)/\(self.bookingHour)"
+            updateChildValues.setObject(true,
+                                        forKey: prefix+"/boxes/\(self.boxIndex!)")
+            updateChildValues.setObject(true,
+                                        forKey: prefix+"/washers/\(self.washer!.id)")
+        }
+
+        getFirebaseRef()
+            .updateChildValues(updateChildValues as [NSObject: AnyObject])
     }
 }
 

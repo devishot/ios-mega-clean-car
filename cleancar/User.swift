@@ -15,7 +15,9 @@ import SwiftyJSON
 
 class User: FirebaseDataProtocol {
     static let childRefName: String = "users"
-    static var currentUser: User?
+    static var refHandle: FIRDatabaseHandle?
+
+    static var current: User?
 
     let id: String
     let full_name: String
@@ -45,6 +47,8 @@ class User: FirebaseDataProtocol {
         if let facebookProfile = parsed["facebook_profile"].dictionary {
             self.facebookProfile = facebookProfile
         }
+
+        // optional
         if parsed["car_info"].isExists() {
             let data = parsed["car_info"].object
             self.carInfo = CarInfo(data: data)
@@ -113,9 +117,10 @@ class User: FirebaseDataProtocol {
         return nil
     }
 
-    static func subscribeToUserData(completion: (user: User)->(Void)) -> Void {
+
+    static func subscribeToCurrent(completion: ()->(Void)) -> Void {
         let uid = self.getUser()!.id
-        getFirebaseRef()
+        User.refHandle = getFirebaseRef()
             .child(User.childRefName)
             .child(uid)
             .observeEventType(.Value, withBlock: { (snapshot) in
@@ -124,23 +129,36 @@ class User: FirebaseDataProtocol {
                     // create UserProfile
                     User.saveCurrentUser(completion)
                 } else {
-                    let user = User(uid: uid, data: snapshot.value!)
-                    User.currentUser = user
-                    completion(user: user)
+                    // fetch BookingHours for Reservation inside parsed User
+                    BookingHour.subscribeToToday({ () -> (Void) in
+                        // Note: BookingHour.today - was setted
+                        BookingHour.unsubscribe()
+
+                        let user = User(uid: uid, data: snapshot.value!)
+                        User.current = user
+                        completion()
+                    })
                 }
             })
     }
 
-    static func saveCurrentUser(completion: (user: User) -> (Void)) -> Void {
+    class func unsubscribe() {
+        if let ref = User.refHandle {
+            getFirebaseRef().removeObserverWithHandle(ref)
+        }
+    }
+
+    static func saveCurrentUser(completion: () -> (Void)) -> Void {
         let user = User.getUser()!
         getFirebaseRef()
             .child(User.childRefName)
             .child(user.id)
             .setValue(user.toDict(), withCompletionBlock: {_,_ in
-                User.currentUser = user
-                completion(user: user)
+                User.current = user
+                completion()
             })
     }
+
 
     static func logInByFacebook(completion: () -> (Void) ) -> Void {
         let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString);
@@ -174,9 +192,7 @@ class User: FirebaseDataProtocol {
 
     static func afterLogin(completion: () -> (Void)) -> Void {
         // fetch or create UserProfile
-        User.subscribeToUserData({ user in
-            completion()
-        })
+        User.subscribeToCurrent(completion)
         // TODO: fetch FacebookProfile data and update UserProfile
     }
 
@@ -187,7 +203,7 @@ class User: FirebaseDataProtocol {
             // logout from Facebook
             let facebookLogin = FBSDKLoginManager();
             facebookLogin.logOut()
-            User.currentUser = nil
+            User.current = nil
 
             completion()
 
