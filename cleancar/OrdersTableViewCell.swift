@@ -9,6 +9,7 @@
 import UIKit
 
 class OrdersTableViewCell: UITableViewCell {
+
     //outlets
     @IBOutlet weak var boxLabel: UILabel!
     @IBOutlet weak var numberOfBoxLabel: UILabel!
@@ -25,6 +26,10 @@ class OrdersTableViewCell: UITableViewCell {
     
     @IBOutlet weak var servicesDescriptionLabel: UITextView!
 
+    
+    // variables
+    var value: Reservation?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -34,6 +39,27 @@ class OrdersTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+
+    func configure(value: Reservation) {
+        self.value = value
+
+        let isAssigned = value.status.rawValue > ReservationStatus.NonAssigned.rawValue
+
+        [numberOfBoxLabel, cleanserNameLabel]
+            .forEach({ $0.hidden = !isAssigned })
+
+        if isAssigned {
+            boxLabel.text = String(value.boxIndex!)
+            cleanserNameLabel.text = value.washer!.name
+        }
+        timeLabel.text = value.bookingHour.getHour()
+        overallPriceLabel.text = formatMoney(value.services.getCostForTotal())
+        servicesDescriptionLabel.text = value.services.getDescription()
+        if let carInfo = value.user.carInfo {
+            carModelName.text = carInfo.model!
+            carNumberLabel.text = carInfo.identifierNumber!
+        }
     }
 
 }

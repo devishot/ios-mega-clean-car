@@ -21,7 +21,7 @@ class BookingHour {
     var index: Int
     var boxes: [Bool]
     var washers: [String: Bool]
-    var unassignedReservationIds: [String]
+    var nonAssignedReservationIds: [String]
 
 
     init(index: Int, data: AnyObject) {
@@ -30,21 +30,21 @@ class BookingHour {
         self.index = index
         self.boxes = parsed["boxes"].arrayValue.map {$0.boolValue}
         self.washers = toStringBool(parsed["washers"].dictionaryValue)
-        self.unassignedReservationIds = parsed["unassigned"].arrayValue.map({$0.stringValue})
+        self.nonAssignedReservationIds = parsed["non_assigned"].arrayValue.map({$0.stringValue})
     }
 
     init(index: Int, boxes: [Bool], washers: [String:Bool]) {
         self.index = index
         self.boxes = boxes
         self.washers = washers
-        self.unassignedReservationIds = []
+        self.nonAssignedReservationIds = []
     }
 
     func toDict() -> NSDictionary {
         let data = [
             "boxes": boxes,
             "washers": washers,
-            "unassigned": unassignedReservationIds
+            "non_assigned": nonAssignedReservationIds
         ]
         return data
     }
@@ -72,14 +72,14 @@ class BookingHour {
 
     func getStatus() -> String {
         let freeBoxesCount =
-            self.getFreeBoxIndexes().count - self.unassignedReservationIds.count
+            self.getFreeBoxIndexes().count - self.nonAssignedReservationIds.count
         return self.isFree()
             ? "\(freeBoxesCount) \(transformWord("бокс", amount: freeBoxesCount))"
             : "Занято"
     }
 
     func isFree() -> Bool {
-        return self.getFreeBoxIndexes().count - self.unassignedReservationIds.count > 0
+        return self.getFreeBoxIndexes().count - self.nonAssignedReservationIds.count > 0
     }
 
     func getFreeBoxIndexes() -> [Int] {

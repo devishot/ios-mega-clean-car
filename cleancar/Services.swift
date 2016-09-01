@@ -24,6 +24,17 @@ enum AdditionalsEnum: String {
 }
 
 
+let WashTypeName = ["Кузов", "Салон", "Кузов-салон"]
+let AdditionalsName = [
+    "EngineCleaning": "Мойка двигателя",
+    "TrunkCleaning": "Чистка багажника",
+    "InterierPolishing": "Полировка салона",
+    "BodyWeaning": "Отбивка кузова"
+]
+let CleanMatsName = "Чистка ковров"
+
+
+
 class Services {
     var carType: CarTypeEnum
     var washType: WashTypeEnum
@@ -169,6 +180,18 @@ class Services {
         cost += Services.costs[self.carType.rawValue]!["CleanMatsPerCount"]! * self.cleanMatsCount
 
         return cost
+    }
+    
+    func getDescription() -> String {
+        let sep = " / "
+
+        let desc = WashTypeName[self.washType.rawValue]
+        let additionals = self.additionalSelect
+                .map({ $0.1 ? AdditionalsName[$0.0]! : "" })
+                .joinWithSeparator(sep)
+        let mats = self.cleanMatsCount > 0 ? "\(CleanMatsName) (\(self.cleanMatsCount)шт.)" : ""
+
+        return [desc, additionals, mats].joinWithSeparator(sep)
     }
 }
 

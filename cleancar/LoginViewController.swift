@@ -71,8 +71,6 @@ class LoginViewController: UIViewController {
         signUpButtonBorder.layer.borderWidth = 2
         signUpButtonBorder.layer.masksToBounds = true
 
-        // XXX:
-        User.logOut({})
 
         User.isAlreadyLoggedInByFacebook(self.redirectToHome)
         //TODO: User.isAlreadyLoggedInFirebase()

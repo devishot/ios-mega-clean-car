@@ -20,7 +20,16 @@ func formatMoney(cost: Int) -> String {
 }
 
 
-func formatTime(date: NSDate) -> String {
+func formatAsTimestamp(date: NSDate) -> Int {
+    return date.timeIntervalSince1970.hashValue
+}
+
+func parseTimestamp(timestamp: Int) -> NSDate {
+    let interval = NSTimeInterval(timestamp)
+    return NSDate(timeIntervalSince1970: interval)
+}
+
+func formatAsString(date: NSDate) -> String {
     return getDateFormatter().stringFromDate(date)
 }
 

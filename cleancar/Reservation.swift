@@ -11,15 +11,25 @@ import Firebase
 import SwiftyJSON
 
 
+enum ReservationStatus: Int {
+    case NonAssigned
+    case Assigned
+    case Completed
+    case FeedbackReceived
+    case Declined
+}
+
 class Reservation: FirebaseDataProtocol {
     static let childRefName: String = "reservations"
+    static var refHandle: FIRDatabaseHandle?
     static let timeToWashMinuteMultiplier: Int = 15
 
     let id: String
     let user: User
     let bookingHour: BookingHour
     let services: Services
-    let dateCreated: NSDate
+    let timestamp: NSDate
+    var status: ReservationStatus
 
     var boxIndex: Int?
     var washer: Washer?
@@ -31,7 +41,8 @@ class Reservation: FirebaseDataProtocol {
         self.user = user
         self.bookingHour = bookingHour
         self.services = services
-        self.dateCreated = NSDate()
+        self.timestamp = NSDate()
+        self.status = .NonAssigned
     }
 
     init(data: AnyObject) {
@@ -41,12 +52,10 @@ class Reservation: FirebaseDataProtocol {
             uid: parsed["user", "id"].stringValue,
             data: parsed["user"].object
         )
-
-        print("here", BookingHour.today)
-        
         self.bookingHour = BookingHour.today[parsed["booking_hour_index"].intValue]
         self.services = Services(data: parsed["services"].object)
-        self.dateCreated = parseTime(parsed["date_created"].stringValue)
+        self.timestamp = parseTimestamp(parsed["timestamp"].intValue)
+        self.status = ReservationStatus(rawValue: parsed["status"].intValue)!
 
         // optional
         self.boxIndex = parsed["box_index"].int
@@ -61,7 +70,8 @@ class Reservation: FirebaseDataProtocol {
             "user": user.toDict(true),
             "booking_hour_index": bookingHour.index,
             "services": services.toDict(),
-            "date_created": formatTime(dateCreated)
+            "timestamp": formatAsTimestamp(timestamp),
+            "status": status.rawValue
         ]
         if withId {
             data.setObject(self.id, forKey: "id")
@@ -78,6 +88,7 @@ class Reservation: FirebaseDataProtocol {
         return data
     }
 
+    // create as .NonAssigned
     static func create(carInfo: CarInfo, bookingHour: BookingHour,
                        services: Services,
                        completion: ()->(Void) ) -> Reservation {
@@ -85,32 +96,16 @@ class Reservation: FirebaseDataProtocol {
             ref = getFirebaseRef(),
             id = ref.child(Reservation.childRefName).childByAutoId().key
 
-        /* //auto reserve - Part I
-        let bookingData: [String: AnyObject] = bookingHour.reserve(),
-            boxIndex = bookingData["boxIndex"] as! Int,
-            washer = bookingData["washer"]! as! Washer,
-            reservedBookingHours = bookingData["bookingHours"]! as! [BookingHour]
-        */
-
         var updUser = user.update(carInfo)
         let reservation = Reservation(id: id, user: updUser, bookingHour: bookingHour, services: services)
         updUser = updUser.update(reservation)
 
         // collect requests
         let childUpdates: NSMutableDictionary = [
-            "/\(Reservation.childRefName)/\(id)": reservation.toDict(),
+            "/\(Reservation.childRefName)/\(reservation.status.rawValue)/\(id)": reservation.toDict(),
             "/\(User.childRefName)/\(updUser.id)": updUser.toDictFull(),
-            "/\(BookingHour.childRefName)/\(bookingHour.index)/unassigned/\(id)": true
+            "/\(BookingHour.childRefName)/\(bookingHour.index)/non_assigned/\(id)": true
         ]
-
-        /* //auto reserve - Part II
-        reservedBookingHours.forEach({ bh in
-            childUpdates.setObject(
-                bh.toDict(),
-                forKey: "/\(BookingHour.childRefName)/\(bh.index)"
-            )
-        })
-        */
 
         // push requests
         ref.updateChildValues(
@@ -124,12 +119,14 @@ class Reservation: FirebaseDataProtocol {
 
     func delete() {
         let updateChildValues: NSMutableDictionary = [
-            "\(Reservation.childRefName)/\(self.id)": NSNull(),
-            "\(User.childRefName)/\(self.user.id)/current_reservation": NSNull(),
-            "\(BookingHour.childRefName)/\(self.bookingHour.index)/unassigned/\(self.id)": NSNull()
+            "\(Reservation.childRefName)/\(self.status.rawValue)/\(self.id)": NSNull(),
+            "\(User.childRefName)/\(self.user.id)/current_reservation": NSNull()
         ]
 
-        if self.boxIndex != nil {
+        if self.status.rawValue == ReservationStatus.NonAssigned.rawValue {
+            updateChildValues.setObject(NSNull(),
+                                        forKey: "\(BookingHour.childRefName)/\(self.bookingHour.index)/non_assigned/\(self.id)")
+        } else {
             let prefix = "\(BookingHour.childRefName)/\(self.bookingHour)"
             updateChildValues.setObject(true,
                                         forKey: prefix+"/boxes/\(self.boxIndex!)")
@@ -139,6 +136,32 @@ class Reservation: FirebaseDataProtocol {
 
         getFirebaseRef()
             .updateChildValues(updateChildValues as [NSObject: AnyObject])
+    }
+
+    static func subscribeTo(filterByStatus: ReservationStatus,
+                     completion: (reservations: [Reservation])->Void) {
+        let ref = getFirebaseRef()
+            .child(Reservation.childRefName)
+            .child(String(filterByStatus.rawValue))
+            .observeEventType(.Value) { (snapshot: FIRDataSnapshot) -> Void in
+
+                if snapshot.value is NSNull {
+                    completion(reservations: [])
+                    return
+                }
+
+                let data = JSON(snapshot.value!),
+                    reservations = data.dictionaryObject!.map({ Reservation(data: $0.1) })
+
+                completion(reservations: reservations)
+            }
+        Reservation.refHandle = ref
+    }
+
+    static func unsubscribe() {
+        if let ref = Reservation.refHandle {
+            getFirebaseRef().removeObserverWithHandle(ref)
+        }
     }
 }
 

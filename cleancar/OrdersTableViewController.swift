@@ -9,7 +9,47 @@
 import UIKit
 
 class OrdersTableViewController: UITableViewController {
-    
+
+    // IBOutlets
+    @IBOutlet weak var filterButton: UIBarButtonItem!
+
+
+    // IBActions
+    @IBAction func clickedFilterButton(sender: UIBarButtonItem) {
+        self.filterValue = (self.filterValue + 1) % 2
+
+        self.updateFilterLabels()
+    }
+
+
+    // constants
+    let filterNames = ["Все", "Отмененные"]
+    let sections = [
+        ["Новые", "Назначенные"],
+        ["Отмененные"]
+    ]
+
+
+    // variables
+    var nonAssigned: [Reservation] = [] {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+    var assigned: [Reservation] = [] {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+    var declined: [Reservation] = [] {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+
+    var filterValue: Int = 0
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,75 +58,64 @@ class OrdersTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        
+        // 2. load data
+        Reservation.subscribeTo(ReservationStatus.NonAssigned, completion: { (reservations) in
+            self.nonAssigned = reservations
+        })
+        Reservation.subscribeTo(ReservationStatus.Assigned, completion: { (reservations) in
+            self.assigned = reservations
+        })
+        Reservation.subscribeTo(ReservationStatus.Declined, completion: { (reservations) in
+            self.assigned = reservations
+        })
+    }
+
+    override func viewDidDisappear(animated: Bool) {
+        Reservation.unsubscribe()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return self.sections.count
+    }
+
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.sections[filterValue][section]
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return self.getReservationsFor(section).count
     }
 
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("orderCellID", forIndexPath: indexPath) as! OrdersTableViewCell
-
-        // Configure the cell...
+    
+        let reservation = self.getReservationsFor(indexPath.section)[indexPath.row]
+        cell.configure(reservation)
 
         return cell
     }
-   
 
-   
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
 
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    func getReservationsFor(section: Int) -> [Reservation] {
+        if self.filterValue == 0 {
+            return [self.nonAssigned, self.assigned][section]
+        } else {
+            return self.declined
+        }
     }
-    */
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
+    func updateFilterLabels() {
+        self.navigationItem.title = self.filterButton.title
+        self.filterButton.title = self.filterNames[self.filterValue]
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
