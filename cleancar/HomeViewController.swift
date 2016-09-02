@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
     @IBAction func clickedCancelReservation(sender: UIButton) {
         displayPromptView("Хотите отменить бронь?", self: self) { (value: Bool) -> Void in
             if value {
-                self.currentUser!.currentReservation!.delete()
+                self.currentUser!.currentReservation!.decline()
             }
         }
     }
@@ -110,7 +110,7 @@ class HomeViewController: UIViewController {
         self.tabBarController?.tabBar.hidden = false
 
     }
-    
+
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         

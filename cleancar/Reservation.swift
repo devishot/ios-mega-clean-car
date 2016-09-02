@@ -88,7 +88,16 @@ class Reservation: FirebaseDataProtocol {
         return data
     }
 
-    // create as .NonAssigned
+    func isAssigned() -> Bool {
+        return !self.isDeclined() &&
+            self.status.rawValue > ReservationStatus.NonAssigned.rawValue
+    }
+
+    func isDeclined() -> Bool {
+        return self.status.rawValue == ReservationStatus.Declined.rawValue
+    }
+
+    // create in .NonAssigned
     static func create(carInfo: CarInfo, bookingHour: BookingHour,
                        services: Services,
                        completion: ()->(Void) ) -> Reservation {
@@ -117,26 +126,74 @@ class Reservation: FirebaseDataProtocol {
         return reservation
     }
 
-    func delete() {
+    func setDeclined(completion: () -> (Void)) {
+        // 1. move to /reservations/[Declined.rawValue]/[id]
+        // Note: don't change {status} field
+        // 2. remove {current_reservation} at User
+        // 3a. remove from {non_assigned} at BookingHour
+        // 3b. set free {boxes} and {washers} at BookingHour
+        let prefixB = "\(BookingHour.childRefName)/\(self.bookingHour.index)"
+
+        
         let updateChildValues: NSMutableDictionary = [
             "\(Reservation.childRefName)/\(self.status.rawValue)/\(self.id)": NSNull(),
+            "\(Reservation.childRefName)/\(ReservationStatus.Declined)/\(self.id)": self.toDict(),
+
             "\(User.childRefName)/\(self.user.id)/current_reservation": NSNull()
         ]
 
-        if self.status.rawValue == ReservationStatus.NonAssigned.rawValue {
-            updateChildValues.setObject(NSNull(),
-                                        forKey: "\(BookingHour.childRefName)/\(self.bookingHour.index)/non_assigned/\(self.id)")
+        if self.isAssigned() {
+            updateChildValues.setObject(true,
+                                        forKey: prefixB+"/boxes/\(self.boxIndex!)")
+            updateChildValues.setObject(true,
+                                        forKey: prefixB+"/washers/\(self.washer!.id)")
         } else {
-            let prefix = "\(BookingHour.childRefName)/\(self.bookingHour)"
-            updateChildValues.setObject(true,
-                                        forKey: prefix+"/boxes/\(self.boxIndex!)")
-            updateChildValues.setObject(true,
-                                        forKey: prefix+"/washers/\(self.washer!.id)")
+            updateChildValues.setObject(NSNull(),
+                                        forKey: prefixB+"/non_assigned/\(self.id)")
         }
 
         getFirebaseRef()
-            .updateChildValues(updateChildValues as [NSObject: AnyObject])
+            .updateChildValues(
+                updateChildValues as [NSObject: AnyObject],
+                withCompletionBlock: {_,_ in completion() }
+            )
     }
+
+    // move to .Assigned
+    func setAssigned(boxIndex: Int, washer: Washer, timeToWash: Int,
+                     completion: () -> (Void)) {
+        let updateChildValues = NSMutableDictionary()
+        if !self.isAssigned() {
+            updateChildValues.setObject(NSNull(), forKey: "\(Reservation.childRefName)/\(self.status.rawValue)/\(self.id)")
+        }
+
+        self.boxIndex = boxIndex
+        self.washer = washer
+        self.timeToWash = timeToWash
+        self.status = ReservationStatus.Assigned
+
+        updateChildValues.setObject(self.toDict(), forKey: "\(Reservation.childRefName)/\(ReservationStatus.Assigned.rawValue)/\(self.id)")
+
+        getFirebaseRef()
+            .updateChildValues(
+                updateChildValues as [NSObject: AnyObject],
+                withCompletionBlock: {_,_ in completion() }
+            )
+    }
+
+    func setComplete(completion: () -> (Void)) {
+        let prevStatus = self.status
+        self.status = ReservationStatus.Completed
+
+        let updateChildValues: [NSObject: AnyObject] = [
+            "\(Reservation.childRefName)/\(prevStatus.rawValue)/\(self.id)": NSNull(),
+            "\(Reservation.childRefName)/\(self.status.rawValue)/\(self.id)": self.toDict()
+        ]
+        getFirebaseRef()
+            .updateChildValues(updateChildValues,
+                               withCompletionBlock: {_,_ in completion() })
+    }
+
 
     static func subscribeTo(filterByStatus: ReservationStatus,
                      completion: (reservations: [Reservation])->Void) {

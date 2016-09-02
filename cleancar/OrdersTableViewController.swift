@@ -53,22 +53,18 @@ class OrdersTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        
         // 2. load data
-        Reservation.subscribeTo(ReservationStatus.NonAssigned, completion: { (reservations) in
-            self.nonAssigned = reservations
-        })
-        Reservation.subscribeTo(ReservationStatus.Assigned, completion: { (reservations) in
-            self.assigned = reservations
-        })
-        Reservation.subscribeTo(ReservationStatus.Declined, completion: { (reservations) in
-            self.assigned = reservations
+        BookingHour.subscribeToToday({ () -> (Void) in
+
+            Reservation.subscribeTo(ReservationStatus.NonAssigned, completion: { (reservations) in
+                self.nonAssigned = reservations
+            })
+            Reservation.subscribeTo(ReservationStatus.Assigned, completion: { (reservations) in
+                self.assigned = reservations
+            })
+            Reservation.subscribeTo(ReservationStatus.Declined, completion: { (reservations) in
+                self.assigned = reservations
+            })
         })
     }
 
@@ -101,10 +97,53 @@ class OrdersTableViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    // Swipe cell actions
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
+
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let reservation = getReservationsFor(indexPath.section)[indexPath.row]
+
+
+        let assignAction = UITableViewRowAction(style: .Normal, title: "Назначить", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+            print("assignAction", indexPath.row)
+            
+            reservation.setAssigned(<#T##boxIndex: Int##Int#>, washer: <#T##Washer#>, timeToWash: <#T##Int#>) {
+                
+            }
+        })
+        
+        let reAssignAction = UITableViewRowAction(style: .Normal, title: "Переназначить", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+            print("reAssignAction", indexPath.row)
+        })
+
+
+        let completeAction = UITableViewRowAction(style: .Normal, title: "Выполнен", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+            print("completeAction", indexPath.row)
+            reservation.setComplete() {
+                // TODO: push message to User
+            }
+        })
+        completeAction.backgroundColor = UIColor.blueColor()
+
+        let declineAction = UITableViewRowAction(style: .Default, title: "Отменить", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+            print("declineAction", indexPath.row)
+            reservation.setDeclined()
+        })
+
+
+        if reservation.isDeclined() {
+            return []
+        }
+        if reservation.isAssigned() {
+            return [completeAction, reAssignAction, declineAction]
+        } else {
+            return [assignAction, declineAction]
+        }
+    }
+
+
+
 
     func getReservationsFor(section: Int) -> [Reservation] {
         if self.filterValue == 0 {
