@@ -16,6 +16,7 @@ class BookingHour {
     static var refHandle: FIRDatabaseHandle?
 
     static let minuteMultiplier: Int = 30
+    static let allBoxIndexes: [Int] = [1,2,3,4,5,6]
     static var today: [BookingHour] = []
 
     var index: Int

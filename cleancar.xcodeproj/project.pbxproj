@@ -18,6 +18,10 @@
 		523F3B571D67A50B00B75421 /* BookingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523F3B561D67A50B00B75421 /* BookingController.swift */; };
 		5252E8131D731457009A841F /* FirebaseDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5252E8121D731457009A841F /* FirebaseDataProtocol.swift */; };
 		5252E8151D7582E2009A841F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5252E8141D7582E2009A841F /* Utils.swift */; };
+		525A8A571D7ADBE9002C6F46 /* AssignWasherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8A561D7ADBE9002C6F46 /* AssignWasherTableViewController.swift */; };
+		525A8A591D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8A581D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift */; };
+		525A8A5C1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8A5B1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift */; };
+		525A8A5E1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8A5D1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift */; };
 		525C7C971D66C6D400DAE000 /* PricelistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C961D66C6D400DAE000 /* PricelistController.swift */; };
 		528947251D717441004B7090 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528947241D717441004B7090 /* LoginViewController.swift */; };
 		528947271D71760D004B7090 /* LoginCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528947261D71760D004B7090 /* LoginCheckViewController.swift */; };
@@ -31,7 +35,7 @@
 		B45905C41D6AC92600CFEFEF /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45905C31D6AC92600CFEFEF /* PopUpViewController.swift */; };
 		B45905C61D6C171B00CFEFEF /* OrdersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45905C51D6C171B00CFEFEF /* OrdersTableViewController.swift */; };
 		B45905CB1D7023D000CFEFEF /* UISegmentedControl_fontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45905CA1D7023D000CFEFEF /* UISegmentedControl_fontSize.swift */; };
-		B46AE7D61D7991EF00875C40 /* SelectPropertiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46AE7D51D7991EF00875C40 /* SelectPropertiesViewController.swift */; };
+		B46AE7D61D7991EF00875C40 /* AssignToReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46AE7D51D7991EF00875C40 /* AssignToReservationViewController.swift */; };
 		B4856D961D6889FC000EC687 /* UIView+borderColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4856D951D6889FC000EC687 /* UIView+borderColor.swift */; };
 		B4856D981D6896E0000EC687 /* OrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4856D971D6896E0000EC687 /* OrdersTableViewCell.swift */; };
 		B4EEA3261D6429EB0039D998 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA3251D6429EB0039D998 /* AppDelegate.swift */; };
@@ -63,6 +67,10 @@
 		523F3B561D67A50B00B75421 /* BookingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingController.swift; sourceTree = "<group>"; };
 		5252E8121D731457009A841F /* FirebaseDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDataProtocol.swift; sourceTree = "<group>"; };
 		5252E8141D7582E2009A841F /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		525A8A561D7ADBE9002C6F46 /* AssignWasherTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignWasherTableViewController.swift; sourceTree = "<group>"; };
+		525A8A581D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignWasherTableViewCell.swift; sourceTree = "<group>"; };
+		525A8A5B1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectRightBarButtonHelper.swift; sourceTree = "<group>"; };
+		525A8A5D1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignBoxIndexTableViewController.swift; sourceTree = "<group>"; };
 		525C7C961D66C6D400DAE000 /* PricelistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PricelistController.swift; sourceTree = "<group>"; };
 		525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingHoursCollectionViewCell.swift; sourceTree = "<group>"; };
 		528947241D717441004B7090 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -81,7 +89,7 @@
 		B45905C31D6AC92600CFEFEF /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		B45905C51D6C171B00CFEFEF /* OrdersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersTableViewController.swift; sourceTree = "<group>"; };
 		B45905CA1D7023D000CFEFEF /* UISegmentedControl_fontSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISegmentedControl_fontSize.swift; sourceTree = "<group>"; };
-		B46AE7D51D7991EF00875C40 /* SelectPropertiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPropertiesViewController.swift; sourceTree = "<group>"; };
+		B46AE7D51D7991EF00875C40 /* AssignToReservationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignToReservationViewController.swift; sourceTree = "<group>"; };
 		B4856D951D6889FC000EC687 /* UIView+borderColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+borderColor.swift"; sourceTree = "<group>"; };
 		B4856D971D6896E0000EC687 /* OrdersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersTableViewCell.swift; sourceTree = "<group>"; };
 		B4EEA3221D6429EA0039D998 /* cleancar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cleancar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,7 +163,6 @@
 				B4EEA3471D644B1F0039D998 /* HomeViewController.swift */,
 				525C7C961D66C6D400DAE000 /* PricelistController.swift */,
 				B45905C51D6C171B00CFEFEF /* OrdersTableViewController.swift */,
-				B46AE7D51D7991EF00875C40 /* SelectPropertiesViewController.swift */,
 			);
 			name = Tabs;
 			sourceTree = "<group>";
@@ -185,11 +192,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		525A8A5A1D7AE1DD002C6F46 /* AssignControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B46AE7D51D7991EF00875C40 /* AssignToReservationViewController.swift */,
+				525A8A561D7ADBE9002C6F46 /* AssignWasherTableViewController.swift */,
+				525A8A5D1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift */,
+			);
+			name = AssignControllers;
+			sourceTree = "<group>";
+		};
 		525C7C981D66C6DF00DAE000 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
 				523F3B4E1D66E93F00B75421 /* SignUp/SignIn */,
 				523F3B4F1D66E96600B75421 /* Tabs */,
+				525A8A5A1D7AE1DD002C6F46 /* AssignControllers */,
 				B43C90021D6859F800667B09 /* FeedbackViewController.swift */,
 				B45905C31D6AC92600CFEFEF /* PopUpViewController.swift */,
 				5209DE3E1D6C1EEA006E040E /* ServicesTableViewController.swift */,
@@ -204,6 +222,7 @@
 				525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */,
 				B4856D971D6896E0000EC687 /* OrdersTableViewCell.swift */,
 				B42F94E81D79F336008F178A /* DurationCollectionViewCell.swift */,
+				525A8A581D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -214,6 +233,7 @@
 				5292AC061D6EBD4C00E03760 /* Dimmable.swift */,
 				5252E8121D731457009A841F /* FirebaseDataProtocol.swift */,
 				5252E8141D7582E2009A841F /* Utils.swift */,
+				525A8A5B1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift */,
 			);
 			name = helpers;
 			sourceTree = "<group>";
@@ -470,13 +490,16 @@
 				523F3B521D66EA4300B75421 /* BookingHour.swift in Sources */,
 				528947291D72C9D7004B7090 /* Reservation.swift in Sources */,
 				528947271D71760D004B7090 /* LoginCheckViewController.swift in Sources */,
-				B46AE7D61D7991EF00875C40 /* SelectPropertiesViewController.swift in Sources */,
+				B46AE7D61D7991EF00875C40 /* AssignToReservationViewController.swift in Sources */,
+				525A8A591D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift in Sources */,
 				52284A8E1D75F5DD00A41427 /* BookingHoursCollectionViewCell.swift in Sources */,
 				5225B05C1D6B640E00BFBAE7 /* Services.swift in Sources */,
 				528947251D717441004B7090 /* LoginViewController.swift in Sources */,
+				525A8A5E1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift in Sources */,
 				5209DE3F1D6C1EEA006E040E /* ServicesTableViewController.swift in Sources */,
 				5289472D1D72CFA9004B7090 /* Washer.swift in Sources */,
 				5225B05A1D6B5CEB00BFBAE7 /* CarInfo.swift in Sources */,
+				525A8A571D7ADBE9002C6F46 /* AssignWasherTableViewController.swift in Sources */,
 				5289472B1D72CA0F004B7090 /* User.swift in Sources */,
 				5292AC071D6EBD4C00E03760 /* Dimmable.swift in Sources */,
 				B4856D961D6889FC000EC687 /* UIView+borderColor.swift in Sources */,
@@ -487,6 +510,7 @@
 				B45905C41D6AC92600CFEFEF /* PopUpViewController.swift in Sources */,
 				B4856D981D6896E0000EC687 /* OrdersTableViewCell.swift in Sources */,
 				B45905CB1D7023D000CFEFEF /* UISegmentedControl_fontSize.swift in Sources */,
+				525A8A5C1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift in Sources */,
 				B4EEA3481D644B1F0039D998 /* HomeViewController.swift in Sources */,
 				B43C90031D6859F800667B09 /* FeedbackViewController.swift in Sources */,
 				5252E8131D731457009A841F /* FirebaseDataProtocol.swift in Sources */,

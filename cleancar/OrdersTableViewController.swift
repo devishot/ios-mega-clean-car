@@ -20,8 +20,15 @@ class OrdersTableViewController: UITableViewController {
 
         self.updateFilterLabels()
     }
+    @IBAction func unwindAssignToReservation(unwindSegue: UIStoryboardSegue) {
+        setFromAssignToReservationViewController(unwindSegue)
+    }
 
+    
+    // identifiers
+    let segueAssignToReservationID = "assignToReservation"
 
+    
     // constants
     let filterNames = ["Все", "Отмененные"]
     let sections = [
@@ -48,6 +55,7 @@ class OrdersTableViewController: UITableViewController {
     }
 
     var filterValue: Int = 0
+    var selectedReservation: Reservation?
 
 
     override func viewDidLoad() {
@@ -74,6 +82,39 @@ class OrdersTableViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == segueAssignToReservationID {
+            let indexPath = sender as! NSIndexPath
+            self.setToAssignToReservationViewController(segue, indexPath: indexPath)
+        }
+    }
+
+
+    func setToAssignToReservationViewController(segue: UIStoryboardSegue, indexPath: NSIndexPath) {
+        let destController = segue.destinationViewController as! AssignToReservationViewController
+
+        let reservation = getReservationsFor(indexPath.section)[indexPath.row]
+        self.selectedReservation = reservation
+
+        destController.bookingHour = reservation.bookingHour
+        if reservation.isAssigned() {
+            destController.valueTimeToWash = reservation.boxIndex
+            destController.valueWasher = reservation.washer
+            destController.valueTimeToWash = reservation.timeToWash
+        }
+    }
+
+    func setFromAssignToReservationViewController(unwindSegue: UIStoryboardSegue) {
+        let sourceController = unwindSegue.sourceViewController as! AssignToReservationViewController
+
+        let reservation = self.selectedReservation!
+        reservation.setAssigned(
+            sourceController.valueBoxIndex!,
+            washer: sourceController.valueWasher!,
+            timeToWash: sourceController.valueTimeToWash!
+        ){}
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -106,20 +147,18 @@ class OrdersTableViewController: UITableViewController {
 
 
         let assignAction = UITableViewRowAction(style: .Normal, title: "Назначить", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
-            print("assignAction", indexPath.row)
-            
-            reservation.setAssigned(<#T##boxIndex: Int##Int#>, washer: <#T##Washer#>, timeToWash: <#T##Int#>) {
-                
-            }
+
+            self.performSegueWithIdentifier(self.segueAssignToReservationID, sender: indexPath)
         })
-        
+
         let reAssignAction = UITableViewRowAction(style: .Normal, title: "Переназначить", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
-            print("reAssignAction", indexPath.row)
+
+            self.performSegueWithIdentifier(self.segueAssignToReservationID, sender: indexPath)
         })
 
 
         let completeAction = UITableViewRowAction(style: .Normal, title: "Выполнен", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
-            print("completeAction", indexPath.row)
+
             reservation.setComplete() {
                 // TODO: push message to User
             }
@@ -127,8 +166,9 @@ class OrdersTableViewController: UITableViewController {
         completeAction.backgroundColor = UIColor.blueColor()
 
         let declineAction = UITableViewRowAction(style: .Default, title: "Отменить", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+
             print("declineAction", indexPath.row)
-            reservation.setDeclined()
+            //reservation.setDeclined()
         })
 
 
@@ -141,7 +181,6 @@ class OrdersTableViewController: UITableViewController {
             return [assignAction, declineAction]
         }
     }
-
 
 
 

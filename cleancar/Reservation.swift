@@ -159,7 +159,6 @@ class Reservation: FirebaseDataProtocol {
             )
     }
 
-    // move to .Assigned
     func setAssigned(boxIndex: Int, washer: Washer, timeToWash: Int,
                      completion: () -> (Void)) {
         let updateChildValues = NSMutableDictionary()

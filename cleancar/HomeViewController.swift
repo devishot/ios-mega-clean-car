@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
     @IBAction func clickedCancelReservation(sender: UIButton) {
         displayPromptView("Хотите отменить бронь?", self: self) { (value: Bool) -> Void in
             if value {
-                self.currentUser!.currentReservation!.decline()
+                self.currentUser!.currentReservation!.setDeclined(){}
             }
         }
     }
