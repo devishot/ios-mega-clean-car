@@ -14,6 +14,7 @@ class BookingController: UIViewController, Dimmable {
     // IBOutlets
 
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var transitionViewWithCar: UIView!
     @IBOutlet weak var transitionViewNoCar: UIView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -63,6 +64,16 @@ class BookingController: UIViewController, Dimmable {
     }
     var bookingHour: BookingHour?
     var servicesTableViewController: ServicesTableViewController?
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+//        let bottomInset = bottomLayoutGuide.length
+        let bottomInset = self.tabBarController!.tabBar.bounds.height
+        scrollView.contentInset.bottom = 3*bottomInset
+        scrollView.scrollIndicatorInsets.bottom = -bottomInset
+        
+    }
 
 
     override func viewDidLoad() {

@@ -21,9 +21,9 @@ class BookingHoursCollectionViewCell: UICollectionViewCell {
             self.statusLabel.text = bookingHour!.getStatus()
 
             if bookingHour!.isFree() {
-                self.statusLabel.textColor = UIColor.greenColor()
+                self.statusLabel.textColor = UIColor.ccGreen()
             } else {
-                self.statusLabel.textColor = UIColor.redColor()
+                self.statusLabel.textColor = UIColor.ccRed()
             }
         }
     }
@@ -39,9 +39,9 @@ class BookingHoursCollectionViewCell: UICollectionViewCell {
             self.layer.cornerRadius = 10
             self.layer.masksToBounds = true
             self.backgroundColor = UIColor.whiteColor()
-            self.layer.borderColor = UIColor.yellowColor().CGColor
+            self.layer.borderColor = UIColor.ccOrgange().CGColor
             self.layer.borderWidth = 2
-            
+
         } else {
             self.layer.cornerRadius = 10
             self.layer.masksToBounds = true
