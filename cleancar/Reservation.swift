@@ -115,6 +115,16 @@ class Reservation: FirebaseDataProtocol {
     }
 
 
+    func getFeedbackRateVisual() -> String {
+        let filled = (1...self.feedbackRate!).generate()
+                .map({ _ in "\u{2606}" })
+                .joinWithSeparator("")
+        let empty = (self.feedbackRate!+1...5).generate()
+                .map({ _ in "\u{2605}" })
+                .joinWithSeparator("")
+        return filled + empty
+    }
+
     // create in .NonAssigned
     static func create(carInfo: CarInfo, bookingHour: BookingHour,
                        services: Services,
