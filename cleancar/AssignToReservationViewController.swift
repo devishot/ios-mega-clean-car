@@ -16,8 +16,6 @@ class AssignToReservationViewController: UIViewController {
 
  
     //actions
-    @IBAction func sendButton(sender: UIButton) {
-    }
     @IBAction func unwindAssignWasher(unwindSegue: UIStoryboardSegue) {
         let sourceController = unwindSegue.sourceViewController as! AssignWasherTableViewController
         self.valueWasher = sourceController.assignedWasher
@@ -39,24 +37,30 @@ class AssignToReservationViewController: UIViewController {
     // constants
     let textSelectBoxIndex = "Выберите номер бокса"
     let textSelectWasher = "Выберите мойщика"
+    let cellDurationID = "durationCell"
 
     
     //variables
-    var selectedIndex: Int?
     var embeddedTableView: UITableView?
 
     var bookingHour: BookingHour?
     var valueBoxIndex: Int? {
         didSet {
             self.embeddedTableView?.reloadData()
+            self.updateSubmitButtonStyle()
         }
     }
     var valueWasher: Washer? {
         didSet {
             self.embeddedTableView?.reloadData()
+            self.updateSubmitButtonStyle()
         }
     }
-    var valueTimeToWash: Int?
+    var valueTimeToWash: Int? {
+        didSet {
+            self.updateSubmitButtonStyle()
+        }
+    }
 
 
     override func viewDidLoad() {
@@ -66,18 +70,25 @@ class AssignToReservationViewController: UIViewController {
         submitButton.layer.masksToBounds = true
         submitButton.layer.cornerRadius = 5
 
+        self.updateSubmitButtonStyle()
+
         // init
         self.durationCollectionView.delegate = self
         self.durationCollectionView.dataSource = self
-
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+        // init embedded tableview
         if segue.identifier == segueEmbeddedTableViewID {
             let destConroller = segue.destinationViewController as! UITableViewController
             self.embeddedTableView = destConroller.tableView
@@ -85,12 +96,17 @@ class AssignToReservationViewController: UIViewController {
             self.embeddedTableView!.dataSource = self
         }
 
+        // insert data to destControllers
         if segue.identifier == segueAssignWasherID {
             let destController = segue.destinationViewController as! AssignWasherTableViewController
 
-            let washers = Washer.all
+            var washers = Washer.all
                 .filter({ (id, washer) in self.bookingHour!.washers[id] == true })
                 .map({ $0.1 })
+
+            if self.valueWasher != nil {
+                washers.append(self.valueWasher!)
+            }
 
             destController.washers = washers
             destController.assignedWasher = self.valueWasher
@@ -99,19 +115,36 @@ class AssignToReservationViewController: UIViewController {
         if segue.identifier == segueAssignBoxIndexID {
             let destController = segue.destinationViewController as! AssignBoxIndexTableViewController
 
-            let boxIndexes = self.bookingHour!.boxes
+            var boxIndexes = self.bookingHour!.boxes
                 .filter({ $0.boolValue })
                 .map({ $0.hashValue })
+
+            if self.valueBoxIndex != nil {
+                boxIndexes.append(self.valueBoxIndex!)
+            }
 
             destController.boxIndexes = boxIndexes
             destController.assignedBoxIndex = self.valueBoxIndex
         }
+    }
 
+    func updateSubmitButtonStyle() {
+        if !self.isViewLoaded() {
+            return
+        }
+        var isActive = false
+        if  let _ = self.valueWasher,
+            let _ = self.valueBoxIndex,
+            let _ = self.valueTimeToWash {
+            isActive = true
+        }
+        self.submitButton.enabled = isActive
     }
 
 }
 
 
+// set labels for embedded tableview's cells
 extension AssignToReservationViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -138,6 +171,7 @@ extension AssignToReservationViewController: UITableViewDataSource {
     }
 }
 
+// redirect on click tableview's cells
 extension AssignToReservationViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -148,6 +182,7 @@ extension AssignToReservationViewController: UITableViewDelegate {
 }
 
 
+// configure duration cells
 extension AssignToReservationViewController: UICollectionViewDataSource {
 
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -161,8 +196,8 @@ extension AssignToReservationViewController: UICollectionViewDataSource {
 
     func collectionView(collectionView: UICollectionView,
                         cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("durationCell", forIndexPath: indexPath) as! DurationCollectionViewCell
-        let isSelected = self.selectedIndex == indexPath.row
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellDurationID, forIndexPath: indexPath) as! DurationCollectionViewCell
+        let isSelected = self.valueTimeToWash == indexPath.row
 
         cell.configure(indexPath.row, isSelected: isSelected)
 
@@ -170,18 +205,18 @@ extension AssignToReservationViewController: UICollectionViewDataSource {
     }
 }
 
-
+// update duration cells on select
 extension AssignToReservationViewController: UICollectionViewDelegate {
 
     func collectionView(collectionView: UICollectionView,
                         didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
-        self.selectedIndex = indexPath.row
+        self.valueTimeToWash = indexPath.row
         self.durationCollectionView.reloadData()
     }
 
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        self.selectedIndex = nil
+        self.valueTimeToWash = nil
         self.durationCollectionView.reloadData()
     }
 }

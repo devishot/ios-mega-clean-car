@@ -5611,14 +5611,12 @@
                                                 <exclude reference="BVo-RK-He6"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="25" y="54" width="350" height="50"/>
+                                        <variation key="widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="BVo-RK-He6"/>
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <action selector="sendButton:" destination="DHn-Qw-42f" eventType="touchUpInside" id="XEc-n1-t5N"/>
                                             <segue destination="6tS-hU-4Hj" kind="unwind" identifier="" unwindAction="unwindAssignToReservation:" id="iQO-de-gEh"/>
                                         </connections>
                                     </button>
@@ -5643,8 +5641,7 @@
                                         <exclude reference="p6K-D3-gqr"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="442" width="400" height="158"/>
+                                <variation key="widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="twV-kO-4vZ"/>
                                     </mask>

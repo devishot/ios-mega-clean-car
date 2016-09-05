@@ -46,12 +46,12 @@ class OrdersTableViewCell: UITableViewCell {
 
         let isAssigned = value.status.rawValue > ReservationStatus.NonAssigned.rawValue
 
-        [numberOfBoxLabel, cleanserNameLabel]
-            .forEach({ $0.hidden = !isAssigned })
-
         if isAssigned {
-            boxLabel.text = String(value.boxIndex!)
+            numberOfBoxLabel.text = "#\(value.boxIndex!)"
             cleanserNameLabel.text = value.washer!.name
+        } else {
+            numberOfBoxLabel.text = "?"
+            cleanserNameLabel.text = "?"
         }
         timeLabel.text = value.bookingHour.getHour()
         overallPriceLabel.text = formatMoney(value.services.getCostForTotal())

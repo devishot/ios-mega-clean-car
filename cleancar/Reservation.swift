@@ -45,9 +45,9 @@ class Reservation: FirebaseDataProtocol {
         self.status = .NonAssigned
     }
 
-    init(data: AnyObject) {
+    init(id: String, data: AnyObject) {
         let parsed = JSON(data)
-        self.id = parsed["id"].stringValue
+        self.id = id
         self.user = User(
             uid: parsed["user", "id"].stringValue,
             data: parsed["user"].object
@@ -103,7 +103,9 @@ class Reservation: FirebaseDataProtocol {
                        completion: ()->(Void) ) -> Reservation {
         let user = User.getUser()!,
             ref = getFirebaseRef(),
-            id = ref.child(Reservation.childRefName).childByAutoId().key
+            id = ref
+                .child(Reservation.childRefName + "/\(ReservationStatus.NonAssigned.rawValue)")
+                .childByAutoId().key
 
         var updUser = user.update(carInfo)
         let reservation = Reservation(id: id, user: updUser, bookingHour: bookingHour, services: services)
@@ -163,7 +165,15 @@ class Reservation: FirebaseDataProtocol {
                      completion: () -> (Void)) {
         let updateChildValues = NSMutableDictionary()
         if !self.isAssigned() {
-            updateChildValues.setObject(NSNull(), forKey: "\(Reservation.childRefName)/\(self.status.rawValue)/\(self.id)")
+            updateChildValues
+                .setObject(NSNull(), forKey: "\(Reservation.childRefName)/\(self.status.rawValue)/\(self.id)")
+            let prefixB = "\(BookingHour.childRefName)/\(self.bookingHour.index)"
+            updateChildValues
+                .setObject(NSNull(), forKey: prefixB+"/non_assigned/\(self.id)")
+            updateChildValues
+                .setObject(false, forKey: prefixB+"/boxes/\(boxIndex)")
+            updateChildValues
+                .setObject(false, forKey: prefixB+"/washers/\(washer.id)")
         }
 
         self.boxIndex = boxIndex
@@ -197,8 +207,7 @@ class Reservation: FirebaseDataProtocol {
     static func subscribeTo(filterByStatus: ReservationStatus,
                      completion: (reservations: [Reservation])->Void) {
         let ref = getFirebaseRef()
-            .child(Reservation.childRefName)
-            .child(String(filterByStatus.rawValue))
+            .child(Reservation.childRefName + "/\(filterByStatus.rawValue)")
             .observeEventType(.Value) { (snapshot: FIRDataSnapshot) -> Void in
 
                 if snapshot.value is NSNull {
@@ -207,7 +216,7 @@ class Reservation: FirebaseDataProtocol {
                 }
 
                 let data = JSON(snapshot.value!),
-                    reservations = data.dictionaryObject!.map({ Reservation(data: $0.1) })
+                    reservations = data.dictionaryObject!.map({ Reservation(id: $0.0, data: $0.1) })
 
                 completion(reservations: reservations)
             }

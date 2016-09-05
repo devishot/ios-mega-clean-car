@@ -19,17 +19,17 @@ class AssignBoxIndexTableViewController: SelectRightBarButtonHelper {
     var assignedBoxIndex: Int? {
         didSet {
             if assignedBoxIndex != nil {
-                let at: Int = self.boxIndexes
+                let itemAt: Int = self.boxIndexes
                     .enumerate()
                     .filter({ $0.element == assignedBoxIndex })
                     .first!.index
-                self.assignedBoxIndexInTable =  NSIndexPath(forItem: at, inSection: 0)
+                self.assignedBoxIndexInTable =  NSIndexPath(forItem: itemAt, inSection: 0)
             }
         }
     }
     var assignedBoxIndexInTable: NSIndexPath?
 
-    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         

@@ -181,7 +181,7 @@ class Services {
 
         return cost
     }
-    
+
     func getDescription() -> String {
         let sep = " / "
 
@@ -191,7 +191,9 @@ class Services {
                 .joinWithSeparator(sep)
         let mats = self.cleanMatsCount > 0 ? "\(CleanMatsName) (\(self.cleanMatsCount)шт.)" : ""
 
-        return [desc, additionals, mats].joinWithSeparator(sep)
+        return [desc, additionals, mats]
+            .filter({ $0.characters.count > 0 })
+            .joinWithSeparator(sep)
     }
 }
 

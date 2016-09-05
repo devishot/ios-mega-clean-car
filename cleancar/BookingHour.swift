@@ -31,7 +31,13 @@ class BookingHour {
         self.index = index
         self.boxes = parsed["boxes"].arrayValue.map {$0.boolValue}
         self.washers = toStringBool(parsed["washers"].dictionaryValue)
-        self.nonAssignedReservationIds = parsed["non_assigned"].arrayValue.map({$0.stringValue})
+
+        self.nonAssignedReservationIds = []
+        if let non_assigned = parsed["non_assigned"].dictionary {
+            self.nonAssignedReservationIds = non_assigned
+                .filter({ $0.1.boolValue })
+                .map({ $0.0 })
+        }
     }
 
     init(index: Int, boxes: [Bool], washers: [String:Bool]) {
