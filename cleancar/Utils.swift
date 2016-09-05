@@ -9,6 +9,39 @@
 import Foundation
 import Firebase
 import SwiftyJSON
+import UIKit
+
+
+// Color palette
+extension UIColor {
+    class func ccRedTabActive() -> UIColor {
+        return UIColor(colorLiteralRed: 255.0 / 255.0, green: 0.0, blue: 56.0 / 255.0, alpha: 1.0)
+    }
+
+    class func ccRedBackground() -> UIColor {
+        return UIColor(colorLiteralRed: 190.0 / 255.0, green: 30.0 / 255.0, blue: 45.0 / 255.0, alpha: 1.0)
+    }
+    
+    class func ccOrgange() -> UIColor {
+        return UIColor(colorLiteralRed: 251.0 / 255.0, green: 176.0 / 255.0, blue: 64.0 / 255.0, alpha: 1.0)
+    }
+
+    class func ccRed() -> UIColor {
+        return UIColor(colorLiteralRed: 237.0 / 255.0, green: 28.0 / 255.0, blue: 36.0 / 255.0, alpha: 1.0)
+    }
+    
+    class func ccGreen() -> UIColor {
+        return UIColor(colorLiteralRed: 0.0, green: 148.0 / 255.0, blue: 68.0 / 255.0, alpha: 1.0)
+    }
+}
+
+// Sample text styles
+extension UIFont {
+    class func clnHeaderFont() -> UIFont {
+        return UIFont.systemFontOfSize(12.0, weight: UIFontWeightRegular)
+    }
+}
+
 
 
 func getFirebaseRef() -> FIRDatabaseReference {
