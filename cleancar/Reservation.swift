@@ -31,9 +31,13 @@ class Reservation: FirebaseDataProtocol {
     let timestamp: NSDate
     var status: ReservationStatus
 
+    // when Assigned
     var boxIndex: Int?
     var washer: Washer?
     var timeToWash: Int?
+    // when FeedbackReceived
+    var feedbackRate: Int?
+    var feedbackMessage: String?
 
 
     init(id: String, user: User, bookingHour: BookingHour, services: Services) {
@@ -96,6 +100,20 @@ class Reservation: FirebaseDataProtocol {
     func isDeclined() -> Bool {
         return self.status.rawValue == ReservationStatus.Declined.rawValue
     }
+
+    func isCompleted() -> Bool {
+        return self.status.rawValue == ReservationStatus.Completed.rawValue
+    }
+    
+    
+    func getRefPrefix() -> String {
+        return self.getRefPrefix(self.status)
+    }
+
+    func getRefPrefix(status: ReservationStatus) -> String {
+        return "\(Reservation.childRefName)/\(status.rawValue)/\(self.id)"
+    }
+
 
     // create in .NonAssigned
     static func create(carInfo: CarInfo, bookingHour: BookingHour,
@@ -190,13 +208,37 @@ class Reservation: FirebaseDataProtocol {
             )
     }
 
-    func setComplete(completion: () -> (Void)) {
+    func setCompleted(completion: () -> (Void)) {
+        // move Reservation 
+        // update {current_reservation} at User
+        // update Statistic
         let prevStatus = self.status
-        self.status = ReservationStatus.Completed
+        self.status = .Completed
 
         let updateChildValues: [NSObject: AnyObject] = [
-            "\(Reservation.childRefName)/\(prevStatus.rawValue)/\(self.id)": NSNull(),
-            "\(Reservation.childRefName)/\(self.status.rawValue)/\(self.id)": self.toDict()
+            self.getRefPrefix(prevStatus): NSNull(),
+            self.getRefPrefix(): self.toDict(),
+            "\(self.user.getRefPrefix())/current_reservation": self.toDict()
+        ]
+        getFirebaseRef()
+            .updateChildValues(updateChildValues,
+                               withCompletionBlock: {_,_ in completion() })
+    }
+
+    func setFeedbackReceived(rate: Int, message: String, completion: () -> (Void)) {
+        // move Reservation
+        // remove {current_reservation} at User
+        // update Statistic
+
+        let prevStatus = self.status
+        self.status = .FeedbackReceived
+        self.feedbackRate = rate
+        self.feedbackMessage = message
+
+        let updateChildValues: [NSObject: AnyObject] = [
+            self.getRefPrefix(prevStatus): NSNull(),
+            self.getRefPrefix(): self.toDict(),
+            "\(self.user.getRefPrefix())/current_reservation": NSNull()
         ]
         getFirebaseRef()
             .updateChildValues(updateChildValues,

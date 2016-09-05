@@ -132,7 +132,7 @@ class OrdersTableViewController: UITableViewController {
 
         let completeAction = UITableViewRowAction(style: .Normal, title: "\u{2605}\n Выполнен", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
-            reservation.setComplete() {
+            reservation.setCompleted() {
                 // TODO: push message to User
             }
         })

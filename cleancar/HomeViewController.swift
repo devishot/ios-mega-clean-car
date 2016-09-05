@@ -30,11 +30,25 @@ class HomeViewController: UIViewController {
             }
         }
     }
+    @IBAction func clickedRateReservation(sender: UIButton) {
+        performSegueWithIdentifier(segueRateID, sender: self)
+    }
 
+    @IBAction func unwindRate(unwindSegue: UIStoryboardSegue) {
+        let sourceController = unwindSegue.sourceViewController as! FeedbackViewController
+        let rate = sourceController.getRate(),
+            message = sourceController.getMessage()
 
+        let reservation = self.currentUser!.currentReservation!
+        reservation.setFeedbackReceived(rate, message: message) {}
+    }
+
+    
     // IBOutlets
     @IBOutlet weak var roundedBorderView: UIView!
     @IBOutlet weak var noReservationView: UIView!
+    @IBOutlet weak var viewReservationRate: UIView!
+    @IBOutlet weak var viewReservationCancel: UIView!
     @IBOutlet weak var timeOfOrderLabel: UILabel!
     @IBOutlet weak var nameOfCarLabel: UILabel!
     @IBOutlet weak var numberOfCarLabel: UILabel!
@@ -46,6 +60,7 @@ class HomeViewController: UIViewController {
     // Identifiers
     var bookingHourCellID = "bookingHourCell"
     var bookingSegueID = "bookingSegue"
+    var segueRateID = "rate"
 
 
     // variables
@@ -133,8 +148,6 @@ class HomeViewController: UIViewController {
 
     func updateCurrentReservationView() {
         let user = self.currentUser!
-        var fromView = roundedBorderView,
-            toView = noReservationView
 
         if  let reservation: Reservation = user.currentReservation,
             let carInfo: CarInfo = reservation.user.carInfo {
@@ -142,12 +155,25 @@ class HomeViewController: UIViewController {
             self.timeOfOrderLabel.text = reservation.bookingHour.getHour()
             self.nameOfCarLabel.text = carInfo.model!
             self.numberOfCarLabel.text = carInfo.identifierNumber!
-            
-            fromView = noReservationView
-            toView = roundedBorderView
-        }
 
-        UIView.transitionFromView(fromView, toView: toView, duration: 0.2, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+            if reservation.isCompleted() {
+                UIView.transitionFromView(
+                    viewReservationCancel,
+                    toView: viewReservationRate,
+                    duration: 0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+            } else {
+                if reservation.isCompleted() {
+                    UIView.transitionFromView(
+                        viewReservationRate,
+                        toView: viewReservationCancel,
+                        duration: 0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+                }
+            }
+
+            UIView.transitionFromView(noReservationView, toView: roundedBorderView, duration: 0.2, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+        } else {
+            UIView.transitionFromView(roundedBorderView, toView: noReservationView, duration: 0.2, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+        }
     }
 
     func displayMenuView() {

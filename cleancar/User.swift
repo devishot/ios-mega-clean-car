@@ -87,6 +87,10 @@ class User: FirebaseDataProtocol {
         return data
     }
     
+    func getRefPrefix() -> String {
+        return "\(User.childRefName)/\(self.id)"
+    }
+
 
 
     func update(newReservation: Reservation) -> User {

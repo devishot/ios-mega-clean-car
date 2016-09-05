@@ -191,9 +191,13 @@ class Services {
                 .joinWithSeparator(sep)
         let mats = self.cleanMatsCount > 0 ? "\(CleanMatsName) (\(self.cleanMatsCount)шт.)" : ""
 
-        return [desc, additionals, mats]
+        let ret = [desc, additionals, mats]
             .filter({ $0.characters.count > 0 })
             .joinWithSeparator(sep)
+
+        print([desc, additionals, mats], ret)
+
+        return ret
     }
 }
 
