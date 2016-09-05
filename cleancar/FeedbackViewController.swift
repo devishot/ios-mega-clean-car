@@ -40,6 +40,11 @@ class FeedbackViewController: UIViewController {
         self.navigationController!.navigationBar.tintColor = UIColor.orangeColor();
         self.navigationController!.navigationBar.backgroundColor = UIColor.whiteColor();
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orangeColor()]
+        
+        
+        // init
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        self.view.addGestureRecognizer(tap)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -61,6 +66,12 @@ class FeedbackViewController: UIViewController {
 
     func getMessage() -> String {
         return feedbackTextView.text
+    }
+
+
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        self.view.endEditing(true)
     }
 }
 
