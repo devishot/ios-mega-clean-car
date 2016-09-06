@@ -801,13 +801,13 @@
         <scene sceneID="GQz-Ii-93E">
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="qex-dj-Kcb" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="4me-o9-xqY">
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="4me-o9-xqY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="1" green="0.0" blue="0.21960784494876862" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
-                        <color key="barTintColor" white="0.77419777684563762" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="selectedImageTintColor" red="1" green="0.0" blue="0.21960784494876862" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                        <color key="barTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="selectedImageTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="keyPath">
                                 <color key="value" red="0.7450980544090271" green="0.11764705926179886" blue="0.17647059261798859" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
@@ -841,6 +841,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suv-B3-k1P" userLabel="Menu">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" image="burger-menu">
                                             <color key="titleColor" red="0.92941176891326904" green="0.10980392247438431" blue="0.14117647707462311" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
                                         </state>
@@ -898,6 +899,8 @@
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="rPk-L4-KLQ"/>
+                                        <exclude reference="62R-KL-kkf"/>
+                                        <exclude reference="zRs-M7-zQA"/>
                                         <exclude reference="PPx-vZ-kYw"/>
                                         <exclude reference="RO1-s8-zt5"/>
                                         <exclude reference="gmX-au-iQd"/>
@@ -905,8 +908,6 @@
                                         <exclude reference="Hnf-sg-ldb"/>
                                         <exclude reference="PAg-Pp-Du0"/>
                                         <exclude reference="miE-2P-iuH"/>
-                                        <exclude reference="62R-KL-kkf"/>
-                                        <exclude reference="zRs-M7-zQA"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -917,6 +918,8 @@
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="rPk-L4-KLQ"/>
+                                        <include reference="62R-KL-kkf"/>
+                                        <include reference="zRs-M7-zQA"/>
                                         <include reference="PPx-vZ-kYw"/>
                                         <include reference="RO1-s8-zt5"/>
                                         <include reference="gmX-au-iQd"/>
@@ -924,8 +927,6 @@
                                         <include reference="Hnf-sg-ldb"/>
                                         <include reference="PAg-Pp-Du0"/>
                                         <include reference="miE-2P-iuH"/>
-                                        <include reference="62R-KL-kkf"/>
-                                        <include reference="zRs-M7-zQA"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -4365,7 +4366,7 @@
                         <viewControllerLayoutGuide type="bottom" id="cQS-Ba-lbb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mMn-ke-XCp">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="71x-6t-Rcp">
@@ -4461,7 +4462,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Услуги" image="pricelist-icon" id="o0k-aJ-kyM"/>
+                    <tabBarItem key="tabBarItem" title="Услуги" image="pricelist-icon" selectedImage="active-pricelist-icon" id="o0k-aJ-kyM"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="containerView" destination="71x-6t-Rcp" id="cNA-Rn-Egm"/>
@@ -4496,7 +4497,7 @@
         <scene sceneID="sNB-JD-tJD">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="i7r-FA-csY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Главная" image="services-icon" id="imN-NW-aRJ"/>
+                    <tabBarItem key="tabBarItem" title="Главная" image="services-icon" selectedImage="active-services-icon" id="imN-NW-aRJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jtN-4h-4qz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -5631,7 +5632,7 @@
         <scene sceneID="C6P-Ks-MQJ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="K5z-nC-lo6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Заказы" image="order-icon" selectedImage="order-icon" id="2lg-U8-iOn"/>
+                    <tabBarItem key="tabBarItem" title="Заказы" image="order-icon" selectedImage="activ-order-icon" id="2lg-U8-iOn"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HNa-4N-4NK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -6151,13 +6152,16 @@
         </scene>
     </scenes>
     <resources>
+        <image name="activ-order-icon" width="66" height="52"/>
+        <image name="active-pricelist-icon" width="75" height="67"/>
+        <image name="active-services-icon" width="62" height="62"/>
         <image name="burger-menu" width="70" height="62"/>
         <image name="code" width="229" height="92"/>
         <image name="fb_logo" width="17" height="18"/>
         <image name="label-cc" width="272" height="38"/>
-        <image name="order-icon" width="68" height="52"/>
-        <image name="pricelist-icon" width="64" height="62"/>
-        <image name="services-icon" width="98" height="88"/>
+        <image name="order-icon" width="66" height="52"/>
+        <image name="pricelist-icon" width="62" height="62"/>
+        <image name="services-icon" width="75" height="67"/>
         <image name="сс_logo" width="564" height="564"/>
     </resources>
     <inferredMetricsTieBreakers>

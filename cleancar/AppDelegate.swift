@@ -27,7 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application,didFinishLaunchingWithOptions:launchOptions)
         
         //tab bar item color
-        UITabBar.appearance().tintColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 56/255.0, alpha: 1.0)
+         UITabBar.appearance().tintColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 56/255.0, alpha: 1.0)
+        
+        let color:UIColor =  UIColor.whiteColor()
+        let tappedColor:UIColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 56/255.0, alpha: 1.0)
+       
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: color], forState: .Normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: tappedColor], forState: .Selected)
+       
 
         return true
     }
