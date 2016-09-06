@@ -16,7 +16,8 @@ class BookingHour {
     static var refHandle: FIRDatabaseHandle?
 
     static let minuteMultiplier: Int = 30
-    static let allBoxIndexes: [Int] = [1,2,3,4,5,6]
+    static let boxesCount: Int = 6
+
     static var today: [BookingHour] = []
 
     var index: Int
@@ -56,7 +57,11 @@ class BookingHour {
         return data
     }
 
-    
+
+    func getRefPrefix() -> String {
+        return "\(BookingHour.getTodayChildRef())/\(self.index)"
+    }
+
     func getHour() -> String {
         let addingMinutes = index * BookingHour.minuteMultiplier
         // 09:00
@@ -65,14 +70,9 @@ class BookingHour {
         // 09:00 + 150 minute = 11:30
         let hour = startHour + (startMinute + addingMinutes) / 60
         let minute = (startMinute + addingMinutes) % 60
-        
+
         func f(x: Int) -> String {
-            if x < 10 {
-                return "0\(x)"
-            }
-            else {
-                return "\(x)"
-            }
+            return (x < 10) ?  "0\(x)" : "\(x)"
         }
         return "\(f(hour)):\(f(minute))"
     }
@@ -174,16 +174,51 @@ class BookingHour {
     }
 
 
+    class func initToday(completion: () -> (Void)) {
+        let startHour = 9,
+        endHour = 21,
+        bookingHoursCount = (endHour - startHour) * 60 / BookingHour.minuteMultiplier
+        
+        let boxes = (0..<BookingHour.boxesCount).map({_ in true })
+        let washers = NSMutableDictionary()
+        Washer.all.forEach() { (id, washer) in washers.setObject(true, forKey: id) }
+
+        let initData = (0..<bookingHoursCount).generate()
+            .map({index in ["boxes": boxes, "washers": washers] })
+
+        getFirebaseRef()
+            .child(BookingHour.getTodayChildRef())
+            .setValue(initData, withCompletionBlock: {_ in completion()})
+    }
+
+    class func getTodayChildRef() -> String {
+        let todaystampt = formatAsString(NSDate(), onlyDate: true)
+        return "\(BookingHour.childRefName)/\(todaystampt)"
+    }
+
+
     // firebase
     class func subscribeToToday(callback: () -> (Void) ) {
         BookingHour.refHandle = getFirebaseRef()
-            .child(BookingHour.childRefName)
+            .child(BookingHour.getTodayChildRef())
             .observeEventType(FIRDataEventType.Value) {(snapshot: FIRDataSnapshot) -> Void in
 
-                let values = snapshot.value as! [AnyObject]
+                if snapshot.value is NSNull {
+                    BookingHour.initToday() {
+                        BookingHour.subscribeToToday(callback)
+                    }
+                    return
+                }
+
+                let values = snapshot.value as! [AnyObject],
+                    startHour = 9
+                var offsetBookingHourIndexes: Int = (getCurrentHour() - startHour + 1) * 60 / BookingHour.minuteMultiplier - (60 - getCurrentMinute()) / BookingHour.minuteMultiplier
+                offsetBookingHourIndexes = min(0, offsetBookingHourIndexes)
+
                 BookingHour.today = values
                     .enumerate()
                     .map({ BookingHour(index: $0.index, data: $0.element) })
+                    .filter({ $0.index >= offsetBookingHourIndexes })
                 callback()
             }
     }
@@ -193,6 +228,7 @@ class BookingHour {
             getFirebaseRef().removeObserverWithHandle(ref)
         }
     }
+
 }
 
 

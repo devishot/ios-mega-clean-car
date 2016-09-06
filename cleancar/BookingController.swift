@@ -31,7 +31,6 @@ class BookingController: UIViewController, Dimmable {
         let bookingHour = self.bookingHour!,
             carInfo = self.carInfo,
             services = self.servicesTableViewController!.selectedServices
-        //print(".sendButton", bookingHour, carInfo, services)
         Reservation.create(carInfo, bookingHour: bookingHour, services: services) {
             self.navigationController?.popToRootViewControllerAnimated(true)
         }
@@ -64,20 +63,12 @@ class BookingController: UIViewController, Dimmable {
     }
     var bookingHour: BookingHour?
     var servicesTableViewController: ServicesTableViewController?
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-//        let bottomInset = bottomLayoutGuide.length
-        let bottomInset = self.tabBarController!.tabBar.bounds.height
-        scrollView.contentInset.bottom = 3*bottomInset
-        scrollView.scrollIndicatorInsets.bottom = -bottomInset
-        
-    }
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // init styles
         roundedSendButton.layer.cornerRadius = 5
         roundedSendButton.layer.masksToBounds = true
 
@@ -94,13 +85,18 @@ class BookingController: UIViewController, Dimmable {
         self.navigationController!.navigationBar.backgroundColor = UIColor.whiteColor();
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orangeColor()]
 
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
 
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.tabBarController?.tabBar.hidden = true
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        if let bottomInset = self.tabBarController?.tabBar.bounds.height {
+            scrollView.contentInset.bottom = 2*bottomInset
+            scrollView.scrollIndicatorInsets.bottom = -bottomInset
+        }
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

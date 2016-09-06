@@ -104,18 +104,17 @@ class HomeViewController: UIViewController {
         chooseTimeCollectionView.dataSource = self
         chooseTimeCollectionView.delegate = self
 
-        self.makeReservationButton.enabled = true
-
 
         // 3. Fetch data
-        Washer.fetchData(){}
-        BookingHour.subscribeToToday({ () -> (Void) in
-            self.bookingHours = BookingHour.today
-            self.chooseTimeCollectionView.reloadData()
-        })
-        User.subscribeToCurrent({ () -> (Void) in
-            self.currentUser = User.current
-        })
+        Washer.fetchData() {
+            BookingHour.subscribeToToday({ () -> (Void) in
+                self.bookingHours = BookingHour.today
+                self.chooseTimeCollectionView.reloadData()
+            })
+            User.subscribeToCurrent({ () -> (Void) in
+                self.currentUser = User.current
+            })
+        }
     }
 
     override func viewWillAppear(animated: Bool) {

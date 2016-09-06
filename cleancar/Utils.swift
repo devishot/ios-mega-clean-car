@@ -63,20 +63,44 @@ func parseTimestamp(timestamp: Int) -> NSDate {
 }
 
 func formatAsString(date: NSDate) -> String {
-    return getDateFormatter().stringFromDate(date)
+    return getDateTimeFormatter().stringFromDate(date)
+}
+
+func formatAsString(date: NSDate, onlyDate: Bool) -> String {
+    return (onlyDate ? getDateFormatter() : getDateTimeFormatter() ).stringFromDate(date)
+}
+
+func getCurrentHour() -> Int {
+    let now = NSDate()
+    let calendar = NSCalendar.currentCalendar()
+    let comp = calendar.components(.Hour, fromDate: now)
+    return comp.hour
+}
+
+func getCurrentMinute() -> Int {
+    let now = NSDate()
+    let calendar = NSCalendar.currentCalendar()
+    let comp = calendar.components(.Minute, fromDate: now)
+    return comp.minute
 }
 
 func parseTime(date: String) -> NSDate {
-    return getDateFormatter().dateFromString(date)!
+    return getDateTimeFormatter().dateFromString(date)!
+}
+
+func getDateTimeFormatter() -> NSDateFormatter {
+    let formatter = NSDateFormatter()
+    formatter.locale = NSLocale.currentLocale()
+    formatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+    return formatter
 }
 
 func getDateFormatter() -> NSDateFormatter {
     let formatter = NSDateFormatter()
     formatter.locale = NSLocale.currentLocale()
-    formatter.dateFormat = "dd-mm-yyyy HH:mm:ss"
+    formatter.dateFormat = "dd-MM-yyyy"
     return formatter
 }
-
 
 private var kAssociationKeyNextField: UInt8 = 0
 

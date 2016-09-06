@@ -104,8 +104,8 @@ class Reservation: FirebaseDataProtocol {
     func isCompleted() -> Bool {
         return self.status.rawValue == ReservationStatus.Completed.rawValue
     }
-    
-    
+
+
     func getRefPrefix() -> String {
         return self.getRefPrefix(self.status)
     }
@@ -132,7 +132,7 @@ class Reservation: FirebaseDataProtocol {
         let user = User.getUser()!,
             ref = getFirebaseRef(),
             id = ref
-                .child(Reservation.childRefName + "/\(ReservationStatus.NonAssigned.rawValue)")
+                .child(Reservation.childRefName + String(ReservationStatus.NonAssigned.rawValue))
                 .childByAutoId().key
 
         var updUser = user.update(carInfo)
@@ -141,9 +141,9 @@ class Reservation: FirebaseDataProtocol {
 
         // collect requests
         let childUpdates: NSMutableDictionary = [
-            "/\(Reservation.childRefName)/\(reservation.status.rawValue)/\(id)": reservation.toDict(),
-            "/\(User.childRefName)/\(updUser.id)": updUser.toDictFull(),
-            "/\(BookingHour.childRefName)/\(bookingHour.index)/non_assigned/\(id)": true
+            reservation.getRefPrefix(): reservation.toDict(),
+            updUser.getRefPrefix(): updUser.toDictFull(),
+            "/\(bookingHour.getRefPrefix())/non_assigned/\(id)": true
         ]
 
         // push requests
@@ -162,24 +162,22 @@ class Reservation: FirebaseDataProtocol {
         // 2. remove {current_reservation} at User
         // 3a. remove from {non_assigned} at BookingHour
         // 3b. set free {boxes} and {washers} at BookingHour
-        let prefixB = "\(BookingHour.childRefName)/\(self.bookingHour.index)"
+        let prefixB = self.bookingHour.getRefPrefix()
 
-        
         let updateChildValues: NSMutableDictionary = [
-            "\(Reservation.childRefName)/\(self.status.rawValue)/\(self.id)": NSNull(),
-            "\(Reservation.childRefName)/\(ReservationStatus.Declined)/\(self.id)": self.toDict(),
-
-            "\(User.childRefName)/\(self.user.id)/current_reservation": NSNull()
+            self.getRefPrefix(): NSNull(),
+            self.getRefPrefix(.Declined): self.toDict(),
+            "\(self.user.getRefPrefix())/current_reservation": NSNull()
         ]
 
         if self.isAssigned() {
-            updateChildValues.setObject(true,
-                                        forKey: prefixB+"/boxes/\(self.boxIndex!)")
-            updateChildValues.setObject(true,
-                                        forKey: prefixB+"/washers/\(self.washer!.id)")
+            updateChildValues
+                .setObject(true, forKey: prefixB+"/boxes/\(self.boxIndex!)")
+            updateChildValues
+                .setObject(true, forKey: prefixB+"/washers/\(self.washer!.id)")
         } else {
-            updateChildValues.setObject(NSNull(),
-                                        forKey: prefixB+"/non_assigned/\(self.id)")
+            updateChildValues
+                .setObject(NSNull(), forKey: prefixB+"/non_assigned/\(self.id)")
         }
 
         getFirebaseRef()
@@ -192,10 +190,17 @@ class Reservation: FirebaseDataProtocol {
     func setAssigned(boxIndex: Int, washer: Washer, timeToWash: Int,
                      completion: () -> (Void)) {
         let updateChildValues = NSMutableDictionary()
+
+        self.boxIndex = boxIndex
+        self.washer = washer
+        self.timeToWash = timeToWash
+        self.status = ReservationStatus.Assigned
+
         if !self.isAssigned() {
             updateChildValues
-                .setObject(NSNull(), forKey: "\(Reservation.childRefName)/\(self.status.rawValue)/\(self.id)")
-            let prefixB = "\(BookingHour.childRefName)/\(self.bookingHour.index)"
+                .setObject(NSNull(), forKey: self.getRefPrefix())
+
+            let prefixB = self.bookingHour.getRefPrefix()
             updateChildValues
                 .setObject(NSNull(), forKey: prefixB+"/non_assigned/\(self.id)")
             updateChildValues
@@ -203,13 +208,7 @@ class Reservation: FirebaseDataProtocol {
             updateChildValues
                 .setObject(false, forKey: prefixB+"/washers/\(washer.id)")
         }
-
-        self.boxIndex = boxIndex
-        self.washer = washer
-        self.timeToWash = timeToWash
-        self.status = ReservationStatus.Assigned
-
-        updateChildValues.setObject(self.toDict(), forKey: "\(Reservation.childRefName)/\(ReservationStatus.Assigned.rawValue)/\(self.id)")
+        updateChildValues.setObject(self.toDict(), forKey: self.getRefPrefix(.Assigned))
 
         getFirebaseRef()
             .updateChildValues(
