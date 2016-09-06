@@ -41,6 +41,9 @@ class LoginViewController: UIViewController {
     }
 
     @IBOutlet weak var signUpButtonBorder: UIButton!
+    @IBOutlet weak var facebookLoginButtonBorder: UIButton!
+    @IBOutlet weak var signInButtonBorder: UIButton!
+    
 
     // constants
     let loginCheckSegueID = "loginCheck"
@@ -60,16 +63,26 @@ class LoginViewController: UIViewController {
 
         // style
         //navigationController!.navigationBar.barTintColor = UIColor(red: 216.0/255.0, green: 55.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+        self.navigationController!.navigationBar.translucent = false
         
         
         // text field placeholder color
         signUpNameField.attributedPlaceholder = NSAttributedString(string:"ФИО",attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
         signUpNumberField.attributedPlaceholder = NSAttributedString(string:"Номер телефона",attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
+        signInNumberField.attributedPlaceholder = NSAttributedString(string:"Номер телефона",attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
         
-        // рамки кнопки Регистрация
+        // рамки кнопки
         signUpButtonBorder.layer.borderColor = UIColor.whiteColor().CGColor
-        signUpButtonBorder.layer.borderWidth = 2
+        signUpButtonBorder.layer.borderWidth = 1
         signUpButtonBorder.layer.masksToBounds = true
+        signUpButtonBorder.layer.cornerRadius = 5
+        
+        facebookLoginButtonBorder.layer.cornerRadius = 5
+        facebookLoginButtonBorder.layer.masksToBounds = true
+        signInButtonBorder.layer.borderColor = UIColor.whiteColor().CGColor
+        signInButtonBorder.layer.borderWidth = 1
+        signInButtonBorder.layer.masksToBounds = true
+        signInButtonBorder.layer.cornerRadius = 5
 
 
         User.isAlreadyLoggedInByFacebook(self.redirectToHome)
