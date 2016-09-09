@@ -18,7 +18,17 @@ class BookingHour {
     static let minuteMultiplier: Int = 30
     static let boxesCount: Int = 6
 
-    static var today: [BookingHour] = []
+    static var today: [BookingHour] = [] {
+        didSet {
+            let startHour = 9
+            var offsetBookingHourIndexes: Int = (getCurrentHour() - startHour + 1) * 60 / BookingHour.minuteMultiplier - (60 - getCurrentMinute()) / BookingHour.minuteMultiplier
+            offsetBookingHourIndexes = max(0, offsetBookingHourIndexes)
+
+            BookingHour.fromNow = BookingHour.today
+                .filter({ $0.index >= offsetBookingHourIndexes })
+        }
+    }
+    static var fromNow: [BookingHour] = []
 
     var index: Int
     var boxes: [Bool]
@@ -63,7 +73,8 @@ class BookingHour {
     }
 
     func getHour() -> String {
-        let addingMinutes = index * BookingHour.minuteMultiplier
+        let addingMinutes = self.index * BookingHour.minuteMultiplier
+
         // 09:00
         let startHour = 9
         let startMinute = 0
@@ -174,6 +185,10 @@ class BookingHour {
     }
 
 
+    static func getByIndex(index: Int) -> BookingHour {
+        return BookingHour.today[index]
+    }
+
     class func initToday(completion: () -> (Void)) {
         let startHour = 9,
         endHour = 21,
@@ -210,15 +225,11 @@ class BookingHour {
                     return
                 }
 
-                let values = snapshot.value as! [AnyObject],
-                    startHour = 9
-                var offsetBookingHourIndexes: Int = (getCurrentHour() - startHour + 1) * 60 / BookingHour.minuteMultiplier - (60 - getCurrentMinute()) / BookingHour.minuteMultiplier
-                offsetBookingHourIndexes = min(0, offsetBookingHourIndexes)
-
+                let values = snapshot.value as! [AnyObject]
                 BookingHour.today = values
                     .enumerate()
                     .map({ BookingHour(index: $0.index, data: $0.element) })
-                    .filter({ $0.index >= offsetBookingHourIndexes })
+
                 callback()
             }
     }

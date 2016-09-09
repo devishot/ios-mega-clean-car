@@ -54,12 +54,13 @@ func formatMoney(cost: Int) -> String {
 
 
 func formatAsTimestamp(date: NSDate) -> Int {
-    return date.timeIntervalSince1970.hashValue
+    return Int(date.timeIntervalSince1970)
 }
 
 func parseTimestamp(timestamp: Int) -> NSDate {
-    let interval = NSTimeInterval(timestamp)
-    return NSDate(timeIntervalSince1970: interval)
+    let interval = NSTimeInterval(Double(timestamp)),
+        date = NSDate(timeIntervalSince1970: interval)
+    return date
 }
 
 func formatAsString(date: NSDate) -> String {
@@ -172,5 +173,4 @@ func displayPromptView(title: String, self: UIViewController, completion: (value
     
     self.presentViewController(alert, animated: true, completion: nil)
 }
-
 

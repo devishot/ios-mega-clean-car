@@ -116,8 +116,9 @@ class AssignToReservationViewController: UIViewController {
             let destController = segue.destinationViewController as! AssignBoxIndexTableViewController
 
             var boxIndexes = self.bookingHour!.boxes
-                .filter({ $0.boolValue })
-                .map({ $0.hashValue })
+                .enumerate()
+                .filter({ $0.element.boolValue })
+                .map({ $0.index })
 
             if self.valueBoxIndex != nil {
                 boxIndexes.append(self.valueBoxIndex!)
@@ -160,7 +161,7 @@ extension AssignToReservationViewController: UITableViewDataSource {
 
         if indexPath.row == 0 {
             cell = self.embeddedTableView!.dequeueReusableCellWithIdentifier(cellAssignBoxIndexID, forIndexPath: indexPath)
-            cellText = (self.valueBoxIndex != nil) ? "Бокс: \(self.valueBoxIndex!)" : textSelectBoxIndex
+            cellText = (self.valueBoxIndex != nil) ? "Бокс: #\(self.valueBoxIndex!+1)" : textSelectBoxIndex
         } else {
             cell = self.embeddedTableView!.dequeueReusableCellWithIdentifier(cellAssignWasherID, forIndexPath: indexPath)
             cellText = (self.valueWasher != nil) ? "Мойщик: \(self.valueWasher!.name)" : textSelectWasher

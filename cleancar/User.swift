@@ -54,8 +54,8 @@ class User: FirebaseDataProtocol {
             self.carInfo = CarInfo(data: data)
         }
         if parsed["current_reservation"].isExists() {
-            let data = parsed["current_reservation"]
-            let id = data["id"].stringValue
+            let data = parsed["current_reservation"],
+                id = data["id"].stringValue
 
             self.currentReservation = Reservation(id: id, data: data.object)
         }

@@ -108,13 +108,15 @@ class HomeViewController: UIViewController {
         // 3. Fetch data
         Washer.fetchData() {
             BookingHour.subscribeToToday({ () -> (Void) in
-                self.bookingHours = BookingHour.today
+                self.bookingHours = BookingHour.fromNow
                 self.chooseTimeCollectionView.reloadData()
             })
             User.subscribeToCurrent({ () -> (Void) in
                 self.currentUser = User.current
             })
         }
+
+        
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -161,12 +163,10 @@ class HomeViewController: UIViewController {
                     toView: viewReservationRate,
                     duration: 0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
             } else {
-                if reservation.isCompleted() {
-                    UIView.transitionFromView(
-                        viewReservationRate,
-                        toView: viewReservationCancel,
-                        duration: 0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
-                }
+                UIView.transitionFromView(
+                    viewReservationRate,
+                    toView: viewReservationCancel,
+                    duration: 0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
             }
 
             UIView.transitionFromView(noReservationView, toView: roundedBorderView, duration: 0.2, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)

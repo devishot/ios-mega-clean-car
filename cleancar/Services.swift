@@ -195,8 +195,6 @@ class Services {
             .filter({ $0.characters.count > 0 })
             .joinWithSeparator(sep)
 
-        print([desc, additionals, mats], ret)
-
         return ret
     }
 }

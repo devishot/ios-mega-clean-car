@@ -58,7 +58,8 @@ class AssignBoxIndexTableViewController: SelectRightBarButtonHelper {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(self.cellID, forIndexPath: indexPath)
 
-        cell.textLabel!.text = "\(self.boxIndexes[indexPath.row])"
+        let text = self.boxIndexes[indexPath.row] + 1
+        cell.textLabel!.text = "#\(text)"
         return cell
     }
 }

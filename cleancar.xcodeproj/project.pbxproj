@@ -22,6 +22,8 @@
 		525A8A591D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8A581D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift */; };
 		525A8A5C1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8A5B1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift */; };
 		525A8A5E1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8A5D1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift */; };
+		525A8ABD1D7F4C48002C6F46 /* FeedbackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8ABC1D7F4C48002C6F46 /* FeedbackTableViewCell.swift */; };
+		525A8ABF1D7F4DB4002C6F46 /* FeedbacksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8ABE1D7F4DB4002C6F46 /* FeedbacksTableViewController.swift */; };
 		525C7C971D66C6D400DAE000 /* PricelistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C961D66C6D400DAE000 /* PricelistController.swift */; };
 		528947251D717441004B7090 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528947241D717441004B7090 /* LoginViewController.swift */; };
 		528947271D71760D004B7090 /* LoginCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528947261D71760D004B7090 /* LoginCheckViewController.swift */; };
@@ -71,6 +73,8 @@
 		525A8A581D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignWasherTableViewCell.swift; sourceTree = "<group>"; };
 		525A8A5B1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectRightBarButtonHelper.swift; sourceTree = "<group>"; };
 		525A8A5D1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignBoxIndexTableViewController.swift; sourceTree = "<group>"; };
+		525A8ABC1D7F4C48002C6F46 /* FeedbackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackTableViewCell.swift; sourceTree = "<group>"; };
+		525A8ABE1D7F4DB4002C6F46 /* FeedbacksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbacksTableViewController.swift; sourceTree = "<group>"; };
 		525C7C961D66C6D400DAE000 /* PricelistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PricelistController.swift; sourceTree = "<group>"; };
 		525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingHoursCollectionViewCell.swift; sourceTree = "<group>"; };
 		528947241D717441004B7090 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -163,6 +167,7 @@
 				B4EEA3471D644B1F0039D998 /* HomeViewController.swift */,
 				525C7C961D66C6D400DAE000 /* PricelistController.swift */,
 				B45905C51D6C171B00CFEFEF /* OrdersTableViewController.swift */,
+				525A8ABE1D7F4DB4002C6F46 /* FeedbacksTableViewController.swift */,
 			);
 			name = Tabs;
 			sourceTree = "<group>";
@@ -223,6 +228,7 @@
 				B4856D971D6896E0000EC687 /* OrdersTableViewCell.swift */,
 				B42F94E81D79F336008F178A /* DurationCollectionViewCell.swift */,
 				525A8A581D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift */,
+				525A8ABC1D7F4C48002C6F46 /* FeedbackTableViewCell.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -487,6 +493,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525A8ABF1D7F4DB4002C6F46 /* FeedbacksTableViewController.swift in Sources */,
 				523F3B521D66EA4300B75421 /* BookingHour.swift in Sources */,
 				528947291D72C9D7004B7090 /* Reservation.swift in Sources */,
 				528947271D71760D004B7090 /* LoginCheckViewController.swift in Sources */,
@@ -507,6 +514,7 @@
 				525C7C971D66C6D400DAE000 /* PricelistController.swift in Sources */,
 				B45905C61D6C171B00CFEFEF /* OrdersTableViewController.swift in Sources */,
 				5252E8151D7582E2009A841F /* Utils.swift in Sources */,
+				525A8ABD1D7F4C48002C6F46 /* FeedbackTableViewCell.swift in Sources */,
 				B45905C41D6AC92600CFEFEF /* PopUpViewController.swift in Sources */,
 				B4856D981D6896E0000EC687 /* OrdersTableViewCell.swift in Sources */,
 				B45905CB1D7023D000CFEFEF /* UISegmentedControl_fontSize.swift in Sources */,

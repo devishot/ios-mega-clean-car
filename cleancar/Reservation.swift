@@ -56,7 +56,7 @@ class Reservation: FirebaseDataProtocol {
             uid: parsed["user", "id"].stringValue,
             data: parsed["user"].object
         )
-        self.bookingHour = BookingHour.today[parsed["booking_hour_index"].intValue]
+        self.bookingHour = BookingHour.getByIndex(parsed["booking_hour_index"].intValue)
         self.services = Services(data: parsed["services"].object)
         self.timestamp = parseTimestamp(parsed["timestamp"].intValue)
         self.status = ReservationStatus(rawValue: parsed["status"].intValue)!
@@ -67,6 +67,8 @@ class Reservation: FirebaseDataProtocol {
             self.washer = Washer(data: object)
         }
         self.timeToWash = parsed["time_to_wash"].int
+        self.feedbackRate = parsed["feedback_rate"].int
+        self.feedbackMessage = parsed["feedback_message"].string
     }
 
     func toDict(withId: Bool = false) -> NSMutableDictionary {
@@ -80,15 +82,20 @@ class Reservation: FirebaseDataProtocol {
         if withId {
             data.setObject(self.id, forKey: "id")
         }
-        if timeToWash != nil {
-            data.setObject(timeToWash!, forKey: "time_to_wash")
-        }
-        if boxIndex != nil {
-            data.setObject(boxIndex!, forKey: "box_index")
-        }
-        if washer != nil {
-            data.setObject(washer!.toDict(true), forKey: "washer")
-        }
+
+        let optionalFields: [String: AnyObject?] = [
+            "time_to_wash": timeToWash,
+            "box_index": boxIndex,
+            "washer": washer?.toDict(true),
+            "feedback_rate": feedbackRate,
+            "feedback_message": feedbackMessage
+        ]
+        optionalFields.forEach({ (key, value) in
+            if value != nil {
+                data.setObject(value!, forKey: key)
+            }
+        })
+
         return data
     }
 
@@ -114,13 +121,17 @@ class Reservation: FirebaseDataProtocol {
         return "\(Reservation.childRefName)/\(status.rawValue)/\(self.id)"
     }
 
+    
+    func getBoxIndexText() -> String {
+        return "#\(self.boxIndex! + 1)"
+    }
 
     func getFeedbackRateVisual() -> String {
         let filled = (1...self.feedbackRate!).generate()
-                .map({ _ in "\u{2606}" })
-                .joinWithSeparator("")
-        let empty = (self.feedbackRate!+1...5).generate()
                 .map({ _ in "\u{2605}" })
+                .joinWithSeparator("")
+        let empty = (self.feedbackRate!+1..<6).generate()
+                .map({ _ in "\u{2606}" })
                 .joinWithSeparator("")
         return filled + empty
     }
@@ -149,9 +160,7 @@ class Reservation: FirebaseDataProtocol {
         // push requests
         ref.updateChildValues(
             childUpdates as [NSObject: AnyObject],
-            withCompletionBlock: {(error, ref) in
-                completion()
-            }
+            withCompletionBlock: {(error, ref) in completion() }
         )
         return reservation
     }
@@ -189,16 +198,18 @@ class Reservation: FirebaseDataProtocol {
 
     func setAssigned(boxIndex: Int, washer: Washer, timeToWash: Int,
                      completion: () -> (Void)) {
-        let updateChildValues = NSMutableDictionary()
+        let updateChildValues = NSMutableDictionary(),
+            prevStatus = self.status,
+            wasNonAssigned = !self.isAssigned()
 
         self.boxIndex = boxIndex
         self.washer = washer
         self.timeToWash = timeToWash
         self.status = ReservationStatus.Assigned
 
-        if !self.isAssigned() {
+        if wasNonAssigned {
             updateChildValues
-                .setObject(NSNull(), forKey: self.getRefPrefix())
+                .setObject(NSNull(), forKey: self.getRefPrefix(prevStatus))
 
             let prefixB = self.bookingHour.getRefPrefix()
             updateChildValues
@@ -208,7 +219,7 @@ class Reservation: FirebaseDataProtocol {
             updateChildValues
                 .setObject(false, forKey: prefixB+"/washers/\(washer.id)")
         }
-        updateChildValues.setObject(self.toDict(), forKey: self.getRefPrefix(.Assigned))
+        updateChildValues.setObject(self.toDict(), forKey: self.getRefPrefix())
 
         getFirebaseRef()
             .updateChildValues(
@@ -227,7 +238,7 @@ class Reservation: FirebaseDataProtocol {
         let updateChildValues: [NSObject: AnyObject] = [
             self.getRefPrefix(prevStatus): NSNull(),
             self.getRefPrefix(): self.toDict(),
-            "\(self.user.getRefPrefix())/current_reservation": self.toDict()
+            "\(self.user.getRefPrefix())/current_reservation": self.toDict(true)
         ]
         getFirebaseRef()
             .updateChildValues(updateChildValues,

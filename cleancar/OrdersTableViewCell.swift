@@ -24,7 +24,8 @@ class OrdersTableViewCell: UITableViewCell {
     
     @IBOutlet weak var overallPriceLabel: UILabel!
     
-    @IBOutlet weak var servicesDescriptionLabel: UITextView!
+    @IBOutlet weak var servicesDescriptionLabel: UILabel!
+
 
     
     // variables
@@ -47,7 +48,7 @@ class OrdersTableViewCell: UITableViewCell {
         let isAssigned = value.status.rawValue > ReservationStatus.NonAssigned.rawValue
 
         if isAssigned {
-            numberOfBoxLabel.text = "#\(value.boxIndex!)"
+            numberOfBoxLabel.text = value.getBoxIndexText()
             cleanserNameLabel.text = value.washer!.name
         } else {
             numberOfBoxLabel.text = "?"
