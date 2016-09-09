@@ -6,7 +6,7 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "services-icon.pdf",
+      "filename" : "pricelist-icon.pdf",
       "scale" : "2x"
     },
     {
@@ -17,5 +17,8 @@
   "info" : {
     "version" : 1,
     "author" : "xcode"
+  },
+  "properties" : {
+    "template-rendering-intent" : "original"
   }
 }
