@@ -8,48 +8,37 @@
 
 import UIKit
 
+
 class PricelistController: UIViewController {
-   
-    @IBOutlet weak var containerView: UIView!
-   
-    @IBOutlet weak var typesOfCarsSC: UISegmentedControl!
-    weak var currentViewController: UIViewController?
 
-    override func viewDidLoad() {
-        UISegmentedControl.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.orangeColor()], forState: UIControlState.Normal)
-        typesOfCarsSC.setFontSize(10)
-
-        self.currentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("a")
-        self.currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false
-        self.addChildViewController(self.currentViewController!)
-        self.addSubview(self.currentViewController!.view, toView: self.containerView)
-        
-        super.viewDidLoad()
+    // outlets
+    @IBOutlet weak var segmentViewCarTypes: UISegmentedControl!
+    
+    // actions
+    @IBAction func changedSegmentViewCarTypes(sender: UISegmentedControl) {
+        self.selectedCarType = CarTypeEnum(rawValue: sender.selectedSegmentIndex)!
+        self.tablePrices?.tableView.reloadData()
     }
 
-    
-    @IBAction func showComponent(sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
-            let newViewController = self.storyboard?.instantiateViewControllerWithIdentifier("a")
-            newViewController!.view.translatesAutoresizingMaskIntoConstraints = false
-            self.cycleFromViewController(self.currentViewController!, toViewController: newViewController!)
-            self.currentViewController = newViewController
-        } else if sender.selectedSegmentIndex == 1 {
-            let newViewController = self.storyboard?.instantiateViewControllerWithIdentifier("b")
-            newViewController!.view.translatesAutoresizingMaskIntoConstraints = false
-            self.cycleFromViewController(self.currentViewController!, toViewController: newViewController!)
-            self.currentViewController = newViewController
-        } else if sender.selectedSegmentIndex == 2 {
-            let newViewController = self.storyboard?.instantiateViewControllerWithIdentifier("c")
-            newViewController!.view.translatesAutoresizingMaskIntoConstraints = false
-            self.cycleFromViewController(self.currentViewController!, toViewController: newViewController!)
-            self.currentViewController = newViewController
-        } else if sender.selectedSegmentIndex == 3 {
-            let newViewController = self.storyboard?.instantiateViewControllerWithIdentifier("d")
-            newViewController!.view.translatesAutoresizingMaskIntoConstraints = false
-            self.cycleFromViewController(self.currentViewController!, toViewController: newViewController!)
-            self.currentViewController = newViewController
-        }
+    // constants
+    let segueEmbeddedTableViewID = "pricesTable"
+    let cellOfTablePriceID = "cellWithDetail"
+
+    // variables
+    var tablePrices: UITableViewController?
+    var selectedCarType: CarTypeEnum = CarTypeEnum.Normal
+
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // set styles
+        segmentViewCarTypes.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.orangeColor()], forState: UIControlState.Normal)
+        segmentViewCarTypes.setFontSize(10)
+
+        // init
+        segmentViewCarTypes.selectedSegmentIndex = CarTypeEnum.Normal.rawValue
+        tablePrices?.tableView.dataSource = self
     }
 
     
@@ -59,42 +48,36 @@ class PricelistController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    func addSubview(subView:UIView, toView parentView:UIView) {
-        parentView.addSubview(subView)
-        
-        var viewBindingsDict = [String: AnyObject]()
-        viewBindingsDict["subView"] = subView
-        parentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[subView]|",
-            options: [], metrics: nil, views: viewBindingsDict))
-        parentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[subView]|",
-            options: [], metrics: nil, views: viewBindingsDict))
-    }
-    
-    func cycleFromViewController(oldViewController: UIViewController, toViewController newViewController: UIViewController) {
-        oldViewController.willMoveToParentViewController(nil)
-        self.addChildViewController(newViewController)
-        self.addSubview(newViewController.view, toView:self.containerView!)
-        newViewController.view.alpha = 0
-        newViewController.view.layoutIfNeeded()
-        UIView.animateWithDuration(0.5, animations: {
-            newViewController.view.alpha = 1
-            oldViewController.view.alpha = 0
-            },
-                                   completion: { finished in
-                                    oldViewController.view.removeFromSuperview()
-                                    oldViewController.removeFromParentViewController()
-                                    newViewController.didMoveToParentViewController(self)
-        })
+        if segue.identifier == self.segueEmbeddedTableViewID {
+            self.tablePrices = segue.destinationViewController as? UITableViewController
+        }
     }
 
 }
+
+
+extension PricelistController: UITableViewDataSource {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return getServices(getName: true).count
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = self.tablePrices!.tableView.dequeueReusableCellWithIdentifier(self.cellOfTablePriceID, forIndexPath: indexPath)
+        let row = indexPath.row,
+            carType = self.selectedCarType.rawValue,
+            service = getServices(true)[row],
+            serviceName = getServices(getName: true)[row],
+            cost = Services.costs[carType]![service]!
+
+        cell.textLabel?.text = serviceName
+        cell.detailTextLabel?.text = formatMoney(cost)
+        return cell
+    }
+}
+
+

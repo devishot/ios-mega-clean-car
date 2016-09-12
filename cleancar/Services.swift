@@ -14,6 +14,18 @@ enum WashTypeEnum: Int {
     case Body = 0
     case Salon = 1
     case BodyAndSalon = 2
+
+    func name() -> String {
+        switch self {
+        case .Body:
+            return "Кузов"
+        case .Salon:
+            return "Салон"
+        case .BodyAndSalon:
+            return "Кузов-салон"
+        }
+    }
+
 }
 
 enum AdditionalsEnum: String {
@@ -21,18 +33,42 @@ enum AdditionalsEnum: String {
     case TrunkCleaning
     case InterierPolishing
     case BodyWeaning
+    case CleanMatsPerCount
+
+    func name() -> String {
+        switch self {
+        case .EngineCleaning:
+            return "Мойка двигателя"
+        case .TrunkCleaning:
+            return "Чистка багажника"
+        case .InterierPolishing:
+            return "Полировка салона"
+        case .BodyWeaning:
+            return "Отбивка кузова"
+        case .CleanMatsPerCount:
+            return "Чистка резиновых\n" + "и текстильных ковров (1 ед.)"
+        }
+    }
 }
 
-
-let WashTypeName = ["Кузов", "Салон", "Кузов-салон"]
-let AdditionalsName = [
-    "EngineCleaning": "Мойка двигателя",
-    "TrunkCleaning": "Чистка багажника",
-    "InterierPolishing": "Полировка салона",
-    "BodyWeaning": "Отбивка кузова"
-]
 let CleanMatsName = "Чистка ковров"
 
+
+func getServices(getID: Bool=false, getName: Bool=false) -> [String] {
+    var ret = [
+        WashTypeEnum.BodyAndSalon,
+        WashTypeEnum.Body,
+        WashTypeEnum.Salon
+        ].map({ getID ? String($0.rawValue) : $0.name() })
+    ret += [
+        AdditionalsEnum.EngineCleaning,
+        AdditionalsEnum.TrunkCleaning,
+        AdditionalsEnum.InterierPolishing,
+        AdditionalsEnum.CleanMatsPerCount,
+        AdditionalsEnum.BodyWeaning
+        ].map({ getID ? $0.rawValue : $0.name() })
+    return ret
+}
 
 
 class Services {
@@ -185,9 +221,9 @@ class Services {
     func getDescription() -> String {
         let sep = " / "
 
-        let desc = WashTypeName[self.washType.rawValue]
+        let desc = self.washType.name()
         let additionals = self.additionalSelect
-                .map({ $0.1 ? AdditionalsName[$0.0]! : "" })
+                .map({ $0.1 ? AdditionalsEnum(rawValue: $0.0)!.name() : "" })
                 .joinWithSeparator(sep)
         let mats = self.cleanMatsCount > 0 ? "\(CleanMatsName) (\(self.cleanMatsCount)шт.)" : ""
 
