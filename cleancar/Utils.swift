@@ -85,6 +85,13 @@ func getCurrentMinute() -> Int {
     return comp.minute
 }
 
+func getCurrentYear() -> Int {
+    let now = NSDate()
+    let calendar = NSCalendar.currentCalendar()
+    let comp = calendar.components(.Year, fromDate: now)
+    return comp.year
+}
+
 func parseTime(date: String) -> NSDate {
     return getDateTimeFormatter().dateFromString(date)!
 }
@@ -92,15 +99,22 @@ func parseTime(date: String) -> NSDate {
 func getDateTimeFormatter() -> NSDateFormatter {
     let formatter = NSDateFormatter()
     formatter.locale = NSLocale.currentLocale()
-    formatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     return formatter
 }
 
 func getDateFormatter() -> NSDateFormatter {
     let formatter = NSDateFormatter()
     formatter.locale = NSLocale.currentLocale()
-    formatter.dateFormat = "dd-MM-yyyy"
+    formatter.dateFormat = "yyyy-MM-dd"
     return formatter
+}
+
+func getCurrentMonth(inFormat: String = "MM") -> String {
+    let formatter = NSDateFormatter()
+    formatter.locale = NSLocale.currentLocale()
+    formatter.dateFormat = inFormat
+    return formatter.stringFromDate(NSDate())
 }
 
 private var kAssociationKeyNextField: UInt8 = 0

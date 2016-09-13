@@ -224,6 +224,7 @@ class Services {
         let desc = self.washType.name()
         let additionals = self.additionalSelect
                 .map({ $0.1 ? AdditionalsEnum(rawValue: $0.0)!.name() : "" })
+                .filter({ $0.characters.count > 0 })
                 .joinWithSeparator(sep)
         let mats = self.cleanMatsCount > 0 ? "\(CleanMatsName) (\(self.cleanMatsCount)шт.)" : ""
 

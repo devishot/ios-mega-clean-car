@@ -240,9 +240,10 @@ class Reservation: FirebaseDataProtocol {
             self.getRefPrefix(): self.toDict(),
             "\(self.user.getRefPrefix())/current_reservation": self.toDict(true)
         ]
-        getFirebaseRef()
-            .updateChildValues(updateChildValues,
-                               withCompletionBlock: {_,_ in completion() })
+        getFirebaseRef().updateChildValues(updateChildValues, withCompletionBlock: {_,_ in
+            self.updateStatistic()
+            completion()
+        })
     }
 
     func setFeedbackReceived(rate: Int, message: String, completion: () -> (Void)) {
@@ -261,10 +262,71 @@ class Reservation: FirebaseDataProtocol {
             "\(self.user.getRefPrefix())/current_reservation": NSNull()
         ]
         getFirebaseRef()
-            .updateChildValues(updateChildValues,
-                               withCompletionBlock: {_,_ in completion() })
+            .updateChildValues(updateChildValues, withCompletionBlock: {_,_ in
+                self.updateStatistic(true)
+                completion()
+            })
     }
 
+
+    func updateStatistic(onlyRate: Bool = false) {
+        let now = NSDate(),
+            calendar = NSCalendar.currentCalendar()
+        var firstDayOfWeek: NSDate?,
+            lastDayOfWeek: NSDate?,
+            year = getCurrentYear(),
+            month = getCurrentMonth(),
+            day = formatAsString(now, onlyDate: true)
+        calendar.components([.YearForWeekOfYear, .WeekOfYear], fromDate: now)
+        calendar.firstWeekday = 2
+        calendar.rangeOfUnit(.WeekOfYear, startDate: &firstDayOfWeek, interval: nil, forDate: now)
+        lastDayOfWeek = calendar.dateByAddingUnit(.Day, value: 7, toDate: firstDayOfWeek!, options: [])
+
+        let paths = [
+            "/years/\(year)",
+            "/months/\(year)-\(month)",
+            "/weeks/\(formatAsString(firstDayOfWeek!, onlyDate: true))_\(formatAsString(lastDayOfWeek!, onlyDate: true))",
+            "/days/\(formatAsString(now, onlyDate: true))"
+        ]
+
+    
+        let newInfo: [String: AnyObject] =
+            onlyRate ? [
+                "count": 0,
+                "sum": 0,
+                "rate_count": 1,
+                "rate_sum": self.feedbackRate!
+            ] : [
+                "count": 1,
+                "sum": self.services.getCostForTotal(),
+                "rate_count": 0,
+                "rate_sum": 0
+            ]
+        func updateInfo(data: [String: AnyObject]) -> [String: AnyObject] {
+            let info = JSON(data).dictionaryValue
+            return [
+                "count": info["count"]!.intValue + (newInfo["count"]! as! Int),
+                "sum": info["sum"]!.intValue + (newInfo["sum"]! as! Int),
+                "rate_count": info["rate_count"]!.intValue + (newInfo["rate_count"]! as! Int),
+                "rate_sum": info["rate_sum"]!.intValue + (newInfo["rate_sum"]! as! Int)
+            ]
+        }
+
+        paths.forEach({ path in
+            getFirebaseRef()
+                .child("statistics" + path)
+                .runTransactionBlock({ (currentState: FIRMutableData) -> FIRTransactionResult in
+
+                    if currentState.hasChildren() {
+                        let currentInfo = currentState.value! as! [String: AnyObject]
+                        currentState.value = updateInfo(currentInfo)
+                    } else {
+                        currentState.value = newInfo
+                    }
+                    return FIRTransactionResult.successWithValue(currentState)
+                })
+        })
+    }
 
     static func subscribeTo(filterByStatus: ReservationStatus,
                      completion: (reservations: [Reservation])->Void) {

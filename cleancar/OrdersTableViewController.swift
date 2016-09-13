@@ -18,7 +18,9 @@ class OrdersTableViewController: UITableViewController {
     @IBAction func clickedFilterButton(sender: UIBarButtonItem) {
         self.filterValue = (self.filterValue + 1) % 2
 
-        self.updateFilterLabels()
+        // update views:
+        self.filterButton.title = self.filterNames[(self.filterValue + 1) % 2]
+        self.tableView.reloadData()
     }
     @IBAction func unwindAssignToReservation(unwindSegue: UIStoryboardSegue) {
         self.setFromAssignToReservationViewController(unwindSegue)
@@ -38,23 +40,30 @@ class OrdersTableViewController: UITableViewController {
 
 
     // variables
+    var filterValue: Int = 0
+    var selectedReservation: Reservation?
+
     var nonAssigned: [Reservation] = [] {
         didSet {
-            self.tableView.reloadData()
+            if self.filterValue == 0 {
+                self.tableView.reloadData()
+            }
         }
     }
     var assigned: [Reservation] = [] {
         didSet {
-            self.tableView.reloadData()
+            if self.filterValue == 0 {
+                self.tableView.reloadData()
+            }
         }
     }
     var declined: [Reservation] = [] {
         didSet {
-            self.tableView.reloadData()
+            if self.filterValue == 1 {
+                self.tableView.reloadData()
+            }
         }
     }
-    var filterValue: Int = 0
-    var selectedReservation: Reservation?
 
 
     override func viewDidLoad() {
@@ -70,6 +79,7 @@ class OrdersTableViewController: UITableViewController {
                 self.assigned = reservations
             })
             Reservation.subscribeTo(ReservationStatus.Declined, completion: { (reservations) in
+                //print(".subscribeTo.Declined", reservations.count)
                 self.declined = reservations
             })
         })
@@ -92,7 +102,7 @@ class OrdersTableViewController: UITableViewController {
 
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self.sections.count
+        return self.sections[filterValue].count
     }
 
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -140,12 +150,13 @@ class OrdersTableViewController: UITableViewController {
 
         let declineAction = UITableViewRowAction(style: .Default, title: "\u{267A}\n Отменить", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
-            print("declineAction", indexPath.row)
-            //reservation.setDeclined()
+            reservation.setDeclined() {
+                // TODO: push message to User
+            }
         })
 
 
-        if reservation.isDeclined() {
+        if self.filterValue == 1 {
             return []
         }
         if reservation.isAssigned() {
@@ -185,14 +196,10 @@ class OrdersTableViewController: UITableViewController {
 
     func getReservationsFor(section: Int) -> [Reservation] {
         if self.filterValue == 0 {
-            return [self.nonAssigned, self.assigned][section]
+            return (section == 0) ? self.nonAssigned : self.assigned
         } else {
             return self.declined
         }
     }
 
-    func updateFilterLabels() {
-        self.navigationItem.title = self.filterButton.title
-        self.filterButton.title = self.filterNames[self.filterValue]
-    }
 }
