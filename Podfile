@@ -18,6 +18,7 @@ target 'cleancar' do
   pod 'FBSDKCoreKit'
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
+  pod 'AccountKit'
 
   pod 'SwiftyJSON'
 

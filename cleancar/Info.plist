@@ -24,6 +24,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb136140120168151</string>
+                <string>ak136140120168151</string>
 			</array>
 		</dict>
 	</array>
@@ -31,6 +32,8 @@
 	<string>1</string>
 	<key>FacebookAppID</key>
 	<string>136140120168151</string>
+    <key>AccountKitClientToken</key>
+    <string>ded2240e8b9b7b62d40161ac3a0de631</string>
 	<key>FacebookDisplayName</key>
 	<string>Clean Car</string>
 	<key>LSApplicationQueriesSchemes</key>

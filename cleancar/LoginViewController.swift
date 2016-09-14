@@ -10,17 +10,12 @@ import UIKit
 import Firebase
 import FBSDKCoreKit
 import FBSDKLoginKit
+import AccountKit
 
 
 class LoginViewController: UIViewController {
 
     // IBOutlets
-    @IBOutlet var signUpView: UIView!
-    @IBOutlet var signInView: UIView!
-    @IBOutlet weak var signUpNameField: UITextField!
-    @IBOutlet weak var signUpNumberField: UITextField!
-    @IBOutlet weak var signInNumberField: UITextField!
-    @IBOutlet weak var rightBarButton: UIBarButtonItem!
 
 
     // IBActions
@@ -29,117 +24,110 @@ class LoginViewController: UIViewController {
             User.logInByFacebook(self.redirectToHome)
         }
     }
-    @IBAction func clickedSignUpButton(sender: UIButton) {
-        self.redirectToCheckNumber()
-    }
     @IBAction func clickedSignInButton(sender: UIButton) {
-        self.redirectToCheckNumber()
-    }
-    @IBAction func clickedRightBarButton(sender: UIBarButtonItem) {
-        self.isLoginPage = !self.isLoginPage
-        self.updateLoginPage()
+        self.loginWithPhoneNumber()
     }
 
-    @IBOutlet weak var signUpButtonBorder: UIButton!
     @IBOutlet weak var facebookLoginButtonBorder: UIButton!
     @IBOutlet weak var signInButtonBorder: UIButton!
-    
+
 
     // constants
-    let loginCheckSegueID = "loginCheck"
     let homeSegueID = "homeDirect"
-    let textSignIn = "Войти"
-    let textSignUp = "Регистрация"
 
     
     // variables
     var isLoginPage = false
+    
+    var _accountKit: AKFAccountKit!
+    var _pendingLoginViewController: AKFViewController?
+    var _authorizationCode: String?
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //keyboard next instead of return
-        self.signUpNameField.nextField = self.signUpNumberField
 
-        // style
-        //navigationController!.navigationBar.barTintColor = UIColor(red: 216.0/255.0, green: 55.0/255.0, blue: 55.0/255.0, alpha: 1.0)
-        self.navigationController!.navigationBar.translucent = false
-        
-        
-        // text field placeholder color
-        signUpNameField.attributedPlaceholder = NSAttributedString(string:"ФИО",attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
-        signUpNumberField.attributedPlaceholder = NSAttributedString(string:"Номер телефона",attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
-        signInNumberField.attributedPlaceholder = NSAttributedString(string:"Номер телефона",attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
-        
         // рамки кнопки
-        signUpButtonBorder.layer.borderColor = UIColor.whiteColor().CGColor
-        signUpButtonBorder.layer.borderWidth = 1
-        signUpButtonBorder.layer.masksToBounds = true
-        signUpButtonBorder.layer.cornerRadius = 5
-        
-        facebookLoginButtonBorder.layer.cornerRadius = 5
-        facebookLoginButtonBorder.layer.masksToBounds = true
         signInButtonBorder.layer.borderColor = UIColor.whiteColor().CGColor
         signInButtonBorder.layer.borderWidth = 1
         signInButtonBorder.layer.masksToBounds = true
         signInButtonBorder.layer.cornerRadius = 5
 
+        facebookLoginButtonBorder.layer.cornerRadius = 5
+        facebookLoginButtonBorder.layer.masksToBounds = true
 
+
+        // check exist Login credentials for:
+        // 1. facebook account
         User.isAlreadyLoggedInByFacebook(self.redirectToHome)
-        //TODO: User.isAlreadyLoggedInFirebase()
+
+        // 2. phone number AccountKit
+        if _accountKit == nil {
+            _accountKit = AKFAccountKit(responseType: .AuthorizationCode)
+        }
+        _pendingLoginViewController = _accountKit.viewControllerForLoginResume() as? AKFViewController
+        _pendingLoginViewController?.delegate = self
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        if  _accountKit.currentAccessToken != nil {
+            //if the user is already logged in, go to the main screen
+
+            // TODO: firebaseLogin()
+
+        } else if (_pendingLoginViewController != nil) {
+            //resume pending login (if any)
+            self.prepareLoginViewController(_pendingLoginViewController!)
+            self.presentViewController(_pendingLoginViewController as! UIViewController, animated: true, completion: nil)
+            _pendingLoginViewController = nil;
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == loginCheckSegueID {
-            let destController = segue.destinationViewController as! LoginCheckViewController
-            // collect fields value and set in controller
-            
-        }
-    }
 
-
-    func updateLoginPage() -> Void {
-        if self.isLoginPage {
-            rightBarButton.title = textSignUp
-            UIView.transitionFromView(signUpView,
-                                      toView: signInView,
-                                      duration: 0.2,
-                                      options: UIViewAnimationOptions.ShowHideTransitionViews,
-                                      completion: nil)
-        } else {
-            rightBarButton.title = textSignIn
-            UIView.transitionFromView(signInView,
-                                      toView: signUpView,
-                                      duration: 0.2,
-                                      options: UIViewAnimationOptions.ShowHideTransitionViews,
-                                      completion: nil)
-        }
-    }
-
-    func redirectToCheckNumber() -> Void {
-        if self.isLoginPage {
-            
-        } else {
-            
-        }
-        performSegueWithIdentifier(loginCheckSegueID, sender: self)
-    }
 
     func redirectToHome() -> Void {
         dispatch_async(dispatch_get_main_queue()) {
             self.performSegueWithIdentifier(self.homeSegueID, sender: self)
         }
     }
+
+
+    // MARK: Facebook AccountKit
+    func prepareLoginViewController(loginViewController: AKFViewController) {
+        loginViewController.delegate = self
+        loginViewController.advancedUIManager = nil
+        loginViewController.defaultCountryCode = "KZ"
+
+        //Costumize the theme
+        let theme:AKFTheme = AKFTheme.defaultTheme()
+        theme.headerBackgroundColor = UIColor(red: 0.325, green: 0.557, blue: 1, alpha: 1)
+        theme.headerTextColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        theme.iconColor = UIColor(red: 0.325, green: 0.557, blue: 1, alpha: 1)
+        theme.inputTextColor = UIColor(white: 0.4, alpha: 1.0)
+        theme.statusBarStyle = .Default
+        theme.textColor = UIColor(white: 0.3, alpha: 1.0)
+        theme.titleColor = UIColor(red: 0.247, green: 0.247, blue: 0.247, alpha: 1)
+
+        loginViewController.theme = theme
+    }
+
+    func loginWithPhoneNumber() {
+        let preFillPhoneNumber: AKFPhoneNumber? = nil
+        let inputState = NSUUID().UUIDString
+        let vc: AKFViewController = _accountKit.viewControllerForPhoneLoginWithPhoneNumber(preFillPhoneNumber, state: inputState) as! AKFViewController
+        vc.enableSendToFacebook = true
+
+        self.prepareLoginViewController(vc)
+        self.presentViewController(vc as! UIViewController, animated: true, completion: nil)
+    }
+    // END: Facebook AccountKit
+
 
 
     func facebookLogin(completion: () -> (Void)) -> Void {
@@ -157,5 +145,12 @@ class LoginViewController: UIViewController {
 
 }
 
-
+extension LoginViewController: AKFViewControllerDelegate {
+    func viewController(viewController: UIViewController!, didFailWithError error: NSError!) {
+        print("error \(error)")
+    }
+    func viewController(viewController: UIViewController!, didCompleteLoginWithAccessToken accessToken: AKFAccessToken!, state: String!) {
+        print("did complete login with access token \(accessToken.tokenString) state \(state)")
+    }
+}
 

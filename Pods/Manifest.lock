@@ -1,4 +1,5 @@
 PODS:
+  - AccountKit (4.15.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -89,6 +90,7 @@ PODS:
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
+  - AccountKit
   - Bolts
   - Cosmos (~> 1.2)
   - FBSDKCoreKit
@@ -101,6 +103,7 @@ DEPENDENCIES:
   - SwiftyJSON
 
 SPEC CHECKSUMS:
+  AccountKit: 7f9dad64c2fb4905a36a6f32ac44eb5d70a0e165
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Cosmos: efddd01b729956ad6335bc58bc92e5735a1d12a3
   FBSDKCoreKit: 6e020b5db0b5bd1e01f5fb0902131befd129a502
@@ -124,6 +127,6 @@ SPEC CHECKSUMS:
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 022accaeb1a0162eed09886d56eeedc88c739ba3
+PODFILE CHECKSUM: 4dfae0ba5f1abfa3f082c5a8712fe0f77b6d8890
 
 COCOAPODS: 1.0.1
