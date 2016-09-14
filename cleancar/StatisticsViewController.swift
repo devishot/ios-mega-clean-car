@@ -10,63 +10,6 @@ import UIKit
 import SwiftyJSON
 
 
-enum StatisticFilter: Int {
-    case Day
-    case Week
-    case Month
-    case Year
-}
-
-struct StatisticItem {
-    var filter: StatisticFilter
-    var date: NSDate
-
-    var info: Dictionary<String, Int>?
-
-
-    func key() -> String {
-        return getStaticKey(date, forFilter: filter)
-    }
-
-    func name() -> String {
-        return getStaticKeyDisplay(date, forFilter: filter)
-    }
-
-    func genPrev() -> StatisticItem {
-        let calendar = getCalendar()
-        var prevDate = NSDate()
-
-        switch filter {
-        case .Day:
-            prevDate = calendar.dateByAddingUnit(.Day, value: -1, toDate: date, options: [])!
-        case .Week:
-            prevDate = calendar.dateByAddingUnit(.Day, value: -7, toDate: date, options: [])!
-        case .Month:
-            prevDate = calendar.dateByAddingUnit(.Month, value: -1, toDate: date, options: [])!
-        default:
-            break
-        }
-
-        return StatisticItem(filter: filter, date: prevDate, info: nil)
-    }
-    
-    mutating func fetchInfo(completion: ()->(Void)) {
-        getFirebaseRef()
-            .child(key())
-            .observeSingleEventOfType(.Value, withBlock: { snapshot in
-                if snapshot.value is NSNull {
-                    self.info = Dictionary<String, Int>()
-                } else {
-                    let parsed = JSON(snapshot.value!).dictionaryValue
-                    self.info = parsed.reduce([String: Int]()) { (var acc, nextValue) in
-                        acc.updateValue(nextValue.1.intValue, forKey: nextValue.0)
-                        return acc
-                    }
-                }
-                completion()
-            })
-    }
-}
 
 
 class StatisticsViewController: UIViewController {
@@ -83,10 +26,31 @@ class StatisticsViewController: UIViewController {
         self.selectedFilter = StatisticFilter(rawValue: sender.selectedSegmentIndex)!
     }
     @IBAction func clickedButtonPrev(sender: UIButton) {
+        let row = self.getCurrentRowIndex()
+        self.currentItem = self.getItem(row - 1, reversed: true)
+        
+        let itemSize = self.collectionView.frame.size.width
+        var co = self.collectionView.contentOffset
+        co.x -= itemSize
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.collectionView.setContentOffset(co, animated: true)
+        })
     }
-    @IBOutlet weak var clickedButtonNext: UIButton!
+    @IBAction func clickedButtonNext(sender: UIButton) {
+        let row = self.getCurrentRowIndex()
+        self.currentItem = self.getItem(row + 1, reversed: true)
+        
+        let itemSize = self.collectionView.frame.size.width
+        var co = self.collectionView.contentOffset
+        co.x += itemSize
 
-    
+        dispatch_async(dispatch_get_main_queue(), {
+            self.collectionView.setContentOffset(co, animated: true)
+        })
+    }
+
+
     // constants
     let segueTableInfoID = "embeddedTableInfo"
     let cellReuseOfCollectionID = "collectionCell"
@@ -95,27 +59,21 @@ class StatisticsViewController: UIViewController {
 
     // variables
     var tableInfo: UITableView?
+    lazy var spinner: UIActivityIndicatorView = {
+        let s = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        s.frame = CGRectMake(0, 0, 24, 24);
+        s.hidesWhenStopped = true
+        return s
+    }()
 
     var selectedFilter: StatisticFilter = .Day {
         didSet {
-            if self.dataStore[selectedFilter]!.isEmpty {
-                generateDataFor(selectedFilter)
-                self.currentItem = getItem(0)
-            }
-            self.collectionView.reloadData()
+            self.updateCollectionViewForFilter(selectedFilter)
         }
     }
     var currentItem: StatisticItem? {
         didSet {
-            if currentItem == nil {
-                return
-            }
-
-            if currentItem!.info != nil {
-                self.tableInfo?.reloadData()
-            } else {
-                currentItem!.fetchInfo({ self.tableInfo?.reloadData() })
-            }
+            self.updateTableViewForItem(currentItem!)
         }
     }
     var wasRenderedCollectionView: Bool = false
@@ -129,10 +87,9 @@ class StatisticsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        // init
         self.selectedFilter = .Day
-        let d = self.dataStore[selectedFilter]!
-        print(".here", self.currentItem, d.count, d.map({ $0.date }) )
 
         segmentedFilterView.selectedSegmentIndex = self.selectedFilter.rawValue
         collectionView.dataSource = self
@@ -142,6 +99,7 @@ class StatisticsViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        // runs once
         self.scrollOnceToLastItem()
     }
 
@@ -154,21 +112,27 @@ class StatisticsViewController: UIViewController {
     }
 
 
-    func scrollOnceToLastItem() {
-        if self.wasRenderedCollectionView {
-            return
+    func updateCollectionViewForFilter(filter: StatisticFilter) {
+        if self.dataStore[selectedFilter]!.isEmpty {
+            self.generateDataFor(selectedFilter)
         }
-        self.wasRenderedCollectionView = true
+        self.currentItem = getItem(0)
+        self.collectionView.reloadData()
 
-        let rowsCount = self.collectionView.numberOfItemsInSection(0),
-            contentSize = Int(self.collectionView.frame.size.width)
-        var co = self.collectionView.contentOffset
-        co.x = CGFloat( contentSize * (rowsCount - 1) )
-
-        dispatch_async(dispatch_get_main_queue(), {
-            self.collectionView.setContentOffset(co, animated: false)
-        })
+        // runs only after viewWillAppear runs it
+        if self.wasRenderedCollectionView {
+            self.wasRenderedCollectionView = false
+            self.scrollOnceToLastItem()
+        }
     }
+
+    func updateTableViewForItem(item: StatisticItem) {
+        if item.info == nil {
+            item.fetchInfo({ self.tableInfo!.reloadData() })
+        }
+        self.tableInfo!.reloadData()
+    }
+
 
     func generateDataFor(filter: StatisticFilter) {
         Range(1...5).generate() // 5 times
@@ -177,6 +141,9 @@ class StatisticsViewController: UIViewController {
 
                 if let last = self.dataStore[filter]?.last {
                     item = last.genPrev()
+                    if item == nil { // it was last item
+                        return
+                    }
                 } else {
                     let now = NSDate()
                     item = StatisticItem(filter: filter, date: now, info: nil)
@@ -188,6 +155,16 @@ class StatisticsViewController: UIViewController {
 
     func getItem(index: Int) -> StatisticItem  {
         return self.dataStore[self.selectedFilter]![index]
+    }
+
+    func getItem(index: Int, reversed: Bool) -> StatisticItem {
+        if reversed == false {
+            return getItem(index)
+        }
+
+        let count = self.dataStore[self.selectedFilter]!.count,
+            indexDesc = count - index - 1
+        return self.dataStore[self.selectedFilter]![indexDesc]
     }
 }
 
@@ -203,9 +180,7 @@ extension StatisticsViewController: UICollectionViewDataSource {
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = self.collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseOfCollectionID, forIndexPath: indexPath) as! StatisticItemCell
-        let rowsCount = self.collectionView.numberOfItemsInSection(0),
-            rowDesc = rowsCount - indexPath.row - 1,
-            item = self.getItem(rowDesc)
+        let item = self.getItem(indexPath.row, reversed: true)
 
         cell.labelDescription.text = item.name()
         return cell
@@ -220,8 +195,54 @@ extension StatisticsViewController: UICollectionViewDelegateFlowLayout {
 
 extension StatisticsViewController: UICollectionViewDelegate {
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        let row = Int(self.collectionView.contentOffset.x / self.collectionView.frame.size.width)
-        self.currentItem = self.getItem(row)
+        let row = self.getCurrentRowIndex()
+        self.currentItem = self.getItem(row, reversed: true)
+    }
+
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        // add prev items
+        if self.isOnFirstScrollItem() {
+            self.generateDataFor(self.selectedFilter)
+        }
+
+        // hide buttons
+        let animate = {
+            self.buttonNext.layer.opacity = self.isOnLastScrollItem() ? 0.5 : 1
+            self.buttonNext.enabled = !self.isOnLastScrollItem()
+            self.buttonPrev.layer.opacity = self.isOnFirstScrollItem() ? 0.5 : 1
+            self.buttonPrev.enabled = !self.isOnFirstScrollItem()
+        }
+        UIView.animateWithDuration(0.3, delay: 0.3, options: .CurveEaseOut, animations: animate, completion: nil)
+    }
+
+    // custom function for scroll
+    func scrollOnceToLastItem() {
+        if self.wasRenderedCollectionView {
+            return
+        }
+        self.wasRenderedCollectionView = true
+        
+        let rowsCount = self.collectionView.numberOfItemsInSection(0),
+        contentSize = Int(self.collectionView.frame.size.width)
+        var co = self.collectionView.contentOffset
+        co.x = CGFloat( contentSize * (rowsCount - 1) )
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.collectionView.setContentOffset(co, animated: false)
+        })
+    }
+
+    func isOnFirstScrollItem() -> Bool {
+        return self.collectionView.contentOffset.x < self.collectionView.frame.size.width
+    }
+
+    func isOnLastScrollItem() -> Bool {
+        let rightBorder = self.collectionView.contentOffset.x + self.collectionView.frame.size.width
+        return rightBorder >= self.collectionView.contentSize.width
+    }
+
+    func getCurrentRowIndex() -> Int {
+        return Int(self.collectionView.contentOffset.x / self.collectionView.frame.size.width)
     }
 }
 
@@ -231,15 +252,27 @@ extension StatisticsViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (self.currentItem?.info != nil) ? 4 : 1
+        if let info = self.currentItem?.info {
+            self.spinner.stopAnimating()
+            return info.isEmpty ? 1 : 4
+        }
+        return 1
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableInfo!.dequeueReusableCellWithIdentifier(cellReuseOfTableID, forIndexPath: indexPath)
 
-        if let info = self.currentItem?.info {
+        if let info = self.currentItem?.info { // fetchInfo was finished
+            // 1. no data
+            if info.isEmpty {
+                cell.textLabel!.text = "Нет данных"
+                cell.detailTextLabel!.text = ""
+                return cell
+            }
+
+            // 2. some data
             switch indexPath.row {
             case 0:
                 cell.textLabel!.text = "Количество моек"
@@ -256,12 +289,17 @@ extension StatisticsViewController: UITableViewDataSource {
             default:
                 break
             }
-        } else {
-            cell.textLabel!.text = "Нет данных"
+        } else { // fetchInfo in progress
+            cell.textLabel!.text = ""
             cell.detailTextLabel!.text = ""
+
+            cell.accessoryView = self.spinner
+            self.spinner.startAnimating()
         }
 
         return cell
     }
+
 }
+
 

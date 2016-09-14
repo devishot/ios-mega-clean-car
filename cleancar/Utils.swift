@@ -63,6 +63,14 @@ func parseTimestamp(timestamp: Int) -> NSDate {
     return date
 }
 
+func getCalendar() -> NSCalendar {
+    let now = NSDate()
+    let calendar = NSCalendar.currentCalendar()
+    calendar.components([.YearForWeekOfYear, .WeekOfYear], fromDate: now)
+    calendar.firstWeekday = 2
+    return calendar
+}
+
 func formatAsString(date: NSDate) -> String {
     return getDateTimeFormatter().stringFromDate(date)
 }

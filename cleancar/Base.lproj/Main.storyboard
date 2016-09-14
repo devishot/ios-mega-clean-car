@@ -4734,6 +4734,9 @@
                                                 <include reference="hju-i9-vD5"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="clickedButtonNext:" destination="psA-gy-P7D" eventType="touchUpInside" id="H3Z-rG-8fA"/>
+                                        </connections>
                                     </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MsB-Zz-TsU">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -4984,7 +4987,6 @@
                     <connections>
                         <outlet property="buttonNext" destination="9lh-eq-s4q" id="iUg-sh-Ep5"/>
                         <outlet property="buttonPrev" destination="w7b-kF-WCZ" id="rhV-jx-iMu"/>
-                        <outlet property="clickedButtonNext" destination="9lh-eq-s4q" id="Kc8-I8-L0u"/>
                         <outlet property="collectionView" destination="MsB-Zz-TsU" id="078-ZI-hNl"/>
                         <outlet property="segmentedFilterView" destination="vhb-wL-159" id="1go-qQ-4pV"/>
                     </connections>

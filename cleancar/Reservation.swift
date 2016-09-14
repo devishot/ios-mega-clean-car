@@ -12,64 +12,6 @@ import SwiftyJSON
 
 
 
-
-func getCalendar() -> NSCalendar {
-    let now = NSDate()
-    let calendar = NSCalendar.currentCalendar()
-    calendar.components([.YearForWeekOfYear, .WeekOfYear], fromDate: now)
-    calendar.firstWeekday = 2
-    return calendar
-}
-
-func getStaticKey(date: NSDate, forFilter: StatisticFilter) -> String {
-    let calendar = getCalendar()
-    
-    switch forFilter {
-    case .Year:
-        let year = calendar.components(.Year, fromDate: date).year
-        return "/years/" + String(year)
-    case .Month:
-        let updCalendar = calendar.components([.Year, .Month], fromDate: date)
-        return "/months/" + "\(updCalendar.year)-\(updCalendar.month)"
-    case .Week:
-        var firstDayOfWeek: NSDate?,
-            lastDayOfWeek: NSDate?
-        calendar.rangeOfUnit(.WeekOfYear, startDate: &firstDayOfWeek, interval: nil, forDate: date)
-        lastDayOfWeek = calendar.dateByAddingUnit(.Day, value: 7, toDate: firstDayOfWeek!, options: [])
-        let weekRange = [firstDayOfWeek!, lastDayOfWeek!]
-                            .map({ formatAsString($0, onlyDate: true) })
-                            .joinWithSeparator("_")
-        return "/weeks/" + weekRange
-    case .Day:
-        return "/days/" + formatAsString(date, onlyDate: true)
-    }
-}
-
-func getStaticKeyDisplay(date: NSDate, forFilter: StatisticFilter) -> String {
-    let calendar = getCalendar()
-
-    switch forFilter {
-    case .Month:
-        return getMonth(date, inFormat: "MMMM") + "'" + formatAsString(date, inFormat: "yy")
-    case .Week:
-        var firstDayOfWeek: NSDate?,
-            lastDayOfWeek: NSDate?
-        calendar.rangeOfUnit(.WeekOfYear, startDate: &firstDayOfWeek, interval: nil, forDate: date)
-        lastDayOfWeek = calendar.dateByAddingUnit(.Day, value: 7, toDate: firstDayOfWeek!, options: [])
-        let weekRange = [firstDayOfWeek!, lastDayOfWeek!]
-            .map({ formatAsString($0, inFormat: "MMMM dd") })
-            .joinWithSeparator(" - ")
-        return weekRange
-    case .Day:
-        return formatAsString(date, inFormat: "d MMMM - EEEE")
-    default:
-        return ""
-    }
-}
-
-
-
-
 enum ReservationStatus: Int {
     case NonAssigned
     case Assigned
