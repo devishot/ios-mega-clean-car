@@ -10,6 +10,8 @@
 		0404B3F268897FB69D358151 /* Pods_cleancarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48303207C9BACF141C57D8CC /* Pods_cleancarUITests.framework */; };
 		3CCDD94ABB73D43BD8346AB0 /* Pods_cleancar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC7078257E4E069BA7EF11A /* Pods_cleancar.framework */; };
 		5209DE3F1D6C1EEA006E040E /* ServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5209DE3E1D6C1EEA006E040E /* ServicesTableViewController.swift */; };
+		52129C421D87ABD500921445 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52129C411D87ABD500921445 /* StatisticsViewController.swift */; };
+		52129C441D881DE000921445 /* StatisticItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52129C431D881DE000921445 /* StatisticItemCell.swift */; };
 		5225B05A1D6B5CEB00BFBAE7 /* CarInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225B0591D6B5CEB00BFBAE7 /* CarInfo.swift */; };
 		5225B05C1D6B640E00BFBAE7 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225B05B1D6B640E00BFBAE7 /* Services.swift */; };
 		52284A8E1D75F5DD00A41427 /* BookingHoursCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */; };
@@ -62,6 +64,8 @@
 		408F4B8A8AAB864F46AF8072 /* Pods-cleancar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.release.xcconfig"; sourceTree = "<group>"; };
 		48303207C9BACF141C57D8CC /* Pods_cleancarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cleancarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5209DE3E1D6C1EEA006E040E /* ServicesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesTableViewController.swift; sourceTree = "<group>"; };
+		52129C411D87ABD500921445 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		52129C431D881DE000921445 /* StatisticItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticItemCell.swift; sourceTree = "<group>"; };
 		5225B0591D6B5CEB00BFBAE7 /* CarInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarInfo.swift; sourceTree = "<group>"; };
 		5225B05B1D6B640E00BFBAE7 /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		523F3B511D66EA4300B75421 /* BookingHour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingHour.swift; sourceTree = "<group>"; };
@@ -168,6 +172,7 @@
 				525C7C961D66C6D400DAE000 /* PricelistController.swift */,
 				B45905C51D6C171B00CFEFEF /* OrdersTableViewController.swift */,
 				525A8ABE1D7F4DB4002C6F46 /* FeedbacksTableViewController.swift */,
+				52129C411D87ABD500921445 /* StatisticsViewController.swift */,
 			);
 			name = Tabs;
 			sourceTree = "<group>";
@@ -229,6 +234,7 @@
 				B42F94E81D79F336008F178A /* DurationCollectionViewCell.swift */,
 				525A8A581D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift */,
 				525A8ABC1D7F4C48002C6F46 /* FeedbackTableViewCell.swift */,
+				52129C431D881DE000921445 /* StatisticItemCell.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -496,6 +502,7 @@
 				525A8ABF1D7F4DB4002C6F46 /* FeedbacksTableViewController.swift in Sources */,
 				523F3B521D66EA4300B75421 /* BookingHour.swift in Sources */,
 				528947291D72C9D7004B7090 /* Reservation.swift in Sources */,
+				52129C421D87ABD500921445 /* StatisticsViewController.swift in Sources */,
 				528947271D71760D004B7090 /* LoginCheckViewController.swift in Sources */,
 				B46AE7D61D7991EF00875C40 /* AssignToReservationViewController.swift in Sources */,
 				525A8A591D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift in Sources */,
@@ -508,6 +515,7 @@
 				5225B05A1D6B5CEB00BFBAE7 /* CarInfo.swift in Sources */,
 				525A8A571D7ADBE9002C6F46 /* AssignWasherTableViewController.swift in Sources */,
 				5289472B1D72CA0F004B7090 /* User.swift in Sources */,
+				52129C441D881DE000921445 /* StatisticItemCell.swift in Sources */,
 				5292AC071D6EBD4C00E03760 /* Dimmable.swift in Sources */,
 				B4856D961D6889FC000EC687 /* UIView+borderColor.swift in Sources */,
 				B4EEA3261D6429EB0039D998 /* AppDelegate.swift in Sources */,

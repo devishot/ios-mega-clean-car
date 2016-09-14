@@ -11,6 +11,65 @@ import Firebase
 import SwiftyJSON
 
 
+
+
+func getCalendar() -> NSCalendar {
+    let now = NSDate()
+    let calendar = NSCalendar.currentCalendar()
+    calendar.components([.YearForWeekOfYear, .WeekOfYear], fromDate: now)
+    calendar.firstWeekday = 2
+    return calendar
+}
+
+func getStaticKey(date: NSDate, forFilter: StatisticFilter) -> String {
+    let calendar = getCalendar()
+    
+    switch forFilter {
+    case .Year:
+        let year = calendar.components(.Year, fromDate: date).year
+        return "/years/" + String(year)
+    case .Month:
+        let updCalendar = calendar.components([.Year, .Month], fromDate: date)
+        return "/months/" + "\(updCalendar.year)-\(updCalendar.month)"
+    case .Week:
+        var firstDayOfWeek: NSDate?,
+            lastDayOfWeek: NSDate?
+        calendar.rangeOfUnit(.WeekOfYear, startDate: &firstDayOfWeek, interval: nil, forDate: date)
+        lastDayOfWeek = calendar.dateByAddingUnit(.Day, value: 7, toDate: firstDayOfWeek!, options: [])
+        let weekRange = [firstDayOfWeek!, lastDayOfWeek!]
+                            .map({ formatAsString($0, onlyDate: true) })
+                            .joinWithSeparator("_")
+        return "/weeks/" + weekRange
+    case .Day:
+        return "/days/" + formatAsString(date, onlyDate: true)
+    }
+}
+
+func getStaticKeyDisplay(date: NSDate, forFilter: StatisticFilter) -> String {
+    let calendar = getCalendar()
+
+    switch forFilter {
+    case .Month:
+        return getMonth(date, inFormat: "MMMM") + "'" + formatAsString(date, inFormat: "yy")
+    case .Week:
+        var firstDayOfWeek: NSDate?,
+            lastDayOfWeek: NSDate?
+        calendar.rangeOfUnit(.WeekOfYear, startDate: &firstDayOfWeek, interval: nil, forDate: date)
+        lastDayOfWeek = calendar.dateByAddingUnit(.Day, value: 7, toDate: firstDayOfWeek!, options: [])
+        let weekRange = [firstDayOfWeek!, lastDayOfWeek!]
+            .map({ formatAsString($0, inFormat: "MMMM dd") })
+            .joinWithSeparator(" - ")
+        return weekRange
+    case .Day:
+        return formatAsString(date, inFormat: "d MMMM - EEEE")
+    default:
+        return ""
+    }
+}
+
+
+
+
 enum ReservationStatus: Int {
     case NonAssigned
     case Assigned
@@ -18,6 +77,8 @@ enum ReservationStatus: Int {
     case FeedbackReceived
     case Declined
 }
+
+
 
 class Reservation: FirebaseDataProtocol {
     static let childRefName: String = "reservations"
@@ -271,37 +332,29 @@ class Reservation: FirebaseDataProtocol {
 
     func updateStatistic(onlyRate: Bool = false) {
         let now = NSDate(),
-            calendar = NSCalendar.currentCalendar()
-        var firstDayOfWeek: NSDate?,
-            lastDayOfWeek: NSDate?,
-            year = getCurrentYear(),
-            month = getCurrentMonth(),
-            day = formatAsString(now, onlyDate: true)
-        calendar.components([.YearForWeekOfYear, .WeekOfYear], fromDate: now)
-        calendar.firstWeekday = 2
-        calendar.rangeOfUnit(.WeekOfYear, startDate: &firstDayOfWeek, interval: nil, forDate: now)
-        lastDayOfWeek = calendar.dateByAddingUnit(.Day, value: 7, toDate: firstDayOfWeek!, options: [])
+            paths = [
+                getStaticKey(now, forFilter: .Year),
+                getStaticKey(now, forFilter: .Month),
+                getStaticKey(now, forFilter: .Week),
+                getStaticKey(now, forFilter: .Day)
+            ]
 
-        let paths = [
-            "/years/\(year)",
-            "/months/\(year)-\(month)",
-            "/weeks/\(formatAsString(firstDayOfWeek!, onlyDate: true))_\(formatAsString(lastDayOfWeek!, onlyDate: true))",
-            "/days/\(formatAsString(now, onlyDate: true))"
+
+        var newInfo: [String: AnyObject] = [
+            "count": 1,
+            "sum": self.services.getCostForTotal(),
+            "rate_count": 0,
+            "rate_sum": 0
         ]
-
-    
-        let newInfo: [String: AnyObject] =
-            onlyRate ? [
+        if onlyRate {
+            newInfo = [
                 "count": 0,
                 "sum": 0,
                 "rate_count": 1,
                 "rate_sum": self.feedbackRate!
-            ] : [
-                "count": 1,
-                "sum": self.services.getCostForTotal(),
-                "rate_count": 0,
-                "rate_sum": 0
             ]
+        }
+
         func updateInfo(data: [String: AnyObject]) -> [String: AnyObject] {
             let info = JSON(data).dictionaryValue
             return [

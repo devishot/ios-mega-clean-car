@@ -71,6 +71,13 @@ func formatAsString(date: NSDate, onlyDate: Bool) -> String {
     return (onlyDate ? getDateFormatter() : getDateTimeFormatter() ).stringFromDate(date)
 }
 
+func formatAsString(date: NSDate, inFormat: String) -> String {
+    let formatter = NSDateFormatter()
+    formatter.locale = NSLocale.currentLocale()
+    formatter.dateFormat = inFormat
+    return formatter.stringFromDate(date)
+}
+
 func getCurrentHour() -> Int {
     let now = NSDate()
     let calendar = NSCalendar.currentCalendar()
@@ -110,11 +117,11 @@ func getDateFormatter() -> NSDateFormatter {
     return formatter
 }
 
-func getCurrentMonth(inFormat: String = "MM") -> String {
+func getMonth(date: NSDate, inFormat: String = "MM") -> String {
     let formatter = NSDateFormatter()
     formatter.locale = NSLocale.currentLocale()
     formatter.dateFormat = inFormat
-    return formatter.stringFromDate(NSDate())
+    return formatter.stringFromDate(date)
 }
 
 private var kAssociationKeyNextField: UInt8 = 0
