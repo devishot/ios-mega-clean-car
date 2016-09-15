@@ -166,6 +166,50 @@ class User: FirebaseDataProtocol {
     }
 
 
+    static func logInByAccountKit(uid: String, phoneNumber: String, completion: () -> (Void) ) {
+        let akEmail = "\(phoneNumber)@accountkit.fb",
+            akPassword = uid
+
+        FIRAuth.auth()?.signInWithEmail(akEmail, password: akPassword) { (user, error) in
+            if error == nil { // done!
+                self.afterLogin(completion)
+                
+            } else {
+                print(".User.logInByAccountKit.error", error.debugDescription, akEmail, akPassword)
+            }
+        }
+    }
+
+    static func signUpWithAccountKit(uid: String, phoneNumber: String, fullName: String, completion: () -> (Void) ) {
+        let akEmail = "\(phoneNumber)@accountkit.fb",
+            akPassword = uid
+
+        FIRAuth.auth()?.createUserWithEmail(akEmail, password: akPassword) { (user, error) in
+            if  error == nil,
+                let user = user {
+
+                // set fullName
+                let changeRequest = user.profileChangeRequest()
+                changeRequest.displayName = fullName
+                changeRequest.commitChangesWithCompletion { err in
+                    if err == nil { // done!
+                        self.afterLogin(completion)
+
+                    } else {
+                        print(".User.signUpWithAccountKit.commitChangesWithCompletion.error", err.debugDescription, fullName)
+                    }
+                }
+            } else {
+                print(".User.signUpWithAccountKit.createUserWithEmail.error", error.debugDescription, akEmail, akPassword)
+
+                // already exist:
+                logInByAccountKit(uid, phoneNumber: phoneNumber, completion: completion)
+            }
+        }
+    }
+    
+    
+
     static func logInByFacebook(completion: () -> (Void) ) -> Void {
         let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString);
 

@@ -56,26 +56,22 @@ class LoginViewController: UIViewController {
         facebookLoginButtonBorder.layer.cornerRadius = 5
         facebookLoginButtonBorder.layer.masksToBounds = true
 
+        // init
+        self.initAccountKit()
 
-        // check exist Login credentials for:
-        // 1. facebook account
+
+        // if the user is already logged in
+        // 1. using facebook account
         User.isAlreadyLoggedInByFacebook(self.redirectToHome)
-
-        // 2. phone number AccountKit
-        if _accountKit == nil {
-            _accountKit = AKFAccountKit(responseType: .AuthorizationCode)
-        }
-        _pendingLoginViewController = _accountKit.viewControllerForLoginResume() as? AKFViewController
-        _pendingLoginViewController?.delegate = self
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        // if the user is already logged in
+        // 2. using phone number in AccountKit
         if  _accountKit.currentAccessToken != nil {
-            //if the user is already logged in, go to the main screen
-
-            // TODO: firebaseLogin()
+            self.fetchAccountKitData({ User.logInByAccountKit($0.uid, phoneNumber: $0.phoneNumber, completion: self.redirectToHome) })
 
         } else if (_pendingLoginViewController != nil) {
             //resume pending login (if any)
@@ -99,6 +95,14 @@ class LoginViewController: UIViewController {
 
 
     // MARK: Facebook AccountKit
+    func initAccountKit() {
+        if _accountKit == nil {
+            _accountKit = AKFAccountKit(responseType: .AccessToken)
+        }
+        _pendingLoginViewController = _accountKit.viewControllerForLoginResume() as? AKFViewController
+        _pendingLoginViewController?.delegate = self
+    }
+
     func prepareLoginViewController(loginViewController: AKFViewController) {
         loginViewController.delegate = self
         loginViewController.advancedUIManager = nil
@@ -143,14 +147,34 @@ class LoginViewController: UIViewController {
         }
     }
 
+
+    func fetchAccountKitData(completion: (uid: String, phoneNumber: String) -> (Void) ) {
+        _accountKit.requestAccount({ (account: AKFAccount?, error: NSError?) in
+            let akID = account!.accountID
+            let phoneNumber = account!.phoneNumber!.stringRepresentation()
+            print(".LoginWithAccessToken.requestAccount", akID, phoneNumber)
+            
+            completion(uid: akID, phoneNumber: phoneNumber)
+        })
+    }
 }
 
 extension LoginViewController: AKFViewControllerDelegate {
     func viewController(viewController: UIViewController!, didFailWithError error: NSError!) {
         print("error \(error)")
     }
+
     func viewController(viewController: UIViewController!, didCompleteLoginWithAccessToken accessToken: AKFAccessToken!, state: String!) {
-        print("did complete login with access token \(accessToken.tokenString) state \(state)")
+        print(".AccountKit.didCompleteLoginWithAccessToken: \(accessToken.tokenString) state \(state)")
+
+        self.fetchAccountKitData() { uid, phoneNumber in
+            User.signUpWithAccountKit(uid, phoneNumber: phoneNumber, fullName: "Sattar Stamkulov", completion: self.redirectToHome)
+        }
+
+    }
+
+    func viewController(viewController: UIViewController!, didCompleteLoginWithAuthorizationCode code: String!, state: String!) {
+        print("..LoginWithAuthorizationCode", code, state)
     }
 }
 
