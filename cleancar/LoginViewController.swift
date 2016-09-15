@@ -16,6 +16,8 @@ import AccountKit
 class LoginViewController: UIViewController {
 
     // IBOutlets
+    @IBOutlet weak var facebookLoginButtonBorder: UIButton!
+    @IBOutlet weak var signInButtonBorder: UIButton!
 
 
     // IBActions
@@ -27,19 +29,25 @@ class LoginViewController: UIViewController {
     @IBAction func clickedSignInButton(sender: UIButton) {
         self.loginWithPhoneNumber()
     }
+    @IBAction func unwindToLoginViewController(segue: UIStoryboardSegue) {
+        let destController = segue.sourceViewController as! SignupSecondStepViewController
+        let fullName = destController.textFieldFullName.text!
 
-    @IBOutlet weak var facebookLoginButtonBorder: UIButton!
-    @IBOutlet weak var signInButtonBorder: UIButton!
+        User.fetchAccountKitData() { uid, phoneNumber in
+            User.signUpWithAccountKit(uid, phoneNumber: phoneNumber, fullName: fullName, completion: self.redirectToHome)
+        }
+        self.flagCompleteSignupSteps = false
+    }
 
 
     // constants
     let homeSegueID = "homeDirect"
+    let segueSignupSecondStep = "signupSecondStep"
 
-    
+
     // variables
-    var isLoginPage = false
-    
-    var _accountKit: AKFAccountKit!
+    var flagCompleteSignupSteps: Bool = false
+
     var _pendingLoginViewController: AKFViewController?
     var _authorizationCode: String?
 
@@ -59,7 +67,6 @@ class LoginViewController: UIViewController {
         // init
         self.initAccountKit()
 
-
         // if the user is already logged in
         // 1. using facebook account
         User.isAlreadyLoggedInByFacebook(self.redirectToHome)
@@ -70,8 +77,8 @@ class LoginViewController: UIViewController {
 
         // if the user is already logged in
         // 2. using phone number in AccountKit
-        if  _accountKit.currentAccessToken != nil {
-            self.fetchAccountKitData({ User.logInByAccountKit($0.uid, phoneNumber: $0.phoneNumber, completion: self.redirectToHome) })
+        if  User.accountKit.currentAccessToken != nil {
+            User.fetchAccountKitData({ User.logInByAccountKit($0.uid, phoneNumber: $0.phoneNumber, completion: self.redirectToHome) })
 
         } else if (_pendingLoginViewController != nil) {
             //resume pending login (if any)
@@ -80,12 +87,20 @@ class LoginViewController: UIViewController {
             _pendingLoginViewController = nil;
         }
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if self.flagCompleteSignupSteps {
+            self.redirectToSignupSecondStep()
+        }
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 
     func redirectToHome() -> Void {
         dispatch_async(dispatch_get_main_queue()) {
@@ -93,13 +108,16 @@ class LoginViewController: UIViewController {
         }
     }
 
+    func redirectToSignupSecondStep() -> Void {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.performSegueWithIdentifier(self.segueSignupSecondStep, sender: self)
+        }
+    }
+
 
     // MARK: Facebook AccountKit
     func initAccountKit() {
-        if _accountKit == nil {
-            _accountKit = AKFAccountKit(responseType: .AccessToken)
-        }
-        _pendingLoginViewController = _accountKit.viewControllerForLoginResume() as? AKFViewController
+        _pendingLoginViewController = User.accountKit.viewControllerForLoginResume() as? AKFViewController
         _pendingLoginViewController?.delegate = self
     }
 
@@ -124,7 +142,7 @@ class LoginViewController: UIViewController {
     func loginWithPhoneNumber() {
         let preFillPhoneNumber: AKFPhoneNumber? = nil
         let inputState = NSUUID().UUIDString
-        let vc: AKFViewController = _accountKit.viewControllerForPhoneLoginWithPhoneNumber(preFillPhoneNumber, state: inputState) as! AKFViewController
+        let vc: AKFViewController = User.accountKit.viewControllerForPhoneLoginWithPhoneNumber(preFillPhoneNumber, state: inputState) as! AKFViewController
         vc.enableSendToFacebook = true
 
         self.prepareLoginViewController(vc)
@@ -147,16 +165,6 @@ class LoginViewController: UIViewController {
         }
     }
 
-
-    func fetchAccountKitData(completion: (uid: String, phoneNumber: String) -> (Void) ) {
-        _accountKit.requestAccount({ (account: AKFAccount?, error: NSError?) in
-            let akID = account!.accountID
-            let phoneNumber = account!.phoneNumber!.stringRepresentation()
-            print(".LoginWithAccessToken.requestAccount", akID, phoneNumber)
-            
-            completion(uid: akID, phoneNumber: phoneNumber)
-        })
-    }
 }
 
 extension LoginViewController: AKFViewControllerDelegate {
@@ -167,10 +175,7 @@ extension LoginViewController: AKFViewControllerDelegate {
     func viewController(viewController: UIViewController!, didCompleteLoginWithAccessToken accessToken: AKFAccessToken!, state: String!) {
         print(".AccountKit.didCompleteLoginWithAccessToken: \(accessToken.tokenString) state \(state)")
 
-        self.fetchAccountKitData() { uid, phoneNumber in
-            User.signUpWithAccountKit(uid, phoneNumber: phoneNumber, fullName: "Sattar Stamkulov", completion: self.redirectToHome)
-        }
-
+        self.flagCompleteSignupSteps = true
     }
 
     func viewController(viewController: UIViewController!, didCompleteLoginWithAuthorizationCode code: String!, state: String!) {

@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import AccountKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import SwiftyJSON
@@ -18,6 +19,10 @@ class User: FirebaseDataProtocol {
     static var refHandle: FIRDatabaseHandle?
 
     static var current: User?
+    
+    // AccountKit
+    static var accountKit: AKFAccountKit = AKFAccountKit(responseType: .AccessToken)
+
 
     let id: String
     let full_name: String
@@ -166,6 +171,17 @@ class User: FirebaseDataProtocol {
     }
 
 
+    // AcountKit
+    static func fetchAccountKitData(completion: (uid: String, phoneNumber: String) -> (Void) ) {
+        User.accountKit.requestAccount({ (account: AKFAccount?, error: NSError?) in
+            let akID = account!.accountID
+            let phoneNumber = account!.phoneNumber!.stringRepresentation()
+            print(".LoginWithAccessToken.requestAccount", akID, phoneNumber)
+            
+            completion(uid: akID, phoneNumber: phoneNumber)
+        })
+    }
+
     static func logInByAccountKit(uid: String, phoneNumber: String, completion: () -> (Void) ) {
         let akEmail = "\(phoneNumber)@accountkit.fb",
             akPassword = uid
@@ -208,8 +224,8 @@ class User: FirebaseDataProtocol {
         }
     }
     
-    
 
+    // Facebook
     static func logInByFacebook(completion: () -> (Void) ) -> Void {
         let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString);
 
@@ -253,8 +269,10 @@ class User: FirebaseDataProtocol {
             // logout from Facebook
             let facebookLogin = FBSDKLoginManager();
             facebookLogin.logOut()
-            User.current = nil
+            // logout from AccountKit
+            User.accountKit.logOut()
 
+            User.current = nil
             completion()
 
         } catch {

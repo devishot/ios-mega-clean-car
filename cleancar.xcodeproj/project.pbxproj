@@ -15,6 +15,7 @@
 		5225B05A1D6B5CEB00BFBAE7 /* CarInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225B0591D6B5CEB00BFBAE7 /* CarInfo.swift */; };
 		5225B05C1D6B640E00BFBAE7 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225B05B1D6B640E00BFBAE7 /* Services.swift */; };
 		52284A8E1D75F5DD00A41427 /* BookingHoursCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */; };
+		5232275C1D8A83BB000D61D3 /* SignupSecondStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232275B1D8A83BB000D61D3 /* SignupSecondStepViewController.swift */; };
 		523F3B521D66EA4300B75421 /* BookingHour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523F3B511D66EA4300B75421 /* BookingHour.swift */; };
 		523F3B551D67678B00B75421 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 523F3B541D67678B00B75421 /* GoogleService-Info.plist */; };
 		523F3B571D67A50B00B75421 /* BookingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523F3B561D67A50B00B75421 /* BookingController.swift */; };
@@ -29,7 +30,6 @@
 		525C7C971D66C6D400DAE000 /* PricelistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C961D66C6D400DAE000 /* PricelistController.swift */; };
 		526CB0AD1D8914A800DB930B /* Statistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526CB0AC1D8914A800DB930B /* Statistic.swift */; };
 		528947251D717441004B7090 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528947241D717441004B7090 /* LoginViewController.swift */; };
-		528947271D71760D004B7090 /* LoginCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528947261D71760D004B7090 /* LoginCheckViewController.swift */; };
 		528947291D72C9D7004B7090 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528947281D72C9D7004B7090 /* Reservation.swift */; };
 		5289472B1D72CA0F004B7090 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5289472A1D72CA0F004B7090 /* User.swift */; };
 		5289472D1D72CFA9004B7090 /* Washer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5289472C1D72CFA9004B7090 /* Washer.swift */; };
@@ -69,6 +69,7 @@
 		52129C431D881DE000921445 /* StatisticItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticItemCell.swift; sourceTree = "<group>"; };
 		5225B0591D6B5CEB00BFBAE7 /* CarInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarInfo.swift; sourceTree = "<group>"; };
 		5225B05B1D6B640E00BFBAE7 /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		5232275B1D8A83BB000D61D3 /* SignupSecondStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupSecondStepViewController.swift; sourceTree = "<group>"; };
 		523F3B511D66EA4300B75421 /* BookingHour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingHour.swift; sourceTree = "<group>"; };
 		523F3B541D67678B00B75421 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		523F3B561D67A50B00B75421 /* BookingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingController.swift; sourceTree = "<group>"; };
@@ -84,7 +85,6 @@
 		525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingHoursCollectionViewCell.swift; sourceTree = "<group>"; };
 		526CB0AC1D8914A800DB930B /* Statistic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statistic.swift; sourceTree = "<group>"; };
 		528947241D717441004B7090 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		528947261D71760D004B7090 /* LoginCheckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginCheckViewController.swift; sourceTree = "<group>"; };
 		528947281D72C9D7004B7090 /* Reservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
 		5289472A1D72CA0F004B7090 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5289472C1D72CFA9004B7090 /* Washer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Washer.swift; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				528947241D717441004B7090 /* LoginViewController.swift */,
-				528947261D71760D004B7090 /* LoginCheckViewController.swift */,
+				5232275B1D8A83BB000D61D3 /* SignupSecondStepViewController.swift */,
 			);
 			name = SignUp/SignIn;
 			sourceTree = "<group>";
@@ -507,7 +507,6 @@
 				523F3B521D66EA4300B75421 /* BookingHour.swift in Sources */,
 				528947291D72C9D7004B7090 /* Reservation.swift in Sources */,
 				52129C421D87ABD500921445 /* StatisticsViewController.swift in Sources */,
-				528947271D71760D004B7090 /* LoginCheckViewController.swift in Sources */,
 				B46AE7D61D7991EF00875C40 /* AssignToReservationViewController.swift in Sources */,
 				525A8A591D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift in Sources */,
 				52284A8E1D75F5DD00A41427 /* BookingHoursCollectionViewCell.swift in Sources */,
@@ -531,6 +530,7 @@
 				B4856D981D6896E0000EC687 /* OrdersTableViewCell.swift in Sources */,
 				B45905CB1D7023D000CFEFEF /* UISegmentedControl_fontSize.swift in Sources */,
 				525A8A5C1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift in Sources */,
+				5232275C1D8A83BB000D61D3 /* SignupSecondStepViewController.swift in Sources */,
 				B4EEA3481D644B1F0039D998 /* HomeViewController.swift in Sources */,
 				B43C90031D6859F800667B09 /* FeedbackViewController.swift in Sources */,
 				5252E8131D731457009A841F /* FirebaseDataProtocol.swift in Sources */,
