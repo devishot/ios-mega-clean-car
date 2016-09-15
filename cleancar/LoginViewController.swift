@@ -128,14 +128,25 @@ class LoginViewController: UIViewController {
 
         //Costumize the theme
         let theme:AKFTheme = AKFTheme.defaultTheme()
-        theme.headerBackgroundColor = UIColor(red: 0.325, green: 0.557, blue: 1, alpha: 1)
-        theme.headerTextColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        theme.iconColor = UIColor(red: 0.325, green: 0.557, blue: 1, alpha: 1)
-        theme.inputTextColor = UIColor(white: 0.4, alpha: 1.0)
-        theme.statusBarStyle = .Default
-        theme.textColor = UIColor(white: 0.3, alpha: 1.0)
-        theme.titleColor = UIColor(red: 0.247, green: 0.247, blue: 0.247, alpha: 1)
+        let redBgColor = UIColor(red: 190.0/255.0, green: 30.0/255.0, blue: 45.0/255.0, alpha: 1)
+        let whiteColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1)
 
+        theme.headerBackgroundColor = redBgColor
+
+        theme.headerTextColor = whiteColor
+        theme.iconColor = whiteColor
+        
+        theme.statusBarStyle = .Default
+        theme.textColor =  whiteColor
+        theme.titleColor = whiteColor
+        theme.backgroundColor = redBgColor
+        theme.inputBorderColor =  whiteColor
+        theme.inputBackgroundColor = redBgColor
+        theme.inputTextColor =  whiteColor
+        theme.buttonBackgroundColor = redBgColor
+        theme.buttonBorderColor = whiteColor
+        theme.buttonTextColor = whiteColor
+        
         loginViewController.theme = theme
     }
 

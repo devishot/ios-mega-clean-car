@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ycG-gP-qHL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ycG-gP-qHL">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -48,7 +48,7 @@
                                                 <variation key="widthClass=compact" constant="45"/>
                                             </constraint>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
@@ -90,14 +90,20 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="s41-di-cGY" firstAttribute="top" secondItem="FU3-Mo-h8O" secondAttribute="bottom" constant="320" id="51g-Jz-4k5">
-                                        <variation key="widthClass=compact" constant="15"/>
+                                        <variation key="widthClass=compact" constant="17"/>
                                     </constraint>
-                                    <constraint firstItem="s41-di-cGY" firstAttribute="leading" secondItem="9hK-YH-vzt" secondAttribute="leadingMargin" constant="65" id="60b-pp-6oK"/>
+                                    <constraint firstItem="s41-di-cGY" firstAttribute="leading" secondItem="9hK-YH-vzt" secondAttribute="leadingMargin" constant="65" id="60b-pp-6oK">
+                                        <variation key="widthClass=compact" constant="57"/>
+                                    </constraint>
                                     <constraint firstItem="FU3-Mo-h8O" firstAttribute="leading" secondItem="9hK-YH-vzt" secondAttribute="leadingMargin" constant="60" id="KGT-Cm-nKK"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="s41-di-cGY" secondAttribute="trailing" constant="65" id="O1D-Kb-xaa"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="s41-di-cGY" secondAttribute="trailing" constant="65" id="O1D-Kb-xaa">
+                                        <variation key="widthClass=compact" constant="57"/>
+                                    </constraint>
                                     <constraint firstAttribute="trailingMargin" secondItem="FU3-Mo-h8O" secondAttribute="trailing" constant="60" id="OdA-Nj-hHi"/>
                                     <constraint firstAttribute="height" constant="150" id="Sb1-MH-IDd"/>
-                                    <constraint firstAttribute="bottom" secondItem="s41-di-cGY" secondAttribute="bottom" constant="2" id="wpH-xf-zV1"/>
+                                    <constraint firstAttribute="bottom" secondItem="s41-di-cGY" secondAttribute="bottom" constant="2" id="wpH-xf-zV1">
+                                        <variation key="widthClass=compact" constant="0.0"/>
+                                    </constraint>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
@@ -304,9 +310,11 @@
                                 <exclude reference="vVf-ur-C3x"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="6rb-R5-3ev"/>
-                                <exclude reference="gZe-g6-9UV"/>
-                                <exclude reference="zat-m3-a9r"/>
+                                <exclude reference="bCe-9S-AB0"/>
+                                <exclude reference="bmY-0H-ZNK"/>
+                                <exclude reference="7vJ-S2-huY"/>
+                                <exclude reference="COA-7H-tcQ"/>
+                                <exclude reference="TIL-RW-gh4"/>
                                 <exclude reference="6i9-CJ-q5H"/>
                                 <exclude reference="WTR-cW-sii"/>
                                 <exclude reference="aUV-By-rfP"/>
@@ -316,11 +324,9 @@
                                 <exclude reference="bvd-hz-023"/>
                                 <exclude reference="bxr-rt-JSX"/>
                                 <exclude reference="l6N-Qo-4bO"/>
-                                <exclude reference="7vJ-S2-huY"/>
-                                <exclude reference="COA-7H-tcQ"/>
-                                <exclude reference="TIL-RW-gh4"/>
-                                <exclude reference="bCe-9S-AB0"/>
-                                <exclude reference="bmY-0H-ZNK"/>
+                                <exclude reference="6rb-R5-3ev"/>
+                                <exclude reference="gZe-g6-9UV"/>
+                                <exclude reference="zat-m3-a9r"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -331,9 +337,11 @@
                                 <include reference="vVf-ur-C3x"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="6rb-R5-3ev"/>
-                                <include reference="gZe-g6-9UV"/>
-                                <include reference="zat-m3-a9r"/>
+                                <include reference="bCe-9S-AB0"/>
+                                <exclude reference="bmY-0H-ZNK"/>
+                                <include reference="7vJ-S2-huY"/>
+                                <include reference="COA-7H-tcQ"/>
+                                <include reference="TIL-RW-gh4"/>
                                 <include reference="6i9-CJ-q5H"/>
                                 <include reference="WTR-cW-sii"/>
                                 <include reference="aUV-By-rfP"/>
@@ -343,11 +351,9 @@
                                 <include reference="bvd-hz-023"/>
                                 <include reference="bxr-rt-JSX"/>
                                 <include reference="l6N-Qo-4bO"/>
-                                <include reference="7vJ-S2-huY"/>
-                                <include reference="COA-7H-tcQ"/>
-                                <include reference="TIL-RW-gh4"/>
-                                <include reference="bCe-9S-AB0"/>
-                                <exclude reference="bmY-0H-ZNK"/>
+                                <include reference="6rb-R5-3ev"/>
+                                <include reference="gZe-g6-9UV"/>
+                                <include reference="zat-m3-a9r"/>
                             </mask>
                         </variation>
                     </view>
@@ -372,6 +378,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hC6-9r-jbB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gTu-uZ-6GV">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ФИО" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iW6-gA-mVl">
@@ -432,13 +439,13 @@
                                 <exclude reference="vL8-ga-SWh"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Ict-P1-L5p"/>
+                                <exclude reference="ihp-cB-7Ky"/>
+                                <exclude reference="c2r-Yq-UmN"/>
+                                <exclude reference="hEA-B6-9uO"/>
                                 <exclude reference="1IT-0w-DK0"/>
                                 <exclude reference="3DO-Nq-1ha"/>
                                 <exclude reference="TQE-Pf-1bl"/>
-                                <exclude reference="c2r-Yq-UmN"/>
-                                <exclude reference="hEA-B6-9uO"/>
-                                <exclude reference="Ict-P1-L5p"/>
-                                <exclude reference="ihp-cB-7Ky"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -447,13 +454,13 @@
                                 <include reference="vL8-ga-SWh"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Ict-P1-L5p"/>
+                                <include reference="ihp-cB-7Ky"/>
+                                <include reference="c2r-Yq-UmN"/>
+                                <include reference="hEA-B6-9uO"/>
                                 <include reference="1IT-0w-DK0"/>
                                 <include reference="3DO-Nq-1ha"/>
                                 <include reference="TQE-Pf-1bl"/>
-                                <include reference="c2r-Yq-UmN"/>
-                                <include reference="hEA-B6-9uO"/>
-                                <exclude reference="Ict-P1-L5p"/>
-                                <include reference="ihp-cB-7Ky"/>
                             </mask>
                         </variation>
                     </view>
@@ -4244,7 +4251,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="qD7-fw-wna"/>
+                    <tabBarItem key="tabBarItem" title="Услуги" image="pricelist-icon" selectedImage="active-pricelist-icon" id="qD7-fw-wna"/>
                     <connections>
                         <outlet property="segmentViewCarTypes" destination="O8o-X1-oIV" id="RUw-a1-hK2"/>
                     </connections>
@@ -5185,7 +5192,7 @@
                             <outlet property="delegate" destination="DAv-iv-XIK" id="vdi-01-ebH"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="IVM-se-sk0" userLabel="Отзывы"/>
+                    <tabBarItem key="tabBarItem" title="Отзывы" image="feedback-icon" selectedImage="activ-feedback-icon" id="IVM-se-sk0" userLabel="Отзывы"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9eq-7O-eBi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -5724,13 +5731,17 @@
         </scene>
     </scenes>
     <resources>
+        <image name="activ-feedback-icon" width="21" height="41"/>
         <image name="activ-order-icon" width="66" height="52"/>
+        <image name="active-pricelist-icon" width="62" height="62"/>
         <image name="active-services-icon" width="75" height="67"/>
         <image name="burger-menu" width="70" height="62"/>
         <image name="fb_logo" width="17" height="18"/>
+        <image name="feedback-icon" width="22" height="42"/>
         <image name="label-cc" width="272" height="38"/>
         <image name="left-arrow" width="34" height="72"/>
         <image name="order-icon" width="66" height="52"/>
+        <image name="pricelist-icon" width="62" height="62"/>
         <image name="right-arrow" width="34" height="72"/>
         <image name="services-icon" width="75" height="67"/>
         <image name="сс_logo" width="564" height="564"/>
