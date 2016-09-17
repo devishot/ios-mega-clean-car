@@ -21,10 +21,8 @@
 		523F3B571D67A50B00B75421 /* BookingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523F3B561D67A50B00B75421 /* BookingController.swift */; };
 		5252E8131D731457009A841F /* FirebaseDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5252E8121D731457009A841F /* FirebaseDataProtocol.swift */; };
 		5252E8151D7582E2009A841F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5252E8141D7582E2009A841F /* Utils.swift */; };
-		525A8A571D7ADBE9002C6F46 /* AssignWasherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8A561D7ADBE9002C6F46 /* AssignWasherTableViewController.swift */; };
-		525A8A591D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8A581D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift */; };
+		5259ED0B1D8C0DB7003F5BB9 /* SelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5259ED0A1D8C0DB7003F5BB9 /* SelectTableViewController.swift */; };
 		525A8A5C1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8A5B1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift */; };
-		525A8A5E1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8A5D1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift */; };
 		525A8ABD1D7F4C48002C6F46 /* FeedbackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8ABC1D7F4C48002C6F46 /* FeedbackTableViewCell.swift */; };
 		525A8ABF1D7F4DB4002C6F46 /* FeedbacksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8ABE1D7F4DB4002C6F46 /* FeedbacksTableViewController.swift */; };
 		525C7C971D66C6D400DAE000 /* PricelistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C961D66C6D400DAE000 /* PricelistController.swift */; };
@@ -75,10 +73,8 @@
 		523F3B561D67A50B00B75421 /* BookingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingController.swift; sourceTree = "<group>"; };
 		5252E8121D731457009A841F /* FirebaseDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDataProtocol.swift; sourceTree = "<group>"; };
 		5252E8141D7582E2009A841F /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		525A8A561D7ADBE9002C6F46 /* AssignWasherTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignWasherTableViewController.swift; sourceTree = "<group>"; };
-		525A8A581D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignWasherTableViewCell.swift; sourceTree = "<group>"; };
+		5259ED0A1D8C0DB7003F5BB9 /* SelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTableViewController.swift; sourceTree = "<group>"; };
 		525A8A5B1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectRightBarButtonHelper.swift; sourceTree = "<group>"; };
-		525A8A5D1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignBoxIndexTableViewController.swift; sourceTree = "<group>"; };
 		525A8ABC1D7F4C48002C6F46 /* FeedbackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackTableViewCell.swift; sourceTree = "<group>"; };
 		525A8ABE1D7F4DB4002C6F46 /* FeedbacksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbacksTableViewController.swift; sourceTree = "<group>"; };
 		525C7C961D66C6D400DAE000 /* PricelistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PricelistController.swift; sourceTree = "<group>"; };
@@ -209,8 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				B46AE7D51D7991EF00875C40 /* AssignToReservationViewController.swift */,
-				525A8A561D7ADBE9002C6F46 /* AssignWasherTableViewController.swift */,
-				525A8A5D1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift */,
+				5259ED0A1D8C0DB7003F5BB9 /* SelectTableViewController.swift */,
 			);
 			name = AssignControllers;
 			sourceTree = "<group>";
@@ -235,7 +230,6 @@
 				525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */,
 				B4856D971D6896E0000EC687 /* OrdersTableViewCell.swift */,
 				B42F94E81D79F336008F178A /* DurationCollectionViewCell.swift */,
-				525A8A581D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift */,
 				525A8ABC1D7F4C48002C6F46 /* FeedbackTableViewCell.swift */,
 				52129C431D881DE000921445 /* StatisticItemCell.swift */,
 			);
@@ -372,9 +366,11 @@
 					B4EEA3211D6429EA0039D998 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 9P2RB2SCK5;
+						LastSwiftMigration = 0800;
 					};
 					B4EEA3351D6429EB0039D998 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = B4EEA3211D6429EA0039D998;
 					};
 				};
@@ -508,15 +504,12 @@
 				528947291D72C9D7004B7090 /* Reservation.swift in Sources */,
 				52129C421D87ABD500921445 /* StatisticsViewController.swift in Sources */,
 				B46AE7D61D7991EF00875C40 /* AssignToReservationViewController.swift in Sources */,
-				525A8A591D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift in Sources */,
 				52284A8E1D75F5DD00A41427 /* BookingHoursCollectionViewCell.swift in Sources */,
 				5225B05C1D6B640E00BFBAE7 /* Services.swift in Sources */,
 				528947251D717441004B7090 /* LoginViewController.swift in Sources */,
-				525A8A5E1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift in Sources */,
 				5209DE3F1D6C1EEA006E040E /* ServicesTableViewController.swift in Sources */,
 				5289472D1D72CFA9004B7090 /* Washer.swift in Sources */,
 				5225B05A1D6B5CEB00BFBAE7 /* CarInfo.swift in Sources */,
-				525A8A571D7ADBE9002C6F46 /* AssignWasherTableViewController.swift in Sources */,
 				5289472B1D72CA0F004B7090 /* User.swift in Sources */,
 				52129C441D881DE000921445 /* StatisticItemCell.swift in Sources */,
 				5292AC071D6EBD4C00E03760 /* Dimmable.swift in Sources */,
@@ -535,6 +528,7 @@
 				B43C90031D6859F800667B09 /* FeedbackViewController.swift in Sources */,
 				5252E8131D731457009A841F /* FirebaseDataProtocol.swift in Sources */,
 				B42F94E91D79F336008F178A /* DurationCollectionViewCell.swift in Sources */,
+				5259ED0B1D8C0DB7003F5BB9 /* SelectTableViewController.swift in Sources */,
 				523F3B571D67A50B00B75421 /* BookingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -673,6 +667,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = hackteam.MegaCleanCar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -689,6 +684,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = hackteam.MegaCleanCar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -700,6 +696,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = a.cleancarUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = cleancar;
 			};
 			name = Debug;
@@ -712,6 +709,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = a.cleancarUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = cleancar;
 			};
 			name = Release;

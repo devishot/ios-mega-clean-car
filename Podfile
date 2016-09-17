@@ -16,7 +16,6 @@ target 'cleancar' do
 
   pod 'Bolts'
   pod 'FBSDKCoreKit'
-  pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
   pod 'AccountKit'
 
