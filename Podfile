@@ -23,6 +23,8 @@ target 'cleancar' do
   pod 'SwiftyJSON'
 
   pod 'Cosmos', '~> 1.2'
+  
+  pod 'BWWalkthrough'
 
 
   target 'cleancarUITests' do

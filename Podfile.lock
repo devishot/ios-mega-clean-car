@@ -6,6 +6,7 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - BWWalkthrough (1.1.0)
   - Cosmos (1.2.3)
   - FBSDKCoreKit (4.15.1):
     - Bolts (~> 1.7)
@@ -85,6 +86,7 @@ PODS:
 DEPENDENCIES:
   - AccountKit
   - Bolts
+  - BWWalkthrough
   - Cosmos (~> 1.2)
   - FBSDKCoreKit
   - FBSDKLoginKit
@@ -98,6 +100,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AccountKit: 682357caf88b9d37f08084643a3403386318bca9
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  BWWalkthrough: 0c27ad2773a25c8f4fb9004bc7d6685deb35fecc
   Cosmos: efddd01b729956ad6335bc58bc92e5735a1d12a3
   FBSDKCoreKit: fc7fa53d16b095ee3fd53f0cd59f1df8bcbb634d
   FBSDKLoginKit: 073f79b3b2e762fc6f54a283fe15f45372d59f5f
@@ -119,6 +122,6 @@ SPEC CHECKSUMS:
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 4dfae0ba5f1abfa3f082c5a8712fe0f77b6d8890
+PODFILE CHECKSUM: fb8ba4a6fd59ae02d1f2e286df66f46c5635e74c
 
 COCOAPODS: 1.0.1
