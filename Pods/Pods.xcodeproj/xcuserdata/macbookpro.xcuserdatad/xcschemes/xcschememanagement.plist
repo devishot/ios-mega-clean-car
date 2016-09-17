@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>BWWalkthrough-BWWalkthrough.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>BWWalkthrough.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,7 +52,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>15F3A564D4C64947D29F16386019FA67</key>
+		<key>17664F8F0232329D875EC690EB653867</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -53,11 +63,6 @@
 			<true/>
 		</dict>
 		<key>33CC89C26D47BE8A6624AD1FC6DBE10F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>57E10F78D8773F01AC6A0A139CDCAF0D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -73,6 +78,21 @@
 			<true/>
 		</dict>
 		<key>9D0F2E5EA1B46A5D72FFD42B0B39DBBC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A371D9F716AF507FF01A593DD0D9DFDF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DAF28E2CE5C02AA5CC5050DD26816C68</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F7068E29225D88BEA973F1A648B2352E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

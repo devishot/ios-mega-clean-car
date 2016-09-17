@@ -70,8 +70,10 @@ class LoginViewController: UIViewController {
         // if the user is already logged in
         // 1. using facebook account
         User.isAlreadyLoggedInByFacebook(self.redirectToHome)
+        
+        
     }
-
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -94,6 +96,8 @@ class LoginViewController: UIViewController {
         if self.flagCompleteSignupSteps {
             self.redirectToSignupSecondStep()
         }
+
+
     }
     
 
