@@ -115,8 +115,9 @@ class AssignToReservationViewController: UIViewController {
             self.embeddedTableView = destConroller.tableView
             self.embeddedTableView!.delegate = self
             self.embeddedTableView!.dataSource = self
+        }
 
-        } else {
+        if segue.identifier == segueSelectTableID {
             let sourceType = SelectTableSources(rawValue: sender as! Int)!
             let destController = segue.destinationViewController as! SelectTableViewController
             destController.sourceType = sourceType
