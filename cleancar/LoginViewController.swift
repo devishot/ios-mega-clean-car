@@ -13,6 +13,14 @@ import FBSDKLoginKit
 import AccountKit
 
 
+enum LoginViewControllerStates {
+    case AfterSignupSecondStep
+    case OnSignupSecondStep
+    case OnSignin
+    case None
+}
+
+
 class LoginViewController: UIViewController {
 
     // IBOutlets
@@ -23,7 +31,9 @@ class LoginViewController: UIViewController {
     // IBActions
     @IBAction func clickedFacebookLoginButton(sender: UIButton) {
         self.facebookLogin() {
-            User.logInByFacebook(self.redirectToHome)
+            User.logInByFacebook() { userError in
+                self.redirectToHome()
+            }
         }
     }
     @IBAction func clickedSignInButton(sender: UIButton) {
@@ -33,10 +43,10 @@ class LoginViewController: UIViewController {
         let destController = segue.sourceViewController as! SignupSecondStepViewController
         let fullName = destController.textFieldFullName.text!
 
-        User.fetchAccountKitData() { uid, phoneNumber in
-            User.signUpWithAccountKit(uid, phoneNumber: phoneNumber, fullName: fullName, completion: self.redirectToHome)
+        self.state = .AfterSignupSecondStep
+        User.signUpWithAccountKit(fullName) { userError in
+            self.redirectToHome()
         }
-        self.flagCompleteSignupSteps = false
     }
 
 
@@ -46,8 +56,7 @@ class LoginViewController: UIViewController {
 
 
     // variables
-    var flagCompleteSignupSteps: Bool = false
-
+    var state: LoginViewControllerStates = .None
     var _pendingLoginViewController: AKFViewController?
     var _authorizationCode: String?
 
@@ -66,21 +75,32 @@ class LoginViewController: UIViewController {
 
         // init
         self.initAccountKit()
-
-        // if the user is already logged in
-        // 1. using facebook account
-        User.isAlreadyLoggedInByFacebook(self.redirectToHome)
-        
-        
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+
         // if the user is already logged in
-        // 2. using phone number in AccountKit
-        if  User.accountKit.currentAccessToken != nil {
-            User.fetchAccountKitData({ User.logInByAccountKit($0.uid, phoneNumber: $0.phoneNumber, completion: self.redirectToHome) })
+        // 1. into Firebase Auth
+        if User.isAlreadyLoggedIn() {
+            self.redirectToHome()
+        }
+
+        // 2. using facebook account
+        User.isAlreadyLoggedInByFacebook() { userError in
+            self.redirectToHome()
+        }
+
+        // 3. currenlty logged into AccountKit
+        if User.accountKit.currentAccessToken != nil && self.state != .AfterSignupSecondStep {
+            User.signInByAccountKit() { userError in
+                if userError == nil {
+                    self.redirectToHome()
+                } else if userError! == UserErrors.ProfileNotExist  {
+                    self.redirectToSignupSecondStep()
+                }
+            }
 
         } else if (_pendingLoginViewController != nil) {
             //resume pending login (if any)
@@ -89,17 +109,6 @@ class LoginViewController: UIViewController {
             _pendingLoginViewController = nil;
         }
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-
-        if self.flagCompleteSignupSteps {
-            self.redirectToSignupSecondStep()
-        }
-
-
-    }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -189,8 +198,6 @@ extension LoginViewController: AKFViewControllerDelegate {
 
     func viewController(viewController: UIViewController!, didCompleteLoginWithAccessToken accessToken: AKFAccessToken!, state: String!) {
         print(".AccountKit.didCompleteLoginWithAccessToken: \(accessToken.tokenString) state \(state)")
-
-        self.flagCompleteSignupSteps = true
     }
 
     func viewController(viewController: UIViewController!, didCompleteLoginWithAuthorizationCode code: String!, state: String!) {

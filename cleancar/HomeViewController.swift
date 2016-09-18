@@ -111,7 +111,7 @@ class HomeViewController: UIViewController {
                 self.bookingHours = BookingHour.fromNow
                 self.chooseTimeCollectionView.reloadData()
             })
-            User.subscribeToCurrent({ () -> (Void) in
+            User.subscribeToCurrent({ userError in
                 self.currentUser = User.current
             })
         }
