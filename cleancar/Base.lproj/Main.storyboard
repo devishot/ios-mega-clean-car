@@ -497,10 +497,10 @@
             </objects>
             <point key="canvasLocation" x="1726.5" y="1820"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="GQz-Ii-93E">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="qex-dj-Kcb" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="qex-dj-Kcb" customClass="TabBarViewController" customModule="cleancar" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="4me-o9-xqY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1853,56 +1853,6 @@
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X2A-yM-YZg" userLabel="Transform View">
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4RL-ZV-upD" userLabel="No Car View">
-                                                                        <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Укажите автомобиль" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pb0-To-acr">
-                                                                                <constraints>
-                                                                                    <constraint firstAttribute="height" constant="16" id="AA8-mZ-gXV"/>
-                                                                                </constraints>
-                                                                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="18"/>
-                                                                                <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                                <variation key="default">
-                                                                                    <mask key="constraints">
-                                                                                        <exclude reference="AA8-mZ-gXV"/>
-                                                                                    </mask>
-                                                                                </variation>
-                                                                                <variation key="widthClass=compact">
-                                                                                    <mask key="constraints">
-                                                                                        <include reference="AA8-mZ-gXV"/>
-                                                                                    </mask>
-                                                                                </variation>
-                                                                            </label>
-                                                                        </subviews>
-                                                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <constraints>
-                                                                            <constraint firstItem="Pb0-To-acr" firstAttribute="centerY" secondItem="4RL-ZV-upD" secondAttribute="centerY" id="dx6-sv-uWA"/>
-                                                                            <constraint firstItem="Pb0-To-acr" firstAttribute="leading" secondItem="4RL-ZV-upD" secondAttribute="leading" constant="16" id="uDJ-mZ-5hF"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="Pb0-To-acr" secondAttribute="trailing" constant="16" id="x9R-fD-Gqu">
-                                                                                <variation key="widthClass=compact" constant="35"/>
-                                                                            </constraint>
-                                                                        </constraints>
-                                                                        <variation key="default">
-                                                                            <mask key="subviews">
-                                                                                <exclude reference="Pb0-To-acr"/>
-                                                                            </mask>
-                                                                            <mask key="constraints">
-                                                                                <exclude reference="dx6-sv-uWA"/>
-                                                                                <exclude reference="uDJ-mZ-5hF"/>
-                                                                                <exclude reference="x9R-fD-Gqu"/>
-                                                                            </mask>
-                                                                        </variation>
-                                                                        <variation key="widthClass=compact">
-                                                                            <mask key="subviews">
-                                                                                <include reference="Pb0-To-acr"/>
-                                                                            </mask>
-                                                                            <mask key="constraints">
-                                                                                <include reference="dx6-sv-uWA"/>
-                                                                                <include reference="uDJ-mZ-5hF"/>
-                                                                                <include reference="x9R-fD-Gqu"/>
-                                                                            </mask>
-                                                                        </variation>
-                                                                    </view>
                                                                     <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5pd-5z-TJN" userLabel="Car Details View">
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAR MODEL" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T7L-tT-Buz">
@@ -1996,6 +1946,56 @@
                                                                             </mask>
                                                                         </variation>
                                                                     </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4RL-ZV-upD" userLabel="No Car View">
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Укажите автомобиль" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pb0-To-acr">
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="16" id="AA8-mZ-gXV"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="18"/>
+                                                                                <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                                <variation key="default">
+                                                                                    <mask key="constraints">
+                                                                                        <exclude reference="AA8-mZ-gXV"/>
+                                                                                    </mask>
+                                                                                </variation>
+                                                                                <variation key="widthClass=compact">
+                                                                                    <mask key="constraints">
+                                                                                        <include reference="AA8-mZ-gXV"/>
+                                                                                    </mask>
+                                                                                </variation>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <constraints>
+                                                                            <constraint firstItem="Pb0-To-acr" firstAttribute="centerY" secondItem="4RL-ZV-upD" secondAttribute="centerY" id="dx6-sv-uWA"/>
+                                                                            <constraint firstItem="Pb0-To-acr" firstAttribute="leading" secondItem="4RL-ZV-upD" secondAttribute="leading" constant="16" id="uDJ-mZ-5hF"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="Pb0-To-acr" secondAttribute="trailing" constant="16" id="x9R-fD-Gqu">
+                                                                                <variation key="widthClass=compact" constant="35"/>
+                                                                            </constraint>
+                                                                        </constraints>
+                                                                        <variation key="default">
+                                                                            <mask key="subviews">
+                                                                                <exclude reference="Pb0-To-acr"/>
+                                                                            </mask>
+                                                                            <mask key="constraints">
+                                                                                <exclude reference="dx6-sv-uWA"/>
+                                                                                <exclude reference="uDJ-mZ-5hF"/>
+                                                                                <exclude reference="x9R-fD-Gqu"/>
+                                                                            </mask>
+                                                                        </variation>
+                                                                        <variation key="widthClass=compact">
+                                                                            <mask key="subviews">
+                                                                                <include reference="Pb0-To-acr"/>
+                                                                            </mask>
+                                                                            <mask key="constraints">
+                                                                                <include reference="dx6-sv-uWA"/>
+                                                                                <include reference="uDJ-mZ-5hF"/>
+                                                                                <include reference="x9R-fD-Gqu"/>
+                                                                            </mask>
+                                                                        </variation>
+                                                                    </view>
                                                                 </subviews>
                                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
@@ -2030,8 +2030,8 @@
                                                                 </constraints>
                                                                 <variation key="default">
                                                                     <mask key="subviews">
-                                                                        <exclude reference="4RL-ZV-upD"/>
                                                                         <exclude reference="5pd-5z-TJN"/>
+                                                                        <exclude reference="4RL-ZV-upD"/>
                                                                     </mask>
                                                                     <mask key="constraints">
                                                                         <exclude reference="Ci4-WC-74L"/>
@@ -2050,8 +2050,8 @@
                                                                 </variation>
                                                                 <variation key="widthClass=compact">
                                                                     <mask key="subviews">
-                                                                        <include reference="4RL-ZV-upD"/>
                                                                         <include reference="5pd-5z-TJN"/>
+                                                                        <include reference="4RL-ZV-upD"/>
                                                                     </mask>
                                                                     <mask key="constraints">
                                                                         <include reference="Ci4-WC-74L"/>
@@ -4090,6 +4090,39 @@
                                     <navigationItem title="ОСТАВИТЬ ОТЗЫВ" id="v6F-uM-ohr"/>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N4D-dC-ktJ">
+                                <color key="backgroundColor" red="0.76646351440000005" green="0.76646351440000005" blue="0.76646351440000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="N4D-dC-ktJ" secondAttribute="height" multiplier="9:1" id="3We-Ei-O5w">
+                                        <variation key="widthClass=compact" constant="-217"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="50" id="41r-fs-N5a"/>
+                                    <constraint firstAttribute="width" constant="360" id="Zuk-Jl-NZR">
+                                        <variation key="widthClass=compact" constant="323"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                <state key="normal" title="Отправить">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="3We-Ei-O5w"/>
+                                        <exclude reference="41r-fs-N5a"/>
+                                        <exclude reference="Zuk-Jl-NZR"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="3We-Ei-O5w"/>
+                                        <include reference="41r-fs-N5a"/>
+                                        <exclude reference="Zuk-Jl-NZR"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <segue destination="ozu-WY-bi2" kind="unwind" unwindAction="unwindRate:" id="sv6-m4-p34"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0G7-Cr-Uew">
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEN-WZ-4Ca" userLabel="Header View">
@@ -4213,7 +4246,7 @@
                                         </variation>
                                     </textView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.74027371406555176" green="0.74027371406555176" blue="0.74027371406555176" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="fEN-WZ-4Ca" secondAttribute="trailing" id="1Yh-LH-K73"/>
                                     <constraint firstAttribute="trailing" secondItem="fEN-WZ-4Ca" secondAttribute="trailing" id="DMS-xW-3mM"/>
@@ -4228,7 +4261,7 @@
                                     <constraint firstItem="fEN-WZ-4Ca" firstAttribute="top" secondItem="0G7-Cr-Uew" secondAttribute="top" id="VuK-pu-ADL"/>
                                     <constraint firstItem="TIe-aO-UG8" firstAttribute="leading" secondItem="0G7-Cr-Uew" secondAttribute="leading" id="fWd-6Y-Ls9"/>
                                     <constraint firstItem="ecA-2T-RJN" firstAttribute="leading" secondItem="0G7-Cr-Uew" secondAttribute="leading" id="fze-Uo-Eir"/>
-                                    <constraint firstItem="TIe-aO-UG8" firstAttribute="top" secondItem="fEN-WZ-4Ca" secondAttribute="bottom" id="gcc-hj-mPm"/>
+                                    <constraint firstItem="TIe-aO-UG8" firstAttribute="top" secondItem="fEN-WZ-4Ca" secondAttribute="bottom" constant="1" id="gcc-hj-mPm"/>
                                     <constraint firstAttribute="trailing" secondItem="fEN-WZ-4Ca" secondAttribute="trailing" id="o36-7K-Xms"/>
                                     <constraint firstAttribute="trailing" secondItem="ecA-2T-RJN" secondAttribute="trailing" id="uMn-tQ-Xbb"/>
                                     <constraint firstItem="fEN-WZ-4Ca" firstAttribute="leading" secondItem="0G7-Cr-Uew" secondAttribute="leading" id="x6v-WW-lMc"/>
@@ -4285,39 +4318,6 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N4D-dC-ktJ">
-                                <color key="backgroundColor" red="0.76646351440000005" green="0.76646351440000005" blue="0.76646351440000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="N4D-dC-ktJ" secondAttribute="height" multiplier="9:1" id="3We-Ei-O5w">
-                                        <variation key="widthClass=compact" constant="-217"/>
-                                    </constraint>
-                                    <constraint firstAttribute="height" constant="50" id="41r-fs-N5a"/>
-                                    <constraint firstAttribute="width" constant="360" id="Zuk-Jl-NZR">
-                                        <variation key="widthClass=compact" constant="323"/>
-                                    </constraint>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
-                                <state key="normal" title="Отправить">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="3We-Ei-O5w"/>
-                                        <exclude reference="41r-fs-N5a"/>
-                                        <exclude reference="Zuk-Jl-NZR"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <exclude reference="3We-Ei-O5w"/>
-                                        <include reference="41r-fs-N5a"/>
-                                        <exclude reference="Zuk-Jl-NZR"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <segue destination="ozu-WY-bi2" kind="unwind" unwindAction="unwindRate:" id="sv6-m4-p34"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -4328,7 +4328,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="KPW-Zv-q8j" secondAttribute="trailing" constant="-20" id="ApJ-t8-t2b">
                                 <variation key="widthClass=compact" constant="0.0"/>
                             </constraint>
-                            <constraint firstItem="0G7-Cr-Uew" firstAttribute="top" secondItem="KPW-Zv-q8j" secondAttribute="bottom" constant="20" id="EL8-sg-hbP"/>
+                            <constraint firstItem="0G7-Cr-Uew" firstAttribute="top" secondItem="KPW-Zv-q8j" secondAttribute="bottom" constant="50" id="EL8-sg-hbP"/>
                             <constraint firstAttribute="trailing" secondItem="0G7-Cr-Uew" secondAttribute="trailing" constant="40" id="F3P-br-CZn"/>
                             <constraint firstItem="KPW-Zv-q8j" firstAttribute="leading" secondItem="xlt-OP-Wym" secondAttribute="leadingMargin" constant="-20" id="JeY-dd-8ee">
                                 <variation key="widthClass=compact" constant="0.0"/>
@@ -4340,8 +4340,8 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="KPW-Zv-q8j"/>
-                                <exclude reference="0G7-Cr-Uew"/>
                                 <exclude reference="N4D-dC-ktJ"/>
+                                <exclude reference="0G7-Cr-Uew"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="EL8-sg-hbP"/>
@@ -4358,8 +4358,8 @@
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="KPW-Zv-q8j"/>
-                                <include reference="0G7-Cr-Uew"/>
                                 <include reference="N4D-dC-ktJ"/>
+                                <include reference="0G7-Cr-Uew"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="EL8-sg-hbP"/>
@@ -4385,7 +4385,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="msk-4K-gLi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ozu-WY-bi2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="6417" y="-857"/>
+            <point key="canvasLocation" x="6417" y="-855"/>
         </scene>
         <!--Услуги-->
         <scene sceneID="Dkg-qf-EWC">

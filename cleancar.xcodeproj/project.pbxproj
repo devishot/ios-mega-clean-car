@@ -32,6 +32,7 @@
 		5289472D1D72CFA9004B7090 /* Washer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5289472C1D72CFA9004B7090 /* Washer.swift */; };
 		5292AC041D6EB40A00E03760 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5292AC021D6EB40A00E03760 /* Main.storyboard */; };
 		5292AC071D6EBD4C00E03760 /* Dimmable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5292AC061D6EBD4C00E03760 /* Dimmable.swift */; };
+		52BF3C481D8EDEB0001BC9A7 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF3C471D8EDEB0001BC9A7 /* TabBarViewController.swift */; };
 		64DBE4346228683B0609F616 /* Pods_cleancar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7C11601A253081170570B5 /* Pods_cleancar.framework */; };
 		B42F94E91D79F336008F178A /* DurationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F94E81D79F336008F178A /* DurationCollectionViewCell.swift */; };
 		B43C90031D6859F800667B09 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43C90021D6859F800667B09 /* FeedbackViewController.swift */; };
@@ -84,6 +85,7 @@
 		5289472C1D72CFA9004B7090 /* Washer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Washer.swift; sourceTree = "<group>"; };
 		5292AC031D6EB40A00E03760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5292AC061D6EBD4C00E03760 /* Dimmable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dimmable.swift; sourceTree = "<group>"; };
+		52BF3C471D8EDEB0001BC9A7 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		5B7C11601A253081170570B5 /* Pods_cleancar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cleancar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87B0141522C964E81865A577 /* Pods-cleancarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancarUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests.release.xcconfig"; sourceTree = "<group>"; };
 		902BCA39CD94BEAD0A3A7E4A /* Pods_cleancarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cleancarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +165,7 @@
 				B45905C51D6C171B00CFEFEF /* OrdersTableViewController.swift */,
 				525A8ABE1D7F4DB4002C6F46 /* FeedbacksTableViewController.swift */,
 				52129C411D87ABD500921445 /* StatisticsViewController.swift */,
+				52BF3C471D8EDEB0001BC9A7 /* TabBarViewController.swift */,
 			);
 			name = Tabs;
 			sourceTree = "<group>";
@@ -503,6 +506,7 @@
 				5289472D1D72CFA9004B7090 /* Washer.swift in Sources */,
 				5225B05A1D6B5CEB00BFBAE7 /* CarInfo.swift in Sources */,
 				5289472B1D72CA0F004B7090 /* User.swift in Sources */,
+				52BF3C481D8EDEB0001BC9A7 /* TabBarViewController.swift in Sources */,
 				52129C441D881DE000921445 /* StatisticItemCell.swift in Sources */,
 				5292AC071D6EBD4C00E03760 /* Dimmable.swift in Sources */,
 				B4856D961D6889FC000EC687 /* UIView+borderColor.swift in Sources */,

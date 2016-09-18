@@ -83,9 +83,10 @@ class LoginViewController: UIViewController {
 
         // if the user is already logged in
         // 1. into Firebase Auth
-        if User.isAlreadyLoggedIn() {
+        User.isAlreadyLoggedIn() { userError in
             self.redirectToHome()
         }
+
 
         // 2. using facebook account
         User.isAlreadyLoggedInByFacebook() { userError in

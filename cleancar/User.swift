@@ -14,6 +14,12 @@ import FBSDKLoginKit
 import SwiftyJSON
 
 
+enum UserRoles {
+    case Owner
+    case Admin
+    case Client
+}
+
 enum UserErrors: ErrorType {
     case ProfileNotExist
     case ProfileAlreadyExist
@@ -38,6 +44,7 @@ class User: FirebaseDataProtocol {
 
     let id: String
     let full_name: String
+    let role: UserRoles
     var facebookProfile: [String: JSON]?
     var accountKitProfile: [String: JSON]?
     var carInfo: CarInfo?
@@ -47,15 +54,7 @@ class User: FirebaseDataProtocol {
     init(uid: String, full_name: String) {
         self.id = uid
         self.full_name = full_name
-    }
-
-    init(uid: String, full_name: String, facebookProfile: [String: JSON]?,
-         carInfo: CarInfo?, currentReservation: Reservation?) {
-        self.id = uid
-        self.full_name = full_name
-        self.facebookProfile = facebookProfile
-        self.carInfo = carInfo
-        self.currentReservation = currentReservation
+        self.role = .Client
     }
 
     init(uid: String, data: AnyObject) {
@@ -63,6 +62,16 @@ class User: FirebaseDataProtocol {
 
         self.id = uid
         self.full_name = parsed["full_name"].stringValue
+
+        var role: UserRoles = .Client
+        if parsed["is_admin"].bool != nil {
+            role = .Admin
+        }
+        if parsed["is_owner"].bool != nil {
+            role = .Owner
+        }
+        self.role = role
+
         if let facebookProfile = parsed["profile_facebook"].dictionary {
             self.facebookProfile = facebookProfile
         }
@@ -90,6 +99,12 @@ class User: FirebaseDataProtocol {
         if withId {
             data.setObject(self.id, forKey: "id")
         }
+        if self.role == .Admin {
+            data.setObject(true, forKey: "is_admin")
+        } else if self.role == .Owner {
+            data.setObject(true, forKey: "is_owner")
+        }
+
         if self.carInfo != nil {
             data.setObject(self.carInfo!.toDict(), forKey: "car_info")
         }
@@ -251,7 +266,7 @@ class User: FirebaseDataProtocol {
         if FBSDKAccessToken.currentAccessToken() != nil {
             if let user = FIRAuth.auth()?.currentUser {
                 print("Already logged in, user: \(user.displayName)");
-                completion(nil)
+                afterSignIn(completion)
             } else {
                 print("Warning: not logged in Firebase")
                 // sign into Firebase
@@ -262,8 +277,12 @@ class User: FirebaseDataProtocol {
         return false
     }
 
-    static func isAlreadyLoggedIn() -> Bool {
-        return FIRAuth.auth()?.currentUser != nil
+    static func isAlreadyLoggedIn(completion: CompletionWithError) {
+        if FIRAuth.auth()?.currentUser != nil {
+            afterSignIn(completion)
+        } else {
+            completion(UserErrors.NotLoggedIn)
+        }
     }
 
     static func afterSignIn(completion: CompletionWithError) {

@@ -192,7 +192,7 @@ class HomeViewController: UIViewController {
                 })
             }
         })
-        
+
         let cancel = UIAlertAction(title: "Отмена", style: .Cancel, handler: {
             (alert: UIAlertAction!) -> Void in
             
