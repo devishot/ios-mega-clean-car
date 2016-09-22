@@ -215,7 +215,7 @@ extension StatisticsViewController: UICollectionViewDelegate {
             print(".scrollViewDidScroll.isOnFirstScrollItem")
             if let addedCount = self.generateDataFor(self.selectedFilter) {
                 self.collectionView.reloadData()
-                self.scrollToItem(addedCount)
+                self.scrollToItem(addedCount + 1)
             }
         }
 
