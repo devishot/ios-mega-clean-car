@@ -11,6 +11,10 @@ import Firebase
 import FBSDKCoreKit
 
 
+let AppFontDescriptor = UIFontDescriptor(fontAttributes: [UIFontDescriptorFamilyAttribute: "Helvetica Neue"])
+let AppFontDescriptorLight = AppFontDescriptor.fontDescriptorByAddingAttributes([ UIFontDescriptorFaceAttribute: "Light"])
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -27,14 +31,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application,didFinishLaunchingWithOptions:launchOptions)
         
         //tab bar item color
-         UITabBar.appearance().tintColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 56/255.0, alpha: 1.0)
-        
+        let tintColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 56/255.0, alpha: 1.0)
         let color:UIColor =  UIColor.whiteColor()
         let tappedColor:UIColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 56/255.0, alpha: 1.0)
-       
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: color], forState: .Normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: tappedColor], forState: .Selected)
-       
+        let font = UIFont(descriptor: AppFontDescriptorLight, size: 14)
+
+        let attrsForNormal = [
+            NSForegroundColorAttributeName: color,
+            NSFontAttributeName: font
+        ]
+        let attrsForSelected = [
+            NSForegroundColorAttributeName: tappedColor,
+            NSFontAttributeName: font
+        ]
+
+        UITabBarItem.appearance().setTitleTextAttributes(attrsForNormal, forState: .Normal)
+        UITabBarItem.appearance().setTitleTextAttributes(attrsForSelected, forState: .Selected)
+        UITabBar.appearance().tintColor = tintColor
 
         return true
     }

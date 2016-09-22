@@ -12,8 +12,6 @@ PODS:
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.15.1):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.15.1):
-    - FBSDKCoreKit
   - Firebase/Analytics (3.6.0):
     - FirebaseAnalytics (= 3.4.2)
   - Firebase/Auth (3.6.0):
@@ -90,7 +88,6 @@ DEPENDENCIES:
   - Cosmos (~> 1.2)
   - FBSDKCoreKit
   - FBSDKLoginKit
-  - FBSDKShareKit
   - Firebase/Auth
   - Firebase/Database
   - Firebase/RemoteConfig
@@ -104,7 +101,6 @@ SPEC CHECKSUMS:
   Cosmos: efddd01b729956ad6335bc58bc92e5735a1d12a3
   FBSDKCoreKit: fc7fa53d16b095ee3fd53f0cd59f1df8bcbb634d
   FBSDKLoginKit: 073f79b3b2e762fc6f54a283fe15f45372d59f5f
-  FBSDKShareKit: 11cbb5a4d7b5fda8143cc95b76188147e6725736
   Firebase: 34187200ef4979dbd485c7aa685ef078bf587c86
   FirebaseAnalytics: 3f5358d9104adf159cc8d99b7b501e50099a39ad
   FirebaseAuth: 75a062bbf2d3c97d1e6e55bbc110e13a6853e25d
@@ -122,6 +118,6 @@ SPEC CHECKSUMS:
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: fb8ba4a6fd59ae02d1f2e286df66f46c5635e74c
+PODFILE CHECKSUM: a58bc6402be7f51b32cdb72d9af871d3c69d6ad1
 
 COCOAPODS: 1.0.1

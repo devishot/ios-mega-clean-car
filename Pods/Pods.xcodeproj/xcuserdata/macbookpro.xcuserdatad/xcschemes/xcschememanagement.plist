@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>BWWalkthrough-BWWalkthrough.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>BWWalkthrough.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -20,11 +30,6 @@
 			<false/>
 		</dict>
 		<key>FBSDKLoginKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>FBSDKShareKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -47,17 +52,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>006A50413244848D28BBC648C4BADD2D</key>
+		<key>17664F8F0232329D875EC690EB653867</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0EB19C1377A747F81110D44E2D5FCF78</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>30D7FCF8072F5D59AE1C98D94F9A6EC9</key>
+		<key>2E303C3CE7513908EE880D9CA833AFAE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,7 +82,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E638AFF28AA679D8478A5BA3E72F721F</key>
+		<key>A371D9F716AF507FF01A593DD0D9DFDF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DAF28E2CE5C02AA5CC5050DD26816C68</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F7068E29225D88BEA973F1A648B2352E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

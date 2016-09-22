@@ -35,7 +35,13 @@ class PopUpViewController: UIViewController {
     // variables
     let carTypes = CarInfo.carTypeNames
     var selectedCarType: CarTypeEnum = .Normal
-    var carInfo: CarInfo?
+    var carInfo: CarInfo? {
+        didSet {
+            if carInfo != nil {
+                selectedCarType = carInfo!.type
+            }
+        }
+    }
 
 
     override func viewDidLoad() {

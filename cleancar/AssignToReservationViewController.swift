@@ -8,42 +8,47 @@
 
 import UIKit
 
+
+enum SelectTableSources: Int {
+    case AssignBoxIndex
+    case AssignWasher
+}
+
+
 class AssignToReservationViewController: UIViewController {
 
     //outlets
     @IBOutlet weak var durationCollectionView: UICollectionView!
     @IBOutlet weak var submitButton: UIButton!
 
- 
+
     //actions
-    @IBAction func unwindAssignWasher(unwindSegue: UIStoryboardSegue) {
-        let sourceController = unwindSegue.sourceViewController as! AssignWasherTableViewController
-        self.valueWasher = sourceController.assignedWasher
-    }
-    @IBAction func unwindAssignBoxIndex(unwindSegue: UIStoryboardSegue) {
-        let sourceController = unwindSegue.sourceViewController as! AssignBoxIndexTableViewController
-        self.valueBoxIndex = sourceController.assignedBoxIndex
+    @IBAction func unwindSelectTableViewController(unwindSegue: UIStoryboardSegue) {
+        let sourceController = unwindSegue.sourceViewController as! SelectTableViewController
+
+        switch sourceController.sourceType! {
+        case .AssignBoxIndex:
+            self.valueBoxIndex = self.availableBoxIndexes[sourceController.selectedIndex!]
+        case .AssignWasher:
+            self.valueWasher = self.availableWashers[sourceController.selectedIndex!]
+        }
     }
 
 
     // identifiers
-    let segueAssignWasherID = "assignWasher"
-    let segueAssignBoxIndexID = "assignBoxIndex"
-    let segueEmbeddedTableViewID = "embeddedTableView"
-    let cellAssignBoxIndexID = "assignBoxIndexCell"
-    let cellAssignWasherID = "assignWasherCell"
-
+    let segueSelectTableID = "selectTable"
+    let segueAssignActionsTableID = "embeddedAssignActionsTable"
+    let cellOfAssignActionsTableID = "assignActionCell"
+    let cellDurationID = "durationCell"
 
     // constants
     let textSelectBoxIndex = "Выберите номер бокса"
     let textSelectWasher = "Выберите мойщика"
-    let cellDurationID = "durationCell"
 
-    
     //variables
     var embeddedTableView: UITableView?
 
-    var bookingHour: BookingHour?
+    var bookingHour: BookingHour!
     var valueBoxIndex: Int? {
         didSet {
             self.embeddedTableView?.reloadData()
@@ -62,6 +67,10 @@ class AssignToReservationViewController: UIViewController {
         }
     }
 
+    // calculate
+    var availableWashers: [Washer]!
+    var availableBoxIndexes: [Int]!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,12 +78,24 @@ class AssignToReservationViewController: UIViewController {
         // set styles
         submitButton.layer.masksToBounds = true
         submitButton.layer.cornerRadius = 5
-
         self.updateSubmitButtonStyle()
+
 
         // init
         self.durationCollectionView.delegate = self
         self.durationCollectionView.dataSource = self
+
+
+        // init variables
+        availableWashers = Washer.all
+            .filter({ (id, washer) in
+                bookingHour.washers[id] == true
+            })
+            .map({ $0.1 })
+        availableBoxIndexes = self.bookingHour.boxes
+            .enumerate()
+            .filter({ $0.element.boolValue })
+            .map({ $0.index })
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -89,44 +110,39 @@ class AssignToReservationViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
         // init embedded tableview
-        if segue.identifier == segueEmbeddedTableViewID {
+        if segue.identifier == segueAssignActionsTableID {
             let destConroller = segue.destinationViewController as! UITableViewController
             self.embeddedTableView = destConroller.tableView
             self.embeddedTableView!.delegate = self
             self.embeddedTableView!.dataSource = self
         }
 
-        // insert data to destControllers
-        if segue.identifier == segueAssignWasherID {
-            let destController = segue.destinationViewController as! AssignWasherTableViewController
+        if segue.identifier == segueSelectTableID {
+            let sourceType = SelectTableSources(rawValue: sender as! Int)!
+            let destController = segue.destinationViewController as! SelectTableViewController
+            destController.sourceType = sourceType
 
-            var washers = Washer.all
-                .filter({ (id, washer) in self.bookingHour!.washers[id] == true })
-                .map({ $0.1 })
+            switch sourceType {
+            case .AssignWasher:
+                destController.items = availableWashers.map({ $0.name })
 
-            if self.valueWasher != nil {
-                washers.append(self.valueWasher!)
+                if self.valueWasher != nil {
+                    let selectedItem = self.valueWasher!.name
+                    destController.items.insert(selectedItem, atIndex: 0)
+                    destController.selectedIndex = 0
+                }
+
+            case .AssignBoxIndex:
+                destController.items = availableBoxIndexes.map({ "#\($0+1)" })
+
+                if self.valueBoxIndex != nil {
+                    let selectedItem = "#\(self.valueBoxIndex!+1)"
+                    destController.items.insert(selectedItem, atIndex: 0)
+                    destController.selectedIndex = 0
+                }
             }
-
-            destController.washers = washers
-            destController.assignedWasher = self.valueWasher
         }
 
-        if segue.identifier == segueAssignBoxIndexID {
-            let destController = segue.destinationViewController as! AssignBoxIndexTableViewController
-
-            var boxIndexes = self.bookingHour!.boxes
-                .enumerate()
-                .filter({ $0.element.boolValue })
-                .map({ $0.index })
-
-            if self.valueBoxIndex != nil {
-                boxIndexes.append(self.valueBoxIndex!)
-            }
-
-            destController.boxIndexes = boxIndexes
-            destController.assignedBoxIndex = self.valueBoxIndex
-        }
     }
 
     func updateSubmitButtonStyle() {
@@ -156,29 +172,29 @@ extension AssignToReservationViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = UITableViewCell(),
-            cellText = ""
-
-        if indexPath.row == 0 {
-            cell = self.embeddedTableView!.dequeueReusableCellWithIdentifier(cellAssignBoxIndexID, forIndexPath: indexPath)
-            cellText = (self.valueBoxIndex != nil) ? "Бокс: #\(self.valueBoxIndex!+1)" : textSelectBoxIndex
-        } else {
-            cell = self.embeddedTableView!.dequeueReusableCellWithIdentifier(cellAssignWasherID, forIndexPath: indexPath)
+        let cell = self.embeddedTableView?.dequeueReusableCellWithIdentifier(cellOfAssignActionsTableID, forIndexPath: indexPath)
+        var cellText: String!
+        
+        let sourceType = SelectTableSources(rawValue: indexPath.row)!
+        switch sourceType {
+        case .AssignWasher:
             cellText = (self.valueWasher != nil) ? "Мойщик: \(self.valueWasher!.name)" : textSelectWasher
+        case .AssignBoxIndex:
+            cellText = (self.valueBoxIndex != nil) ? "Бокс: #\(self.valueBoxIndex!+1)" : textSelectBoxIndex
         }
 
-        cell.textLabel!.text = cellText
-        return cell
+        print(".tableView.cellForRow", indexPath.row, cellText)
+        
+        cell!.textLabel!.text = cellText
+        return cell!
     }
 }
 
 // redirect on click tableview's cells
 extension AssignToReservationViewController: UITableViewDelegate {
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
-        let segue: String = (indexPath.row == 0) ? segueAssignBoxIndexID : segueAssignWasherID
-        self.performSegueWithIdentifier(segue, sender: self)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier(segueSelectTableID, sender: indexPath.row)
     }
 }
 

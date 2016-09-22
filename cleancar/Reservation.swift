@@ -143,20 +143,20 @@ class Reservation: FirebaseDataProtocol {
     static func create(carInfo: CarInfo, bookingHour: BookingHour,
                        services: Services,
                        completion: ()->(Void) ) -> Reservation {
-        let user = User.getUser()!,
+        let user = User.current!,
             ref = getFirebaseRef(),
             id = ref
                 .child(Reservation.childRefName + String(ReservationStatus.NonAssigned.rawValue))
                 .childByAutoId().key
 
-        var updUser = user.update(carInfo)
-        let reservation = Reservation(id: id, user: updUser, bookingHour: bookingHour, services: services)
-        updUser = updUser.update(reservation)
+        user.carInfo = carInfo
+        let reservation = Reservation(id: id, user: user, bookingHour: bookingHour, services: services)
+        user.currentReservation = reservation
 
         // collect requests
         let childUpdates: NSMutableDictionary = [
             reservation.getRefPrefix(): reservation.toDict(),
-            updUser.getRefPrefix(): updUser.toDictFull(),
+            user.getRefPrefix(): user.toDictFull(),
             "/\(bookingHour.getRefPrefix())/non_assigned/\(id)": true
         ]
 

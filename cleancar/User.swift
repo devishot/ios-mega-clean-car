@@ -14,6 +14,24 @@ import FBSDKLoginKit
 import SwiftyJSON
 
 
+enum UserRoles {
+    case Owner
+    case Admin
+    case Client
+}
+
+enum UserErrors: ErrorType {
+    case ProfileNotExist
+    case ProfileAlreadyExist
+    case NotLoggedIn
+    case UnknowError
+}
+
+
+typealias CompletionWithError = (UserErrors?) -> (Void)
+
+
+
 class User: FirebaseDataProtocol {
     static let childRefName: String = "users"
     static var refHandle: FIRDatabaseHandle?
@@ -26,22 +44,17 @@ class User: FirebaseDataProtocol {
 
     let id: String
     let full_name: String
+    let role: UserRoles
     var facebookProfile: [String: JSON]?
+    var accountKitProfile: [String: JSON]?
     var carInfo: CarInfo?
     var currentReservation: Reservation?
+
 
     init(uid: String, full_name: String) {
         self.id = uid
         self.full_name = full_name
-    }
-
-    init(uid: String, full_name: String, facebookProfile: [String: JSON]?,
-         carInfo: CarInfo?, currentReservation: Reservation?) {
-        self.id = uid
-        self.full_name = full_name
-        self.facebookProfile = facebookProfile
-        self.carInfo = carInfo
-        self.currentReservation = currentReservation
+        self.role = .Client
     }
 
     init(uid: String, data: AnyObject) {
@@ -49,8 +62,21 @@ class User: FirebaseDataProtocol {
 
         self.id = uid
         self.full_name = parsed["full_name"].stringValue
-        if let facebookProfile = parsed["facebook_profile"].dictionary {
+
+        var role: UserRoles = .Client
+        if parsed["is_admin"].bool != nil {
+            role = .Admin
+        }
+        if parsed["is_owner"].bool != nil {
+            role = .Owner
+        }
+        self.role = role
+
+        if let facebookProfile = parsed["profile_facebook"].dictionary {
             self.facebookProfile = facebookProfile
+        }
+        if let accountkitProfile = parsed["profile_accountkit"].dictionary {
+            self.accountKitProfile = accountkitProfile
         }
 
         // optional
@@ -73,12 +99,22 @@ class User: FirebaseDataProtocol {
         if withId {
             data.setObject(self.id, forKey: "id")
         }
+        if self.role == .Admin {
+            data.setObject(true, forKey: "is_admin")
+        } else if self.role == .Owner {
+            data.setObject(true, forKey: "is_owner")
+        }
+
         if self.carInfo != nil {
             data.setObject(self.carInfo!.toDict(), forKey: "car_info")
         }
         if self.facebookProfile != nil {
             data.setObject(toStringAnyObject(self.facebookProfile!),
-                           forKey: "facebook_profile")
+                           forKey: "profile_facebook")
+        }
+        if self.accountKitProfile != nil {
+            data.setObject(toStringAnyObject(self.accountKitProfile!),
+                           forKey: "profile_accountkit")
         }
         return data
     }
@@ -94,20 +130,6 @@ class User: FirebaseDataProtocol {
     
     func getRefPrefix() -> String {
         return "\(User.childRefName)/\(self.id)"
-    }
-
-
-
-    func update(newReservation: Reservation) -> User {
-        let copy = User(uid: id, full_name: full_name, facebookProfile: facebookProfile, carInfo: carInfo, currentReservation: currentReservation)
-        copy.currentReservation = newReservation
-        return copy
-    }
-
-    func update(newCarInfo: CarInfo) -> User {
-        let copy = User(uid: id, full_name: full_name, facebookProfile: facebookProfile, carInfo: carInfo, currentReservation: currentReservation)
-        copy.carInfo = newCarInfo
-        return copy
     }
 
 
@@ -128,8 +150,7 @@ class User: FirebaseDataProtocol {
         return nil
     }
 
-
-    static func subscribeToCurrent(completion: ()->(Void)) -> Void {
+    static func subscribeToCurrent(completion: CompletionWithError) {
         let uid = self.getUser()!.id
         User.refHandle = getFirebaseRef()
             .child(User.childRefName)
@@ -137,8 +158,8 @@ class User: FirebaseDataProtocol {
             .observeEventType(.Value, withBlock: { (snapshot) in
                 //check is UserProfile exists
                 if snapshot.value is NSNull {
-                    // create UserProfile
-                    User.saveCurrentUser(completion)
+                    completion(UserErrors.ProfileNotExist)
+
                 } else {
                     // fetch BookingHours for Reservation inside parsed User
                     BookingHour.subscribeToToday({ () -> (Void) in
@@ -147,7 +168,7 @@ class User: FirebaseDataProtocol {
 
                         let user = User(uid: uid, data: snapshot.value!)
                         User.current = user
-                        completion()
+                        completion(nil)
                     })
                 }
             })
@@ -176,57 +197,57 @@ class User: FirebaseDataProtocol {
         User.accountKit.requestAccount({ (account: AKFAccount?, error: NSError?) in
             let akID = account!.accountID
             let phoneNumber = account!.phoneNumber!.stringRepresentation()
-            print(".LoginWithAccessToken.requestAccount", akID, phoneNumber)
-            
+
             completion(uid: akID, phoneNumber: phoneNumber)
         })
     }
 
-    static func logInByAccountKit(uid: String, phoneNumber: String, completion: () -> (Void) ) {
-        let akEmail = "\(phoneNumber)@accountkit.fb",
-            akPassword = uid
+    static func signInByAccountKit(completion: CompletionWithError) {
+        User.fetchAccountKitData({ id, phoneNumber in
+            let akEmail = "\(phoneNumber)@accountkit.fb",
+                akPassword = id
 
-        FIRAuth.auth()?.signInWithEmail(akEmail, password: akPassword) { (user, error) in
-            if error == nil { // done!
-                self.afterLogin(completion)
-                
-            } else {
-                print(".User.logInByAccountKit.error", error.debugDescription, akEmail, akPassword)
-            }
-        }
-    }
+            FIRAuth.auth()?.signInWithEmail(akEmail, password: akPassword) { (user, error) in
+                if error == nil { // done!
+                    self.afterSignIn(completion)
 
-    static func signUpWithAccountKit(uid: String, phoneNumber: String, fullName: String, completion: () -> (Void) ) {
-        let akEmail = "\(phoneNumber)@accountkit.fb",
-            akPassword = uid
-
-        FIRAuth.auth()?.createUserWithEmail(akEmail, password: akPassword) { (user, error) in
-            if  error == nil,
-                let user = user {
-
-                // set fullName
-                let changeRequest = user.profileChangeRequest()
-                changeRequest.displayName = fullName
-                changeRequest.commitChangesWithCompletion { err in
-                    if err == nil { // done!
-                        self.afterLogin(completion)
-
-                    } else {
-                        print(".User.signUpWithAccountKit.commitChangesWithCompletion.error", err.debugDescription, fullName)
-                    }
+                } else {
+                    print(".User.logInByAccountKit.error", error.debugDescription, akEmail, akPassword)
+                    completion(UserErrors.ProfileNotExist)
                 }
-            } else {
-                print(".User.signUpWithAccountKit.createUserWithEmail.error", error.debugDescription, akEmail, akPassword)
-
-                // already exist:
-                logInByAccountKit(uid, phoneNumber: phoneNumber, completion: completion)
             }
-        }
+        })
     }
-    
+
+    static func signUpWithAccountKit(fullName: String, completion: CompletionWithError) {
+        User.fetchAccountKitData({ id, phoneNumber in
+            let akEmail = "\(phoneNumber)@accountkit.fb",
+                akPassword = id
+
+            FIRAuth.auth()?.createUserWithEmail(akEmail, password: akPassword) { (user, error) in
+                if error == nil { // set fullName
+                    let changeRequest = user!.profileChangeRequest()
+                    changeRequest.displayName = fullName
+                    changeRequest.commitChangesWithCompletion { err in
+                        if err == nil { // done!
+                            self.afterSignIn(completion)
+
+                        } else {
+                            completion(UserErrors.UnknowError)
+                        }
+                    }
+
+                } else {
+                    completion(UserErrors.ProfileAlreadyExist)
+
+                }
+            }
+        })
+    }
+
 
     // Facebook
-    static func logInByFacebook(completion: () -> (Void) ) -> Void {
+    static func logInByFacebook(completion: CompletionWithError) {
         let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString);
 
         // fetch updated FacebookProfile data
@@ -234,18 +255,18 @@ class User: FirebaseDataProtocol {
         FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
             if error == nil {
                 print("Firebase login: \(user!.displayName!)");
-                afterLogin(completion)
+                afterSignIn(completion)
             } else {
                 print("Error: while login into Firebase:", error.debugDescription);
             }
         }
     }
 
-    static func isAlreadyLoggedInByFacebook(completion: () -> (Void) ) -> Bool {
+    static func isAlreadyLoggedInByFacebook(completion: CompletionWithError) -> Bool {
         if FBSDKAccessToken.currentAccessToken() != nil {
             if let user = FIRAuth.auth()?.currentUser {
                 print("Already logged in, user: \(user.displayName)");
-                completion()
+                afterSignIn(completion)
             } else {
                 print("Warning: not logged in Firebase")
                 // sign into Firebase
@@ -256,13 +277,47 @@ class User: FirebaseDataProtocol {
         return false
     }
 
-    static func afterLogin(completion: () -> (Void)) -> Void {
-        // fetch or create UserProfile
-        User.subscribeToCurrent(completion)
-        // TODO: fetch FacebookProfile data and update UserProfile
+    static func isAlreadyLoggedIn(completion: CompletionWithError) {
+        if FIRAuth.auth()?.currentUser != nil {
+            afterSignIn(completion)
+        } else {
+            completion(UserErrors.NotLoggedIn)
+        }
     }
 
-    static func logOut(completion: () -> (Void)) -> Void {
+    static func afterSignIn(completion: CompletionWithError) {
+        // get or create UserProfile
+        User.subscribeToCurrent({ userError in
+            if userError == nil {
+                completion(nil)
+            } else if userError! == UserErrors.ProfileNotExist { // create UserProfile
+                User.saveCurrentUser() {
+                    completion(nil)
+                    afterSignUp() { error in }
+                }
+            }
+        })
+    }
+
+    static func afterSignUp(completion: CompletionWithError) {
+        // 1. update profile by AccountKit
+        User.fetchAccountKitData() { (akID, phoneNumber) in
+            let data = [
+                "id": akID,
+                "phone_number": phoneNumber
+            ]
+            let user = User.getUser()!
+            getFirebaseRef()
+                .child(User.childRefName)
+                .child(user.id)
+                .child("profile_accountkit")
+                .setValue(data)
+        }
+
+        // 2. TODO: update profile by Facebook
+    }
+
+    static func logOut(completion: () -> (Void)) {
         do {
             // logout from Firebase
             try FIRAuth.auth()?.signOut()

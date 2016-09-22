@@ -111,7 +111,7 @@ class HomeViewController: UIViewController {
                 self.bookingHours = BookingHour.fromNow
                 self.chooseTimeCollectionView.reloadData()
             })
-            User.subscribeToCurrent({ () -> (Void) in
+            User.subscribeToCurrent({ userError in
                 self.currentUser = User.current
             })
         }
@@ -192,7 +192,7 @@ class HomeViewController: UIViewController {
                 })
             }
         })
-        
+
         let cancel = UIAlertAction(title: "Отмена", style: .Cancel, handler: {
             (alert: UIAlertAction!) -> Void in
             

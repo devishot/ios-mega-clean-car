@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0404B3F268897FB69D358151 /* Pods_cleancarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48303207C9BACF141C57D8CC /* Pods_cleancarUITests.framework */; };
-		3CCDD94ABB73D43BD8346AB0 /* Pods_cleancar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC7078257E4E069BA7EF11A /* Pods_cleancar.framework */; };
+		302F56D34DA210D0C13320DE /* Pods_cleancarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 902BCA39CD94BEAD0A3A7E4A /* Pods_cleancarUITests.framework */; };
 		5209DE3F1D6C1EEA006E040E /* ServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5209DE3E1D6C1EEA006E040E /* ServicesTableViewController.swift */; };
 		52129C421D87ABD500921445 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52129C411D87ABD500921445 /* StatisticsViewController.swift */; };
 		52129C441D881DE000921445 /* StatisticItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52129C431D881DE000921445 /* StatisticItemCell.swift */; };
@@ -21,10 +20,8 @@
 		523F3B571D67A50B00B75421 /* BookingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523F3B561D67A50B00B75421 /* BookingController.swift */; };
 		5252E8131D731457009A841F /* FirebaseDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5252E8121D731457009A841F /* FirebaseDataProtocol.swift */; };
 		5252E8151D7582E2009A841F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5252E8141D7582E2009A841F /* Utils.swift */; };
-		525A8A571D7ADBE9002C6F46 /* AssignWasherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8A561D7ADBE9002C6F46 /* AssignWasherTableViewController.swift */; };
-		525A8A591D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8A581D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift */; };
+		5259ED0B1D8C0DB7003F5BB9 /* SelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5259ED0A1D8C0DB7003F5BB9 /* SelectTableViewController.swift */; };
 		525A8A5C1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8A5B1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift */; };
-		525A8A5E1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8A5D1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift */; };
 		525A8ABD1D7F4C48002C6F46 /* FeedbackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8ABC1D7F4C48002C6F46 /* FeedbackTableViewCell.swift */; };
 		525A8ABF1D7F4DB4002C6F46 /* FeedbacksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8ABE1D7F4DB4002C6F46 /* FeedbacksTableViewController.swift */; };
 		525C7C971D66C6D400DAE000 /* PricelistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C961D66C6D400DAE000 /* PricelistController.swift */; };
@@ -35,6 +32,8 @@
 		5289472D1D72CFA9004B7090 /* Washer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5289472C1D72CFA9004B7090 /* Washer.swift */; };
 		5292AC041D6EB40A00E03760 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5292AC021D6EB40A00E03760 /* Main.storyboard */; };
 		5292AC071D6EBD4C00E03760 /* Dimmable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5292AC061D6EBD4C00E03760 /* Dimmable.swift */; };
+		52BF3C481D8EDEB0001BC9A7 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF3C471D8EDEB0001BC9A7 /* TabBarViewController.swift */; };
+		64DBE4346228683B0609F616 /* Pods_cleancar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7C11601A253081170570B5 /* Pods_cleancar.framework */; };
 		B42F94E91D79F336008F178A /* DurationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F94E81D79F336008F178A /* DurationCollectionViewCell.swift */; };
 		B43C90031D6859F800667B09 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43C90021D6859F800667B09 /* FeedbackViewController.swift */; };
 		B45905C41D6AC92600CFEFEF /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45905C31D6AC92600CFEFEF /* PopUpViewController.swift */; };
@@ -61,9 +60,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		09557AF8E2E4DB998B24E254 /* Pods-cleancarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancarUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		408F4B8A8AAB864F46AF8072 /* Pods-cleancar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.release.xcconfig"; sourceTree = "<group>"; };
-		48303207C9BACF141C57D8CC /* Pods_cleancarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cleancarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2901FB5C5A6386A11F3E2251 /* Pods-cleancarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancarUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5209DE3E1D6C1EEA006E040E /* ServicesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesTableViewController.swift; sourceTree = "<group>"; };
 		52129C411D87ABD500921445 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		52129C431D881DE000921445 /* StatisticItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticItemCell.swift; sourceTree = "<group>"; };
@@ -75,10 +72,8 @@
 		523F3B561D67A50B00B75421 /* BookingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingController.swift; sourceTree = "<group>"; };
 		5252E8121D731457009A841F /* FirebaseDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDataProtocol.swift; sourceTree = "<group>"; };
 		5252E8141D7582E2009A841F /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		525A8A561D7ADBE9002C6F46 /* AssignWasherTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignWasherTableViewController.swift; sourceTree = "<group>"; };
-		525A8A581D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignWasherTableViewCell.swift; sourceTree = "<group>"; };
+		5259ED0A1D8C0DB7003F5BB9 /* SelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTableViewController.swift; sourceTree = "<group>"; };
 		525A8A5B1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectRightBarButtonHelper.swift; sourceTree = "<group>"; };
-		525A8A5D1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignBoxIndexTableViewController.swift; sourceTree = "<group>"; };
 		525A8ABC1D7F4C48002C6F46 /* FeedbackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackTableViewCell.swift; sourceTree = "<group>"; };
 		525A8ABE1D7F4DB4002C6F46 /* FeedbacksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbacksTableViewController.swift; sourceTree = "<group>"; };
 		525C7C961D66C6D400DAE000 /* PricelistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PricelistController.swift; sourceTree = "<group>"; };
@@ -90,10 +85,11 @@
 		5289472C1D72CFA9004B7090 /* Washer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Washer.swift; sourceTree = "<group>"; };
 		5292AC031D6EB40A00E03760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5292AC061D6EBD4C00E03760 /* Dimmable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dimmable.swift; sourceTree = "<group>"; };
-		82965A14B655F9FE32120647 /* Pods-cleancarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancarUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests.release.xcconfig"; sourceTree = "<group>"; };
-		84384B51F1EAA21FEFEA9766 /* Pods-cleancar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.debug.xcconfig"; sourceTree = "<group>"; };
-		97FAB469328B62ACE747D91A /* Pods-cleancar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.release.xcconfig"; sourceTree = "<group>"; };
-		9EBDDD8594AA17CCC79ADDBF /* Pods-cleancarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancarUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		52BF3C471D8EDEB0001BC9A7 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		5B7C11601A253081170570B5 /* Pods_cleancar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cleancar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		87B0141522C964E81865A577 /* Pods-cleancarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancarUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests.release.xcconfig"; sourceTree = "<group>"; };
+		902BCA39CD94BEAD0A3A7E4A /* Pods_cleancarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cleancarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3BDF9108FE3AA754175B2C7 /* Pods-cleancar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.release.xcconfig"; sourceTree = "<group>"; };
 		B42F94E81D79F336008F178A /* DurationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationCollectionViewCell.swift; sourceTree = "<group>"; };
 		B43C90021D6859F800667B09 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		B45905C31D6AC92600CFEFEF /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
@@ -111,9 +107,7 @@
 		B4EEA33A1D6429EB0039D998 /* cleancarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cleancarUITests.swift; sourceTree = "<group>"; };
 		B4EEA33C1D6429EB0039D998 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4EEA3471D644B1F0039D998 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		B804464F39BDE39608136BA1 /* Pods-cleancar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.debug.xcconfig"; sourceTree = "<group>"; };
-		EEC7078257E4E069BA7EF11A /* Pods_cleancar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cleancar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F6979A98C03896628EE9F5B7 /* Pods-cleancarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancarUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancarUITests/Pods-cleancarUITests.release.xcconfig"; sourceTree = "<group>"; };
+		CB6D6A598B99A13969654139 /* Pods-cleancar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CCDD94ABB73D43BD8346AB0 /* Pods_cleancar.framework in Frameworks */,
+				64DBE4346228683B0609F616 /* Pods_cleancar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,20 +123,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0404B3F268897FB69D358151 /* Pods_cleancarUITests.framework in Frameworks */,
+				302F56D34DA210D0C13320DE /* Pods_cleancarUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0547B4E5F47B77E8C25819A1 /* Pods */ = {
+		498A82F9BE6AD766CBC6C42E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B804464F39BDE39608136BA1 /* Pods-cleancar.debug.xcconfig */,
-				97FAB469328B62ACE747D91A /* Pods-cleancar.release.xcconfig */,
-				9EBDDD8594AA17CCC79ADDBF /* Pods-cleancarUITests.debug.xcconfig */,
-				F6979A98C03896628EE9F5B7 /* Pods-cleancarUITests.release.xcconfig */,
+				CB6D6A598B99A13969654139 /* Pods-cleancar.debug.xcconfig */,
+				A3BDF9108FE3AA754175B2C7 /* Pods-cleancar.release.xcconfig */,
+				2901FB5C5A6386A11F3E2251 /* Pods-cleancarUITests.debug.xcconfig */,
+				87B0141522C964E81865A577 /* Pods-cleancarUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -150,10 +144,6 @@
 		523F3B4D1D66E91B00B75421 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				84384B51F1EAA21FEFEA9766 /* Pods-cleancar.debug.xcconfig */,
-				408F4B8A8AAB864F46AF8072 /* Pods-cleancar.release.xcconfig */,
-				09557AF8E2E4DB998B24E254 /* Pods-cleancarUITests.debug.xcconfig */,
-				82965A14B655F9FE32120647 /* Pods-cleancarUITests.release.xcconfig */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -175,6 +165,7 @@
 				B45905C51D6C171B00CFEFEF /* OrdersTableViewController.swift */,
 				525A8ABE1D7F4DB4002C6F46 /* FeedbacksTableViewController.swift */,
 				52129C411D87ABD500921445 /* StatisticsViewController.swift */,
+				52BF3C471D8EDEB0001BC9A7 /* TabBarViewController.swift */,
 			);
 			name = Tabs;
 			sourceTree = "<group>";
@@ -209,8 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				B46AE7D51D7991EF00875C40 /* AssignToReservationViewController.swift */,
-				525A8A561D7ADBE9002C6F46 /* AssignWasherTableViewController.swift */,
-				525A8A5D1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift */,
+				5259ED0A1D8C0DB7003F5BB9 /* SelectTableViewController.swift */,
 			);
 			name = AssignControllers;
 			sourceTree = "<group>";
@@ -235,7 +225,6 @@
 				525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */,
 				B4856D971D6896E0000EC687 /* OrdersTableViewCell.swift */,
 				B42F94E81D79F336008F178A /* DurationCollectionViewCell.swift */,
-				525A8A581D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift */,
 				525A8ABC1D7F4C48002C6F46 /* FeedbackTableViewCell.swift */,
 				52129C431D881DE000921445 /* StatisticItemCell.swift */,
 			);
@@ -251,6 +240,15 @@
 				525A8A5B1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift */,
 			);
 			name = helpers;
+			sourceTree = "<group>";
+		};
+		9EED77A41C0F2D6357C190ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5B7C11601A253081170570B5 /* Pods_cleancar.framework */,
+				902BCA39CD94BEAD0A3A7E4A /* Pods_cleancarUITests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		B4856D941D6889DE000EC687 /* extensions */ = {
@@ -270,9 +268,9 @@
 				B4856D941D6889DE000EC687 /* extensions */,
 				B4EEA3231D6429EA0039D998 /* Products */,
 				B4EEA3391D6429EB0039D998 /* cleancarUITests */,
-				E839B45BC8CB19266AD0869D /* Frameworks */,
 				523F3B4D1D66E91B00B75421 /* Recovered References */,
-				0547B4E5F47B77E8C25819A1 /* Pods */,
+				498A82F9BE6AD766CBC6C42E /* Pods */,
+				9EED77A41C0F2D6357C190ED /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -306,15 +304,6 @@
 			);
 			path = cleancarUITests;
 			sourceTree = SOURCE_ROOT;
-		};
-		E839B45BC8CB19266AD0869D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				EEC7078257E4E069BA7EF11A /* Pods_cleancar.framework */,
-				48303207C9BACF141C57D8CC /* Pods_cleancarUITests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -372,9 +361,11 @@
 					B4EEA3211D6429EA0039D998 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 9P2RB2SCK5;
+						LastSwiftMigration = 0800;
 					};
 					B4EEA3351D6429EB0039D998 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = B4EEA3211D6429EA0039D998;
 					};
 				};
@@ -508,16 +499,14 @@
 				528947291D72C9D7004B7090 /* Reservation.swift in Sources */,
 				52129C421D87ABD500921445 /* StatisticsViewController.swift in Sources */,
 				B46AE7D61D7991EF00875C40 /* AssignToReservationViewController.swift in Sources */,
-				525A8A591D7ADE3E002C6F46 /* AssignWasherTableViewCell.swift in Sources */,
 				52284A8E1D75F5DD00A41427 /* BookingHoursCollectionViewCell.swift in Sources */,
 				5225B05C1D6B640E00BFBAE7 /* Services.swift in Sources */,
 				528947251D717441004B7090 /* LoginViewController.swift in Sources */,
-				525A8A5E1D7C5121002C6F46 /* AssignBoxIndexTableViewController.swift in Sources */,
 				5209DE3F1D6C1EEA006E040E /* ServicesTableViewController.swift in Sources */,
 				5289472D1D72CFA9004B7090 /* Washer.swift in Sources */,
 				5225B05A1D6B5CEB00BFBAE7 /* CarInfo.swift in Sources */,
-				525A8A571D7ADBE9002C6F46 /* AssignWasherTableViewController.swift in Sources */,
 				5289472B1D72CA0F004B7090 /* User.swift in Sources */,
+				52BF3C481D8EDEB0001BC9A7 /* TabBarViewController.swift in Sources */,
 				52129C441D881DE000921445 /* StatisticItemCell.swift in Sources */,
 				5292AC071D6EBD4C00E03760 /* Dimmable.swift in Sources */,
 				B4856D961D6889FC000EC687 /* UIView+borderColor.swift in Sources */,
@@ -535,6 +524,7 @@
 				B43C90031D6859F800667B09 /* FeedbackViewController.swift in Sources */,
 				5252E8131D731457009A841F /* FirebaseDataProtocol.swift in Sources */,
 				B42F94E91D79F336008F178A /* DurationCollectionViewCell.swift in Sources */,
+				5259ED0B1D8C0DB7003F5BB9 /* SelectTableViewController.swift in Sources */,
 				523F3B571D67A50B00B75421 /* BookingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -662,7 +652,7 @@
 		};
 		B4EEA3401D6429EB0039D998 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 84384B51F1EAA21FEFEA9766 /* Pods-cleancar.debug.xcconfig */;
+			baseConfigurationReference = CB6D6A598B99A13969654139 /* Pods-cleancar.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -673,12 +663,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = hackteam.MegaCleanCar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
 		B4EEA3411D6429EB0039D998 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 408F4B8A8AAB864F46AF8072 /* Pods-cleancar.release.xcconfig */;
+			baseConfigurationReference = A3BDF9108FE3AA754175B2C7 /* Pods-cleancar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -689,29 +680,32 @@
 				PRODUCT_BUNDLE_IDENTIFIER = hackteam.MegaCleanCar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
 		B4EEA3431D6429EB0039D998 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 09557AF8E2E4DB998B24E254 /* Pods-cleancarUITests.debug.xcconfig */;
+			baseConfigurationReference = 2901FB5C5A6386A11F3E2251 /* Pods-cleancarUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = cleancarUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = a.cleancarUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = cleancar;
 			};
 			name = Debug;
 		};
 		B4EEA3441D6429EB0039D998 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82965A14B655F9FE32120647 /* Pods-cleancarUITests.release.xcconfig */;
+			baseConfigurationReference = 87B0141522C964E81865A577 /* Pods-cleancarUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = cleancarUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = a.cleancarUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = cleancar;
 			};
 			name = Release;
