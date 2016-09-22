@@ -426,6 +426,11 @@
                                     <segue destination="bS3-Ho-UlY" kind="unwind" unwindAction="unwindToLoginViewController:" id="rtk-VH-Fgy"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Завершите регистрацию, заполните поле ниже" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oYP-QA-0Mg">
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.74509805439999999" green="0.1176470593" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
@@ -436,10 +441,12 @@
                             <constraint firstItem="0mA-Q3-e2K" firstAttribute="leading" secondItem="iW6-gA-mVl" secondAttribute="leading" id="OR1-p9-khz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vL8-ga-SWh" secondAttribute="trailing" constant="45" id="TQE-Pf-1bl"/>
                             <constraint firstItem="0mA-Q3-e2K" firstAttribute="width" secondItem="iW6-gA-mVl" secondAttribute="width" id="XBz-eB-6eE"/>
+                            <constraint firstItem="oYP-QA-0Mg" firstAttribute="centerX" secondItem="gTu-uZ-6GV" secondAttribute="centerX" id="ao5-Tv-JLK"/>
                             <constraint firstItem="iW6-gA-mVl" firstAttribute="leading" secondItem="gTu-uZ-6GV" secondAttribute="leading" constant="45" id="c2r-Yq-UmN"/>
                             <constraint firstItem="vL8-ga-SWh" firstAttribute="top" secondItem="0mA-Q3-e2K" secondAttribute="bottom" constant="8" symbolic="YES" id="fy7-xn-FKT">
                                 <variation key="widthClass=compact" constant="17"/>
                             </constraint>
+                            <constraint firstItem="iW6-gA-mVl" firstAttribute="top" secondItem="oYP-QA-0Mg" secondAttribute="bottom" constant="35" id="gK7-mP-n1l"/>
                             <constraint firstItem="0mA-Q3-e2K" firstAttribute="top" secondItem="iW6-gA-mVl" secondAttribute="bottom" constant="2" id="geF-yM-G3I"/>
                             <constraint firstAttribute="trailing" secondItem="iW6-gA-mVl" secondAttribute="trailing" constant="45" id="hEA-B6-9uO"/>
                             <constraint firstItem="hC6-9r-jbB" firstAttribute="top" secondItem="vL8-ga-SWh" secondAttribute="bottom" constant="216" id="ihp-cB-7Ky"/>
@@ -451,18 +458,18 @@
                                 <exclude reference="vL8-ga-SWh"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Ict-P1-L5p"/>
-                                <exclude reference="ihp-cB-7Ky"/>
+                                <exclude reference="c2r-Yq-UmN"/>
+                                <exclude reference="hEA-B6-9uO"/>
                                 <exclude reference="9MJ-08-702"/>
                                 <exclude reference="OR1-p9-khz"/>
                                 <exclude reference="XBz-eB-6eE"/>
                                 <exclude reference="geF-yM-G3I"/>
-                                <exclude reference="c2r-Yq-UmN"/>
-                                <exclude reference="hEA-B6-9uO"/>
                                 <exclude reference="1IT-0w-DK0"/>
                                 <exclude reference="3DO-Nq-1ha"/>
                                 <exclude reference="TQE-Pf-1bl"/>
                                 <exclude reference="fy7-xn-FKT"/>
+                                <exclude reference="Ict-P1-L5p"/>
+                                <exclude reference="ihp-cB-7Ky"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -472,18 +479,18 @@
                                 <include reference="vL8-ga-SWh"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Ict-P1-L5p"/>
-                                <include reference="ihp-cB-7Ky"/>
+                                <include reference="c2r-Yq-UmN"/>
+                                <include reference="hEA-B6-9uO"/>
                                 <include reference="9MJ-08-702"/>
                                 <include reference="OR1-p9-khz"/>
                                 <include reference="XBz-eB-6eE"/>
                                 <include reference="geF-yM-G3I"/>
-                                <include reference="c2r-Yq-UmN"/>
-                                <include reference="hEA-B6-9uO"/>
                                 <include reference="1IT-0w-DK0"/>
                                 <include reference="3DO-Nq-1ha"/>
                                 <include reference="TQE-Pf-1bl"/>
                                 <include reference="fy7-xn-FKT"/>
+                                <exclude reference="Ict-P1-L5p"/>
+                                <include reference="ihp-cB-7Ky"/>
                             </mask>
                         </variation>
                     </view>
@@ -1760,6 +1767,7 @@
                         <outlet property="timeOfOrderLabel" destination="7Tx-XB-Ez0" id="DoE-1i-WrO"/>
                         <outlet property="viewReservationCancel" destination="iv2-Ul-pR5" id="oEW-2Y-OTi"/>
                         <outlet property="viewReservationRate" destination="GC2-xb-oQV" id="u8g-co-8Du"/>
+                        <outlet property="viewSelectBookingHour" destination="l6C-ZE-Ysf" id="Os5-RX-WSf"/>
                         <segue destination="HpN-yy-TkP" kind="show" identifier="rate" id="NX6-Mq-0BN"/>
                     </connections>
                 </viewController>

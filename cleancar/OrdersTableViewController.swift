@@ -159,8 +159,19 @@ class OrdersTableViewController: UITableViewController {
             }
         })
 
+        let callAction: UITableViewRowAction? = nil
+        if reservation.user.accountKitProfile?["phone_number"] != nil {
+            let callAction = UITableViewRowAction(style: .Default, title: "✆\n Call", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+
+                self.displayCallAlert(reservation.user)
+            })
+        }
+
 
         if self.filterValue == 1 {
+            if callAction != nil {
+                return [callAction!]
+            }
             return []
         }
         if reservation.isAssigned() {
@@ -204,6 +215,25 @@ class OrdersTableViewController: UITableViewController {
         } else {
             return self.declined
         }
+    }
+    
+    
+    func displayCallAlert(user: User) {
+        let name = user.full_name
+        let phone_number = user.accountKitProfile!["phone_number"]!
+
+        let alert = UIAlertController(title: "Позвонить?", message: name, preferredStyle: .Alert)
+
+        let callAction = UIAlertAction(title: "Да", style: .Default, handler: { (alert: UIAlertAction!) -> Void in
+            UIApplication.sharedApplication().openURL(NSURL(string: "tel:\(phone_number)")!)
+        })
+
+        let cancel = UIAlertAction(title: "Отмена", style: .Cancel, handler: nil)
+
+        alert.addAction(callAction)
+        alert.addAction(cancel)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 
 }

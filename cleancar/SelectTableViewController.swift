@@ -31,9 +31,8 @@ class SelectTableViewController: UITableViewController {
             target: self,
             action: #selector(clickedSelectBarButton(_:))
         )
+        saveButton.enabled = false
         self.navigationItem.rightBarButtonItem = saveButton
-        
-        
     }
 
 
@@ -65,6 +64,8 @@ class SelectTableViewController: UITableViewController {
     }
 
     func updateSelectBarButtonStyle(isActive: Bool) {
-        self.navigationItem.rightBarButtonItem?.style = isActive ? .Done : .Plain
+        let saveButton: UIBarButtonItem = self.navigationItem.rightBarButtonItem!
+        saveButton.style = isActive ? .Done : .Plain
+        saveButton.enabled = isActive
     }
 }

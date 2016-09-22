@@ -49,6 +49,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var noReservationView: UIView!
     @IBOutlet weak var viewReservationRate: UIView!
     @IBOutlet weak var viewReservationCancel: UIView!
+    @IBOutlet weak var viewSelectBookingHour: UIView!
     @IBOutlet weak var timeOfOrderLabel: UILabel!
     @IBOutlet weak var labelReservationCost: UILabel!
     @IBOutlet weak var numberOfCarLabel: UILabel!
@@ -103,12 +104,8 @@ class HomeViewController: UIViewController {
         chooseTimeCollectionView.dataSource = self
         chooseTimeCollectionView.delegate = self
 
-
-        print(".home")
-
         // 3. Fetch data
         Washer.fetchData() {
-            print(".home.Washers.fetched", Washer.all.count)
             BookingHour.subscribeToToday({ () -> (Void) in
                 self.bookingHours = BookingHour.fromNow
                 self.chooseTimeCollectionView.reloadData()
@@ -171,8 +168,13 @@ class HomeViewController: UIViewController {
             }
 
             UIView.transitionFromView(noReservationView, toView: roundedBorderView, duration: 0.2, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+            
+            // hide 
+            self.viewSelectBookingHour.hidden = true
         } else {
             UIView.transitionFromView(roundedBorderView, toView: noReservationView, duration: 0.2, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+            // show
+            self.viewSelectBookingHour.hidden = false
         }
     }
 
