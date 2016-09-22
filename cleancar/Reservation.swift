@@ -80,6 +80,7 @@ class Reservation: FirebaseDataProtocol {
             "booking_hour_index": bookingHour.index,
             "services": services.toDict(),
             "timestamp": formatAsTimestamp(timestamp),
+            "timestamp_desc": 0 - formatAsTimestamp(timestamp),
             "status": status.rawValue
         ]
         if withId {
@@ -116,15 +117,20 @@ class Reservation: FirebaseDataProtocol {
     }
 
 
-    func getRefPrefix() -> String {
-        return self.getRefPrefix(self.status)
+    func getRefPath() -> String {
+        return self.getRefPath(self.status)
     }
 
-    func getRefPrefix(status: ReservationStatus) -> String {
-        return "\(Reservation.childRefName)/\(status.rawValue)/\(self.id)"
+    func getRefPath(status: ReservationStatus) -> String {
+        return Reservation.getRefPrefix(status, date: self.timestamp) + self.id
     }
 
-    
+    static func getRefPrefix(status: ReservationStatus, date: NSDate = NSDate()) -> String {
+        let dateKey = formatAsString(date, onlyDate: true)
+        return "\(Reservation.childRefName)/\(dateKey)/\(status.rawValue)/"
+    }
+
+
     func getBoxIndexText() -> String {
         return "#\(self.boxIndex! + 1)"
     }
@@ -155,7 +161,7 @@ class Reservation: FirebaseDataProtocol {
 
         // collect requests
         let childUpdates: NSMutableDictionary = [
-            reservation.getRefPrefix(): reservation.toDict(),
+            reservation.getRefPath(): reservation.toDict(),
             user.getRefPrefix(): user.toDictFull(),
             "/\(bookingHour.getRefPrefix())/non_assigned/\(id)": true
         ]
@@ -177,8 +183,8 @@ class Reservation: FirebaseDataProtocol {
         let prefixB = self.bookingHour.getRefPrefix()
 
         let updateChildValues: NSMutableDictionary = [
-            self.getRefPrefix(): NSNull(),
-            self.getRefPrefix(.Declined): self.toDict(),
+            self.getRefPath(): NSNull(),
+            self.getRefPath(.Declined): self.toDict(),
             "\(self.user.getRefPrefix())/current_reservation": NSNull()
         ]
 
@@ -212,7 +218,7 @@ class Reservation: FirebaseDataProtocol {
 
         if wasNonAssigned {
             updateChildValues
-                .setObject(NSNull(), forKey: self.getRefPrefix(prevStatus))
+                .setObject(NSNull(), forKey: self.getRefPath(prevStatus))
 
             let prefixB = self.bookingHour.getRefPrefix()
             updateChildValues
@@ -222,7 +228,7 @@ class Reservation: FirebaseDataProtocol {
             updateChildValues
                 .setObject(false, forKey: prefixB+"/washers/\(washer.id)")
         }
-        updateChildValues.setObject(self.toDict(), forKey: self.getRefPrefix())
+        updateChildValues.setObject(self.toDict(), forKey: self.getRefPath())
 
         getFirebaseRef()
             .updateChildValues(
@@ -239,8 +245,8 @@ class Reservation: FirebaseDataProtocol {
         self.status = .Completed
 
         let updateChildValues: [NSObject: AnyObject] = [
-            self.getRefPrefix(prevStatus): NSNull(),
-            self.getRefPrefix(): self.toDict(),
+            self.getRefPath(prevStatus): NSNull(),
+            self.getRefPath(): self.toDict(),
             "\(self.user.getRefPrefix())/current_reservation": self.toDict(true)
         ]
         getFirebaseRef().updateChildValues(updateChildValues, withCompletionBlock: {_,_ in
@@ -260,8 +266,8 @@ class Reservation: FirebaseDataProtocol {
         self.feedbackMessage = message
 
         let updateChildValues: [NSObject: AnyObject] = [
-            self.getRefPrefix(prevStatus): NSNull(),
-            self.getRefPrefix(): self.toDict(),
+            self.getRefPath(prevStatus): NSNull(),
+            self.getRefPath(): self.toDict(),
             "\(self.user.getRefPrefix())/current_reservation": NSNull()
         ]
         getFirebaseRef()
@@ -323,10 +329,11 @@ class Reservation: FirebaseDataProtocol {
         })
     }
 
-    static func subscribeTo(filterByStatus: ReservationStatus,
+    static func subscribeTo(filterByStatus: ReservationStatus, date: NSDate,
                      completion: (reservations: [Reservation])->Void) {
         let ref = getFirebaseRef()
-            .child(Reservation.childRefName + "/\(filterByStatus.rawValue)")
+            .child(Reservation.getRefPrefix(filterByStatus, date: date))
+            .queryOrderedByChild("timestamp_desc")
             .observeEventType(.Value) { (snapshot: FIRDataSnapshot) -> Void in
 
                 if snapshot.value is NSNull {
@@ -337,7 +344,7 @@ class Reservation: FirebaseDataProtocol {
                 let data = JSON(snapshot.value!),
                     reservations = data.dictionaryObject!.map({ Reservation(id: $0.0, data: $0.1) })
 
-                completion(reservations: reservations)
+                completion(reservations: reservations.reverse())
             }
         Reservation.refHandle = ref
     }

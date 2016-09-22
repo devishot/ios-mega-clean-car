@@ -50,9 +50,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var viewReservationRate: UIView!
     @IBOutlet weak var viewReservationCancel: UIView!
     @IBOutlet weak var timeOfOrderLabel: UILabel!
-    @IBOutlet weak var nameOfCarLabel: UILabel!
+    @IBOutlet weak var labelReservationCost: UILabel!
     @IBOutlet weak var numberOfCarLabel: UILabel!
-
     @IBOutlet weak var chooseTimeCollectionView: UICollectionView!
     @IBOutlet weak var makeReservationButton: UIButton!
 
@@ -154,7 +153,7 @@ class HomeViewController: UIViewController {
             let carInfo: CarInfo = reservation.user.carInfo {
 
             self.timeOfOrderLabel.text = reservation.bookingHour.getHour()
-            self.nameOfCarLabel.text = carInfo.model!
+            self.labelReservationCost.text = formatMoney(reservation.services.getCostForTotal())
             self.numberOfCarLabel.text = carInfo.identifierNumber!
 
             if reservation.isCompleted() {

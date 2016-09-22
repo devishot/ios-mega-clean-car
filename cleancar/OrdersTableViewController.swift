@@ -71,15 +71,15 @@ class OrdersTableViewController: UITableViewController {
 
         // 2. load data
         BookingHour.subscribeToToday({ () -> (Void) in
+            let today = NSDate()
 
-            Reservation.subscribeTo(ReservationStatus.NonAssigned, completion: { (reservations) in
+            Reservation.subscribeTo(.NonAssigned, date: today, completion: { (reservations) in
                 self.nonAssigned = reservations
             })
-            Reservation.subscribeTo(ReservationStatus.Assigned, completion: { (reservations) in
+            Reservation.subscribeTo(.Assigned, date: today, completion: { (reservations) in
                 self.assigned = reservations
             })
-            Reservation.subscribeTo(ReservationStatus.Declined, completion: { (reservations) in
-                //print(".subscribeTo.Declined", reservations.count)
+            Reservation.subscribeTo(.Declined, date: today, completion: { (reservations) in
                 self.declined = reservations
             })
         })

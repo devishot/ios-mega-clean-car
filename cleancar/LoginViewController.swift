@@ -84,13 +84,17 @@ class LoginViewController: UIViewController {
         // if the user is already logged in
         // 1. into Firebase Auth
         User.isAlreadyLoggedIn() { userError in
-            self.redirectToHome()
+            if userError == nil {
+                self.redirectToHome()
+            }
         }
 
 
         // 2. using facebook account
         User.isAlreadyLoggedInByFacebook() { userError in
-            self.redirectToHome()
+            if userError == nil {
+                self.redirectToHome()
+            }
         }
 
         // 3. currenlty logged into AccountKit
@@ -184,9 +188,9 @@ class LoginViewController: UIViewController {
             if FBSDKAccessToken.currentAccessToken() != nil {
                 completion()
             } else {
-                print("Error: while login via Facebook", error.debugDescription)
+                print("Error: while login via Facebook")
             }
-            
+
         }
     }
 

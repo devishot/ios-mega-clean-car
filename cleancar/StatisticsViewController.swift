@@ -134,7 +134,9 @@ class StatisticsViewController: UIViewController {
     }
 
 
-    func generateDataFor(filter: StatisticFilter) {
+    func generateDataFor(filter: StatisticFilter) -> Int? {
+        let prevCount = self.dataStore[filter]!.count
+
         Range(1...5).generate() // 5 times
             .forEach({ _ in
                 var item: StatisticItem?
@@ -151,6 +153,11 @@ class StatisticsViewController: UIViewController {
 
                 self.dataStore[filter]!.append(item!)
             })
+
+        if let count = self.dataStore[filter]?.count where count > prevCount {
+            return count - prevCount
+        }
+        return nil
     }
 
     func getItem(index: Int) -> StatisticItem  {
@@ -199,10 +206,17 @@ extension StatisticsViewController: UICollectionViewDelegate {
         self.currentItem = self.getItem(row, reversed: true)
     }
 
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         // add prev items
+
+        print(".scrollViewDidScroll")
         if self.isOnFirstScrollItem() {
-            self.generateDataFor(self.selectedFilter)
+            print(".scrollViewDidScroll.isOnFirstScrollItem")
+            if let addedCount = self.generateDataFor(self.selectedFilter) {
+                self.collectionView.reloadData()
+                self.scrollToItem(addedCount + 1)
+            }
         }
 
         // hide buttons
@@ -215,33 +229,38 @@ extension StatisticsViewController: UICollectionViewDelegate {
         UIView.animateWithDuration(0.3, delay: 0.3, options: .CurveEaseOut, animations: animate, completion: nil)
     }
 
+
     // custom function for scroll
-    func scrollOnceToLastItem() {
+    private func scrollOnceToLastItem() {
         if self.wasRenderedCollectionView {
             return
         }
         self.wasRenderedCollectionView = true
-        
-        let rowsCount = self.collectionView.numberOfItemsInSection(0),
-        contentSize = Int(self.collectionView.frame.size.width)
+
+        let rowsCount = self.collectionView.numberOfItemsInSection(0)
+        self.scrollToItem(rowsCount)
+    }
+
+    private func scrollToItem(atIndex: Int) {
+        let contentSize = Int(self.collectionView.frame.size.width)
         var co = self.collectionView.contentOffset
-        co.x = CGFloat( contentSize * (rowsCount - 1) )
-        
+        co.x = CGFloat(contentSize * (atIndex - 1))
+
         dispatch_async(dispatch_get_main_queue(), {
             self.collectionView.setContentOffset(co, animated: false)
         })
     }
-
-    func isOnFirstScrollItem() -> Bool {
+    
+    private func isOnFirstScrollItem() -> Bool {
         return self.collectionView.contentOffset.x < self.collectionView.frame.size.width
     }
 
-    func isOnLastScrollItem() -> Bool {
+    private func isOnLastScrollItem() -> Bool {
         let rightBorder = self.collectionView.contentOffset.x + self.collectionView.frame.size.width
         return rightBorder >= self.collectionView.contentSize.width
     }
 
-    func getCurrentRowIndex() -> Int {
+    private func getCurrentRowIndex() -> Int {
         return Int(self.collectionView.contentOffset.x / self.collectionView.frame.size.width)
     }
 }
