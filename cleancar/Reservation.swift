@@ -341,8 +341,12 @@ class Reservation: FirebaseDataProtocol {
                     return
                 }
 
-                let data = JSON(snapshot.value!),
-                    reservations = data.dictionaryObject!.map({ Reservation(id: $0.0, data: $0.1) })
+                let data = JSON(snapshot.value!)
+                let reservations = data.dictionaryObject!
+                        .map({ Reservation(id: $0.0, data: $0.1) })
+                        .sort({ (res1, res2)  in
+                            return res1.bookingHour.index <= res2.bookingHour.index
+                        })
 
                 completion(reservations: reservations.reverse())
             }

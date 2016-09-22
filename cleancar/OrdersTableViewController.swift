@@ -8,6 +8,32 @@
 
 import UIKit
 
+
+private enum OrdersPageFilters: Int {
+    case Quequed
+    case Canceled
+
+    
+    func getTitle() -> String {
+        switch self {
+        case .Quequed:
+            return "Заказы"
+        case .Canceled:
+            return "Отмененные"
+        }
+    }
+    
+    func opposite() -> OrdersPageFilters {
+        switch self {
+        case .Quequed:
+            return .Canceled
+        case .Canceled:
+            return .Quequed
+        }
+    }
+}
+
+
 class OrdersTableViewController: UITableViewController {
 
     // IBOutlets
@@ -16,11 +42,7 @@ class OrdersTableViewController: UITableViewController {
 
     // IBActions
     @IBAction func clickedFilterButton(sender: UIBarButtonItem) {
-        self.filterValue = (self.filterValue + 1) % 2
-
-        // update views:
-        self.filterButton.title = self.filterNames[(self.filterValue + 1) % 2]
-        self.tableView.reloadData()
+        self.filterValue = self.filterValue.opposite()
     }
     @IBAction func unwindAssignToReservation(unwindSegue: UIStoryboardSegue) {
         self.setFromAssignToReservationViewController(unwindSegue)
@@ -30,36 +52,49 @@ class OrdersTableViewController: UITableViewController {
     // identifiers
     let segueAssignToReservationID = "assignToReservation"
 
-    
+
     // constants
-    let filterNames = ["Все", "Отмененные"]
-    let sections = [
+    var sections = [
         ["Новые", "Назначенные"],
-        ["Отмененные"]
+        ["Сегодня"]
     ]
 
 
     // variables
-    var filterValue: Int = 0
-    var selectedReservation: Reservation?
+    private var filterValue: OrdersPageFilters = .Quequed {
+        didSet {
+            // change Nav bar's title
+            switch filterValue {
+            case .Quequed:
+                self.tabBarController?.navigationItem.title = filterValue.getTitle()
+            case .Canceled:
+                 self.tabBarController?.navigationItem.title = ""
+            }
+            // update Nav bar's right
+            self.filterButton.title = filterValue.opposite().getTitle()
+            self.tableView.reloadData()
+        }
+    }
+    private var selectedReservation: Reservation?
 
-    var nonAssigned: [Reservation] = [] {
+
+    private var nonAssigned: [Reservation] = [] {
         didSet {
-            if self.filterValue == 0 {
+            if self.filterValue == .Quequed {
                 self.tableView.reloadData()
             }
         }
     }
-    var assigned: [Reservation] = [] {
+    private var assigned: [Reservation] = [] {
         didSet {
-            if self.filterValue == 0 {
+            if self.filterValue == .Quequed {
                 self.tableView.reloadData()
             }
         }
     }
-    var declined: [Reservation] = [] {
+    private var declined: [Reservation] = [] {
         didSet {
-            if self.filterValue == 1 {
+            if self.filterValue == .Canceled {
                 self.tableView.reloadData()
             }
         }
@@ -102,11 +137,13 @@ class OrdersTableViewController: UITableViewController {
 
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self.sections[filterValue].count
+        let filter = self.filterValue.rawValue
+        return self.sections[filter].count
     }
 
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.sections[filterValue][section]
+        let filter = self.filterValue.rawValue
+        return self.sections[filter][section]
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -142,9 +179,9 @@ class OrdersTableViewController: UITableViewController {
 
         let completeAction = UITableViewRowAction(style: .Normal, title: "✔︎\n Done", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
-            reservation.setCompleted() {
-                // TODO: push message to User
-            }
+                reservation.setCompleted() {
+                    // TODO: push message to User
+                }
         })
         completeAction.backgroundColor = UIColor.blueColor()
 
@@ -159,31 +196,33 @@ class OrdersTableViewController: UITableViewController {
             }
         })
 
-        let callAction: UITableViewRowAction? = nil
+        var callAction: UITableViewRowAction? = nil
         if reservation.user.accountKitProfile?["phone_number"] != nil {
-            let callAction = UITableViewRowAction(style: .Default, title: "✆\n Call", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+            callAction = UITableViewRowAction(style: .Default, title: "✆\n Call", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
                 let user = reservation.user
                 let name = user.full_name
-                let phone_number = user.accountKitProfile!["phone_number"]  as! String
-                displayCallAlert(phone_number, displayText: name, sender: self)
+                let phone_number = user.accountKitProfile!["phone_number"]?.string
+                displayCallAlert(phone_number!, displayText: name, sender: self)
             })
         }
 
 
-        var actions = []
-        if callAction != nil {
-            actions = [callAction!]
+        var actions = (callAction != nil) ? [callAction!] : []
+        switch self.filterValue {
+        case .Canceled:
+            break
+        case .Quequed:
+            if reservation.isAssigned() {
+                actions.appendContentsOf([completeAction, reAssignAction, declineAction])
+            } else {
+                actions.appendContentsOf([assignAction, declineAction])
+            }
         }
 
-        if self.filterValue == 1 {
-            // pass
-        } else if reservation.isAssigned() {
-            actions = actions.arrayByAddingObjectsFromArray([completeAction, reAssignAction, declineAction])
-        } else {
-            actions = actions.arrayByAddingObjectsFromArray([assignAction, declineAction])
-        }
-        return actions as! [UITableViewRowAction]
+        print(".here", indexPath.section, indexPath.row, reservation.bookingHour.getHour(), actions, reservation.user.accountKitProfile)
+
+        return actions 
     }
 
 
@@ -215,9 +254,10 @@ class OrdersTableViewController: UITableViewController {
 
 
     func getReservationsFor(section: Int) -> [Reservation] {
-        if self.filterValue == 0 {
+        switch self.filterValue {
+        case .Quequed:
             return (section == 0) ? self.nonAssigned : self.assigned
-        } else {
+        case .Canceled:
             return self.declined
         }
     }

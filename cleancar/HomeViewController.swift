@@ -14,11 +14,15 @@ import FBSDKLoginKit
 
 class HomeViewController: UIViewController {
 
+    // IBOutlets
+    @IBOutlet weak var viewInfo: UIView!
+
 
     // IBActions
     @IBAction func goToMapButton(sender: UIButton) {
     }
     @IBAction func callButton(sender: UIButton) {
+        displayCallAlert(CleanCarPhoneNumber, displayText: "Администратору: Арману", sender: self)
     }
     @IBAction func clickedMenuButton(sender: UIButton) {
         self.displayMenuView()
@@ -62,7 +66,6 @@ class HomeViewController: UIViewController {
     var bookingSegueID = "bookingSegue"
     var segueRateID = "rate"
 
-
     // variables
     var bookingHours: [BookingHour] = []
     var bookingHoursSelectedIndex: NSIndexPath? {
@@ -81,12 +84,15 @@ class HomeViewController: UIViewController {
             self.updateCurrentReservationView()
         }
     }
+    var CleanCarPhoneNumber = "8 707 830 5253"
+    var CleanCarAddress = "Павильон Expo-2017"
 
 
     // UIViewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+
         // 1. Init styles
 
             //rounded button
@@ -98,7 +104,6 @@ class HomeViewController: UIViewController {
         roundedBorderView.layer.masksToBounds = true
         roundedBorderView.layer.borderWidth = 1
         roundedBorderView.layer.borderColor = UIColor.orangeColor().CGColor
-
 
         // 2. Init behaviour
         chooseTimeCollectionView.dataSource = self
@@ -124,6 +129,16 @@ class HomeViewController: UIViewController {
         
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        print(".here", viewInfo.subviews, viewInfo.viewWithTag(2), viewInfo.viewWithTag(0))
+        let address = viewInfo.viewWithTag(2) as! UILabel
+        let phone = viewInfo.viewWithTag(3) as! UILabel
+        address.text = CleanCarAddress
+        phone.text = CleanCarPhoneNumber
+    }
+    
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
