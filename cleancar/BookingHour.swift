@@ -193,10 +193,12 @@ class BookingHour {
         let startHour = 9,
         endHour = 21,
         bookingHoursCount = (endHour - startHour) * 60 / BookingHour.minuteMultiplier
-        
+
         let boxes = (0..<BookingHour.boxesCount).map({_ in true })
         let washers = NSMutableDictionary()
         Washer.all.forEach() { (id, washer) in washers.setObject(true, forKey: id) }
+
+        print(".BookingHour.initToday", washers.count)
 
         let initData = (0..<bookingHoursCount).generate()
             .map({index in ["boxes": boxes, "washers": washers] })

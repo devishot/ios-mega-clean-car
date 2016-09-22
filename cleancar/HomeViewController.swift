@@ -104,8 +104,11 @@ class HomeViewController: UIViewController {
         chooseTimeCollectionView.delegate = self
 
 
+        print(".home")
+
         // 3. Fetch data
         Washer.fetchData() {
+            print(".home.Washers.fetched", Washer.all.count)
             BookingHour.subscribeToToday({ () -> (Void) in
                 self.bookingHours = BookingHour.fromNow
                 self.chooseTimeCollectionView.reloadData()
@@ -114,8 +117,7 @@ class HomeViewController: UIViewController {
                 self.currentUser = User.current
             })
         }
-
-        
+      
     }
 
     override func viewWillAppear(animated: Bool) {

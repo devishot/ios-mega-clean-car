@@ -130,17 +130,17 @@ class OrdersTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let reservation = getReservationsFor(indexPath.section)[indexPath.row]
 
-        let assignAction = UITableViewRowAction(style: .Normal, title: "\u{2606}\n Назначить", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+        let assignAction = UITableViewRowAction(style: .Normal, title: "✚\n Assign", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
             self.performSegueWithIdentifier(self.segueAssignToReservationID, sender: indexPath)
         })
 
-        let reAssignAction = UITableViewRowAction(style: .Normal, title: "\u{2606}\n Изменить", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+        let reAssignAction = UITableViewRowAction(style: .Normal, title: "✚\n Re-Assign", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
             self.performSegueWithIdentifier(self.segueAssignToReservationID, sender: indexPath)
         })
 
-        let completeAction = UITableViewRowAction(style: .Normal, title: "\u{2605}\n Выполнен", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+        let completeAction = UITableViewRowAction(style: .Normal, title: "✔︎\n Done", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
             reservation.setCompleted() {
                 // TODO: push message to User
@@ -148,10 +148,14 @@ class OrdersTableViewController: UITableViewController {
         })
         completeAction.backgroundColor = UIColor.blueColor()
 
-        let declineAction = UITableViewRowAction(style: .Default, title: "\u{267A}\n Отменить", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+        let declineAction = UITableViewRowAction(style: .Default, title: "✖︎\n Delete", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
-            reservation.setDeclined() {
-                // TODO: push message to User
+            displayPromptView("Хотите отменить заказ?", self: self) { (result: Bool) in
+                if result == true {
+                    reservation.setDeclined() {
+                        // TODO: push message to User
+                    }
+                }
             }
         })
 

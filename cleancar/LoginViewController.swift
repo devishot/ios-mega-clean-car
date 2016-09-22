@@ -17,6 +17,7 @@ enum LoginViewControllerStates {
     case AfterSignupSecondStep
     case OnSignupSecondStep
     case OnSignin
+    case OnHome
     case None
 }
 
@@ -43,7 +44,7 @@ class LoginViewController: UIViewController {
         let destController = segue.sourceViewController as! SignupSecondStepViewController
         let fullName = destController.textFieldFullName.text!
 
-        self.state = .AfterSignupSecondStep
+        self.navState = .AfterSignupSecondStep
         User.signUpWithAccountKit(fullName) { userError in
             self.redirectToHome()
         }
@@ -56,7 +57,7 @@ class LoginViewController: UIViewController {
 
 
     // variables
-    var state: LoginViewControllerStates = .None
+    var navState: LoginViewControllerStates = .None
     var _pendingLoginViewController: AKFViewController?
     var _authorizationCode: String?
 
@@ -81,33 +82,40 @@ class LoginViewController: UIViewController {
         super.viewWillAppear(animated)
 
 
-        // if the user is already logged in
+        // MARK: - if the user is already logged in
+
         // 1. into Firebase Auth
         User.isAlreadyLoggedIn() { userError in
             if userError == nil {
+                print(".login.firebaseAuth")
                 self.redirectToHome()
             }
         }
 
-
         // 2. using facebook account
         User.isAlreadyLoggedInByFacebook() { userError in
             if userError == nil {
+                print(".login.facebookLogin")
                 self.redirectToHome()
             }
         }
 
         // 3. currenlty logged into AccountKit
-        if User.accountKit.currentAccessToken != nil && self.state != .AfterSignupSecondStep {
+        if User.accountKit.currentAccessToken != nil {
             User.signInByAccountKit() { userError in
                 if userError == nil {
+                    print(".login.accountKit")
                     self.redirectToHome()
                 } else if userError! == UserErrors.ProfileNotExist  {
                     self.redirectToSignupSecondStep()
                 }
             }
+            
+        }
 
-        } else if (_pendingLoginViewController != nil) {
+
+        // for AccountKit
+        if (_pendingLoginViewController != nil) {
             //resume pending login (if any)
             self.prepareLoginViewController(_pendingLoginViewController!)
             self.presentViewController(_pendingLoginViewController as! UIViewController, animated: true, completion: nil)
@@ -121,12 +129,18 @@ class LoginViewController: UIViewController {
     }
 
     func redirectToHome() -> Void {
+        if self.navState == .OnHome {
+            return
+        }
+
+        self.navState = .OnHome
         dispatch_async(dispatch_get_main_queue()) {
             self.performSegueWithIdentifier(self.homeSegueID, sender: self)
         }
     }
 
     func redirectToSignupSecondStep() -> Void {
+        self.navState = .OnSignupSecondStep
         dispatch_async(dispatch_get_main_queue()) {
             self.performSegueWithIdentifier(self.segueSignupSecondStep, sender: self)
         }
