@@ -153,7 +153,7 @@ class LoginViewController: UIViewController {
 
         theme.headerTextColor = whiteColor
         theme.iconColor = whiteColor
-        
+
         theme.statusBarStyle = .Default
         theme.textColor =  whiteColor
         theme.titleColor = whiteColor
