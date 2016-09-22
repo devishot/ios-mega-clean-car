@@ -93,7 +93,6 @@ class BookingController: UIViewController, Dimmable {
 
 
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        self.tabBarController?.tabBar.hidden = true
     }
 
     override func viewDidLayoutSubviews() {
@@ -117,7 +116,12 @@ class BookingController: UIViewController, Dimmable {
         if segue.identifier == self.popupChangeCarInfoSegueID {
             let popUpViewController = segue.destinationViewController as! PopUpViewController
             // set carInfo
-            popUpViewController.carInfo = self.carInfo
+            if self.carInfo == nil {
+                popUpViewController.carInfo = CarInfo()
+            } else {
+                popUpViewController.carInfo = self.carInfo
+            }
+
             // animate
             dim(.In, alpha: dimLevel, speed: dimSpeed)
         }

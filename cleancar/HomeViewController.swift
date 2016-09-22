@@ -121,8 +121,7 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.tabBarController?.tabBar.hidden = false
-
+        
     }
 
     override func viewDidDisappear(animated: Bool) {

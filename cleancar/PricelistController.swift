@@ -34,7 +34,7 @@ class PricelistController: UIViewController {
         
         // set styles
         segmentViewCarTypes.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.orangeColor()], forState: UIControlState.Normal)
-        segmentViewCarTypes.setFontSize(8)
+        segmentViewCarTypes.setFontSize(12)
         segmentViewCarTypes.apportionsSegmentWidthsByContent = true
 
         // init

@@ -90,9 +90,34 @@ class FeedbacksTableViewController: UITableViewController {
     }
 
 
+    
+    // Swipe cell actions
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let feedback = self.getFeedbacksBy(indexPath.section)[indexPath.row]
+
+        let callAction: UITableViewRowAction? = nil
+        if feedback.user.accountKitProfile?["phone_number"] != nil {
+            let callAction = UITableViewRowAction(style: .Default, title: "✆\n Call", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+
+                let user = feedback.user
+                let name = user.full_name
+                let phone_number = user.accountKitProfile!["phone_number"] as! String
+                displayCallAlert(phone_number, displayText: name, sender: self)
+            })
+        }
+
+        return (callAction != nil) ? [callAction!] : []
+    }
+    
+
+    
     func getFeedbacksBy(section: Int) -> [Reservation] {
         let sectionKey = self.sections[section],
             feedbacks = self.bySections[sectionKey]!
         return feedbacks
     }
+    
 }

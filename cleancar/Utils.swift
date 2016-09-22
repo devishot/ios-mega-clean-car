@@ -203,3 +203,18 @@ func displayPromptView(title: String, self: UIViewController, completion: (value
     self.presentViewController(alert, animated: true, completion: nil)
 }
 
+
+func displayCallAlert(phoneNumber: String, displayText: String, sender: UIViewController) {
+    let alert = UIAlertController(title: "Позвонить?", message: displayText, preferredStyle: .Alert)
+
+    let callAction = UIAlertAction(title: "Да", style: .Default, handler: { (alert: UIAlertAction!) -> Void in
+        UIApplication.sharedApplication().openURL(NSURL(string: "tel:\(phoneNumber)")!)
+    })
+    let cancel = UIAlertAction(title: "Отмена", style: .Cancel, handler: nil)
+
+    alert.addAction(callAction)
+    alert.addAction(cancel)
+
+    sender.presentViewController(alert, animated: true, completion: nil)
+}
+

@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //tab bar item color
         
         let tintColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 56/255.0, alpha: 1.0)
-        let color:UIColor =  UIColor.whiteColor()
+        let color:UIColor =  UIColor.grayColor()
         let tappedColor:UIColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 56/255.0, alpha: 1.0)
         let font = UIFont(descriptor: AppFontDescriptorLight, size: 14)
         let attrsForNormal = [
@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBarItem.appearance().setTitleTextAttributes(attrsForNormal, forState: .Normal)
         UITabBarItem.appearance().setTitleTextAttributes(attrsForSelected, forState: .Selected)
         UITabBar.appearance().tintColor = tintColor
-        UITabBar.appearance().barTintColor = UIColor.grayColor()
+        UITabBar.appearance().barTintColor = UIColor.whiteColor()
         return true
     }
 

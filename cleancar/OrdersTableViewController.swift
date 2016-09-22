@@ -163,22 +163,27 @@ class OrdersTableViewController: UITableViewController {
         if reservation.user.accountKitProfile?["phone_number"] != nil {
             let callAction = UITableViewRowAction(style: .Default, title: "✆\n Call", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
-                self.displayCallAlert(reservation.user)
+                let user = reservation.user
+                let name = user.full_name
+                let phone_number = user.accountKitProfile!["phone_number"]  as! String
+                displayCallAlert(phone_number, displayText: name, sender: self)
             })
         }
 
 
+        var actions = []
+        if callAction != nil {
+            actions = [callAction!]
+        }
+
         if self.filterValue == 1 {
-            if callAction != nil {
-                return [callAction!]
-            }
-            return []
-        }
-        if reservation.isAssigned() {
-            return [completeAction, reAssignAction, declineAction]
+            // pass
+        } else if reservation.isAssigned() {
+            actions = actions.arrayByAddingObjectsFromArray([completeAction, reAssignAction, declineAction])
         } else {
-            return [assignAction, declineAction]
+            actions = actions.arrayByAddingObjectsFromArray([assignAction, declineAction])
         }
+        return actions as! [UITableViewRowAction]
     }
 
 
@@ -215,25 +220,6 @@ class OrdersTableViewController: UITableViewController {
         } else {
             return self.declined
         }
-    }
-    
-    
-    func displayCallAlert(user: User) {
-        let name = user.full_name
-        let phone_number = user.accountKitProfile!["phone_number"]!
-
-        let alert = UIAlertController(title: "Позвонить?", message: name, preferredStyle: .Alert)
-
-        let callAction = UIAlertAction(title: "Да", style: .Default, handler: { (alert: UIAlertAction!) -> Void in
-            UIApplication.sharedApplication().openURL(NSURL(string: "tel:\(phone_number)")!)
-        })
-
-        let cancel = UIAlertAction(title: "Отмена", style: .Cancel, handler: nil)
-
-        alert.addAction(callAction)
-        alert.addAction(cancel)
-        
-        self.presentViewController(alert, animated: true, completion: nil)
     }
 
 }
