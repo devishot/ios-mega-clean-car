@@ -28,10 +28,16 @@ class BookingController: UIViewController, Dimmable {
 
     // IBActions
     @IBAction func sendButton(sender: UIButton) {
-        let bookingHour = self.bookingHour!,
+        let bookingHour = self.bookingHour,
             carInfo = self.carInfo,
             services = self.servicesTableViewController!.selectedServices
-        Reservation.create(carInfo, bookingHour: bookingHour, services: services) {
+        
+        if carInfo == nil {
+            self.displayAlertNoCar()
+            return
+        }
+
+        Reservation.create(carInfo!, bookingHour: bookingHour!, services: services) {
             self.navigationController?.popToRootViewControllerAnimated(true)
         }
     }
@@ -54,7 +60,7 @@ class BookingController: UIViewController, Dimmable {
 
 
     // variables
-    var carInfo: CarInfo = CarInfo() {
+    var carInfo: CarInfo? {
         didSet {
             if self.isViewLoaded() {
                 self.setDataByCarType()
@@ -118,17 +124,18 @@ class BookingController: UIViewController, Dimmable {
     }
 
     func setDataByCarType() -> Void {
+        var carType: CarTypeEnum = .Normal
+        if self.carInfo != nil {
+            carType = self.carInfo!.type
+            self.showCarDetailView()
+        } else {
+            self.hideCarDetailView()
+        }
+
         // update servicesTableView
         let services = self.servicesTableViewController!.selectedServices,
-        updated = services.update(carInfo.type)
+        updated = services.update(carType)
         self.servicesTableViewController!.selectedServices = updated
-        
-        // update transform views
-        if self.carInfo.isDefault() {
-            self.hideCarDetailView()
-        } else {
-            self.showCarDetailView()
-        }
     }
 
     func showCarDetailView() -> Void {
@@ -138,8 +145,8 @@ class BookingController: UIViewController, Dimmable {
                                   options: UIViewAnimationOptions.ShowHideTransitionViews,
                                   completion: nil)
 
-        carTypeLabel.text = self.carInfo.model
-        carNumberLabel.text = self.carInfo.identifierNumber
+        carTypeLabel.text = self.carInfo!.model
+        carNumberLabel.text = self.carInfo!.identifierNumber
 
         changeCarButton.titleLabel!.text = updateLabelText
     }
@@ -151,6 +158,18 @@ class BookingController: UIViewController, Dimmable {
                                   options: UIViewAnimationOptions.ShowHideTransitionViews,
                                   completion: nil)
         changeCarButton.titleLabel!.text = addLabelText
+    }
+    
+    
+    func displayAlertNoCar() {
+        let title = "Пожалуйста, укажите автомобиль"
+        let alert = UIAlertController(title: nil, message: title, preferredStyle: .Alert)
+
+        let cancel = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+        alert.addAction(cancel)
+
+        self.presentViewController(alert, animated: true, completion: nil)
+
     }
 }
 

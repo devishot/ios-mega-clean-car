@@ -71,15 +71,15 @@ class OrdersTableViewController: UITableViewController {
 
         // 2. load data
         BookingHour.subscribeToToday({ () -> (Void) in
+            let today = NSDate()
 
-            Reservation.subscribeTo(ReservationStatus.NonAssigned, completion: { (reservations) in
+            Reservation.subscribeTo(.NonAssigned, date: today, completion: { (reservations) in
                 self.nonAssigned = reservations
             })
-            Reservation.subscribeTo(ReservationStatus.Assigned, completion: { (reservations) in
+            Reservation.subscribeTo(.Assigned, date: today, completion: { (reservations) in
                 self.assigned = reservations
             })
-            Reservation.subscribeTo(ReservationStatus.Declined, completion: { (reservations) in
-                //print(".subscribeTo.Declined", reservations.count)
+            Reservation.subscribeTo(.Declined, date: today, completion: { (reservations) in
                 self.declined = reservations
             })
         })
@@ -130,17 +130,17 @@ class OrdersTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let reservation = getReservationsFor(indexPath.section)[indexPath.row]
 
-        let assignAction = UITableViewRowAction(style: .Normal, title: "\u{2606}\n Назначить", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+        let assignAction = UITableViewRowAction(style: .Normal, title: "✚\n Assign", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
             self.performSegueWithIdentifier(self.segueAssignToReservationID, sender: indexPath)
         })
 
-        let reAssignAction = UITableViewRowAction(style: .Normal, title: "\u{2606}\n Изменить", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+        let reAssignAction = UITableViewRowAction(style: .Normal, title: "✚\n Re-Assign", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
             self.performSegueWithIdentifier(self.segueAssignToReservationID, sender: indexPath)
         })
 
-        let completeAction = UITableViewRowAction(style: .Normal, title: "\u{2605}\n Выполнен", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+        let completeAction = UITableViewRowAction(style: .Normal, title: "✔︎\n Done", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
             reservation.setCompleted() {
                 // TODO: push message to User
@@ -148,15 +148,30 @@ class OrdersTableViewController: UITableViewController {
         })
         completeAction.backgroundColor = UIColor.blueColor()
 
-        let declineAction = UITableViewRowAction(style: .Default, title: "\u{267A}\n Отменить", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+        let declineAction = UITableViewRowAction(style: .Default, title: "✖︎\n Delete", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
-            reservation.setDeclined() {
-                // TODO: push message to User
+            displayPromptView("Хотите отменить заказ?", self: self) { (result: Bool) in
+                if result == true {
+                    reservation.setDeclined() {
+                        // TODO: push message to User
+                    }
+                }
             }
         })
 
+        let callAction: UITableViewRowAction? = nil
+        if reservation.user.accountKitProfile?["phone_number"] != nil {
+            let callAction = UITableViewRowAction(style: .Default, title: "✆\n Call", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+
+                self.displayCallAlert(reservation.user)
+            })
+        }
+
 
         if self.filterValue == 1 {
+            if callAction != nil {
+                return [callAction!]
+            }
             return []
         }
         if reservation.isAssigned() {
@@ -200,6 +215,25 @@ class OrdersTableViewController: UITableViewController {
         } else {
             return self.declined
         }
+    }
+    
+    
+    func displayCallAlert(user: User) {
+        let name = user.full_name
+        let phone_number = user.accountKitProfile!["phone_number"]!
+
+        let alert = UIAlertController(title: "Позвонить?", message: name, preferredStyle: .Alert)
+
+        let callAction = UIAlertAction(title: "Да", style: .Default, handler: { (alert: UIAlertAction!) -> Void in
+            UIApplication.sharedApplication().openURL(NSURL(string: "tel:\(phone_number)")!)
+        })
+
+        let cancel = UIAlertAction(title: "Отмена", style: .Cancel, handler: nil)
+
+        alert.addAction(callAction)
+        alert.addAction(cancel)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 
 }

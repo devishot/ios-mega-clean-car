@@ -40,8 +40,9 @@ class FeedbacksTableViewController: UITableViewController {
 
         // 2. load data
         BookingHour.subscribeToToday({ () -> (Void) in
+            let today = NSDate()
 
-            Reservation.subscribeTo(.FeedbackReceived, completion: { (reservations) in
+            Reservation.subscribeTo(.FeedbackReceived, date: today, completion: { (reservations) in
                 // [Reservation] -> [timestamp_key: [Reservation]]
                 self.bySections =
                     reservations.reduce([String: [Reservation]](), combine: { (var data, r) in

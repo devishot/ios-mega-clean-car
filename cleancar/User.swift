@@ -262,7 +262,7 @@ class User: FirebaseDataProtocol {
         }
     }
 
-    static func isAlreadyLoggedInByFacebook(completion: CompletionWithError) -> Bool {
+    static func isAlreadyLoggedInByFacebook(completion: CompletionWithError) {
         if FBSDKAccessToken.currentAccessToken() != nil {
             if let user = FIRAuth.auth()?.currentUser {
                 print("Already logged in, user: \(user.displayName)");
@@ -272,9 +272,8 @@ class User: FirebaseDataProtocol {
                 // sign into Firebase
                 User.logInByFacebook(completion)
             }
-            return true
         }
-        return false
+        completion(UserErrors.NotLoggedIn)
     }
 
     static func isAlreadyLoggedIn(completion: CompletionWithError) {

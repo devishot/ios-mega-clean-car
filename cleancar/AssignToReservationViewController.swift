@@ -183,8 +183,6 @@ extension AssignToReservationViewController: UITableViewDataSource {
             cellText = (self.valueBoxIndex != nil) ? "Бокс: #\(self.valueBoxIndex!+1)" : textSelectBoxIndex
         }
 
-        print(".tableView.cellForRow", indexPath.row, cellText)
-        
         cell!.textLabel!.text = cellText
         return cell!
     }

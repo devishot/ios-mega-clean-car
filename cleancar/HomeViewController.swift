@@ -49,10 +49,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var noReservationView: UIView!
     @IBOutlet weak var viewReservationRate: UIView!
     @IBOutlet weak var viewReservationCancel: UIView!
+    @IBOutlet weak var viewSelectBookingHour: UIView!
     @IBOutlet weak var timeOfOrderLabel: UILabel!
-    @IBOutlet weak var nameOfCarLabel: UILabel!
+    @IBOutlet weak var labelReservationCost: UILabel!
     @IBOutlet weak var numberOfCarLabel: UILabel!
-
     @IBOutlet weak var chooseTimeCollectionView: UICollectionView!
     @IBOutlet weak var makeReservationButton: UIButton!
 
@@ -104,7 +104,6 @@ class HomeViewController: UIViewController {
         chooseTimeCollectionView.dataSource = self
         chooseTimeCollectionView.delegate = self
 
-
         // 3. Fetch data
         Washer.fetchData() {
             BookingHour.subscribeToToday({ () -> (Void) in
@@ -115,8 +114,7 @@ class HomeViewController: UIViewController {
                 self.currentUser = User.current
             })
         }
-
-        
+      
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -154,7 +152,7 @@ class HomeViewController: UIViewController {
             let carInfo: CarInfo = reservation.user.carInfo {
 
             self.timeOfOrderLabel.text = reservation.bookingHour.getHour()
-            self.nameOfCarLabel.text = carInfo.model!
+            self.labelReservationCost.text = formatMoney(reservation.services.getCostForTotal())
             self.numberOfCarLabel.text = carInfo.identifierNumber!
 
             if reservation.isCompleted() {
@@ -170,8 +168,13 @@ class HomeViewController: UIViewController {
             }
 
             UIView.transitionFromView(noReservationView, toView: roundedBorderView, duration: 0.2, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+            
+            // hide 
+            self.viewSelectBookingHour.hidden = true
         } else {
             UIView.transitionFromView(roundedBorderView, toView: noReservationView, duration: 0.2, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+            // show
+            self.viewSelectBookingHour.hidden = false
         }
     }
 

@@ -65,9 +65,5 @@ class CarInfo {
         return data
     }
 
-
-    func isDefault() -> Bool {
-        return self.model == nil
-    }
 }
 
