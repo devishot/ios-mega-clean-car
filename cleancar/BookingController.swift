@@ -90,8 +90,7 @@ class BookingController: UIViewController, Dimmable {
         self.navigationController!.navigationBar.tintColor = UIColor.orangeColor();
         self.navigationController!.navigationBar.backgroundColor = UIColor.whiteColor();
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orangeColor()]
-
-
+       
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
