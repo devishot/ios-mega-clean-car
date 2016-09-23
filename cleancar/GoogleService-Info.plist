@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>834443071247-ou8nl1e5snbtciln0j2g7jo6bpcocs72.apps.googleusercontent.com</string>
+	<string>834443071247-t697hgcg2gcatc4m12qq3rpqdb9ckb25.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.834443071247-ou8nl1e5snbtciln0j2g7jo6bpcocs72</string>
+	<string>com.googleusercontent.apps.834443071247-t697hgcg2gcatc4m12qq3rpqdb9ckb25</string>
 	<key>API_KEY</key>
 	<string>AIzaSyD0eDGi97TtXlQbiL8gF4D6HDVLgfF256s</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>hackteam.MegaCleanCar</string>
+	<string>kz.hackteam.CleanCar</string>
 	<key>PROJECT_ID</key>
 	<string>megacleancar-ffd40</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:834443071247:ios:53873077bda5a271</string>
+	<string>1:834443071247:ios:77180cedfa89b6b2</string>
 	<key>DATABASE_URL</key>
 	<string>https://megacleancar-ffd40.firebaseio.com</string>
 </dict>
