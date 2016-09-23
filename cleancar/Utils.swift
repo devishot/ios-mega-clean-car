@@ -208,7 +208,10 @@ func displayCallAlert(phoneNumber: String, displayText: String, sender: UIViewCo
     let alert = UIAlertController(title: "Позвонить?", message: displayText, preferredStyle: .Alert)
 
     let callAction = UIAlertAction(title: "Да", style: .Default, handler: { (alert: UIAlertAction!) -> Void in
-        UIApplication.sharedApplication().openURL(NSURL(string: "tel:\(phoneNumber)")!)
+
+        let parsedNumbers = String(phoneNumber.characters.filter { !" \n\t\r".characters.contains($0) })
+        let telNumber = "tel://" + parsedNumbers
+        UIApplication.sharedApplication().openURL(NSURL(string: telNumber)!)
     })
     let cancel = UIAlertAction(title: "Отмена", style: .Cancel, handler: nil)
 

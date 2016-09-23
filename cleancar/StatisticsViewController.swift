@@ -206,7 +206,7 @@ extension StatisticsViewController: UICollectionViewDelegate {
         self.currentItem = self.getItem(row, reversed: true)
     }
 
-    
+
     func scrollViewDidScroll(scrollView: UIScrollView) {
         // add prev items
 
@@ -250,7 +250,7 @@ extension StatisticsViewController: UICollectionViewDelegate {
             self.collectionView.setContentOffset(co, animated: false)
         })
     }
-    
+
     private func isOnFirstScrollItem() -> Bool {
         return self.collectionView.contentOffset.x < self.collectionView.frame.size.width
     }
@@ -301,10 +301,12 @@ extension StatisticsViewController: UITableViewDataSource {
                 cell.detailTextLabel!.text = formatMoney( info["sum"]! )
             case 2:
                 cell.textLabel!.text = "Средний чек"
-                cell.detailTextLabel!.text =  formatMoney( Int(info["sum"]! / info["count"]!) )
+                let avgCost = info["sum"] == 0 ? 0 : Int(info["sum"]! / info["count"]!)
+                cell.detailTextLabel!.text =  formatMoney( avgCost )
             case 3:
                 cell.textLabel!.text = "Средний рейтинг"
-                cell.detailTextLabel!.text =  String( Int(info["rate_sum"]! / info["rate_count"]!) )
+                let avgRate = info["rate_count"] == 0 ? 0 : Int(info["rate_sum"]! / info["rate_count"]!)
+                cell.detailTextLabel!.text =  String( avgRate )
             default:
                 break
             }
