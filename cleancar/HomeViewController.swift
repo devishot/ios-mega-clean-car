@@ -141,6 +141,9 @@ class HomeViewController: UIViewController {
                 destinationController.carInfo = carInfo
             }
         }
+        let backItem = UIBarButtonItem()
+        backItem.title = "Назад"
+        navigationItem.backBarButtonItem = backItem
     }
 
 
