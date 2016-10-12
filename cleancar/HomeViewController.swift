@@ -49,16 +49,25 @@ class HomeViewController: UIViewController {
 
     
     // IBOutlets
-    @IBOutlet weak var roundedBorderView: UIView!
     @IBOutlet weak var noReservationView: UIView!
-    @IBOutlet weak var viewReservationRate: UIView!
-    @IBOutlet weak var viewReservationCancel: UIView!
-    @IBOutlet weak var viewSelectBookingHour: UIView!
-    @IBOutlet weak var timeOfOrderLabel: UILabel!
+    @IBOutlet weak var ReservationView: UIView!
+
+    @IBOutlet weak var labelReservationTime: UILabel!
     @IBOutlet weak var labelReservationCost: UILabel!
-    @IBOutlet weak var numberOfCarLabel: UILabel!
+    @IBOutlet weak var labelReservationCarInfoNumber: UILabel!
+    @IBOutlet weak var labelReservationServices: UILabel!
+
+    @IBOutlet weak var scrollviewReservationInfo: UIScrollView!
+    @IBOutlet weak var pagecontrollReservationInfo: UIPageControl!
+
     @IBOutlet weak var chooseTimeCollectionView: UICollectionView!
-    @IBOutlet weak var makeReservationButton: UIButton!
+    @IBOutlet weak var buttonMakeReservation: UIButton!
+    @IBOutlet weak var buttonCall: UIButton!
+    
+    @IBOutlet weak var buttonMap: UIButton!
+    @IBOutlet weak var buttonReservationCancel: UIButton!
+    @IBOutlet weak var buttonReservationRate: UIButton!
+    
 
 
     // Identifiers
@@ -73,9 +82,9 @@ class HomeViewController: UIViewController {
             self.chooseTimeCollectionView.reloadData()
 
             if bookingHoursSelectedIndex != nil {
-                self.makeReservationButton.enabled = true
+                self.buttonMakeReservation.enabled = true
             } else {
-                self.makeReservationButton.enabled = false
+                self.buttonMakeReservation.enabled = false
             }
         }
     }
@@ -94,16 +103,12 @@ class HomeViewController: UIViewController {
 
 
         // 1. Init styles
-
             //rounded button
-        makeReservationButton.layer.cornerRadius = 5
-        makeReservationButton.layer.masksToBounds = true
+        [buttonMakeReservation, buttonReservationCancel, buttonReservationRate, buttonMap, buttonCall].forEach { button in
+            button.layer.cornerRadius = 5
+            button.layer.masksToBounds = true
+        }
 
-            // rounded view
-        roundedBorderView.layer.cornerRadius = 10
-        roundedBorderView.layer.masksToBounds = true
-        roundedBorderView.layer.borderWidth = 1
-        roundedBorderView.layer.borderColor = UIColor.orangeColor().CGColor
 
         // 2. Init behaviour
         chooseTimeCollectionView.dataSource = self
@@ -129,15 +134,6 @@ class HomeViewController: UIViewController {
         
     }
 
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-
-        print(".here", viewInfo.subviews, viewInfo.viewWithTag(2), viewInfo.viewWithTag(0))
-        let address = viewInfo.viewWithTag(2) as! UILabel
-        let phone = viewInfo.viewWithTag(3) as! UILabel
-        address.text = CleanCarAddress
-        phone.text = CleanCarPhoneNumber
-    }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
@@ -168,30 +164,32 @@ class HomeViewController: UIViewController {
         if  let reservation: Reservation = user.currentReservation,
             let carInfo: CarInfo = reservation.user.carInfo {
 
-            self.timeOfOrderLabel.text = reservation.bookingHour.getHour()
+            self.labelReservationTime.text = reservation.bookingHour.getHour()
             self.labelReservationCost.text = formatMoney(reservation.services.getCostForTotal())
-            self.numberOfCarLabel.text = carInfo.identifierNumber!
+            self.labelReservationCarInfoNumber.text = carInfo.identifierNumber!
+            self.labelReservationServices.text = reservation.services.getDescription()
 
+            // 1 swap
+            UIView.transitionFromView(noReservationView, toView: ReservationView, duration: 0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+            self.buttonMakeReservation.enabled = false
+            // 2 hide
+            let viewRateIt = self.scrollviewReservationInfo.viewWithTag(0)!
+            UIView.transitionWithView(viewRateIt, duration: 0,
+                                      options: UIViewAnimationOptions.ShowHideTransitionViews,
+                                      animations: {
+                                        viewRateIt.hidden = reservation.isCompleted()
+                                    }, completion: nil)
+            // 3 swap
             if reservation.isCompleted() {
-                UIView.transitionFromView(
-                    viewReservationCancel,
-                    toView: viewReservationRate,
-                    duration: 0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+                UIView.transitionFromView(buttonReservationCancel, toView: buttonReservationRate, duration: 0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
             } else {
-                UIView.transitionFromView(
-                    viewReservationRate,
-                    toView: viewReservationCancel,
-                    duration: 0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+                UIView.transitionFromView(buttonReservationRate, toView: buttonReservationCancel, duration: 0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
             }
 
-            UIView.transitionFromView(noReservationView, toView: roundedBorderView, duration: 0.2, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
-            
-            // hide 
-            self.viewSelectBookingHour.hidden = true
         } else {
-            UIView.transitionFromView(roundedBorderView, toView: noReservationView, duration: 0.2, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
-            // show
-            self.viewSelectBookingHour.hidden = false
+            // swap
+            UIView.transitionFromView(ReservationView, toView: noReservationView, duration: 0.2, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+            self.buttonMakeReservation.enabled = true
         }
     }
 

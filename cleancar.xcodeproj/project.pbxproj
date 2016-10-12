@@ -83,6 +83,7 @@
 		528947281D72C9D7004B7090 /* Reservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
 		5289472A1D72CA0F004B7090 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5289472C1D72CFA9004B7090 /* Washer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Washer.swift; sourceTree = "<group>"; };
+		5289B33B1DA6D7FC00D88CDD /* cleancar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cleancar.entitlements; sourceTree = "<group>"; };
 		5292AC031D6EB40A00E03760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5292AC061D6EBD4C00E03760 /* Dimmable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dimmable.swift; sourceTree = "<group>"; };
 		52BF3C471D8EDEB0001BC9A7 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +188,7 @@
 		523F3B531D6758B400B75421 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5289B33B1DA6D7FC00D88CDD /* cleancar.entitlements */,
 				B4EEA3251D6429EB0039D998 /* AppDelegate.swift */,
 				B4EEA32C1D6429EB0039D998 /* Assets.xcassets */,
 				B4EEA32E1D6429EB0039D998 /* LaunchScreen.storyboard */,
@@ -363,6 +365,11 @@
 						DevelopmentTeam = 45RY7ZW7NU;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					B4EEA3351D6429EB0039D998 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -656,6 +663,7 @@
 			baseConfigurationReference = CB6D6A598B99A13969654139 /* Pods-cleancar.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = cleancar/cleancar.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 45RY7ZW7NU;
@@ -674,6 +682,7 @@
 			baseConfigurationReference = A3BDF9108FE3AA754175B2C7 /* Pods-cleancar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = cleancar/cleancar.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 45RY7ZW7NU;
