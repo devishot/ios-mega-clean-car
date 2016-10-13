@@ -2,6 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "active-arrow.pdf",
       "scale" : "1x"
     },
     {
@@ -10,7 +11,6 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "active-order-icon.pdf",
       "scale" : "3x"
     }
   ],

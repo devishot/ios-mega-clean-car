@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "active-arrow.pdf",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "activ-feedback-icon.pdf",
       "scale" : "2x"
     },
     {

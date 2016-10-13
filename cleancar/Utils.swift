@@ -31,6 +31,9 @@ extension UIColor {
     class func ccPurpleLight() -> UIColor {
         return UIColor(red:0.33, green:0.10, blue:0.62, alpha:1.0)
     }
+    class func ccPurpleSuperLight() -> UIColor {
+        return UIColor(red:0.69, green:0.49, blue:0.96, alpha:1.0)
+    }
     class func ccTextColorWhite() -> UIColor {
         return UIColor.whiteColor()
     }

@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSFontAttributeName: font
         ]
         let attrsForSelected = [
-            NSForegroundColorAttributeName: UIColor.ccPurpleLight(),
+            NSForegroundColorAttributeName: UIColor.ccPurpleSuperLight(),
             NSFontAttributeName: font
         ]
         UITabBarItem.appearance().setTitleTextAttributes(attrsForNormal, forState: .Normal)
