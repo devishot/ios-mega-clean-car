@@ -31,18 +31,31 @@ class PricelistController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // set styles
-        segmentViewCarTypes.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.orangeColor()], forState: UIControlState.Normal)
-        segmentViewCarTypes.setFontSize(12)
+        let font = UIFont(name: "Helvetica Neue", size: 12)
+        let normalTextAttributes: [NSObject : AnyObject] = [
+            NSForegroundColorAttributeName: UIColor.ccTextColorWhite(),
+            NSFontAttributeName: font!
+        ]
+        let selectedTextAttributes: [NSObject : AnyObject] = [
+            NSForegroundColorAttributeName: UIColor.ccPurpleLight(),
+            NSFontAttributeName: font!
+        ]
+        segmentViewCarTypes.setTitleTextAttributes(normalTextAttributes, forState: .Normal)
+        segmentViewCarTypes.setTitleTextAttributes(selectedTextAttributes, forState: .Selected)
         segmentViewCarTypes.apportionsSegmentWidthsByContent = true
 
         // init
         segmentViewCarTypes.selectedSegmentIndex = CarTypeEnum.Normal.rawValue
         tablePrices?.tableView.dataSource = self
     }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
 
-    
+        setStatusBarBackgroundColor(UIColor.ccPurpleLight())
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

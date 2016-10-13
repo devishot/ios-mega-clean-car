@@ -15,40 +15,34 @@ class BookingHoursCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var statusLabel: UILabel!
 
     // variables
-    var bookingHour: BookingHour? {
-        didSet {
-            self.hourLabel.text = bookingHour!.getHour()
-            self.statusLabel.text = bookingHour!.getStatus()
-
-            if bookingHour!.isFree() {
-                self.statusLabel.textColor = UIColor.ccGreen()
-            } else {
-                self.statusLabel.textColor = UIColor.ccRed()
-            }
-        }
-    }
+    var bookingHour: BookingHour!
 
     // methods
-    func configure(isSelected: Bool) -> Void {
-        self.backgroundColor = UIColor.blackColor()
-        self.hourLabel.textColor = UIColor.blackColor()
-        self.layer.cornerRadius = 10
+    func configure(isSelected: Bool, bookingHour: BookingHour) -> Void {
+        // style
+        self.layer.cornerRadius = 5
         self.layer.masksToBounds = true
+        self.layer.borderWidth = 1
 
         if isSelected {
-            self.layer.cornerRadius = 10
-            self.layer.masksToBounds = true
-            self.backgroundColor = UIColor.whiteColor()
-            self.layer.borderColor = UIColor.ccOrgange().CGColor
-            self.layer.borderWidth = 2
+            self.layer.borderColor = UIColor.ccPurpleDark().CGColor
+            self.hourLabel.textColor = UIColor.ccPurpleDark()
+            self.statusLabel.textColor =  UIColor.ccTextColorGray()
+
+        } else if bookingHour.isFree() {
+            self.layer.borderColor = UIColor.whiteColor().CGColor
+            self.hourLabel.textColor = UIColor.ccTextColorWhite()
+            self.statusLabel.textColor = UIColor.ccTextColorGrayLight()
 
         } else {
-            self.layer.cornerRadius = 10
-            self.layer.masksToBounds = true
-            self.backgroundColor = UIColor.whiteColor()
             self.layer.borderColor = UIColor.whiteColor().CGColor
-            self.layer.borderWidth = 2
-        
+            self.hourLabel.textColor = UIColor.ccTextColorGray()
+            self.statusLabel.textColor =  UIColor.ccTextColorGray()
         }
+
+        // data
+        self.bookingHour = bookingHour
+        self.hourLabel.text = bookingHour.getHour()
+        self.statusLabel.text = bookingHour.getStatus()
     }
 }

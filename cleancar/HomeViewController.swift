@@ -59,6 +59,8 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var scrollviewReservationInfo: UIScrollView!
     @IBOutlet weak var pagecontrollReservationInfo: UIPageControl!
+    @IBOutlet weak var constraintsLeadingOfReservationInfoSecondView: NSLayoutConstraint!
+    @IBOutlet weak var viewReservationInfoFirstView: UIView!
 
     @IBOutlet weak var chooseTimeCollectionView: UICollectionView!
     @IBOutlet weak var buttonMakeReservation: UIButton!
@@ -103,14 +105,19 @@ class HomeViewController: UIViewController {
 
 
         // 1. Init styles
-            //rounded button
+        self.tabBarController!.tabBar.translucent = false
+
         [buttonMakeReservation, buttonReservationCancel, buttonReservationRate, buttonMap, buttonCall].forEach { button in
             button.layer.cornerRadius = 5
-            button.layer.masksToBounds = true
+            button.layer.borderWidth = 1
+            button.layer.borderColor = UIColor.whiteColor().CGColor
+            button.layer.masksToBounds = false
+            button.titleEdgeInsets = UIEdgeInsets(top: 5, left: 8, bottom: 5, right: 8)
+            button.layoutIfNeeded()
         }
 
-
         // 2. Init behaviour
+        scrollviewReservationInfo.delegate = self
         chooseTimeCollectionView.dataSource = self
         chooseTimeCollectionView.delegate = self
 
@@ -126,18 +133,17 @@ class HomeViewController: UIViewController {
         }
       
     }
-
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+
+        setStatusBarBackgroundColor(UIColor.ccPurpleDark())
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
     }
 
-    
+
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        
+
         self.bookingHoursSelectedIndex = nil
 
         BookingHour.unsubscribe()
@@ -167,23 +173,26 @@ class HomeViewController: UIViewController {
             self.labelReservationTime.text = reservation.bookingHour.getHour()
             self.labelReservationCost.text = formatMoney(reservation.services.getCostForTotal())
             self.labelReservationCarInfoNumber.text = carInfo.identifierNumber!
-            self.labelReservationServices.text = reservation.services.getDescription()
+            self.labelReservationServices.text = "Выбранные услуги: \n" + reservation.services.getDescription()
 
             // 1 swap
             UIView.transitionFromView(noReservationView, toView: ReservationView, duration: 0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
             self.buttonMakeReservation.enabled = false
             // 2 hide
-            let viewRateIt = self.scrollviewReservationInfo.viewWithTag(0)!
-            UIView.transitionWithView(viewRateIt, duration: 0,
+            UIView.transitionWithView(viewReservationInfoFirstView, duration: 0,
                                       options: UIViewAnimationOptions.ShowHideTransitionViews,
                                       animations: {
-                                        viewRateIt.hidden = reservation.isCompleted()
+                                        self.viewReservationInfoFirstView.hidden = !reservation.isCompleted()
                                     }, completion: nil)
             // 3 swap
             if reservation.isCompleted() {
                 UIView.transitionFromView(buttonReservationCancel, toView: buttonReservationRate, duration: 0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+                self.constraintsLeadingOfReservationInfoSecondView.active = false
+                self.pagecontrollReservationInfo.numberOfPages = 3
             } else {
                 UIView.transitionFromView(buttonReservationRate, toView: buttonReservationCancel, duration: 0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+                self.constraintsLeadingOfReservationInfoSecondView.active = true
+                self.pagecontrollReservationInfo.numberOfPages = 2
             }
 
         } else {
@@ -242,10 +251,7 @@ extension HomeViewController : UICollectionViewDataSource {
 
         // Configure the cell
         let isSelected: Bool = self.bookingHoursSelectedIndex == indexPath
-        cell.configure(isSelected)
-
-        // Set data
-        cell.bookingHour = self.bookingHours[indexPath.row]
+        cell.configure(isSelected, bookingHour: self.bookingHours[indexPath.row])
 
         return cell
     }
@@ -270,3 +276,15 @@ extension HomeViewController : UICollectionViewDelegate {
     }
 
 }
+
+
+extension HomeViewController: UIScrollViewDelegate {
+
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        let page = Int(scrollView.contentOffset.x + 100 / scrollView.contentSize.width)
+        self.pagecontrollReservationInfo.currentPage = page
+    }
+
+}
+
+

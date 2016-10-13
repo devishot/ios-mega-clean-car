@@ -29,29 +29,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Facebook
         FBSDKApplicationDelegate.sharedInstance().application(application,didFinishLaunchingWithOptions:launchOptions)
-        
+
         //tab bar item color
-        let tintColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 56/255.0, alpha: 1.0)
-        let color:UIColor =  UIColor.grayColor()
-        let tappedColor:UIColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 56/255.0, alpha: 1.0)
         let font = UIFont(descriptor: AppFontDescriptorLight, size: 14)
         let attrsForNormal = [
-            NSForegroundColorAttributeName: color,
+            NSForegroundColorAttributeName: UIColor.whiteColor(),
             NSFontAttributeName: font
         ]
         let attrsForSelected = [
-            NSForegroundColorAttributeName: tappedColor,
+            NSForegroundColorAttributeName: UIColor.ccPurpleLight(),
             NSFontAttributeName: font
         ]
-
         UITabBarItem.appearance().setTitleTextAttributes(attrsForNormal, forState: .Normal)
         UITabBarItem.appearance().setTitleTextAttributes(attrsForSelected, forState: .Selected)
-        UITabBar.appearance().tintColor = tintColor
-        UITabBar.appearance().barTintColor = UIColor.whiteColor()
-        
+        UITabBar.appearance().tintColor = UIColor.whiteColor()
+        UITabBar.appearance().barTintColor = UIColor.ccPurpleDark()
+
+        //status bar
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+
         //ui window color 
         let win:UIWindow = UIApplication.sharedApplication().delegate!.window!!
         win.backgroundColor = UIColor.whiteColor()
+        
         
         return true
     }

@@ -12,8 +12,35 @@ import SwiftyJSON
 import UIKit
 
 
+func setStatusBarBackgroundColor(color: UIColor) {
+    guard  let statusBar = UIApplication.sharedApplication().valueForKey("statusBarWindow")?.valueForKey("statusBar") as? UIView else {
+        return
+    }
+    statusBar.backgroundColor = color
+}
+
+
 // Color palette
 extension UIColor {
+    class func ccPurpleDark() -> UIColor {
+        return UIColor(red:0.11, green:0.04, blue:0.21, alpha:1.0)
+    }
+    class func ccPurpleMedium() -> UIColor {
+        return UIColor(red:0.23, green:0.07, blue:0.42, alpha:1.0)
+    }
+    class func ccPurpleLight() -> UIColor {
+        return UIColor(red:0.33, green:0.10, blue:0.62, alpha:1.0)
+    }
+    class func ccTextColorWhite() -> UIColor {
+        return UIColor.whiteColor()
+    }
+    class func ccTextColorGray() -> UIColor {
+        return UIColor(red:0.61, green:0.61, blue:0.61, alpha:1.0)
+    }
+    class func ccTextColorGrayLight() -> UIColor {
+        return UIColor(red:0.94, green:0.94, blue:0.96, alpha:1.0)
+    }
+
     class func ccRedTabActive() -> UIColor {
         return UIColor(colorLiteralRed: 255.0 / 255.0, green: 0.0, blue: 56.0 / 255.0, alpha: 1.0)
     }
