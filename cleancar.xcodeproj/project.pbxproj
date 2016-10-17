@@ -36,6 +36,7 @@
 		64DBE4346228683B0609F616 /* Pods_cleancar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7C11601A253081170570B5 /* Pods_cleancar.framework */; };
 		B42F94E91D79F336008F178A /* DurationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F94E81D79F336008F178A /* DurationCollectionViewCell.swift */; };
 		B43C90031D6859F800667B09 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43C90021D6859F800667B09 /* FeedbackViewController.swift */; };
+		B44206361DB5115B00E3D63C /* BigSoftie-Fat.otf in Resources */ = {isa = PBXBuildFile; fileRef = B44206351DB5115B00E3D63C /* BigSoftie-Fat.otf */; };
 		B45905C41D6AC92600CFEFEF /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45905C31D6AC92600CFEFEF /* PopUpViewController.swift */; };
 		B45905C61D6C171B00CFEFEF /* OrdersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45905C51D6C171B00CFEFEF /* OrdersTableViewController.swift */; };
 		B45905CB1D7023D000CFEFEF /* UISegmentedControl_fontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45905CA1D7023D000CFEFEF /* UISegmentedControl_fontSize.swift */; };
@@ -93,6 +94,7 @@
 		A3BDF9108FE3AA754175B2C7 /* Pods-cleancar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.release.xcconfig"; sourceTree = "<group>"; };
 		B42F94E81D79F336008F178A /* DurationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationCollectionViewCell.swift; sourceTree = "<group>"; };
 		B43C90021D6859F800667B09 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		B44206351DB5115B00E3D63C /* BigSoftie-Fat.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BigSoftie-Fat.otf"; path = "cleancar/Resources/BigSoftie-Fat.otf"; sourceTree = "<group>"; };
 		B45905C31D6AC92600CFEFEF /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		B45905C51D6C171B00CFEFEF /* OrdersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersTableViewController.swift; sourceTree = "<group>"; };
 		B45905CA1D7023D000CFEFEF /* UISegmentedControl_fontSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISegmentedControl_fontSize.swift; sourceTree = "<group>"; };
@@ -253,6 +255,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B44206341DB5114400E3D63C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B44206351DB5115B00E3D63C /* BigSoftie-Fat.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		B4856D941D6889DE000EC687 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +282,7 @@
 				B4EEA3391D6429EB0039D998 /* cleancarUITests */,
 				523F3B4D1D66E91B00B75421 /* Recovered References */,
 				498A82F9BE6AD766CBC6C42E /* Pods */,
+				B44206341DB5114400E3D63C /* Resources */,
 				9EED77A41C0F2D6357C190ED /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -403,6 +414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4EEA3301D6429EB0039D998 /* LaunchScreen.storyboard in Resources */,
+				B44206361DB5115B00E3D63C /* BigSoftie-Fat.otf in Resources */,
 				523F3B551D67678B00B75421 /* GoogleService-Info.plist in Resources */,
 				B4EEA32D1D6429EB0039D998 /* Assets.xcassets in Resources */,
 				5292AC041D6EB40A00E03760 /* Main.storyboard in Resources */,

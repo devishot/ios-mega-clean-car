@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "w1-1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ob-bg-1.pdf",
+      "filename" : "w1-2.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "w1-3.png",
       "scale" : "3x"
     }
   ],

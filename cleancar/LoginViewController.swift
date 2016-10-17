@@ -27,6 +27,7 @@ class LoginViewController: UIViewController {
     // IBOutlets
     @IBOutlet weak var facebookLoginButtonBorder: UIButton!
     @IBOutlet weak var signInButtonBorder: UIButton!
+    @IBOutlet var backgroundView: UIView!
 
 
     // IBActions
@@ -73,6 +74,7 @@ class LoginViewController: UIViewController {
 
         facebookLoginButtonBorder.layer.cornerRadius = 5
         facebookLoginButtonBorder.layer.masksToBounds = true
+
 
         // init
         self.initAccountKit()
@@ -160,10 +162,10 @@ class LoginViewController: UIViewController {
 
         //Costumize the theme
         let theme:AKFTheme = AKFTheme.defaultTheme()
-        let redBgColor = UIColor(red: 190.0/255.0, green: 30.0/255.0, blue: 45.0/255.0, alpha: 1)
+        let purpleBgColor = UIColor(red:0.11, green:0.04, blue:0.21, alpha:0.8)
         let whiteColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1)
 
-        theme.headerBackgroundColor = redBgColor
+        theme.headerBackgroundColor = purpleBgColor
 
         theme.headerTextColor = whiteColor
         theme.iconColor = whiteColor
@@ -171,11 +173,11 @@ class LoginViewController: UIViewController {
         theme.statusBarStyle = .Default
         theme.textColor =  whiteColor
         theme.titleColor = whiteColor
-        theme.backgroundColor = redBgColor
+        theme.backgroundColor = purpleBgColor
         theme.inputBorderColor =  whiteColor
-        theme.inputBackgroundColor = redBgColor
+        theme.inputBackgroundColor = purpleBgColor
         theme.inputTextColor =  whiteColor
-        theme.buttonBackgroundColor = redBgColor
+        theme.buttonBackgroundColor = purpleBgColor
         theme.buttonBorderColor = whiteColor
         theme.buttonTextColor = whiteColor
         
