@@ -256,7 +256,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="3ex-Cp-4J1" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="0NJ-uE-pFS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vVf-ur-C3x" secondAttribute="trailing" constant="45" id="7vJ-S2-huY"/>
@@ -524,6 +524,7 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VIh-Lk-QaJ" userLabel="First View">
                                                 <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info-view-background" translatesAutoresizingMaskIntoConstraints="NO" id="xil-4G-hx5"/>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GkI-0b-Zg1" userLabel="Header View">
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suv-B3-k1P" userLabel="Menu">
@@ -728,18 +729,22 @@
                                                         </variation>
                                                     </view>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.1137254902" green="0.039215686270000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="Lcr-ob-aBd" secondAttribute="trailing" constant="45" id="26F-yW-Nzz"/>
                                                     <constraint firstAttribute="bottom" secondItem="gLw-aU-MW2" secondAttribute="bottom" constant="30" id="FAE-Ck-hZM"/>
                                                     <constraint firstItem="GkI-0b-Zg1" firstAttribute="leading" secondItem="VIh-Lk-QaJ" secondAttribute="leading" constant="8" id="Foc-WL-V1K"/>
                                                     <constraint firstAttribute="trailing" secondItem="GkI-0b-Zg1" secondAttribute="trailing" constant="8" id="Gg1-fp-cZg"/>
                                                     <constraint firstItem="Lcr-ob-aBd" firstAttribute="leading" secondItem="VIh-Lk-QaJ" secondAttribute="leading" constant="45" id="QBx-NT-5hh"/>
+                                                    <constraint firstAttribute="trailing" secondItem="xil-4G-hx5" secondAttribute="trailing" id="Saz-Ib-AKW"/>
                                                     <constraint firstAttribute="trailing" secondItem="gLw-aU-MW2" secondAttribute="trailing" constant="40" id="UaK-b3-ya1"/>
+                                                    <constraint firstAttribute="bottom" secondItem="xil-4G-hx5" secondAttribute="bottom" id="f2e-3Z-HfD"/>
                                                     <constraint firstItem="gLw-aU-MW2" firstAttribute="top" secondItem="Lcr-ob-aBd" secondAttribute="bottom" constant="30" id="ghh-ex-kmD"/>
                                                     <constraint firstAttribute="height" constant="250" id="jeo-Db-grz"/>
                                                     <constraint firstItem="gLw-aU-MW2" firstAttribute="leading" secondItem="VIh-Lk-QaJ" secondAttribute="leading" constant="40" id="pWl-Of-vor"/>
                                                     <constraint firstItem="GkI-0b-Zg1" firstAttribute="top" secondItem="VIh-Lk-QaJ" secondAttribute="top" constant="20" id="qHS-a5-XVT"/>
+                                                    <constraint firstItem="xil-4G-hx5" firstAttribute="leading" secondItem="VIh-Lk-QaJ" secondAttribute="leading" id="wLZ-PS-nmb"/>
+                                                    <constraint firstItem="xil-4G-hx5" firstAttribute="top" secondItem="VIh-Lk-QaJ" secondAttribute="top" id="xLm-7S-aB4"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="472-hs-3eo" userLabel="Second View">
@@ -2352,7 +2357,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="400" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YM2-m9-MAE" id="dLn-1e-9RN">
-                                            <frame key="frameInset" width="400" height="80"/>
+                                            <frame key="frameInset" width="400" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="H4F-CR-vmb">
@@ -2480,7 +2485,7 @@
                                         <rect key="frame" x="0.0" y="80" width="400" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OeU-5t-YqH" id="KGU-w6-7N8">
-                                            <frame key="frameInset" width="400" height="45"/>
+                                            <frame key="frameInset" width="400" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мойка двигателя" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clb-gf-v36">
@@ -2550,7 +2555,7 @@
                                         <rect key="frame" x="0.0" y="125" width="400" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sUt-sQ-Hnp" id="pee-Ov-xlb">
-                                            <frame key="frameInset" width="400" height="45"/>
+                                            <frame key="frameInset" width="400" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Чистка багажника" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xrq-3T-W3n">
@@ -2617,7 +2622,7 @@
                                         <rect key="frame" x="0.0" y="170" width="400" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eHL-gJ-jtW" id="wx1-wN-3ec">
-                                            <frame key="frameInset" width="400" height="45"/>
+                                            <frame key="frameInset" width="400" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Полировка салона" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AD1-Wh-ZXv">
@@ -2684,7 +2689,7 @@
                                         <rect key="frame" x="0.0" y="215" width="400" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OzU-Cc-CBk" id="7qx-yk-gUN">
-                                            <frame key="frameInset" width="400" height="45"/>
+                                            <frame key="frameInset" width="400" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Отбивка кузова" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdW-Q5-JL8">
@@ -2754,7 +2759,7 @@
                                         <rect key="frame" x="0.0" y="260" width="400" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rsI-Xa-Nwd" id="26y-6h-T0S">
-                                            <frame key="frameInset" width="400" height="51"/>
+                                            <frame key="frameInset" width="400" height="50.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="6" translatesAutoresizingMaskIntoConstraints="NO" id="Hx1-uT-4MZ">
@@ -2996,7 +3001,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s5X-GR-NHI" id="lDo-ZW-BDt">
-                                    <frame key="frameInset" width="342" height="120"/>
+                                    <frame key="frameInset" width="342" height="119.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uDC-m3-DIo" userLabel="Top">
@@ -4041,7 +4046,7 @@
             <objects>
                 <navigationController storyboardIdentifier="loginNavController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="ycG-gP-qHL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Sr7-Ix-yjT">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Sr7-Ix-yjT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -4062,7 +4067,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" navigationBarHidden="YES" id="i7r-FA-csY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Главная" image="services-icon" selectedImage="active-services-icon" id="imN-NW-aRJ"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jtN-4h-4qz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jtN-4h-4qz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -4523,7 +4528,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="K5z-nC-lo6" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Заказы" image="order-icon" selectedImage="activ-order-icon" id="2lg-U8-iOn"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HNa-4N-4NK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HNa-4N-4NK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4550,7 +4555,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fzq-8k-kTC" id="aCq-Uc-54j">
-                                    <frame key="frameInset" width="342" height="100"/>
+                                    <frame key="frameInset" width="342" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WEO-cp-t1O" userLabel="Top">
@@ -5156,7 +5161,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wt1-l6-Qcf" id="DGl-rj-Adi">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Имя или Номер бокса" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sNk-qJ-MvR">
@@ -5606,7 +5611,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bS7-PN-VGb" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Отзывы" image="feedback-icon" selectedImage="activ-feedback-icon" id="IVM-se-sk0" userLabel="Отзывы"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3R0-b1-onL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3R0-b1-onL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -5644,7 +5649,7 @@
         <image name="activ-statistics-icon" width="24" height="24"/>
         <image name="active-pricelist-icon" width="19" height="15"/>
         <image name="active-services-icon" width="21" height="22"/>
-        <image name="background-image" width="374" height="667"/>
+        <image name="background-image" width="375" height="667"/>
         <image name="bg1" width="375" height="667"/>
         <image name="bg2" width="375" height="667"/>
         <image name="bg3" width="375" height="667"/>
@@ -5652,6 +5657,7 @@
         <image name="context-menu" width="34" height="8"/>
         <image name="fb_logo" width="17" height="18"/>
         <image name="feedback-icon" width="24" height="23"/>
+        <image name="info-view-background" width="375" height="250"/>
         <image name="left-arrow" width="34" height="72"/>
         <image name="map" width="17" height="26"/>
         <image name="order-icon" width="23" height="21"/>
