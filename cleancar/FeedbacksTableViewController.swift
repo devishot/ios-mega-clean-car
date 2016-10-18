@@ -34,9 +34,6 @@ class FeedbacksTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // 1. set styles
-        self.edgesForExtendedLayout = UIRectEdge.None
-
         // 2. load data
         BookingHour.subscribeToToday({ () -> (Void) in
             let today = NSDate()
@@ -64,7 +61,6 @@ class FeedbacksTableViewController: UITableViewController {
         super.viewWillAppear(animated)
 
         setStatusBarBackgroundColor(UIColor.ccPurpleMedium())
-        self.extSetNavigationBarStyle(UIColor.ccPurpleMedium())
     }
     override func viewDidDisappear(animated: Bool) {
         Reservation.unsubscribe()
@@ -81,6 +77,7 @@ class FeedbacksTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let headerView = view as! UITableViewHeaderFooterView
+        headerView.contentView.backgroundColor = UIColor.ccPurpleLight()
         headerView.backgroundView?.backgroundColor = UIColor.ccPurpleLight()
         headerView.tintColor = UIColor.whiteColor()
         headerView.textLabel?.textColor = UIColor.whiteColor()

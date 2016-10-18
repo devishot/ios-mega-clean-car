@@ -150,9 +150,10 @@ class OrdersTableViewController: UITableViewController {
         let filter = self.filterValue.rawValue
         return self.sections[filter][section]
     }
-    
+
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let headerView = view as! UITableViewHeaderFooterView
+        headerView.contentView.backgroundColor = UIColor.ccPurpleLight()
         headerView.backgroundView?.backgroundColor = UIColor.ccPurpleLight()
         headerView.tintColor = UIColor.whiteColor()
         headerView.textLabel?.textColor = UIColor.whiteColor()
