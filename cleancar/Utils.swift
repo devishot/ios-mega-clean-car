@@ -20,6 +20,23 @@ func setStatusBarBackgroundColor(color: UIColor) {
 }
 
 
+extension UIViewController {
+    func extSetNavigationBarStyle(backgroundColor: UIColor) {
+        if let navBar = self.navigationController?.navigationBar {
+            navBar.barTintColor = backgroundColor
+            navBar.translucent = false
+
+            navBar.titleTextAttributes = [
+                NSForegroundColorAttributeName: UIColor.ccTextColorGrayLight(),
+                NSFontAttributeName: UIFont(name: "Helvetica", size: 14)!
+            ]
+            navBar.tintColor = UIColor.ccTextColorGrayLight();
+        }
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+}
+
+
 // Color palette
 extension UIColor {
     class func ccPurpleDark() -> UIColor {

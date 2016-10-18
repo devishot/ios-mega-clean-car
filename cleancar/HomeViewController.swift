@@ -174,10 +174,12 @@ class HomeViewController: UIViewController {
             self.labelReservationCost.text = formatMoney(reservation.services.getCostForTotal())
             self.labelReservationCarInfoNumber.text = carInfo.identifierNumber!
             self.labelReservationServices.text = "Выбранные услуги: \n" + reservation.services.getDescription()
+            self.labelReservationServices.adjustsFontSizeToFitWidth = true
 
             // 1 swap
             UIView.transitionFromView(noReservationView, toView: ReservationView, duration: 0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
             self.buttonMakeReservation.enabled = false
+            self.chooseTimeCollectionView.allowsSelection = false
             // 2 hide
             UIView.transitionWithView(viewReservationInfoFirstView, duration: 0,
                                       options: UIViewAnimationOptions.ShowHideTransitionViews,
@@ -198,15 +200,13 @@ class HomeViewController: UIViewController {
         } else {
             // swap
             UIView.transitionFromView(ReservationView, toView: noReservationView, duration: 0.2, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
-            self.buttonMakeReservation.enabled = true
+            self.chooseTimeCollectionView.allowsSelection = true
         }
     }
 
     func displayMenuView() {
-        let actionSheet = UIAlertController(title: nil,
-                                            message: "Выберите действие",
-                                            preferredStyle: .ActionSheet)
-        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+
         let logOut = UIAlertAction(title: "Выйти", style: .Destructive, handler: { (alert: UIAlertAction!) -> Void in
 
             // logout from firebase and facebook
@@ -251,7 +251,8 @@ extension HomeViewController : UICollectionViewDataSource {
 
         // Configure the cell
         let isSelected: Bool = self.bookingHoursSelectedIndex == indexPath
-        cell.configure(isSelected, bookingHour: self.bookingHours[indexPath.row])
+        let bookingHour = self.bookingHours[indexPath.row]
+        cell.configure(isSelected, bookingHour: bookingHour)
 
         return cell
     }

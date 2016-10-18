@@ -25,17 +25,20 @@ class BookingHoursCollectionViewCell: UICollectionViewCell {
         self.layer.borderWidth = 1
 
         if isSelected {
-            self.layer.borderColor = UIColor.ccPurpleDark().CGColor
-            self.hourLabel.textColor = UIColor.ccPurpleDark()
-            self.statusLabel.textColor =  UIColor.ccTextColorGray()
+            self.layer.borderColor = UIColor.ccPurpleLight().CGColor
+            self.layer.backgroundColor = UIColor.whiteColor().CGColor
+            self.hourLabel.textColor = UIColor.ccPurpleLight()
+            self.statusLabel.textColor =  UIColor.ccPurpleLight()
 
         } else if bookingHour.isFree() {
             self.layer.borderColor = UIColor.whiteColor().CGColor
+            self.layer.backgroundColor = UIColor.clearColor().CGColor
             self.hourLabel.textColor = UIColor.ccTextColorWhite()
             self.statusLabel.textColor = UIColor.ccTextColorGrayLight()
 
         } else {
             self.layer.borderColor = UIColor.whiteColor().CGColor
+            self.layer.backgroundColor = UIColor.clearColor().CGColor
             self.hourLabel.textColor = UIColor.ccTextColorGray()
             self.statusLabel.textColor =  UIColor.ccTextColorGray()
         }

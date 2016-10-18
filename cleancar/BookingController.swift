@@ -18,6 +18,7 @@ class BookingController: UIViewController, Dimmable {
     @IBOutlet weak var transitionViewWithCar: UIView!
     @IBOutlet weak var transitionViewNoCar: UIView!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var carTypeImage: UIImageView!
     @IBOutlet weak var carTypeLabel: UILabel!
     @IBOutlet weak var carNumberLabel: UILabel!
     @IBOutlet weak var changeCarButton: UIButton!
@@ -75,32 +76,18 @@ class BookingController: UIViewController, Dimmable {
         super.viewDidLoad()
 
         // init styles
-        roundedSendButton.layer.cornerRadius = 5
-        roundedSendButton.layer.masksToBounds = true
+        [roundedSendButton, changeCarButton].forEach { button in
+            button.layer.cornerRadius = 5
+            button.layer.masksToBounds = true
+        }
 
         // set values
         timeLabel.text = self.bookingHour!.getHour()
         self.setDataByCarType()
 
-        // navigationbar item color
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: UIColor.orangeColor(),
-            NSFontAttributeName: UIFont(name: "Helvetica", size: 14)!
-        ]
-        self.navigationController!.navigationBar.tintColor = UIColor.orangeColor();
-        self.navigationController!.navigationBar.backgroundColor = UIColor.whiteColor();
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orangeColor()]
-       
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        if let bottomInset = self.tabBarController?.tabBar.bounds.height {
-            scrollView.contentInset.bottom = 2*bottomInset
-            scrollView.scrollIndicatorInsets.bottom = -bottomInset
-        }
+    override func viewWillAppear(animated: Bool) {
+        self.extSetNavigationBarStyle(UIColor.ccPurpleDark())
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -148,9 +135,11 @@ class BookingController: UIViewController, Dimmable {
                                   options: UIViewAnimationOptions.ShowHideTransitionViews,
                                   completion: nil)
 
-        carTypeLabel.text = self.carInfo!.model
-        carNumberLabel.text = self.carInfo!.identifierNumber
-
+        if let car = self.carInfo {
+            carTypeImage.image = car.type.icon()
+            carTypeLabel.text = car.model
+            carNumberLabel.text = car.identifierNumber
+        }
         changeCarButton.titleLabel!.text = updateLabelText
     }
 
@@ -162,8 +151,8 @@ class BookingController: UIViewController, Dimmable {
                                   completion: nil)
         changeCarButton.titleLabel!.text = addLabelText
     }
-    
-    
+
+
     func displayAlertNoCar() {
         let title = "Пожалуйста, укажите автомобиль"
         let alert = UIAlertController(title: nil, message: title, preferredStyle: .Alert)
@@ -174,5 +163,6 @@ class BookingController: UIViewController, Dimmable {
         self.presentViewController(alert, animated: true, completion: nil)
 
     }
+
 }
 

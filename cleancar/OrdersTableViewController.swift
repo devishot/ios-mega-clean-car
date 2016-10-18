@@ -119,9 +119,14 @@ class OrdersTableViewController: UITableViewController {
             })
         })
     }
-
     override func viewDidDisappear(animated: Bool) {
         Reservation.unsubscribe()
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        setStatusBarBackgroundColor(UIColor.ccPurpleMedium())
+        self.extSetNavigationBarStyle(UIColor.ccPurpleMedium())
     }
 
     override func didReceiveMemoryWarning() {
@@ -145,6 +150,14 @@ class OrdersTableViewController: UITableViewController {
         let filter = self.filterValue.rawValue
         return self.sections[filter][section]
     }
+    
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let headerView = view as! UITableViewHeaderFooterView
+        headerView.backgroundView?.backgroundColor = UIColor.ccPurpleLight()
+        headerView.tintColor = UIColor.whiteColor()
+        headerView.textLabel?.textColor = UIColor.whiteColor()
+    }
+
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.getReservationsFor(section).count
@@ -167,25 +180,27 @@ class OrdersTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let reservation = getReservationsFor(indexPath.section)[indexPath.row]
 
-        let assignAction = UITableViewRowAction(style: .Normal, title: "✚\n Assign", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+        let assignAction = UITableViewRowAction(style: .Normal, title: "✚\nНазн..", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
             self.performSegueWithIdentifier(self.segueAssignToReservationID, sender: indexPath)
         })
+        assignAction.backgroundColor = UIColor.ccPurpleSuperLight()
 
-        let reAssignAction = UITableViewRowAction(style: .Normal, title: "✚\n Re-Assign", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+        let reAssignAction = UITableViewRowAction(style: .Normal, title: "✎\nНазн..", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
             self.performSegueWithIdentifier(self.segueAssignToReservationID, sender: indexPath)
         })
+        reAssignAction.backgroundColor = UIColor.ccPurpleSuperLight()
 
-        let completeAction = UITableViewRowAction(style: .Normal, title: "✔︎\n Done", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+        let completeAction = UITableViewRowAction(style: .Normal, title: "✔︎\nВыпо..", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
                 reservation.setCompleted() {
                     // TODO: push message to User
                 }
         })
-        completeAction.backgroundColor = UIColor.blueColor()
+        completeAction.backgroundColor = UIColor.ccPurpleSuperLight()
 
-        let declineAction = UITableViewRowAction(style: .Default, title: "✖︎\n Delete", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+        let declineAction = UITableViewRowAction(style: .Default, title: "✖︎\nУдал..", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
             displayPromptView("Хотите отменить заказ?", self: self) { (result: Bool) in
                 if result == true {
@@ -198,31 +213,33 @@ class OrdersTableViewController: UITableViewController {
 
         var callAction: UITableViewRowAction? = nil
         if reservation.user.accountKitProfile?["phone_number"] != nil {
-            callAction = UITableViewRowAction(style: .Default, title: "✆\n Call", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+            callAction = UITableViewRowAction(style: .Normal, title: "☎︎\nПозв..", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
                 let user = reservation.user
                 let name = user.full_name
                 let phone_number = user.accountKitProfile!["phone_number"]?.string
                 displayCallAlert(phone_number!, displayText: name, sender: self)
             })
+            callAction!.backgroundColor = UIColor.ccPurpleSuperLight()
         }
 
 
-        var actions = (callAction != nil) ? [callAction!] : []
+        var actions = []
         switch self.filterValue {
         case .Canceled:
             break
         case .Quequed:
             if reservation.isAssigned() {
-                actions.appendContentsOf([completeAction, reAssignAction, declineAction])
+                actions = (callAction != nil)
+                    ? [completeAction, reAssignAction, callAction!, declineAction]
+                    : [completeAction, reAssignAction, declineAction]
             } else {
-                actions.appendContentsOf([assignAction, declineAction])
+                actions = (callAction != nil)
+                    ? [assignAction, callAction!, declineAction]
+                    : [assignAction, declineAction]
             }
         }
-
-        print(".here", indexPath.section, indexPath.row, reservation.bookingHour.getHour(), actions, reservation.user.accountKitProfile)
-
-        return actions 
+        return actions as! [UITableViewRowAction]
     }
 
 

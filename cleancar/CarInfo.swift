@@ -15,6 +15,19 @@ enum CarTypeEnum: Int {
     case CUV
     case SUV
     case VAN
+
+    func icon() -> UIImage {
+        switch self {
+        case .Normal:
+            return UIImage(named: "sedan-car")!
+        case .CUV:
+            return UIImage(named: "crossover-car")!
+        case .SUV:
+            return UIImage(named: "suv-car")!
+        case .VAN:
+            return UIImage(named: "bus-car")!
+        }
+    }
 }
 
 

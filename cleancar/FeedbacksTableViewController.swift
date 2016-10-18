@@ -61,11 +61,15 @@ class FeedbacksTableViewController: UITableViewController {
         })
 
     }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
 
+        setStatusBarBackgroundColor(UIColor.ccPurpleDark())
+        self.extSetNavigationBarStyle(UIColor.ccPurpleDark())
+    }
     override func viewDidDisappear(animated: Bool) {
         Reservation.unsubscribe()
     }
-
 
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
