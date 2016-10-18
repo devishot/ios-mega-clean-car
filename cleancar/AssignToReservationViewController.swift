@@ -85,7 +85,6 @@ class AssignToReservationViewController: UIViewController {
         self.durationCollectionView.delegate = self
         self.durationCollectionView.dataSource = self
 
-
         // init variables
         availableWashers = Washer.all
             .filter({ (id, washer) in
@@ -100,8 +99,11 @@ class AssignToReservationViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        setStatusBarBackgroundColor(UIColor.ccPurpleDark())
+        self.extSetNavigationBarStyle(UIColor.ccPurpleDark())
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -125,21 +127,8 @@ class AssignToReservationViewController: UIViewController {
             switch sourceType {
             case .AssignWasher:
                 destController.items = availableWashers.map({ $0.name })
-
-                if self.valueWasher != nil {
-                    let selectedItem = self.valueWasher!.name
-                    destController.items.insert(selectedItem, atIndex: 0)
-                    destController.selectedIndex = 0
-                }
-
             case .AssignBoxIndex:
                 destController.items = availableBoxIndexes.map({ "#\($0+1)" })
-
-                if self.valueBoxIndex != nil {
-                    let selectedItem = "#\(self.valueBoxIndex!+1)"
-                    destController.items.insert(selectedItem, atIndex: 0)
-                    destController.selectedIndex = 0
-                }
             }
         }
 
@@ -174,7 +163,7 @@ extension AssignToReservationViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.embeddedTableView?.dequeueReusableCellWithIdentifier(cellOfAssignActionsTableID, forIndexPath: indexPath)
         var cellText: String!
-        
+
         let sourceType = SelectTableSources(rawValue: indexPath.row)!
         switch sourceType {
         case .AssignWasher:

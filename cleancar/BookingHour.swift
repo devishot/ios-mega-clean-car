@@ -194,11 +194,11 @@ class BookingHour {
         endHour = 21,
         bookingHoursCount = (endHour - startHour) * 60 / BookingHour.minuteMultiplier
 
+        // boxes
         let boxes = (0..<BookingHour.boxesCount).map({_ in true })
+        // washers
         let washers = NSMutableDictionary()
         Washer.all.forEach() { (id, washer) in washers.setObject(true, forKey: id) }
-
-        print(".BookingHour.initToday", washers.count)
 
         let initData = (0..<bookingHoursCount).generate()
             .map({index in ["boxes": boxes, "washers": washers] })
@@ -216,24 +216,28 @@ class BookingHour {
 
     // firebase
     class func subscribeToToday(callback: () -> (Void) ) {
-        BookingHour.refHandle = getFirebaseRef()
-            .child(BookingHour.getTodayChildRef())
-            .observeEventType(FIRDataEventType.Value) {(snapshot: FIRDataSnapshot) -> Void in
-
-                if snapshot.value is NSNull {
-                    BookingHour.initToday() {
-                        BookingHour.subscribeToToday(callback)
+        Washer.fetchData() {
+            BookingHour.refHandle = getFirebaseRef()
+                .child(BookingHour.getTodayChildRef())
+                .observeEventType(FIRDataEventType.Value) {(snapshot: FIRDataSnapshot) -> Void in
+                    
+                    if snapshot.value is NSNull {
+                        Washer.fetchData() {
+                            BookingHour.initToday() {
+                                BookingHour.subscribeToToday(callback)
+                            }
+                        }
+                        return
                     }
-                    return
-                }
-
-                let values = snapshot.value as! [AnyObject]
-                BookingHour.today = values
-                    .enumerate()
-                    .map({ BookingHour(index: $0.index, data: $0.element) })
-
-                callback()
+                    
+                    let values = snapshot.value as! [AnyObject]
+                    BookingHour.today = values
+                        .enumerate()
+                        .map({ BookingHour(index: $0.index, data: $0.element) })
+                    
+                    callback()
             }
+        }
     }
 
     class func unsubscribe() {

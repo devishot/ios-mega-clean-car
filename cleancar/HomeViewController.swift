@@ -122,15 +122,13 @@ class HomeViewController: UIViewController {
         chooseTimeCollectionView.delegate = self
 
         // 3. Fetch data
-        Washer.fetchData() {
-            BookingHour.subscribeToToday({ () -> (Void) in
-                self.bookingHours = BookingHour.fromNow
-                self.chooseTimeCollectionView.reloadData()
-            })
-            User.subscribeToCurrent({ userError in
-                self.currentUser = User.current
-            })
-        }
+        BookingHour.subscribeToToday({ () -> (Void) in
+            self.bookingHours = BookingHour.fromNow
+            self.chooseTimeCollectionView.reloadData()
+        })
+        User.subscribeToCurrent({ userError in
+            self.currentUser = User.current
+        })
       
     }
     override func viewWillAppear(animated: Bool) {

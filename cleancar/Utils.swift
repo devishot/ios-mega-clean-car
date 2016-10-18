@@ -23,14 +23,13 @@ func setStatusBarBackgroundColor(color: UIColor) {
 extension UIViewController {
     func extSetNavigationBarStyle(backgroundColor: UIColor) {
         if let navBar = self.navigationController?.navigationBar {
-            navBar.barTintColor = backgroundColor
             navBar.translucent = false
-
+            navBar.barTintColor = backgroundColor
+            navBar.tintColor = UIColor.ccTextColorGrayLight();
             navBar.titleTextAttributes = [
                 NSForegroundColorAttributeName: UIColor.ccTextColorGrayLight(),
                 NSFontAttributeName: UIFont(name: "Helvetica", size: 14)!
             ]
-            navBar.tintColor = UIColor.ccTextColorGrayLight();
         }
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
@@ -40,7 +39,7 @@ extension UIViewController {
 // Color palette
 extension UIColor {
     class func ccPurpleDark() -> UIColor {
-        return UIColor(red:0.11, green:0.04, blue:0.21, alpha:1.0)
+        return UIColor(red:0.15, green:0.06, blue:0.27, alpha:1.0)
     }
     class func ccPurpleMedium() -> UIColor {
         return UIColor(red:0.23, green:0.07, blue:0.42, alpha:1.0)
@@ -59,26 +58,6 @@ extension UIColor {
     }
     class func ccTextColorGrayLight() -> UIColor {
         return UIColor(red:0.94, green:0.94, blue:0.96, alpha:1.0)
-    }
-
-    class func ccRedTabActive() -> UIColor {
-        return UIColor(colorLiteralRed: 255.0 / 255.0, green: 0.0, blue: 56.0 / 255.0, alpha: 1.0)
-    }
-
-    class func ccRedBackground() -> UIColor {
-        return UIColor(colorLiteralRed: 190.0 / 255.0, green: 30.0 / 255.0, blue: 45.0 / 255.0, alpha: 1.0)
-    }
-    
-    class func ccOrgange() -> UIColor {
-        return UIColor(colorLiteralRed: 251.0 / 255.0, green: 176.0 / 255.0, blue: 64.0 / 255.0, alpha: 1.0)
-    }
-
-    class func ccRed() -> UIColor {
-        return UIColor(colorLiteralRed: 237.0 / 255.0, green: 28.0 / 255.0, blue: 36.0 / 255.0, alpha: 1.0)
-    }
-    
-    class func ccGreen() -> UIColor {
-        return UIColor(colorLiteralRed: 0.0, green: 148.0 / 255.0, blue: 68.0 / 255.0, alpha: 1.0)
     }
 }
 

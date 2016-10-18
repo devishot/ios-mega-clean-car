@@ -104,13 +104,14 @@ class FeedbacksTableViewController: UITableViewController {
 
         let callAction: UITableViewRowAction? = nil
         if feedback.user.accountKitProfile?["phone_number"] != nil {
-            let callAction = UITableViewRowAction(style: .Default, title: "✆\n Call", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
+            let callAction = UITableViewRowAction(style: .Default, title: "☎︎\nПозв..", handler: { (action: UITableViewRowAction, indexPath: NSIndexPath!) -> Void in
 
                 let user = feedback.user
                 let name = user.full_name
                 let phone_number = user.accountKitProfile!["phone_number"] as! String
                 displayCallAlert(phone_number, displayText: name, sender: self)
             })
+            callAction.backgroundColor = UIColor.ccPurpleSuperLight()
         }
 
         return (callAction != nil) ? [callAction!] : []
