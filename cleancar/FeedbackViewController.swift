@@ -23,9 +23,9 @@ class FeedbackViewController: UIViewController {
 
 
     // constants
-    let placeholder = "Спасибо, мне все понравилось"
-    let placeholderColor = UIColor.grayColor()
-    let nonPlaceholderColor = UIColor.blackColor()
+    let placeholder = "Напиши сюда свое мнение .."
+    let placeholderColor = UIColor.ccPurpleDark()
+    let nonPlaceholderColor = UIColor.whiteColor()
 
 
     override func viewDidLoad() {
@@ -42,6 +42,8 @@ class FeedbackViewController: UIViewController {
         self.view.addGestureRecognizer(tap)
 
         feedbackTextView.delegate = self
+        self.hidesBottomBarWhenPushed = true
+
         self.showPlaceholder()
     }
 
@@ -50,7 +52,6 @@ class FeedbackViewController: UIViewController {
 
         setStatusBarBackgroundColor(UIColor.ccPurpleMedium())
         self.extSetNavigationBarStyle(UIColor.ccPurpleMedium())
-        self.tabBarController?.tabBar.hidden = true
     }
 
     override func didReceiveMemoryWarning() {

@@ -92,7 +92,9 @@ class HomeViewController: UIViewController {
     }
     var currentUser: User? {
         didSet {
-            self.updateCurrentReservationView()
+            if self.isViewLoaded() {
+                self.updateCurrentReservationView()
+            }
         }
     }
     var CleanCarPhoneNumber = "8 707 830 5253"
@@ -136,9 +138,11 @@ class HomeViewController: UIViewController {
 
         setStatusBarBackgroundColor(UIColor.ccPurpleDark())
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+
+        if self.currentUser != nil {
+            self.updateCurrentReservationView()
+        }
     }
-
-
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
 
@@ -187,11 +191,11 @@ class HomeViewController: UIViewController {
             // 3 swap
             if reservation.isCompleted() {
                 UIView.transitionFromView(buttonReservationCancel, toView: buttonReservationRate, duration: 0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
-                self.constraintsLeadingOfReservationInfoSecondView.active = false
+                self.constraintsLeadingOfReservationInfoSecondView.priority = 251
                 self.pagecontrollReservationInfo.numberOfPages = 3
             } else {
                 UIView.transitionFromView(buttonReservationRate, toView: buttonReservationCancel, duration: 0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
-                self.constraintsLeadingOfReservationInfoSecondView.active = true
+                self.constraintsLeadingOfReservationInfoSecondView.priority = 999
                 self.pagecontrollReservationInfo.numberOfPages = 2
             }
 
@@ -199,6 +203,7 @@ class HomeViewController: UIViewController {
             // swap
             UIView.transitionFromView(ReservationView, toView: noReservationView, duration: 0.2, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
             self.chooseTimeCollectionView.allowsSelection = true
+            self.constraintsLeadingOfReservationInfoSecondView.priority = 999
         }
     }
 
@@ -280,7 +285,8 @@ extension HomeViewController : UICollectionViewDelegate {
 extension HomeViewController: UIScrollViewDelegate {
 
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        let page = Int(scrollView.contentOffset.x + 100 / scrollView.contentSize.width)
+        let t = CGFloat(scrollView.contentSize.width / CGFloat(self.pagecontrollReservationInfo.numberOfPages))
+        let page = Int(scrollView.contentOffset.x / t)
         self.pagecontrollReservationInfo.currentPage = page
     }
 
