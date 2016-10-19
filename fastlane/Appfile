@@ -1,7 +1,0 @@
-app_identifier "kz.hackteam.CleanCar" # The bundle identifier of your app
-apple_id "temirzhanapp@gmail.com" # Your Apple email address
-team_id "45RY7ZW7NU"  # Developer Portal Team ID
-itc_team_id "118007318" # "Temirzhan Abdrakhmanov|8502472960" (118007318)
-
-# you can even provide different app identifiers, Apple IDs and team names per lane:
-# More information: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Appfile.md

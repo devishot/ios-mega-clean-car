@@ -53,7 +53,6 @@ class PricelistController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.extSetNavigationBarStyle(UIColor.ccPurpleMedium())
         setStatusBarBackgroundColor(UIColor.ccPurpleMedium())
     }
 

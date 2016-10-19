@@ -42,7 +42,7 @@ extension UIColor {
         return UIColor(red:0.15, green:0.06, blue:0.27, alpha:1.0)
     }
     class func ccPurpleMedium() -> UIColor {
-        return UIColor(red:0.23, green:0.07, blue:0.42, alpha:1.0)
+        return UIColor(red:0.25, green:0.11, blue:0.41, alpha:1.0)
     }
     class func ccPurpleLight() -> UIColor {
         return UIColor(red:0.33, green:0.10, blue:0.62, alpha:1.0)
