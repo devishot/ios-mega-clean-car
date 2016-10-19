@@ -46,7 +46,6 @@
 		B4EEA3261D6429EB0039D998 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA3251D6429EB0039D998 /* AppDelegate.swift */; };
 		B4EEA32D1D6429EB0039D998 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4EEA32C1D6429EB0039D998 /* Assets.xcassets */; };
 		B4EEA3301D6429EB0039D998 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4EEA32E1D6429EB0039D998 /* LaunchScreen.storyboard */; };
-		B4EEA33B1D6429EB0039D998 /* cleancarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA33A1D6429EB0039D998 /* cleancarUITests.swift */; };
 		B4EEA3481D644B1F0039D998 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA3471D644B1F0039D998 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -107,8 +106,6 @@
 		B4EEA32F1D6429EB0039D998 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4EEA3311D6429EB0039D998 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4EEA3361D6429EB0039D998 /* cleancarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cleancarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B4EEA33A1D6429EB0039D998 /* cleancarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cleancarUITests.swift; sourceTree = "<group>"; };
-		B4EEA33C1D6429EB0039D998 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4EEA3471D644B1F0039D998 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CB6D6A598B99A13969654139 /* Pods-cleancar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleancar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleancar/Pods-cleancar.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -279,7 +276,6 @@
 				B4EEA3241D6429EB0039D998 /* cleancar */,
 				B4856D941D6889DE000EC687 /* extensions */,
 				B4EEA3231D6429EA0039D998 /* Products */,
-				B4EEA3391D6429EB0039D998 /* cleancarUITests */,
 				523F3B4D1D66E91B00B75421 /* Recovered References */,
 				498A82F9BE6AD766CBC6C42E /* Pods */,
 				B44206341DB5114400E3D63C /* Resources */,
@@ -308,15 +304,6 @@
 			);
 			path = cleancar;
 			sourceTree = "<group>";
-		};
-		B4EEA3391D6429EB0039D998 /* cleancarUITests */ = {
-			isa = PBXGroup;
-			children = (
-				B4EEA33A1D6429EB0039D998 /* cleancarUITests.swift */,
-				B4EEA33C1D6429EB0039D998 /* Info.plist */,
-			);
-			path = cleancarUITests;
-			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -553,7 +540,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4EEA33B1D6429EB0039D998 /* cleancarUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
