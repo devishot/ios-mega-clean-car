@@ -300,20 +300,23 @@ class User: FirebaseDataProtocol {
 
     static func afterSignUp(completion: CompletionWithError) {
         // 1. update profile by AccountKit
-        User.fetchAccountKitData() { (akID, phoneNumber) in
-            let data = [
-                "id": akID,
-                "phone_number": phoneNumber
-            ]
-            let user = User.getUser()!
-            getFirebaseRef()
-                .child(User.childRefName)
-                .child(user.id)
-                .child("profile_accountkit")
-                .setValue(data)
+        if User.accountKit.currentAccessToken != nil {
+            User.fetchAccountKitData() { (akID, phoneNumber) in
+                let data = [
+                    "id": akID,
+                    "phone_number": phoneNumber
+                ]
+                let user = User.getUser()!
+                getFirebaseRef()
+                    .child(User.childRefName)
+                    .child(user.id)
+                    .child("profile_accountkit")
+                    .setValue(data)
+            }
         }
-
         // 2. TODO: update profile by Facebook
+        if FBSDKAccessToken.currentAccessToken() != nil {
+        }
     }
 
     static func logOut(completion: () -> (Void)) {
