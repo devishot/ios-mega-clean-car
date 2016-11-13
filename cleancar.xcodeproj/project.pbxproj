@@ -26,6 +26,8 @@
 		525A8ABF1D7F4DB4002C6F46 /* FeedbacksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8ABE1D7F4DB4002C6F46 /* FeedbacksTableViewController.swift */; };
 		525C7C971D66C6D400DAE000 /* PricelistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C7C961D66C6D400DAE000 /* PricelistController.swift */; };
 		526CB0AD1D8914A800DB930B /* Statistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526CB0AC1D8914A800DB930B /* Statistic.swift */; };
+		52839C011DD821B200B6EBD8 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52839C001DD821B200B6EBD8 /* AuthViewModel.swift */; };
+		52839C031DD82B5E00B6EBD8 /* ActivityIndicatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52839C021DD82B5E00B6EBD8 /* ActivityIndicatorViewController.swift */; };
 		528947251D717441004B7090 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528947241D717441004B7090 /* LoginViewController.swift */; };
 		528947291D72C9D7004B7090 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528947281D72C9D7004B7090 /* Reservation.swift */; };
 		5289472B1D72CA0F004B7090 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5289472A1D72CA0F004B7090 /* User.swift */; };
@@ -79,6 +81,8 @@
 		525C7C961D66C6D400DAE000 /* PricelistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PricelistController.swift; sourceTree = "<group>"; };
 		525C7C991D66CEE300DAE000 /* BookingHoursCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingHoursCollectionViewCell.swift; sourceTree = "<group>"; };
 		526CB0AC1D8914A800DB930B /* Statistic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statistic.swift; sourceTree = "<group>"; };
+		52839C001DD821B200B6EBD8 /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		52839C021DD82B5E00B6EBD8 /* ActivityIndicatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorViewController.swift; sourceTree = "<group>"; };
 		528947241D717441004B7090 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		528947281D72C9D7004B7090 /* Reservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
 		5289472A1D72CA0F004B7090 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -216,6 +220,7 @@
 				B45905C31D6AC92600CFEFEF /* PopUpViewController.swift */,
 				5209DE3E1D6C1EEA006E040E /* ServicesTableViewController.swift */,
 				523F3B561D67A50B00B75421 /* BookingController.swift */,
+				52839C021DD82B5E00B6EBD8 /* ActivityIndicatorViewController.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -230,6 +235,14 @@
 				52129C431D881DE000921445 /* StatisticItemCell.swift */,
 			);
 			name = views;
+			sourceTree = "<group>";
+		};
+		52839BFF1DD8217900B6EBD8 /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+				52839C001DD821B200B6EBD8 /* AuthViewModel.swift */,
+			);
+			name = viewModel;
 			sourceTree = "<group>";
 		};
 		5292AC051D6EBD2A00E03760 /* helpers */ = {
@@ -298,6 +311,7 @@
 				5292AC051D6EBD2A00E03760 /* helpers */,
 				525C7C981D66C6DF00DAE000 /* controllers */,
 				525C7C9C1D66CF1F00DAE000 /* views */,
+				52839BFF1DD8217900B6EBD8 /* viewModel */,
 				523F3B501D66EA1300B75421 /* models */,
 				5292AC021D6EB40A00E03760 /* Main.storyboard */,
 				523F3B531D6758B400B75421 /* Supporting Files */,
@@ -356,7 +370,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
-				ORGANIZATIONNAME = a;
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					B4EEA3211D6429EA0039D998 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -518,12 +532,14 @@
 				5292AC071D6EBD4C00E03760 /* Dimmable.swift in Sources */,
 				B4856D961D6889FC000EC687 /* UIView+borderColor.swift in Sources */,
 				B4EEA3261D6429EB0039D998 /* AppDelegate.swift in Sources */,
+				52839C031DD82B5E00B6EBD8 /* ActivityIndicatorViewController.swift in Sources */,
 				525C7C971D66C6D400DAE000 /* PricelistController.swift in Sources */,
 				B45905C61D6C171B00CFEFEF /* OrdersTableViewController.swift in Sources */,
 				5252E8151D7582E2009A841F /* Utils.swift in Sources */,
 				525A8ABD1D7F4C48002C6F46 /* FeedbackTableViewCell.swift in Sources */,
 				B45905C41D6AC92600CFEFEF /* PopUpViewController.swift in Sources */,
 				B4856D981D6896E0000EC687 /* OrdersTableViewCell.swift in Sources */,
+				52839C011DD821B200B6EBD8 /* AuthViewModel.swift in Sources */,
 				B45905CB1D7023D000CFEFEF /* UISegmentedControl_fontSize.swift in Sources */,
 				525A8A5C1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift in Sources */,
 				5232275C1D8A83BB000D61D3 /* SignupSecondStepViewController.swift in Sources */,

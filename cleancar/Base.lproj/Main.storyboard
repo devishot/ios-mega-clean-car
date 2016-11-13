@@ -14,6 +14,54 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Activity Indicator View Controller-->
+        <scene sceneID="oHi-Ix-XxF">
+            <objects>
+                <viewController id="jus-gt-TWp" customClass="ActivityIndicatorViewController" customModule="cleancar" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="338-lK-UZv"/>
+                        <viewControllerLayoutGuide type="bottom" id="aSS-hV-9gU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rqj-ka-ILf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TZp-Wb-7mh">
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="R5M-cl-4Uq"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5SN-88-XT3">
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="R5M-cl-4Uq" firstAttribute="centerY" secondItem="TZp-Wb-7mh" secondAttribute="centerY" constant="-100" id="PRj-z8-bue"/>
+                                    <constraint firstItem="R5M-cl-4Uq" firstAttribute="centerX" secondItem="TZp-Wb-7mh" secondAttribute="centerX" id="T9Q-EM-QKs"/>
+                                    <constraint firstAttribute="trailing" secondItem="5SN-88-XT3" secondAttribute="trailing" constant="16" id="YGN-4m-LLG"/>
+                                    <constraint firstItem="5SN-88-XT3" firstAttribute="top" secondItem="R5M-cl-4Uq" secondAttribute="bottom" constant="36" id="hgq-ge-hGA"/>
+                                    <constraint firstItem="5SN-88-XT3" firstAttribute="leading" secondItem="TZp-Wb-7mh" secondAttribute="leading" constant="16" id="p2Y-Ye-ffI"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aSS-hV-9gU" firstAttribute="top" secondItem="TZp-Wb-7mh" secondAttribute="bottom" id="CkX-uu-5zq"/>
+                            <constraint firstAttribute="trailing" secondItem="TZp-Wb-7mh" secondAttribute="trailing" id="KTU-Bf-cn5"/>
+                            <constraint firstItem="TZp-Wb-7mh" firstAttribute="leading" secondItem="rqj-ka-ILf" secondAttribute="leading" id="MWQ-Mc-duj"/>
+                            <constraint firstItem="TZp-Wb-7mh" firstAttribute="top" secondItem="338-lK-UZv" secondAttribute="bottom" id="OrX-m2-Eho"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="R5M-cl-4Uq" id="kFa-Cd-pJa"/>
+                        <outlet property="labelDescription" destination="5SN-88-XT3" id="ZBb-SJ-eUY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p8j-sg-Vd7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1731" y="202"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -334,6 +382,7 @@
                         <outlet property="signInButtonBorder" destination="s41-di-cGY" id="7oV-2R-wUB"/>
                         <segue destination="qex-dj-Kcb" kind="showDetail" identifier="homeDirect" id="FvO-fn-Dv2"/>
                         <segue destination="2qN-Xw-q5U" kind="showDetail" identifier="signupSecondStep" id="vEe-xN-N1u"/>
+                        <segue destination="jus-gt-TWp" kind="presentation" identifier="activityIndicatorID" animates="NO" modalPresentationStyle="overCurrentContext" id="6Hm-Ta-xjg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -3499,7 +3548,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="LMa-6F-gap" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="20z-Vv-3e2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-141" y="42"/>
+            <point key="canvasLocation" x="-2314" y="60"/>
         </scene>
         <!--Walkthrough View Controller-->
         <scene sceneID="cOH-kX-v2p">
@@ -3676,14 +3725,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ltq-bo-h1A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="559.20000000000005" y="41.829085457271368"/>
+            <point key="canvasLocation" x="-1614" y="60"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="U3R-gX-0jd">
             <objects>
                 <navigationController storyboardIdentifier="loginNavController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="ycG-gP-qHL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Sr7-Ix-yjT">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Sr7-Ix-yjT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3704,7 +3753,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" navigationBarHidden="YES" id="i7r-FA-csY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Главная" image="services-icon" selectedImage="active-services-icon" id="imN-NW-aRJ"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jtN-4h-4qz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jtN-4h-4qz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -4165,7 +4214,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="K5z-nC-lo6" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Заказы" image="order-icon" selectedImage="active-order-icon" id="2lg-U8-iOn"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HNa-4N-4NK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HNa-4N-4NK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4260,7 +4309,7 @@
                                                 </mask>
                                             </variation>
                                         </view>
-                                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O6a-i4-JGd" userLabel="Center">
+                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O6a-i4-JGd" userLabel="Center">
                                             <frame key="frameInset" width="1000" height="1000"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мойщик" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGl-bW-Prd">
@@ -4279,13 +4328,13 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.67000000000000004" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Арман" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="av2-Bl-Xwl">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Арман" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="av2-Bl-Xwl">
                                                     <frame key="frameInset" width="1000" height="1000"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Безконтактная мойка/мойка двигателя Колесные арки Мойка ковров / Чистка ковров (4 шт.)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbS-GI-oeX">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Безконтактная мойка/мойка двигателя Колесные арки Мойка ковров / Чистка ковров (4 шт.)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbS-GI-oeX">
                                                     <frame key="frameInset" minX="91" minY="20" width="258" height="47"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4316,10 +4365,10 @@
                                                 </mask>
                                             </variation>
                                         </view>
-                                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DaG-cE-KHM" userLabel="Bottom">
+                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DaG-cE-KHM" userLabel="Bottom">
                                             <frame key="frameInset" width="1000" height="1000"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" ambiguous="YES" misplaced="YES" text="Отзыв о хорошей мойке по выбранным" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZrQ-b6-f1l">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" misplaced="YES" text="Отзыв о хорошей мойке по выбранным" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZrQ-b6-f1l">
                                                     <frame key="frameInset" minX="22" minY="3" width="331" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.67000000000000004" colorSpace="calibratedRGB"/>
@@ -4907,7 +4956,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tQT-6c-EPU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1284" y="41.829085457271368"/>
+            <point key="canvasLocation" x="-889" y="60"/>
         </scene>
         <!--Walkthrough Page View Controller-->
         <scene sceneID="IUz-Ru-Pte">
@@ -5093,7 +5142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p9B-sK-QyM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1935.2" y="41.829085457271368"/>
+            <point key="canvasLocation" x="-238" y="60"/>
         </scene>
         <!--Отзывы-->
         <scene sceneID="4TH-L6-t3v">
@@ -5101,7 +5150,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="bS7-PN-VGb" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Отзывы" image="feedback-icon" selectedImage="active-feedback-icon" id="IVM-se-sk0" userLabel="Отзывы"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3R0-b1-onL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3R0-b1-onL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

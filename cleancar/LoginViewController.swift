@@ -13,15 +13,6 @@ import FBSDKLoginKit
 import AccountKit
 
 
-enum LoginViewControllerStates {
-    case AfterSignupSecondStep
-    case OnSignupSecondStep
-    case OnSignin
-    case OnHome
-    case None
-}
-
-
 class LoginViewController: UIViewController {
 
     // IBOutlets
@@ -32,35 +23,35 @@ class LoginViewController: UIViewController {
 
     // IBActions
     @IBAction func clickedFacebookLoginButton(sender: UIButton) {
-        self.facebookLogin() {
-            User.logInByFacebook() { userError in
-                self.redirectToHome()
-            }
-        }
+        self.redirectToLoginPageOfFacebookAuth({ result, error in
+            self.viewModel.onErrorWithFacebookManager(result, error: error)
+        })
     }
     @IBAction func clickedSignInButton(sender: UIButton) {
-        self.loginWithPhoneNumber()
+        self.redirectToLoginPageOfAccountKit()
     }
     @IBAction func unwindToLoginViewController(segue: UIStoryboardSegue) {
         let destController = segue.sourceViewController as! SignupSecondStepViewController
         let fullName = destController.textFieldFullName.text!
 
-        self.navState = .AfterSignupSecondStep
-        User.signUpWithAccountKit(fullName) { userError in
-            self.redirectToHome()
-        }
+        self.viewModel.signUpByAccountKit(fullName)
     }
+
+
+    var viewModel: AuthViewModel!
 
 
     // constants
     let homeSegueID = "homeDirect"
     let segueSignupSecondStep = "signupSecondStep"
+    let segueActivityIndicator = "activityIndicatorID"
 
 
     // variables
-    var navState: LoginViewControllerStates = .None
     var _pendingLoginViewController: AKFViewController?
     var _authorizationCode: String?
+    var activityIndicatorViewController: ActivityIndicatorViewController?
+    var activityIndicatorDescriptionText: String?
 
 
     override func viewDidLoad() {
@@ -78,74 +69,98 @@ class LoginViewController: UIViewController {
 
         // init
         self.initAccountKit()
+
+        self.viewModel = AuthViewModel()
+        self.viewModel.didRedirectToCompleteSignUp = {[weak self] _ in
+            self?.redirectToCompleteSignUp()
+        }
+        self.viewModel.didRedirectToHome = {[weak self] _ in
+            self?.redirectToHome()
+        }
+        self.viewModel.didUpdateNetworkActivityStatus = {[weak self] (active: Bool, status: String?, onError: String?, completeWithBlock: (() -> Void) ) in
+            if active {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+                self?.showActivityIndicator(status)
+            } else {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                self?.hideActivityIndicator(completeWithBlock)
+            }
+
+            if let errorMessage = onError {
+                self?.displayAlertMesage(errorMessage)
+                return
+            }
+        }
+
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        if self.viewModel.isLoggedIn() {
+            self.viewModel.afterLogin()
 
-        // MARK: - if the user is already logged in
+        } else {
+            // is not logged in, yet
+            // signIn/signUp by token, if exists
+            if self.viewModel.isAvailableTokenOfAccountKit() {
+                self.viewModel.loginByAccounKit()
 
-        // 1. into Firebase Auth
-        User.isAlreadyLoggedIn() { userError in
-            if userError == nil {
-                print(".login.firebaseAuth")
-                self.redirectToHome()
+            } else if self.viewModel.isAvailableTokenOfFacebookAuth() {
+                self.viewModel.loginByFacebookAuth()
+
             }
         }
-
-        // 2. using facebook account
-        User.isAlreadyLoggedInByFacebook() { userError in
-            if userError == nil {
-                print(".login.facebookLogin")
-                self.redirectToHome()
-            }
-        }
-
-        // 3. currenlty logged into AccountKit
-        if User.accountKit.currentAccessToken != nil {
-            User.signInByAccountKit() { userError in
-                if userError == nil {
-                    print(".login.accountKit")
-                    self.redirectToHome()
-                } else if userError! == UserErrors.ProfileNotExist  {
-                    self.redirectToSignupSecondStep()
-                }
-            }
-            
-        }
-
-
-        // for AccountKit
-        if (_pendingLoginViewController != nil) {
-            //resume pending login (if any)
-            self.prepareLoginViewController(_pendingLoginViewController!)
-            self.presentViewController(_pendingLoginViewController as! UIViewController, animated: true, completion: nil)
-            _pendingLoginViewController = nil;
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == self.segueActivityIndicator {
+            let destController = segue.destinationViewController as! ActivityIndicatorViewController
+            destController.textDescription = self.activityIndicatorDescriptionText
+            self.activityIndicatorViewController = destController
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     func redirectToHome() -> Void {
-        if self.navState == .OnHome {
-            return
-        }
-
-        self.navState = .OnHome
         dispatch_async(dispatch_get_main_queue()) {
             self.performSegueWithIdentifier(self.homeSegueID, sender: self)
         }
     }
-
-    func redirectToSignupSecondStep() -> Void {
-        self.navState = .OnSignupSecondStep
+    func redirectToCompleteSignUp() -> Void {
         dispatch_async(dispatch_get_main_queue()) {
             self.performSegueWithIdentifier(self.segueSignupSecondStep, sender: self)
         }
+    }
+
+    func showActivityIndicator(description: String?) -> Void {
+        let display: (() -> Void) = {
+            dispatch_async(dispatch_get_main_queue()) {
+                self.performSegueWithIdentifier(self.segueActivityIndicator, sender: self)
+            }
+        }
+
+        self.activityIndicatorDescriptionText = description
+        // to update description we should call `prepareForSegue` again
+        // by hiding and show it again
+        if self.activityIndicatorViewController != nil {
+            self.hideActivityIndicator() {
+                display()
+            }
+        } else {
+            display()
+
+        }
+    }
+    func hideActivityIndicator( completion: (()->Void) ) -> Void {
+        self.dismissViewControllerAnimated(false) {
+            self.activityIndicatorViewController = nil
+            completion()
+        }
+    }
+    func displayAlertMesage(message: String) {
+        let alert = UIAlertController(title: "«Хьюстон, у нас проблема» 🤕", message: message, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 
 
@@ -184,7 +199,7 @@ class LoginViewController: UIViewController {
         loginViewController.theme = theme
     }
 
-    func loginWithPhoneNumber() {
+    func redirectToLoginPageOfAccountKit() {
         let preFillPhoneNumber: AKFPhoneNumber? = nil
         let inputState = NSUUID().UUIDString
         let vc: AKFViewController = User.accountKit.viewControllerForPhoneLoginWithPhoneNumber(preFillPhoneNumber, state: inputState) as! AKFViewController
@@ -195,22 +210,18 @@ class LoginViewController: UIViewController {
     }
     // END: Facebook AccountKit
 
-
-
-    func facebookLogin(completion: () -> (Void)) -> Void {
+    func redirectToLoginPageOfFacebookAuth(onError: (result: FBSDKLoginManagerLoginResult, error: NSError?) -> Void) -> Void
+    {
         let loginManager = FBSDKLoginManager();
-
         loginManager.logInWithReadPermissions(["email", "user_friends"], fromViewController: self) { (result, error) in
-            if FBSDKAccessToken.currentAccessToken() != nil {
-                completion()
-            } else {
-                print("Error: while login via Facebook")
+            if FBSDKAccessToken.currentAccessToken() == nil {
+                onError(result: result, error: error)
             }
-
         }
     }
 
 }
+
 
 extension LoginViewController: AKFViewControllerDelegate {
     func viewController(viewController: UIViewController!, didFailWithError error: NSError!) {

@@ -15,9 +15,6 @@ class TabBarViewController: UITabBarController {
     var forAdmin: [UIViewController] = []
     var forOwner: [UIViewController] = []
     
-    var showAs: UserRoles?
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,7 +32,8 @@ class TabBarViewController: UITabBarController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        let role: UserRoles = self.showAs != nil ? self.showAs! : User.current!.role
+        let user = User.current!
+        let role: UserRoles = user.role
         switch role {
         case .Client:
             self.viewControllers = forClient

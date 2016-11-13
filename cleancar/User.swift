@@ -27,6 +27,11 @@ enum UserErrors: ErrorType {
     case UnknowError
 }
 
+enum AuthProviderTypes {
+    case AccountKit
+    case Facebook
+}
+
 
 typealias CompletionWithError = (UserErrors?) -> (Void)
 
@@ -133,6 +138,10 @@ class User: FirebaseDataProtocol {
     }
 
 
+
+
+
+    
     // firebase:
     static func getUser() -> User? {
         if let auth = FIRAuth.auth() {
@@ -149,9 +158,13 @@ class User: FirebaseDataProtocol {
         }
         return nil
     }
+    static func getFirebaseID() -> String {
+        let auth = FIRAuth.auth()!
+        return auth.currentUser!.uid
+    }
 
     static func subscribeToCurrent(completion: CompletionWithError) {
-        let uid = self.getUser()!.id
+        let uid = self.getFirebaseID()
         User.refHandle = getFirebaseRef()
             .child(User.childRefName)
             .child(uid)
@@ -171,6 +184,15 @@ class User: FirebaseDataProtocol {
                         completion(nil)
                     })
                 }
+            })
+    }
+    static func isProfileExists(completion: (exists: Bool) -> Void) {
+        let uid = self.getFirebaseID()
+        getFirebaseRef()
+            .child(User.childRefName)
+            .child(uid)
+            .observeSingleEventOfType(.Value, withBlock: { snapshot in
+                completion(exists: snapshot.exists())
             })
     }
 
@@ -193,15 +215,38 @@ class User: FirebaseDataProtocol {
 
 
     // AcountKit
-    static func fetchAccountKitData(completion: (uid: String, phoneNumber: String) -> (Void) ) {
+    static func fetchAccountKitData(
+        completion: (uid: String, phoneNumber: String) -> Void,
+        onError: (error: NSError) -> Void
+        ) {
         User.accountKit.requestAccount({ (account: AKFAccount?, error: NSError?) in
+            if error != nil {
+                onError(error: error!)
+                return
+            }
+
             let akID = account!.accountID
             let phoneNumber = account!.phoneNumber!.stringRepresentation()
-
             completion(uid: akID, phoneNumber: phoneNumber)
         })
     }
+    static func fetchFacebookAuthData(
+        completion: (data: JSON) -> Void,
+        onError: (error: NSError) -> Void
+        ) {
+        FBSDKGraphRequest
+            .init(graphPath: "me", parameters: ["fields": "id, name, gender, age_range, link"])
+            .startWithCompletionHandler({ (connection, result, error) -> Void in
+                if error == nil {
+                    completion(data: JSON(result))
 
+                } else {
+                    onError(error: error)
+                }
+            })
+    }
+
+    /*
     static func signInByAccountKit(completion: CompletionWithError) {
         User.fetchAccountKitData({ id, phoneNumber in
             let akEmail = "\(phoneNumber)@accountkit.fb",
@@ -244,6 +289,7 @@ class User: FirebaseDataProtocol {
             }
         })
     }
+    */
 
 
     // Facebook
@@ -292,12 +338,13 @@ class User: FirebaseDataProtocol {
             } else if userError! == UserErrors.ProfileNotExist { // create UserProfile
                 User.saveCurrentUser() {
                     completion(nil)
-                    afterSignUp() { error in }
+                    //afterSignUp() { error in }
                 }
             }
         })
     }
 
+    /*
     static func afterSignUp(completion: CompletionWithError) {
         // 1. update profile by AccountKit
         if User.accountKit.currentAccessToken != nil {
@@ -318,6 +365,7 @@ class User: FirebaseDataProtocol {
         if FBSDKAccessToken.currentAccessToken() != nil {
         }
     }
+    */
 
     static func logOut(completion: () -> (Void)) {
         do {
