@@ -138,10 +138,6 @@ class User: FirebaseDataProtocol {
     }
 
 
-
-
-
-    
     // firebase:
     static func getUser() -> User? {
         if let auth = FIRAuth.auth() {
@@ -162,30 +158,6 @@ class User: FirebaseDataProtocol {
         let auth = FIRAuth.auth()!
         return auth.currentUser!.uid
     }
-
-    static func subscribeToCurrent(completion: CompletionWithError) {
-        let uid = self.getFirebaseID()
-        User.refHandle = getFirebaseRef()
-            .child(User.childRefName)
-            .child(uid)
-            .observeEventType(.Value, withBlock: { (snapshot) in
-                //check is UserProfile exists
-                if snapshot.value is NSNull {
-                    completion(UserErrors.ProfileNotExist)
-
-                } else {
-                    // fetch BookingHours for Reservation inside parsed User
-                    BookingHour.subscribeToToday({ () -> (Void) in
-                        // Note: BookingHour.today - was setted
-                        BookingHour.unsubscribe()
-
-                        let user = User(uid: uid, data: snapshot.value!)
-                        User.current = user
-                        completion(nil)
-                    })
-                }
-            })
-    }
     static func isProfileExists(completion: (exists: Bool) -> Void) {
         let uid = self.getFirebaseID()
         getFirebaseRef()
@@ -195,13 +167,34 @@ class User: FirebaseDataProtocol {
                 completion(exists: snapshot.exists())
             })
     }
-
     class func unsubscribe() {
         if let ref = User.refHandle {
             getFirebaseRef().removeObserverWithHandle(ref)
+            User.refHandle = nil
         }
     }
 
+
+    static func subscribeToCurrent(completion: () -> Void) {
+        let uid = self.getFirebaseID()
+        User.refHandle = getFirebaseRef()
+            .child(User.childRefName)
+            .child(uid)
+            .observeEventType(.Value, withBlock: { (snapshot) in
+                //check is UserProfile exists
+                if snapshot.exists() {
+                    // NOTE: User initializer will run Reservation initializer
+                    // which will use BookingHours info 
+                    // but required info was fetched in AuthViewMode.afterLogin
+
+                    let user = User(uid: uid, data: snapshot.value!)
+                    User.current = user
+                    completion()
+                }
+            })
+    }
+
+/*
     static func saveCurrentUser(completion: () -> (Void)) -> Void {
         let user = User.getUser()!
         getFirebaseRef()
@@ -212,41 +205,7 @@ class User: FirebaseDataProtocol {
                 completion()
             })
     }
-
-
-    // AcountKit
-    static func fetchAccountKitData(
-        completion: (uid: String, phoneNumber: String) -> Void,
-        onError: (error: NSError) -> Void
-        ) {
-        User.accountKit.requestAccount({ (account: AKFAccount?, error: NSError?) in
-            if error != nil {
-                onError(error: error!)
-                return
-            }
-
-            let akID = account!.accountID
-            let phoneNumber = account!.phoneNumber!.stringRepresentation()
-            completion(uid: akID, phoneNumber: phoneNumber)
-        })
-    }
-    static func fetchFacebookAuthData(
-        completion: (data: JSON) -> Void,
-        onError: (error: NSError) -> Void
-        ) {
-        FBSDKGraphRequest
-            .init(graphPath: "me", parameters: ["fields": "id, name, gender, age_range, link"])
-            .startWithCompletionHandler({ (connection, result, error) -> Void in
-                if error == nil {
-                    completion(data: JSON(result))
-
-                } else {
-                    onError(error: error)
-                }
-            })
-    }
-
-    /*
+ 
     static func signInByAccountKit(completion: CompletionWithError) {
         User.fetchAccountKitData({ id, phoneNumber in
             let akEmail = "\(phoneNumber)@accountkit.fb",
@@ -289,7 +248,6 @@ class User: FirebaseDataProtocol {
             }
         })
     }
-    */
 
 
     // Facebook
@@ -344,7 +302,6 @@ class User: FirebaseDataProtocol {
         })
     }
 
-    /*
     static func afterSignUp(completion: CompletionWithError) {
         // 1. update profile by AccountKit
         if User.accountKit.currentAccessToken != nil {
@@ -365,12 +322,16 @@ class User: FirebaseDataProtocol {
         if FBSDKAccessToken.currentAccessToken() != nil {
         }
     }
+
     */
 
     static func logOut(completion: () -> (Void)) {
         do {
             // logout from Firebase
             try FIRAuth.auth()?.signOut()
+
+            print(".User.logOut", FIRAuth.auth()?.currentUser)
+            
             // logout from Facebook
             let facebookLogin = FBSDKLoginManager();
             facebookLogin.logOut()

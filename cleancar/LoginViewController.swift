@@ -34,6 +34,7 @@ class LoginViewController: UIViewController {
         let destController = segue.sourceViewController as! SignupSecondStepViewController
         let fullName = destController.textFieldFullName.text!
 
+        print(".LoginVC.unwindSegue", fullName)
         self.viewModel.signUpByAccountKit(fullName)
     }
 
@@ -97,7 +98,10 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        print(".LoginVC viewWillAppear", self.viewModel.isLoggedIn())
+
         if self.viewModel.isLoggedIn() {
+            print(".LoginVC isLoggedIn")
             self.viewModel.afterLogin()
 
         } else {

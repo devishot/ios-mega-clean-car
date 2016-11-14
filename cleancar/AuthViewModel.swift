@@ -24,9 +24,13 @@ class AuthViewModel {
 
     // inputs
     func onErrorWithFacebookManager(result: FBSDKLoginManagerLoginResult, error: NSError?) {
-        print(".AuthVM.FacebookManager.error", result.isCancelled, error?.localizedDescription)
+        //print(".AuthVM.FacebookManager.error", result.isCancelled, error?.localizedDescription)
         self.didUpdateNetworkActivityStatus?(active: false, status: nil, onError: "Ошибка с Facebook") {}
     }
+
+    
+    // state variables
+    var isWaitingSignUpByAccountKitFunc: Bool = false
 
 
     // helpers
@@ -61,20 +65,25 @@ class AuthViewModel {
                 }
 
             } else {
-                print(".AuthMV.loginByFacebookAuth.error", error.debugDescription)
+                //print(".AuthMV.loginByFacebookAuth.error", error.debugDescription)
                 self.didUpdateNetworkActivityStatus?(active: false, status: nil, onError: "Ошибка при входе используя Facebook") {}
             }
         }
     }
     func loginByAccounKit() {
-        print("...", "Загружаем ваш сотовый номер")
+        if self.isWaitingSignUpByAccountKitFunc {
+            // do nothing when
+            return
+        }
+
+        //print(".AuthVM.loginByAccounKit", "Загружаем ваш сотовый номер")
         self.didUpdateNetworkActivityStatus?(active: true, status: "Загружаем ваш сотовый номер", onError: nil) {}
-        User.fetchAccountKitData(
+        self.fetchAccountKitData(
             { id, phoneNumber in
                 let akEmail = "\(phoneNumber)@accountkit.fb"
                 let akPassword = id
 
-                print("...", "Поиск профиля в базе приложения")
+                //print(".AuthVM.loginByAccounKit", "Поиск профиля в базе приложения")
                 self.didUpdateNetworkActivityStatus?(active: true, status: "Поиск профиля в базе приложения", onError: nil) {}
                 FIRAuth.auth()?.signInWithEmail(akEmail, password: akPassword) { (user, error) in
                     if error == nil { // done!
@@ -90,19 +99,21 @@ class AuthViewModel {
                 }
 
             }, onError: { error in
-                print(".AuthVM.loginByAccounKit.error", error)
+                //print(".AuthVM.loginByAccounKit.error", error)
                 self.didUpdateNetworkActivityStatus?(active: false, status: nil, onError: "Ошибка при получении сотового номера") {}
         })
     }
     func signUpByAccountKit(fullName: String) {
-        print("....", "Загружаем ваш сотовый номер")
+        self.isWaitingSignUpByAccountKitFunc = true
+
+        //print(".AuthVM.signUpByAccountKit", "Загружаем ваш сотовый номер")
         self.didUpdateNetworkActivityStatus?(active: true, status: "Загружаем ваш сотовый номер", onError: nil) {}
-        User.fetchAccountKitData(
+        self.fetchAccountKitData(
             { id, phoneNumber in
                 let akEmail = "\(phoneNumber)@accountkit.fb"
                 let akPassword = id
 
-                print("....", "Регистрация в базе данных")
+                //print(".AuthVM.signUpByAccountKit", "Регистрация в базе данных")
                 self.didUpdateNetworkActivityStatus?(active: true, status: "Регистрация в базе данных", onError: nil) {}
                 FIRAuth.auth()?.createUserWithEmail(akEmail, password: akPassword) { (user, error) in
                     if error == nil {
@@ -125,22 +136,25 @@ class AuthViewModel {
                             } else {
                                 self.didUpdateNetworkActivityStatus?(active: false, status: nil, onError: "Ошибка при добавлении ФИО в базу") {}
                             }
+                            self.isWaitingSignUpByAccountKitFunc = false
                         }
 
                     } else {
                         // completion(UserErrors.ProfileAlreadyExist)
                         self.didUpdateNetworkActivityStatus?(active: false, status: nil, onError: "Ошибка регистрации: данный аккаунт существует") {}
+                        self.isWaitingSignUpByAccountKitFunc = false
                     }
                 }
 
             }, onError: { error in
                 print(".AuthVM.signUpByAccountKit.error", error)
                 self.didUpdateNetworkActivityStatus?(active: false, status: nil, onError: "Ошибка при получении сотового номера") {}
+                self.isWaitingSignUpByAccountKitFunc = false
         })
     }
 
     func createProfile(provider: AuthProviderTypes, providerData: JSON) {
-        print(".AuthMV.createProfile", provider, providerData)
+        //print(".AuthMV.createProfile", provider, providerData)
         let auth = FIRAuth.auth()!
         let firID = auth.currentUser!.uid
         let full_name = auth.currentUser!.displayName!
@@ -153,14 +167,15 @@ class AuthViewModel {
             user.facebookProfile = providerData.dictionaryValue
         }
 
+        //print(".AuthVM.createProfile", "Создание профиля")
         self.didUpdateNetworkActivityStatus?(active: true, status: "Создание профиля", onError: nil) {}
         getFirebaseRef()
             .child(User.childRefName)
             .child(user.id)
-            .child("profile_accountkit")
             .setValue(user.toDict(), withCompletionBlock: { error, _ in
                 if error == nil {
                     self.didUpdateNetworkActivityStatus?(active: false, status: nil, onError: nil) {}
+                    print(".AuthVM.createProfile.done")
                     self.afterLogin()
 
                 } else {
@@ -169,9 +184,9 @@ class AuthViewModel {
             })
     }
     func createProfileUsingFacebook() {
-        print(".AuthMV.createProfileUsingFacebook")
+        //print(".AuthMV.createProfileUsingFacebook")
         self.didUpdateNetworkActivityStatus?(active: true, status: "Запрос в Facebook", onError: nil) {}
-        User.fetchFacebookAuthData(
+        self.fetchFacebookAuthData(
             { data in
                 self.didUpdateNetworkActivityStatus?(active: false, status: nil, onError: nil) {}
                 self.createProfile(.Facebook, providerData: data)
@@ -180,12 +195,46 @@ class AuthViewModel {
                 self.didUpdateNetworkActivityStatus?(active: false, status: nil, onError: "Ошибка при обращении к Facebook") {}
         })
     }
+
+    func fetchAccountKitData(
+        completion: (uid: String, phoneNumber: String) -> Void,
+        onError: (error: NSError) -> Void
+        ) {
+        User.accountKit.requestAccount({ (account: AKFAccount?, error: NSError?) in
+            if error != nil {
+                onError(error: error!)
+                return
+            }
+            
+            let akID = account!.accountID
+            let phoneNumber = account!.phoneNumber!.stringRepresentation()
+            completion(uid: akID, phoneNumber: phoneNumber)
+        })
+    }
+    func fetchFacebookAuthData(
+        completion: (data: JSON) -> Void,
+        onError: (error: NSError) -> Void
+        ) {
+        FBSDKGraphRequest
+            .init(graphPath: "me", parameters: ["fields": "id, name, gender, age_range, link"])
+            .startWithCompletionHandler({ (connection, result, error) -> Void in
+                if error == nil {
+                    completion(data: JSON(result))
+                    
+                } else {
+                    onError(error: error)
+                }
+            })
+    }
+    
+    
     func afterLogin() {
         print(".AuthMV.afterLogin")
-        // 1. fetch Booking.today or will create it
-        // 2. fetch User.current, will use Booking.today inside currentResevation initializer
-        // 3. fetch Firebase Remote Configs
-        // 4. navigate to Home page
+        // 1. fetch Washers.all, will used by Booking.today
+        // 2. fetch Booking.today or will create it
+        // 3. fetch User.current, will use Booking.today inside currentResevation initializer
+        // 4. fetch Firebase Remote Configs
+        // 5. navigate to Home page
 
         typealias pipelineFunction = ((completion: ()->Void) -> Void)
 
@@ -194,30 +243,33 @@ class AuthViewModel {
         var thirdAction: pipelineFunction
         var fourthAction: pipelineFunction
 
+
         firstAction = { (completion: ()->Void) in
-            // fetch BookingHours for Reservation inside parsed User
             self.didUpdateNetworkActivityStatus?(active: true, status: "Загрузка данных автомойки", onError: nil) {}
-            BookingHour.subscribeToToday() { () -> (Void) in
-                // Note: BookingHour.today - was setted
-                BookingHour.unsubscribe()
-                self.didUpdateNetworkActivityStatus?(active: false, status: nil, onError: nil) {}
-                completion()
+            Washer.fetchData() {
+                BookingHour.fetchData() {
+                    self.didUpdateNetworkActivityStatus?(active: false, status: nil, onError: nil) {
+                        completion()
+                    }
+                }
             }
         }
 
         secondAction = { (completion: ()->Void) in
-            let uid = User.getFirebaseID()
             self.didUpdateNetworkActivityStatus?(active: true, status: "Загрузка профиля", onError: nil) {}
-            User.refHandle = getFirebaseRef()
+            let uid = User.getFirebaseID()
+            getFirebaseRef()
                 .child(User.childRefName)
                 .child(uid)
-                .observeEventType(.Value, withBlock: { (snapshot) in
+                .observeSingleEventOfType(.Value, withBlock: { (snapshot) in
                     //check is UserProfile exists
                     if snapshot.exists() {
                         let user = User(uid: uid, data: snapshot.value!)
                         User.current = user
-                        self.didUpdateNetworkActivityStatus?(active: false, status: nil, onError: nil) {}
-                        completion()
+                        //print(".AuthVM.afterLogin set User.current", User.current)
+                        self.didUpdateNetworkActivityStatus?(active: false, status: nil, onError: nil) {
+                            completion()
+                        }
 
                     } else {
                         self.didUpdateNetworkActivityStatus?(active: false, status: nil, onError: "Ошибка при загрузке профиля") {}
@@ -237,8 +289,11 @@ class AuthViewModel {
 
         // run pipeline functions
         firstAction() {
+            //print(".AuthVM.afterLogin – firstAction")
             secondAction() {
+                //print(".AuthVM.afterLogin – secondAction")
                 thirdAction() {
+                    //print(".AuthVM.afterLogin – thirdAction")
                     fourthAction() {}
                 }
             }

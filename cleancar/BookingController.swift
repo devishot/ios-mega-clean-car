@@ -39,7 +39,7 @@ class BookingController: UIViewController, Dimmable {
         }
 
         Reservation.create(carInfo!, bookingHour: bookingHour!, services: services) {
-            self.navigationController?.popToRootViewControllerAnimated(true)
+            self.navigationController?.popViewControllerAnimated(true)
         }
     }
     @IBAction func unwindFromPopupChangeCarInfo(segue: UIStoryboardSegue) {

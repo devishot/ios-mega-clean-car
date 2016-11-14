@@ -215,6 +215,26 @@ class BookingHour {
 
 
     // firebase
+    class func fetchData(completion: () -> Void) {
+        getFirebaseRef()
+            .child(BookingHour.getTodayChildRef())
+            .observeSingleEventOfType(.Value) {(snapshot: FIRDataSnapshot) -> Void in
+
+                if snapshot.exists() {
+                    let values = snapshot.value as! [AnyObject]
+                    BookingHour.today = values
+                        .enumerate()
+                        .map({ BookingHour(index: $0.index, data: $0.element) })
+                    completion()
+
+                } else {
+                    BookingHour.initToday() {
+                        self.fetchData(completion)
+                    }
+                }
+        }
+    }
+
     class func subscribeToToday(callback: () -> (Void) ) {
         Washer.fetchData() {
             BookingHour.refHandle = getFirebaseRef()

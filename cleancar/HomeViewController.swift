@@ -78,6 +78,7 @@ class HomeViewController: UIViewController {
     var segueRateID = "rate"
 
     // variables
+    var currentUser: User?
     var bookingHours: [BookingHour] = []
     var bookingHoursSelectedIndex: NSIndexPath? {
         didSet {
@@ -90,13 +91,6 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    var currentUser: User? {
-        didSet {
-            if self.isViewLoaded() {
-                self.updateCurrentReservationView()
-            }
-        }
-    }
     var CleanCarPhoneNumber = "8 707 830 5253"
     var CleanCarAddress = "Павильон Expo-2017"
 
@@ -104,7 +98,6 @@ class HomeViewController: UIViewController {
     // UIViewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
 
         // 1. Init styles
         self.tabBarController!.tabBar.translucent = false
@@ -123,18 +116,20 @@ class HomeViewController: UIViewController {
         chooseTimeCollectionView.dataSource = self
         chooseTimeCollectionView.delegate = self
 
-        // 3. Fetch data
+        // 3. Subscribe to data
         BookingHour.subscribeToToday({ () -> (Void) in
             self.bookingHours = BookingHour.fromNow
             self.chooseTimeCollectionView.reloadData()
         })
         User.subscribeToCurrent({ userError in
             self.currentUser = User.current
+            self.updateCurrentReservationView()
         })
-      
+
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        print(".HomeVC viewWillAppear")
 
         setStatusBarBackgroundColor(UIColor.ccPurpleDark())
         self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -145,6 +140,7 @@ class HomeViewController: UIViewController {
     }
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
+        print(".HomeVC viewDidDisappear")
 
         self.bookingHoursSelectedIndex = nil
 
