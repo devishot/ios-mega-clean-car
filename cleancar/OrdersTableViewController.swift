@@ -17,12 +17,12 @@ private enum OrdersPageFilters: Int {
     func getTitle() -> String {
         switch self {
         case .Quequed:
-            return "Заказы"
+            return "Заказы >"
         case .Canceled:
-            return "Отмененные"
+            return "Отмененные >"
         }
     }
-    
+
     func opposite() -> OrdersPageFilters {
         switch self {
         case .Quequed:
@@ -172,6 +172,18 @@ class OrdersTableViewController: UITableViewController {
         cell.configure(reservation)
 
         return cell
+    }
+
+    // Click action
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier(self.segueAssignToReservationID, sender: indexPath)
+    }
+    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        if self.filterValue == .Quequed {
+            return indexPath
+        } else {
+            return nil
+        }
     }
 
     // Swipe cell actions

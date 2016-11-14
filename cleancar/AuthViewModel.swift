@@ -14,6 +14,9 @@ import FBSDKLoginKit
 import SwiftyJSON
 
 
+
+
+
 class AuthViewModel {
     
     
@@ -28,7 +31,7 @@ class AuthViewModel {
         self.didUpdateNetworkActivityStatus?(active: false, status: nil, onError: "Ошибка с Facebook") {}
     }
 
-    
+
     // state variables
     var isWaitingSignUpByAccountKitFunc: Bool = false
 

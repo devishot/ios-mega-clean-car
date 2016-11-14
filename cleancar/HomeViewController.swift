@@ -22,7 +22,9 @@ class HomeViewController: UIViewController {
     @IBAction func goToMapButton(sender: UIButton) {
     }
     @IBAction func callButton(sender: UIButton) {
-        displayCallAlert(CleanCarPhoneNumber, displayText: "Администратору: Арману", sender: self)
+        let phoneNumber = FirebaseRemoteConfig.value(.PhoneNumber).stringValue!
+        let name = FirebaseRemoteConfig.value(.AdministatorName).stringValue!
+        displayCallAlert(phoneNumber, displayText: "Администратору: \(name)", sender: self)
     }
     @IBAction func clickedMenuButton(sender: UIButton) {
         self.displayMenuView()
@@ -70,6 +72,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var buttonReservationCancel: UIButton!
     @IBOutlet weak var buttonReservationRate: UIButton!
     
+    @IBOutlet weak var labelAddressName: UILabel!
+    @IBOutlet weak var labelAddress: UILabel!
+    @IBOutlet weak var labelTimeRange: UILabel!
+    
 
 
     // Identifiers
@@ -91,8 +97,6 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    var CleanCarPhoneNumber = "8 707 830 5253"
-    var CleanCarAddress = "Павильон Expo-2017"
 
 
     // UIViewController lifecycle
@@ -110,6 +114,10 @@ class HomeViewController: UIViewController {
             button.titleEdgeInsets = UIEdgeInsets(top: 5, left: 8, bottom: 5, right: 8)
             button.layoutIfNeeded()
         }
+        
+        labelAddressName.text = FirebaseRemoteConfig.value(.AddressNameLabel).stringValue
+        labelAddress.text = FirebaseRemoteConfig.value(.AddressLabel).stringValue
+        labelTimeRange.text = FirebaseRemoteConfig.value(.TimeRangeLabel).stringValue
 
         // 2. Init behaviour
         scrollviewReservationInfo.delegate = self
@@ -209,21 +217,15 @@ class HomeViewController: UIViewController {
         let logOut = UIAlertAction(title: "Выйти", style: .Destructive, handler: { (alert: UIAlertAction!) -> Void in
 
             // logout from firebase and facebook
-            User.logOut() {
-                // redirect to LoginViewController
-                let firstNavigationController = self.storyboard?.instantiateViewControllerWithIdentifier("loginNavController") as! UINavigationController
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.presentViewController(firstNavigationController, animated: true, completion: nil)
-                    return
-                })
-            }
+            User.logOut()
+            // redirect to LoginViewController
+            let firstNavigationController = self.storyboard?.instantiateViewControllerWithIdentifier("loginNavController") as! UINavigationController
+            dispatch_async(dispatch_get_main_queue(), {
+                self.presentViewController(firstNavigationController, animated: true, completion: nil)
+            })
         })
+        let cancel = UIAlertAction(title: "Отмена", style: .Cancel, handler: nil)
 
-        let cancel = UIAlertAction(title: "Отмена", style: .Cancel, handler: {
-            (alert: UIAlertAction!) -> Void in
-            
-        })
-        
         actionSheet.addAction(logOut)
         actionSheet.addAction(cancel)
         

@@ -162,6 +162,8 @@ class LoginViewController: UIViewController {
         }
     }
     func displayAlertMesage(message: String) {
+        User.logOut()
+
         let alert = UIAlertController(title: "«Хьюстон, у нас проблема» 🤕", message: message, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)

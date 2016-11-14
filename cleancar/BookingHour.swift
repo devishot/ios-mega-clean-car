@@ -20,7 +20,7 @@ class BookingHour {
 
     static var today: [BookingHour] = [] {
         didSet {
-            let startHour = 9
+            let startHour = FirebaseRemoteConfig.value(.TimeStart).numberValue!.integerValue
             var offsetBookingHourIndexes: Int = (getCurrentHour() - startHour + 1) * 60 / BookingHour.minuteMultiplier - (60 - getCurrentMinute()) / BookingHour.minuteMultiplier
             offsetBookingHourIndexes = max(0, offsetBookingHourIndexes)
 
@@ -76,7 +76,7 @@ class BookingHour {
         let addingMinutes = self.index * BookingHour.minuteMultiplier
 
         // 09:00
-        let startHour = 9
+        let startHour = FirebaseRemoteConfig.value(.TimeStart).numberValue!.integerValue
         let startMinute = 0
         // 09:00 + 150 minute = 11:30
         let hour = startHour + (startMinute + addingMinutes) / 60
@@ -190,9 +190,9 @@ class BookingHour {
     }
 
     class func initToday(completion: () -> (Void)) {
-        let startHour = 9,
-        endHour = 21,
-        bookingHoursCount = (endHour - startHour) * 60 / BookingHour.minuteMultiplier
+        let startHour = FirebaseRemoteConfig.value(.TimeStart).numberValue!.integerValue
+        let endHour = FirebaseRemoteConfig.value(.TimeFinish).numberValue!.integerValue
+        let bookingHoursCount = (endHour - startHour) * 60 / BookingHour.minuteMultiplier
 
         // boxes
         let boxes = (0..<BookingHour.boxesCount).map({_ in true })

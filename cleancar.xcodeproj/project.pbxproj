@@ -18,7 +18,7 @@
 		523F3B521D66EA4300B75421 /* BookingHour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523F3B511D66EA4300B75421 /* BookingHour.swift */; };
 		523F3B551D67678B00B75421 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 523F3B541D67678B00B75421 /* GoogleService-Info.plist */; };
 		523F3B571D67A50B00B75421 /* BookingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523F3B561D67A50B00B75421 /* BookingController.swift */; };
-		5252E8131D731457009A841F /* FirebaseDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5252E8121D731457009A841F /* FirebaseDataProtocol.swift */; };
+		5252E8131D731457009A841F /* FirebaseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5252E8121D731457009A841F /* FirebaseUtils.swift */; };
 		5252E8151D7582E2009A841F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5252E8141D7582E2009A841F /* Utils.swift */; };
 		5259ED0B1D8C0DB7003F5BB9 /* SelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5259ED0A1D8C0DB7003F5BB9 /* SelectTableViewController.swift */; };
 		525A8A5C1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8A5B1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift */; };
@@ -28,6 +28,7 @@
 		526CB0AD1D8914A800DB930B /* Statistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526CB0AC1D8914A800DB930B /* Statistic.swift */; };
 		52839C011DD821B200B6EBD8 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52839C001DD821B200B6EBD8 /* AuthViewModel.swift */; };
 		52839C031DD82B5E00B6EBD8 /* ActivityIndicatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52839C021DD82B5E00B6EBD8 /* ActivityIndicatorViewController.swift */; };
+		52839C051DD9EB5200B6EBD8 /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52839C041DD9EB5200B6EBD8 /* RemoteConfigDefaults.plist */; };
 		528947251D717441004B7090 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528947241D717441004B7090 /* LoginViewController.swift */; };
 		528947291D72C9D7004B7090 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528947281D72C9D7004B7090 /* Reservation.swift */; };
 		5289472B1D72CA0F004B7090 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5289472A1D72CA0F004B7090 /* User.swift */; };
@@ -72,7 +73,7 @@
 		523F3B511D66EA4300B75421 /* BookingHour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingHour.swift; sourceTree = "<group>"; };
 		523F3B541D67678B00B75421 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		523F3B561D67A50B00B75421 /* BookingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingController.swift; sourceTree = "<group>"; };
-		5252E8121D731457009A841F /* FirebaseDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDataProtocol.swift; sourceTree = "<group>"; };
+		5252E8121D731457009A841F /* FirebaseUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseUtils.swift; sourceTree = "<group>"; };
 		5252E8141D7582E2009A841F /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		5259ED0A1D8C0DB7003F5BB9 /* SelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTableViewController.swift; sourceTree = "<group>"; };
 		525A8A5B1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectRightBarButtonHelper.swift; sourceTree = "<group>"; };
@@ -83,6 +84,7 @@
 		526CB0AC1D8914A800DB930B /* Statistic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statistic.swift; sourceTree = "<group>"; };
 		52839C001DD821B200B6EBD8 /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		52839C021DD82B5E00B6EBD8 /* ActivityIndicatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorViewController.swift; sourceTree = "<group>"; };
+		52839C041DD9EB5200B6EBD8 /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		528947241D717441004B7090 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		528947281D72C9D7004B7090 /* Reservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
 		5289472A1D72CA0F004B7090 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				B4EEA32E1D6429EB0039D998 /* LaunchScreen.storyboard */,
 				B4EEA3311D6429EB0039D998 /* Info.plist */,
 				523F3B541D67678B00B75421 /* GoogleService-Info.plist */,
+				52839C041DD9EB5200B6EBD8 /* RemoteConfigDefaults.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -249,7 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				5292AC061D6EBD4C00E03760 /* Dimmable.swift */,
-				5252E8121D731457009A841F /* FirebaseDataProtocol.swift */,
+				5252E8121D731457009A841F /* FirebaseUtils.swift */,
 				5252E8141D7582E2009A841F /* Utils.swift */,
 				525A8A5B1D7C4D3D002C6F46 /* SelectRightBarButtonHelper.swift */,
 			);
@@ -414,6 +417,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52839C051DD9EB5200B6EBD8 /* RemoteConfigDefaults.plist in Resources */,
 				B4EEA3301D6429EB0039D998 /* LaunchScreen.storyboard in Resources */,
 				B44206361DB5115B00E3D63C /* BigSoftie-Fat.otf in Resources */,
 				523F3B551D67678B00B75421 /* GoogleService-Info.plist in Resources */,
@@ -545,7 +549,7 @@
 				5232275C1D8A83BB000D61D3 /* SignupSecondStepViewController.swift in Sources */,
 				B4EEA3481D644B1F0039D998 /* HomeViewController.swift in Sources */,
 				B43C90031D6859F800667B09 /* FeedbackViewController.swift in Sources */,
-				5252E8131D731457009A841F /* FirebaseDataProtocol.swift in Sources */,
+				5252E8131D731457009A841F /* FirebaseUtils.swift in Sources */,
 				B42F94E91D79F336008F178A /* DurationCollectionViewCell.swift in Sources */,
 				5259ED0B1D8C0DB7003F5BB9 /* SelectTableViewController.swift in Sources */,
 				523F3B571D67A50B00B75421 /* BookingController.swift in Sources */,

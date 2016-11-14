@@ -325,13 +325,10 @@ class User: FirebaseDataProtocol {
 
     */
 
-    static func logOut(completion: () -> (Void)) {
+    static func logOut() {
         do {
             // logout from Firebase
             try FIRAuth.auth()?.signOut()
-
-            print(".User.logOut", FIRAuth.auth()?.currentUser)
-            
             // logout from Facebook
             let facebookLogin = FBSDKLoginManager();
             facebookLogin.logOut()
@@ -339,7 +336,6 @@ class User: FirebaseDataProtocol {
             User.accountKit.logOut()
 
             User.current = nil
-            completion()
 
         } catch {
             print(error)

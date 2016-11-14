@@ -40,7 +40,7 @@
                                     <constraint firstItem="R5M-cl-4Uq" firstAttribute="centerY" secondItem="TZp-Wb-7mh" secondAttribute="centerY" constant="-100" id="PRj-z8-bue"/>
                                     <constraint firstItem="R5M-cl-4Uq" firstAttribute="centerX" secondItem="TZp-Wb-7mh" secondAttribute="centerX" id="T9Q-EM-QKs"/>
                                     <constraint firstAttribute="trailing" secondItem="5SN-88-XT3" secondAttribute="trailing" constant="16" id="YGN-4m-LLG"/>
-                                    <constraint firstItem="5SN-88-XT3" firstAttribute="top" secondItem="R5M-cl-4Uq" secondAttribute="bottom" constant="36" id="hgq-ge-hGA"/>
+                                    <constraint firstItem="5SN-88-XT3" firstAttribute="top" secondItem="R5M-cl-4Uq" secondAttribute="bottom" constant="16" id="hgq-ge-hGA"/>
                                     <constraint firstItem="5SN-88-XT3" firstAttribute="leading" secondItem="TZp-Wb-7mh" secondAttribute="leading" constant="16" id="p2Y-Ye-ffI"/>
                                 </constraints>
                             </view>
@@ -578,10 +578,10 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suv-B3-k1P" userLabel="Menu">
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="20" id="Jmy-mt-LNs">
-                                                                        <variation key="widthClass=compact" constant="30"/>
+                                                                        <variation key="widthClass=compact" constant="40"/>
                                                                     </constraint>
                                                                     <constraint firstAttribute="height" constant="20" id="iem-uy-VsM">
-                                                                        <variation key="widthClass=compact" constant="30"/>
+                                                                        <variation key="widthClass=compact" constant="40"/>
                                                                     </constraint>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -614,7 +614,7 @@
                                                             <constraint firstItem="eMT-J0-NTz" firstAttribute="centerY" secondItem="GkI-0b-Zg1" secondAttribute="centerY" id="SRI-8Z-9OG"/>
                                                             <constraint firstItem="eMT-J0-NTz" firstAttribute="centerX" secondItem="GkI-0b-Zg1" secondAttribute="centerX" id="TmE-HI-CrF"/>
                                                             <constraint firstItem="suv-B3-k1P" firstAttribute="centerY" secondItem="GkI-0b-Zg1" secondAttribute="centerY" constant="0.5" id="bas-NW-dFL"/>
-                                                            <constraint firstAttribute="trailing" secondItem="suv-B3-k1P" secondAttribute="trailing" id="fi5-y0-dth"/>
+                                                            <constraint firstAttribute="trailing" secondItem="suv-B3-k1P" secondAttribute="trailing" constant="8" id="fi5-y0-dth"/>
                                                             <constraint firstAttribute="height" constant="45" id="rPk-L4-KLQ"/>
                                                         </constraints>
                                                         <variation key="default">
@@ -1251,10 +1251,13 @@
                         <outlet property="buttonReservationRate" destination="V6G-Vn-wiu" id="4AK-nZ-eC1"/>
                         <outlet property="chooseTimeCollectionView" destination="gUS-7x-N8Z" id="ZLH-Ta-xVj"/>
                         <outlet property="constraintsLeadingOfReservationInfoSecondView" destination="bMW-cc-7Pf" id="Tnn-28-gfD"/>
+                        <outlet property="labelAddress" destination="F2D-zM-WbL" id="6DW-vp-zq4"/>
+                        <outlet property="labelAddressName" destination="p2e-SQ-cRF" id="hwk-3o-dT5"/>
                         <outlet property="labelReservationCarInfoNumber" destination="Z6A-Oa-vDa" id="ksY-bf-sXV"/>
                         <outlet property="labelReservationCost" destination="VR2-4Z-0K4" id="oYh-Tt-vCO"/>
                         <outlet property="labelReservationServices" destination="67r-ZE-Uk0" id="cOo-np-yDb"/>
                         <outlet property="labelReservationTime" destination="2l6-kJ-FId" id="q7H-Gp-JYL"/>
+                        <outlet property="labelTimeRange" destination="WNl-Kn-Pgc" id="a4o-eY-Bb1"/>
                         <outlet property="noReservationView" destination="R7r-X0-4Si" id="9Dd-ac-OBH"/>
                         <outlet property="pagecontrollReservationInfo" destination="O6n-ih-c4f" id="IzS-87-TJ7"/>
                         <outlet property="scrollviewReservationInfo" destination="Qoo-CQ-jRF" id="hTL-6h-k1f"/>
@@ -1279,6 +1282,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="976"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ewu-vl-Xa6">
+                                <color key="backgroundColor" red="0.11372549019607843" green="0.039215686274509803" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="x5S-T0-Iua"/>
+                                </constraints>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ojd-EA-8XC">
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Acp-oN-XdV" userLabel="Content View">
@@ -1806,7 +1815,10 @@
                         <color key="backgroundColor" red="0.32549019610000002" green="0.1019607843" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Ojd-EA-8XC" firstAttribute="width" secondItem="Rac-ga-Jcd" secondAttribute="width" id="CCd-iK-XSH"/>
+                            <constraint firstItem="Ewu-vl-Xa6" firstAttribute="top" secondItem="79u-tQ-VMF" secondAttribute="bottom" id="DxC-v3-Hbr"/>
                             <constraint firstItem="Ojd-EA-8XC" firstAttribute="height" secondItem="Rac-ga-Jcd" secondAttribute="height" id="Mx6-71-rRQ"/>
+                            <constraint firstItem="Ewu-vl-Xa6" firstAttribute="leading" secondItem="Rac-ga-Jcd" secondAttribute="leading" id="SKI-Vp-DKN"/>
+                            <constraint firstAttribute="trailing" secondItem="Ewu-vl-Xa6" secondAttribute="trailing" id="aaL-Qs-vHM"/>
                             <constraint firstItem="Ojd-EA-8XC" firstAttribute="centerY" secondItem="Rac-ga-Jcd" secondAttribute="centerY" id="fdc-da-eQX"/>
                             <constraint firstItem="Ojd-EA-8XC" firstAttribute="centerX" secondItem="Rac-ga-Jcd" secondAttribute="centerX" id="zV0-bC-JJG"/>
                         </constraints>
@@ -2851,7 +2863,7 @@
         <scene sceneID="Qf4-zK-VW6">
             <objects>
                 <tableViewController id="qPQ-eh-FCH" customClass="OrdersTableViewController" customModule="cleancar" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="160" sectionHeaderHeight="28" sectionFooterHeight="28" id="HB3-Oa-KaC">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="160" sectionHeaderHeight="28" sectionFooterHeight="28" id="HB3-Oa-KaC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.32549019610000002" green="0.1019607843" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3179,7 +3191,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Qll-tp-TAY">
-                        <barButtonItem key="rightBarButtonItem" title="Отмененные" id="l98-vj-Ohw">
+                        <barButtonItem key="rightBarButtonItem" title="Отмененные &gt;" id="l98-vj-Ohw">
                             <connections>
                                 <action selector="clickedFilterButton:" destination="qPQ-eh-FCH" id="zt0-b2-oof"/>
                             </connections>
@@ -3732,7 +3744,7 @@
             <objects>
                 <navigationController storyboardIdentifier="loginNavController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="ycG-gP-qHL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Sr7-Ix-yjT">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Sr7-Ix-yjT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3753,7 +3765,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" navigationBarHidden="YES" id="i7r-FA-csY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Главная" image="services-icon" selectedImage="active-services-icon" id="imN-NW-aRJ"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jtN-4h-4qz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jtN-4h-4qz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -4214,7 +4226,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="K5z-nC-lo6" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Заказы" image="order-icon" selectedImage="active-order-icon" id="2lg-U8-iOn"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HNa-4N-4NK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HNa-4N-4NK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4309,7 +4321,7 @@
                                                 </mask>
                                             </variation>
                                         </view>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O6a-i4-JGd" userLabel="Center">
+                                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O6a-i4-JGd" userLabel="Center">
                                             <frame key="frameInset" width="1000" height="1000"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мойщик" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGl-bW-Prd">
@@ -4328,13 +4340,13 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.67000000000000004" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Арман" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="av2-Bl-Xwl">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Арман" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="av2-Bl-Xwl">
                                                     <frame key="frameInset" width="1000" height="1000"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Безконтактная мойка/мойка двигателя Колесные арки Мойка ковров / Чистка ковров (4 шт.)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbS-GI-oeX">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Безконтактная мойка/мойка двигателя Колесные арки Мойка ковров / Чистка ковров (4 шт.)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbS-GI-oeX">
                                                     <frame key="frameInset" minX="91" minY="20" width="258" height="47"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4365,10 +4377,10 @@
                                                 </mask>
                                             </variation>
                                         </view>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DaG-cE-KHM" userLabel="Bottom">
+                                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DaG-cE-KHM" userLabel="Bottom">
                                             <frame key="frameInset" width="1000" height="1000"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" misplaced="YES" text="Отзыв о хорошей мойке по выбранным" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZrQ-b6-f1l">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" ambiguous="YES" misplaced="YES" text="Отзыв о хорошей мойке по выбранным" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZrQ-b6-f1l">
                                                     <frame key="frameInset" minX="22" minY="3" width="331" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.67000000000000004" colorSpace="calibratedRGB"/>
@@ -5150,7 +5162,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="bS7-PN-VGb" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Отзывы" image="feedback-icon" selectedImage="active-feedback-icon" id="IVM-se-sk0" userLabel="Отзывы"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3R0-b1-onL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3R0-b1-onL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -5175,7 +5187,7 @@
         <image name="bg2" width="375" height="667"/>
         <image name="bg3" width="375" height="667"/>
         <image name="clock" width="24" height="24"/>
-        <image name="context-menu" width="34" height="8"/>
+        <image name="context-menu" width="40" height="40"/>
         <image name="fb_logo" width="17" height="18"/>
         <image name="feedback-icon" width="24" height="23"/>
         <image name="info-view-background" width="375" height="250"/>

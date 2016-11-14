@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>label_address_name</key>
+	<string>SHINE, MEGA Silk Way</string>
+	<key>label_address</key>
+	<string>г. Астана</string>
+	<key>label_time_range</key>
+	<string>09:00 - 21:00</string>
+	<key>data_administrator_phone_number</key>
+	<string>+77771653703</string>
+	<key>label_administrator_name</key>
+	<string>Temirlan</string>
+	<key>data_start_hour</key>
+	<string>9</string>
+	<key>data_end_hour</key>
+	<string>21</string>
+	<key>data_address_location_lat</key>
+	<string>0.0</string>
+	<key>data_address_location_long</key>
+	<string>0.0</string>
+</dict>
+</plist>
